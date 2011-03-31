@@ -1,0 +1,121 @@
+---
+layout: post
+title: javascript - pass "this" to your anonymous functions
+---
+
+
+h2. javascript - pass "this" to your anonymous functions
+
+Update: The initial solution was wrong and I tricked my self into thinking it was working through something I was working on at the time.  Sean and Joel have clarified in the comments
+as to why it was wrong.   I took down the hackernews post as it was getting far too much traffic for a wrong solution. Thanks guys! 
+
+There is now a working solution
+(unchecked by a professional lol) and would undelete the hackernews post so others could see the useful comments but I am unable to.
+
+Anonymous functions in javascript are extremely powerful and if you don't understand them fully just yet I would highly recommend learning asap.   A great guide can be found
+<a href="http://helephant.com/2008/08/javascript-anonymous-functions/" target="_blank">here</a>.   The problem with anonymous functions is that when declared the value of "this" changes
+depending on the situation and generally points to the functions scope.   <br /><br />This is generally not a desired effect and can cause people to use globals and other funky methods of accessing
+parent objects in anonymous functions. Below I will show you a simple way to access the parent object.   Always remember objects in Javascript are passed by reference!
+
+
+h3. Passing "this" to the anonymous function
+
+This step is quite easy and I have used a famous alien robot for the example.   The robot wants to access his main weapon system from one of methods.  So the expected
+output is for the robot to fire "this.weapon" but as you see in the first example he cannot access his properties which are returned as "undefined".
+
+h2. "Demo":http://thomasdavis.github.com/examples/anonymous-functions/
+    "Source":https://github.com/thomasdavis/thomasdavis.github.com/tree/master/examples/anonymous-functions
+
+
+
+{% highlight javascript %}
+
+
+
+
+// Below is a simple function to find our autobots, 
+// just used for testing purposes
+function findAutobot(){
+    // Locate the autobots!
+    return true;
+}
+
+// noob_bot is an example of what happens when you 
+// don't pass this to your anonymous functions
+noob_bot = {
+    weapon: "laser",
+    kill: function(){
+        // In the then statement we have declared an 
+        // anonymous function and we want to access noob_bots properties
+        $.when( findAutobot )
+        .then( function(){
+            alert("Noob_bot: Fire the " + this.weapon + "!!!#!");
+        });
+    }
+}
+
+// Noob_bots weapon would have failed(undefined) because when
+// you create anonymous functions the scope of "this"
+// changes to the function.   So we use $.proxy(function, this) 
+megatron = {
+    weapon: "laser",
+    kill: function(){
+        // Megatron has direct access to his weapon systems
+        //  because we have called .bind(this)
+        $.when( findAutobot )
+        .then( $.proxy( function(){
+                alert("Megatron: Fire the " + this.weapon + "!!!#!");
+            }, this);
+        })
+    }
+}
+    
+noob_bot.kill();
+megatron.kill();
+
+{% endhighlight %}
+
+
+
+h2. "Demo":http://thomasdavis.github.com/examples/anonymous-functions/
+    "Source":https://github.com/thomasdavis/thomasdavis.github.com/tree/master/examples/anonymous-functions
+
+h3. Conclusion
+
+p. There are many other ways of passing "this" to an anonymous function and if you have any better suggestions I welcome you to post them.   Hopefully this tutorial has been helpful to you!  
+Fork me on github, using the link in the top left.
+
+h3. Other implementations
+
+p. Just posting a few solutions posted by others below.
+
+p. From sisk on hackernews
+"http://news.ycombinator.com/item?id=2296064":http://news.ycombinator.com/item?id=2296064
+
+{% highlight javascript %}
+
+setTimeout(
+(function(scope){
+    return function(){scope.fire();};
+})(this), 500
+);
+
+{% endhighlight %}
+
+p. sisk : The short explanation is you return a function from an immediately-
+executing anonymous function that takes the current scope as a parameter.
+
+
+<span class="st_twitter_vcount" displayText="Tweet"></span><span class="st_facebook_vcount" displayText="Share"></span><span class="st_email_vcount" displayText="Email"></span><span class="st_sharethis_vcount" displayText="Share"></span>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'bdee6d8c-ed9a-4867-90f6-011704c29ee3'});</script>	</article>
+<script type="text/javascript">
+SyntaxHighlighter.all()
+</script>
+<script>
+var idcomments_acct = 'e6c0e0096f8106ea52c674a85b26ecf9';
+var idcomments_post_id = "lasergun";
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+</div>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>{{ page.title }}</title>
+   <meta name="author" content="Thomas Davis" />
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+
+   <!-- Typekit -->
+   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+   	<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		body, ul { padding: 0; margin: 0; }
+		body { font-family: 'Arial'; }
+		#container { width: 760px; margin: auto; }
+		h1 {  font-size: 3em;  }
+		h3 { color: #444; }
+		#topmenu {  height: 15px; border-bottom: 1px solid #996699;	padding: 5px; }
+		#topmenu ul { list-style: none; }
+		#topmenu li { float: left; margin-left: 15px; font-size: 13px;}
+	</style>
+</head>
+<body>
+<div id="topmenu">
+	<ul>
+	<li>home</li>
+	<li><a href="https://github.com/thomasdavis">my repos</a></li>
+	<li><a href="/about.html">about me</a></li>
+	<li><a href="http://twitter.com/?status=@iamjessicagomes,%20@neutralthoughts%20is%20a%20great%20guy,%20you%20should%20marry%20him" target="_blank" alt="will load in new window, please marry me">hot woman (SFW)</a></li>
+	<li><a href="http://protosal.com" target="_blank">my boot-strapped startup</a></li>
+	</ul>
+	<ul style="float: right; margin-right: 15px;">
+	
+	<li>thomas davis - <a href="http://twitter.com/neutralthoughts">follow me on twitter</a> or don't</li>
+	</ul>
+</div>
+<!-- ClickTale Top part -->
+<script type="text/javascript">
+var WRInitTime=(new Date()).getTime();
+</script>
+<!-- ClickTale end of Top part -->
+
+<div class="site">
+  <div class="title">
+    <a href="/">Thomas Davis</a>
+    <a class="extra" href="/">home</a>
+  </div>
+  
+  {{ content }}
+  
+  
+</div>
+
+
+    <link rel="stylesheet" type="text/css" href="http://serve.poplytics.com/shadowbox.css">
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>
+    <script type="text/javascript" src="http://serve.poplytics.com/shadowbox.js"></script>
+    <script language="javascript" type="text/javascript" src="http://serve.poplytics.com/js/jquery.xdomainajax.js"></script>
+    <script language="javascript" type="text/javascript">
+    Shadowbox.init();
+    $(document).ready(function()
+    {
+    $.ajax({
+    url: 'http://serve.poplytics.com/ads.php?uniq=148408611',
+    type: 'GET',
+    success: function(res) {
+    $('#poplytics').html(res.responseText);
+    }
+    });
+    })
+    </script>
+    <div id="poplytics"></div>
+    <script src="http://static.getclicky.com/js" type="text/javascript"></script>
+    <script type="text/javascript">try{ clicky.init(66379121); }catch(err){}</script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/66379121ns.gif" /></p></noscript>
+    
+    
+</body>
+</html>

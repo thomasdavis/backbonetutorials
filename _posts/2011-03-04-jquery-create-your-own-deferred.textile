@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery 1.5 - create deferred object with callback parameters - thanks @neutralthoughts</title>
+	<link href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+	<link href="http://alexgorbatchev.com/pub/sh/current/styles/shBrushJScript.css" rel="stylesheet" type="text/css" />
+	<link href="http://alexgorbatchev.com/pub/sh/current/styles/shBrushXml.css" rel="stylesheet" type="text/css" />
+	<link href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" rel="stylesheet" type="text/css" />
+	<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" type="text/javascript"></script>
+	<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shAutoloader.js" type="text/javascript"></script>
+	<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js" type="text/javascript"></script>
+	<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js" type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<style type="text/css">
+		body, ul { padding: 0; margin: 0; }
+		body { font-family: 'Arial'; }
+		#container { width: 760px; margin: auto; }
+		h1 {  font-size: 3em;  }
+		h3 { color: #444; }
+		#topmenu {  height: 15px; border-bottom: 1px solid #996699;	padding: 5px; }
+		#topmenu ul { list-style: none; }
+		#topmenu li { float: left; margin-left: 15px; font-size: 13px;}
+	</style>
+</head>
+
+<body>
+<!--Survey code for sadsa-->
+<link rel="stylesheet" type="text/css" href="http://serve.poplytics.com/shadowbox.css">
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>
+<script type="text/javascript" src="http://serve.poplytics.com/shadowbox.js"></script>
+<script language="javascript" type="text/javascript" src="http://serve.poplytics.com/js/jquery.xdomainajax.js"></script>
+<script language="javascript" type="text/javascript">
+Shadowbox.init();
+$(document).ready(function()
+{
+$.ajax({
+url: 'http://serve.poplytics.com/ads.php?uniq=148408611',
+type: 'GET',
+success: function(res) {
+$('#poplytics').html(res.responseText);
+}
+});
+})
+</script>
+<div id="poplytics"></div>
+<!-- End Survey code for sadsa-->
+
+
+<div id="topmenu">
+	<ul>
+	<li><a href="../index.html">home</a></li>
+	<li><a href="https://github.com/thomasdavis">my repos</a></li>
+	<li><a href="/about.html">about me</a></li>
+	<li><a href="http://twitter.com/?status=@iamjessicagomes,%20@neutralthoughts%20is%20a%20great%20guy,%20you%20should%20marry%20him" target="_blank" alt="will load in new window, please marry me">hot woman (SFW)</a></li>
+
+	<li><a href="http://protosal.com" target="_blank">my boot-strapped startup</a></li>
+	</ul>
+	<ul style="float: right; margin-right: 15px;">
+	
+	<li>thomas davis - <a href="http://twitter.com/neutralthoughts">follow me on twitter</a> or don't</li>
+	</ul>
+</div>
+<div id="container">
+
+
+	<article class="blog">
+		<h2>jQuery 1.5 - create your own deferred object with parameters</h2>
+		<p>jQuery has just recently released version 1.5 which now contains $.when and $.then, yay!  There are many tutorials already
+        on how to use these new functions.  All the examples used $.ajax calls which are setup by jQuery to be used as 
+        deferred objects so I found it difficult to implement my own deferred objects.   I found this <a href="http://www.erichynds.com/jquery/using-deferreds-in-jquery/" target="_blank">guide</a> which is great
+        and covers most of what you need to know.</p>
+        <p>The tutorial covers how to create your own deferred objects but doesn't include passing parameters to $.then call backs.
+        So after playing around a little bit and reading the jQuery source I figured it out and have included it below.</p>
+        <p>I have seen some people asking on how to do this so hopefully it helps! As usual post any mistakes I made =D</p>
+          
+     <br />
+      <pre class='brush: js'>
+        function myFunc(){
+            return $.Deferred(function( deferred_obj ){
+                $("body").css("background", "#ff0000"); // Example
+                deferred_obj.resolve( "these", "are", "my", "parameters" );
+                // Call resolve when you are ready to continue, in animation callbacks etc
+            }).promise();
+        }
+         
+        $.when( myFunc() )
+            .then(function(p1, p2, p3, p4){
+                console.log( p1 + p2 + p3 + p4);
+        });
+     </pre>
+    <p>So it's pretty easy and you should start using them immediatly!</p>
+     <h2 style="margin-left: 15px;"><a href="http://thomasdavis.github.com/examples/jquery-deferred/" target="_blank">Demo</a></h2>
+     <h2 style="margin-left: 15px;"><a href="https://github.com/thomasdavis/thomasdavis.github.com/tree/master/examples/jquery-deferred" target="_blank">Source</a></h2>
+     
+   
+	  <span class="st_twitter_vcount" displayText="Tweet"></span><span class="st_facebook_vcount" displayText="Share"></span><span class="st_email_vcount" displayText="Email"></span><span class="st_sharethis_vcount" displayText="Share"></span>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'bdee6d8c-ed9a-4867-90f6-011704c29ee3'});</script>	</article>
+	
+
+	<script type="text/javascript">
+		SyntaxHighlighter.all()
+	</script>
+<script>
+var idcomments_acct = 'e6c0e0096f8106ea52c674a85b26ecf9';
+var idcomments_post_id = "jquerydeferred";
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+</div>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(66379121); }catch(err){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/66379121ns.gif" /></p></noscript>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https:":"http:") + "//snapabug.appspot.com/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">
+SnapABug.addButton('d2559443-bb0f-4ab8-80cc-3ebc411945e6',"0","55%");
+</script>
+</body>
+</html>

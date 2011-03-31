@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>backbone.js beginners and underscore.js micro templating, thanks @neutralthoughts</title>
+	<link href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
+	<link href="http://alexgorbatchev.com/pub/sh/current/styles/shBrushJScript.css" rel="stylesheet" type="text/css" />
+	<link href="http://alexgorbatchev.com/pub/sh/current/styles/shBrushXml.css" rel="stylesheet" type="text/css" />
+	<link href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" rel="stylesheet" type="text/css" />
+	<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" type="text/javascript"></script>
+	<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shAutoloader.js" type="text/javascript"></script>
+	<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js" type="text/javascript"></script>
+	<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js" type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<style type="text/css">
+		body, ul { padding: 0; margin: 0; }
+		body { font-family: 'Arial'; }
+		#container { width: 760px; margin: auto; }
+		h1 {  font-size: 3em;  }
+		h3 { color: #444; }
+		#topmenu {  height: 15px; border-bottom: 1px solid #996699;	padding: 5px; }
+		#topmenu ul { list-style: none; }
+		#topmenu li { float: left; margin-left: 15px; font-size: 13px;}
+	</style>
+</head>
+
+<body>
+<!--Survey code for sadsa-->
+<link rel="stylesheet" type="text/css" href="http://serve.poplytics.com/shadowbox.css">
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>
+<script type="text/javascript" src="http://serve.poplytics.com/shadowbox.js"></script>
+<script language="javascript" type="text/javascript" src="http://serve.poplytics.com/js/jquery.xdomainajax.js"></script>
+<script language="javascript" type="text/javascript">
+Shadowbox.init();
+$(document).ready(function()
+{
+$.ajax({
+url: 'http://serve.poplytics.com/ads.php?uniq=148408611',
+type: 'GET',
+success: function(res) {
+$('#poplytics').html(res.responseText);
+}
+});
+})
+</script>
+<div id="poplytics"></div>
+<!-- End Survey code for sadsa-->
+
+
+<div id="topmenu">
+	<ul>
+	<li><a href="../index.html">home</a></li>
+	<li><a href="https://github.com/thomasdavis">my repos</a></li>
+	<li><a href="/about.html">about me</a></li>
+	<li><a href="http://twitter.com/?status=@iamjessicagomes,%20@neutralthoughts%20is%20a%20great%20guy,%20you%20should%20marry%20him" target="_blank" alt="will load in new window, please marry me">hot woman (SFW)</a></li>
+	<li><a href="http://protosal.com" target="_blank">my boot-strapped startup</a></li>
+	</ul>
+	<ul style="float: right; margin-right: 15px;">
+	
+	<li>thomas davis - <a href="http://twitter.com/neutralthoughts">follow me on twitter</a> or don't</li>
+	</ul>
+</div>
+<div id="container">
+
+
+	<article class="blog">
+		<div style="width: 385px; margin: auto; margin-top: 50px; "><img style="width: 150px;" src="images/templating.jpg" /></div>
+		<h2>backbone.js beginners and underscore.js micro templating</h2>
+        <p>Surprisingly I have received many request via the <a href="http://poplytics.com" target="_blank">poplytics.com</a> popup at the bottom of the window.   A lot of the request have asked for more backbone tutorials.  So I decided to share more of what I have learnt so far.   </p>
+        <p>I decided to comment the code this time instead of a normal tutorial layout and hopefully my comments will be sufficient to help you.</p>
+        <h2><a href="http://thomasdavis.github.com/examples/backbone-underscore/" target="_blank">Demo</a></h2>
+        <h2><a href="https://github.com/thomasdavis/thomasdavis.github.com/tree/master/examples/backbone-underscore" target="_blank">Source</a></h2>
+        <p>Please leave comments for anything I am doing wrong =D</p>
+		<h3>underscore micro templating</h3>
+		<p>In the latest startup I have been working on, we decided to just use underscore.js templating as we reviewed <a href="http://www.viget.com/extend/benchmarking-javascript-templating-libraries/" target="_blank">benchmarks</a> of the different templating engines and none of them could really 
+		be crowned king.   Since then I have just learnt to use underscore.js micro templating engine as it works fine for us.
+		
+		</p>
+		<p>
+		We place all our javascript templates which is basically 99% of our web app into an external file and host it on Amazon  CDN.   So our entire
+		app is cached and distrubuted through <a href="http://en.wikipedia.org/wiki/Content_delivery_network" target="_blank">edge locations</a>
+		 which increases the speed the site is served and also saves us money on bandwidth.
+		</p>
+		<h3>passing parent objects to deferred objects</h3>
+		<p>in the example I needed to access the parent object which contains a $.then and $.when. To get the parent object (this) into
+		the anonymous $.when function I simply used jQuery.proxy(func, this).  Has anyone else been experimenting with this and is there
+		an easier way to do it?</p>
+        <p>p.s. the picture is from search for backbone in google images, was too funky to not share =)</p>
+        <p>p.s.s everytime you tweet a kitten dies</p>
+    <span class="st_twitter_vcount" displayText="Tweet"></span><span class="st_facebook_vcount" displayText="Share"></span><span class="st_email_vcount" displayText="Email"></span><span class="st_sharethis_vcount" displayText="Share"></span>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'bdee6d8c-ed9a-4867-90f6-011704c29ee3'});</script>	</article>
+	
+
+	<script type="text/javascript">
+		SyntaxHighlighter.all()
+	</script>
+<script>
+var idcomments_acct = 'e6c0e0096f8106ea52c674a85b26ecf9';
+var idcomments_post_id = "sexylady";
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+</div>
+<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(66379121); }catch(err){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/66379121ns.gif" /></p></noscript>
+
+</body>
+</html>
