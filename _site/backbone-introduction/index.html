@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Why would you use backbone.js?</title>
+   <meta name="author" content="Backbone Tutorials" />
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/reset.css" type="text/css" />
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+   
+   <!-- github ribbon CSS -->
+   <link rel="stylesheet" href="/css/ribbon.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
+   
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/stacklayout.css" type="text/css" media="screen, projection" />
+
+   <!-- Typekit -->
+   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+ 
+    <style>
+        .container {
+            width: 760px;
+            margin: auto;
+        }
+        .menu {
+            margin-left: 40px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .menu a {
+            margin-right: 10px;
+        }
+        p {
+            width: 720px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+   <div class="left ribbon-holder">
+        <a href="#" class="red ribbon">
+          <span class="text">Fork me on GitHub</span>
+        </a>
+      </div>
+<div class="container">
+            <div class="menu">
+            <a href="/">home</a>
+            <a href="/">about</a>
+            <a href="/">contribute</a>
+            <a href="/">contact</a>
+          </div>
+          
+                    
+         
+          
+    <div class="stack">
+        <div class="stackContent">
+            <h1>Backbone Tutorials</h1>
+            <p class="homepagedescription">This site is by no means the definite guide to backbone.js and all corrections and contributions are welcome.</p>
+            <hr>
+             <div id="post">
+<h2>Why would you use backbone.js?</h2>
+<p>Building single page web apps or complicated user interfaces will get extremely difficult by simpling using jQuery or mooTools.   The problem is standard javascript libraries are great at what they do and without realizing it you can build an entire application without any formal structure.</p>
+<h3>So how does backbone.js help?</h3>
+<p>Backbone.js was written by a beautiful man called Jash Kenas.   Backbone.js supplies structure to heavy javascript applications.</p>
+<div class="highlight"><pre><code class="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>I have a back bone<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;add-friend&quot;</span><span class="nt">&gt;</span>Add Friend<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;friends-list&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.4/underscore-min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.cdnjs.com/ajax/libs/backbone.js/0.3.3/backbone-min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div><p><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br /></p>
+<p>The official <a href="http://documentcloud.github.com/backbone/">website</a> describes Backbone.js as a library to supply structure to Javascript heavy web applications.    After using Backbone.js for a week I could never see myself building any sort of Javascript functionality regardless of size without using Backbone.js or alternatives.</p>
+<p>I have decided to write a quick introduction for those trying to grasp the mechanics behind it.   I am only a beginner also and would love suggestions and tips to improve my code.</p>
+<p>I am also very curious to hear what you think about how <span class="caps">MVC</span> ties into Javascript development and the most effective library you have used for logically organizing your Javascript.</p>
+<p>Would be great to get a discussion on <span class="caps">MVC</span> vs <span class="caps">MVVM</span> vs others etc leave comments at the bottom!</p>
+<p>Also could you implement this example better in another framework?</p>
+<h3>Understanding the Model View Controller Paradigm</h3>
+<p>I have used many frameworks which promote that they use <span class="caps">MVC</span>.   I don&#8217;t think I have ever seen the same fundamental principals implemented the same way.</p>
+<p>Backbone.js has 4 classes: Models, Views, Controllers and Collections.   The Models and Collections class work hand in hand and when combined essentially make up the M(model) of <span class="caps">MVC</span>.</p>
+<p>The main concept I follow when using Backbone.js is to make Views listen for changes in the Model and react accordingly.   I would recommend bookmarking the homepage <a href="http://documentcloud.github.com/backbone/">documentation</a> and I perusing  the annotated <a href="http://documentcloud.github.com/backbone/docs/backbone.html">source</a> code.</p>
+<h3>Getting started</h3>
+<p>I am going to run you through a basic tutorial that should get you on the right path if you are a bit lost like I was when I started.</p>
+<p>First of all we are going to just setup a basic page and include Backbone.js and Underscore.js(a dependency of Backbone.js)</p>
+<div class="highlight"><pre><code class="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>I have a back bone<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;add-friend&quot;</span><span class="nt">&gt;</span>Add Friend<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;friends-list&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.4/underscore-min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.cdnjs.com/ajax/libs/backbone.js/0.3.3/backbone-min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div><p>For those of you who are lazy the full example can be viewed <a href="http://thomasdavis.github.com/examples/backbone-101/">here</a> and downloaded <br />
+<a href="https://github.com/thomasdavis/thomasdavis.github.com/tree/master/examples/backbone-101">here</a></p>
+<h3>Setting up the main view</h3>
+<p>Each view has a <span class="caps">HTML</span> <span class="caps">DOM</span> element associated with it. You can read more about why <a href="http://documentcloud.github.com/backbone/#View-el">here</a> .<br />
+Because this is our master view we are just going to associate the view with our page body in this example.</p>
+<p>If the el(element) specified does not exist, Backbone.js will attempt to create it.</p>
+<div class="highlight"><pre><code class="javascript"><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">AppView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">),</span>
+  <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;click #add-friend&quot;</span><span class="o">:</span>  <span class="s2">&quot;showPrompt&quot;</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="nx">showPrompt</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">friend_name</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;Who is your friend?&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="kd">var</span> <span class="nx">appview</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AppView</span><span class="p">;</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+</code></pre>
+</div><p>So we just wrapped our Backbone code with jQuery to make sure the page has loaded correctly. Then we create our main application view by extending Backbone and passing a <span class="caps">JSON</span> object with our options. We specified &#8220;body&#8221; to be the associated element for this view.</p>
+<p>The events property is very powerful and lets us attach listeners to our views.   In the example above we have attached a click listener to our button with id &#8220;add-friend&#8221;. Read more about events <a href="http://documentcloud.github.com/backbone/#View-delegateEvents">here</a></p>
+<p>After we have setup our AppView, we can just call to initiate it at anytime.</p>
+<h3>Collecting the Models</h3>
+<p>A Model in Backbone.js can represent any entity you like and in this case we want it to represent a friend. We can easily create friend Models but without any structure they become fairly useless to us because we can&#8217;t iterate through them unless they are grouped together.   So Backbone.js implements the Collection class which  allows us to order our models. Read more <a href="http://documentcloud.github.com/backbone/#Collection">here</a> .</p>
+<p>Now we get to the fun part. You can bind listeners/events to Models and Collections.   So whenever there are changes to the data we can call events to react accordingly.</p>
+<p>We are going to add this code to our example which lets us add a friend Model to our friend Collection. We will then bind a listener to create a new list element when the data has changed.</p>
+<div class="highlight"><pre><code class="javascript"><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="nx">Friend</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+<span class="c1">//Create a model to hold friend atribute</span>
+<span class="nx">name</span><span class="o">:</span> <span class="kc">null</span>
+<span class="p">});</span>
+
+<span class="nx">Friends</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+<span class="c1">//This is our Friends collection and holds our Friend models</span>
+<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">models</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="nx">options</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">addFriendLi</span><span class="p">);</span>
+<span class="c1">//Listen for new additions to the collection and call a view function if so</span>
+<span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">AppView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+<span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">),</span>
+<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">friends</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Friends</span><span class="p">(</span> <span class="kc">null</span><span class="p">,</span> <span class="p">{</span> <span class="nx">view</span><span class="o">:</span> <span class="k">this</span> <span class="p">});</span>
+<span class="c1">//Create a friends collection when the view is initialized.</span>
+<span class="c1">//Pass it a reference to this view to create a connection between the two</span>
+<span class="p">},</span>
+<span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+<span class="s2">&quot;click #add-friend&quot;</span><span class="o">:</span>  <span class="s2">&quot;showPrompt&quot;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="nx">showPrompt</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">friend_name</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;Who is your friend?&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">friend_model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Friend</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">friend_name</span> <span class="p">});</span>
+<span class="c1">//Add a new friend model to our friend collection</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">friends</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">friend_model</span> <span class="p">);</span>
+<span class="p">},</span>
+<span class="nx">addFriendLi</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">model</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">//The parameter passed is a reference to the model that was added</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#friends-list&quot;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;li&gt;&quot;</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/li&gt;&quot;</span><span class="p">);</span>
+<span class="c1">//Use .get to receive attributes of the model</span>
+<span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">appview</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AppView</span><span class="p">;</span>
+
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+</code></pre>
+</div><h2><a href="http://thomasdavis.github.com/examples/backbone-101">Demo</a><br />
+    <a href="https://github.com/thomasdavis/thomasdavis.github.com/tree/master/examples/backbone-101">Source</a></h2>
+<h3>Conclusion</h3>
+<p>I hope this helps anyone trying to pick it up.   I don&#8217;t mind answering any questions that I have the ability to answer.</p>
+<p>Would also love to hear to some optimization tips! <br />
+    p.s.  Would love some insight into <span class="caps">MVVM</span>, <span class="caps">MVC</span> etc</p>
+<p>Update: 	Changed the code to append the elements from the view and not the Model/Collection. The <a href="http://news.ycombinator.com/item?id=2158011">problem</a> was described on ycombinator by emehrkay</p>
+Update 2: A user called <a href="http://twitter.com/svenlito" target="_blank">svnlto</a> had a pull request to fix up the example code to implement better coding practises, he was spot on so I merged his request into the master branch. You can view the pull request <a href="https://github.com/thomasdavis/thomasdavis.github.com/pull/1" target="_blank">here</a>.
+<p><span class="st_twitter_vcount" displayText="Tweet"></span><span class="st_facebook_vcount" displayText="Share"></span><span class="st_email_vcount" displayText="Email"></span><span class="st_sharethis_vcount" displayText="Share"></span><br />
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'bdee6d8c-ed9a-4867-90f6-011704c29ee3'});</script>	</article></p>
+<script type="text/javascript">
+SyntaxHighlighter.all()
+</script><script>
+var idcomments_acct = 'e6c0e0096f8106ea52c674a85b26ecf9';
+var idcomments_post_id = "backbone";
+var idcomments_post_url;
+</script><p><span id="IDCommentsPostTitle" style="display:none"></span><br />
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script></p>
+</div>
+</div>
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>07 Mar 2011</span> &raquo; <a href="/anonymous-functions">javascript - pass "this" to your anonymous functions</a></li>
+    
+      <li><span>04 Mar 2011</span> &raquo; <a href="/jquery-create-your-own-deferred">Jquery Create Your Own Deferred</a></li>
+    
+      <li><span>07 Feb 2011</span> &raquo; <a href="/making-a-restful-ajax-app">Making A Restful Ajax App</a></li>
+    
+  </ul>
+</div>
+            
+
+
+        </div>
+      
+    </div>
+</div>
+    
+</body>
+</html>

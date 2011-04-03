@@ -1,10 +1,65 @@
 ---
 layout: post
-title: Backbone.js Tutorial - by noob for noobs
+title: Why would you use backbone.js?
+type: beginner
 ---
-!/images/backbone.png!
 
-h2. Backbone.js Tutorial - by noob for noobs
+h2. Why would you use backbone.js?
+
+p. Building single page web apps or complicated user interfaces will get extremely difficult by simpling using jQuery or mooTools.   The problem is standard javascript libraries are great at what they do and without realizing it you can build an entire application without any formal structure.   
+
+h3. So how does backbone.js help?
+
+p. Backbone.js was written by a beautiful man called Jash Kenas.   Backbone.js supplies structure to heavy javascript applications.
+
+{% highlight html %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>I have a back bone</title>
+</head>
+<body>
+    <button id="add-friend">Add Friend</button>
+    <ul id="friends-list">
+    </ul>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.1.4/underscore-min.js"></script>
+    <script src="http://ajax.cdnjs.com/ajax/libs/backbone.js/0.3.3/backbone-min.js"></script>
+</body>
+</html>
+
+{% endhighlight %}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 p. The official "website":http://documentcloud.github.com/backbone/ describes Backbone.js as a library to supply structure to Javascript heavy web applications.    After using Backbone.js for a week I could never see myself building any sort of Javascript functionality regardless of size without using Backbone.js or alternatives.
 
