@@ -4,12 +4,11 @@ layout: default
 <div id="post">
 {{ content }}
 </div>
-
-<div id="related">
-  <h2>Related Posts</h2>
-  <ul class="posts">
-    {% for post in site.related_posts limit:3 %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
+<script>
+var idcomments_acct = 'e6c0e0096f8106ea52c674a85b26ecf9';
+var idcomments_post_id;
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
 </div>
