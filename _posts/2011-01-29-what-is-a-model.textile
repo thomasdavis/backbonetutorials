@@ -1,0 +1,13 @@
+---
+layout: post
+title: What is a model?
+type: beginner
+---
+
+h2.What is a model?
+
+p. Coming very soon
+
+h3. Relevant Links
+* "backbone.js official website":http://documentcloud.github.com/backbone/
+* "great hackernews discussion /w post from author":http://news.ycombinator.com/item?id=2119704
