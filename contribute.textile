@@ -5,6 +5,6 @@ title: Contribute
 
 h2. Contribute
 
-p. The main goal behind BackboneTutorials.com is to build a comprehensive guide for developers of all levels of experience.   Discussion and debate to breed innovation for javascript applications is encouraged.   
+p. The main goal behind BackboneTutorials.com is to build a comprehensive guide for developers of all levels of experience.   Discussion and debate are encouraged and will hopefully breed innovation for javascript applications.   
 
 All contributions will be well acknowledge on the site.
