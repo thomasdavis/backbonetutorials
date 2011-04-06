@@ -2,6 +2,7 @@
 layout: post
 title: What is a model?
 type: beginner
+posturl: http://backbonetutorials.com/what-is-a-model
 ---
 
 h2. What is a model?

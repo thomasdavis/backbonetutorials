@@ -2,6 +2,7 @@
 layout: post
 title: Why would you use backbone.js?
 type: beginner
+posturl: http://backbonetutorials.com/what-would-you-use-backbone
 ---
 
 h2. Why do you need backbone.js?
