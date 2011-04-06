@@ -190,11 +190,13 @@ p. *Validate data before you set or save it*
         }
     });
     
-    var person = new Person({ name: "Mary Poppins", age: -1 }); 
+    var person = new Person;
+    person.set({ name: "Mary Poppins", age: -1 }); 
     // Will trigger an alert outputting the error
     delete person;
     
-    var person = new Person({ name: "Dr Manhatten", age: -1 });
+    var person = new Person;
+    person.set({ name: "Dr Manhatten", age: -1 });
     // God have mercy on our souls
     
 {% endhighlight %}
