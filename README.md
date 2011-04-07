@@ -8,8 +8,8 @@ As single page apps and large scale javascript applications become more prominen
 
 I started this site to not only consolidate my understanding of backbone.js but to also document what I have learned thus far for myself and others.
 
-@neutralthoughts
+Thomas Davis - [@neutralthoughts](http://twitter.com/neutralthoughts) - Twitter
 
 ## Contributions
 
-* Thanks to Cactus("https://github.com/cactus":https://github.com/cactus) for creating the blog feed
+* Thanks to Cactus([https://github.com/cactus](https://github.com/cactus)) for creating the blog feed
