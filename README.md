@@ -1,5 +1,5 @@
 
-h1. Backbone Tutorials
+# Backbone Tutorials
 
 This site is by no means the definite guide to backbone.js and all corrections and contributions are welcome.
 About Backbone Tutorials
@@ -10,6 +10,6 @@ I started this site to not only consolidate my understanding of backbone.js but 
 
 @neutralthoughts
 
-h2. Contributions
+## Contributions
 
 * Thanks to Cactus("https://github.com/cactus":https://github.com/cactus) for creating the blog feed
