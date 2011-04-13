@@ -162,7 +162,7 @@ p. *Get all the current attributes*
 {% highlight javascript %}
       
     var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    var attributes = person.toJSON; // { name: "Thomas", age: 67, children: ['Ryan']}
+    var attributes = person.toJSON(); // { name: "Thomas", age: 67, children: ['Ryan']}
     /* This simply returns a copy of the current attributes. */
     delete attributes;
     var attributes = person.attributes;
