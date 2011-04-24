@@ -7,200 +7,167 @@ posturl: http://backbonetutorials.com/what-is-a-view
 
 h2. What is a view?
 
-p. Backbone views are used reflect what your applications data model looks like.   They are also used to listen to events and react accordingly.   This tutorial will not be addressing binding models/collections with views.   This tutorial will focus on view functionality and how to use it with a javascript templating library.
+p. Backbone views are used reflect what your applications data model looks like.   They are also used to listen to events and react accordingly.   This tutorial will not be addressing binding models/collections with views.   This tutorial will focus on view functionality and how to use it with a javascript templating library ("underscore.js templating":http://documentcloud.github.com/underscore/#template).
 
-We will be using jQuery 1.5.1 as our DOM manipulator.
+We will be using jQuery 1.5.1 as our DOM manipulator. You could use other libraries such as MooTools or "Sizzle":http://sizzlejs.com/ to do this task but official Backbone.js documentation endorses jQuery.   Backbone.View events will possibly have errors with other libraries other then jQuery.
+
+For the purposes of this demostration we will be implementing a search box. A live example can be found "here":http://jsfiddle.net/thomas/C9wew/6.
 
 {% highlight javascript %}
-    Person = Backbone.Model.extend({
+    SearchView = Backbone.View.extend({
         initialize: function(){
-            alert("Welcome to this world");
-        }   /ch
+            alert("Alerts suck.");
+        }   
     });
     
-    var person = new Person;
+    var search_view = new SearchView;
+    // The initialize function is always calld when instantiating a Backbone View.
 {% endhighlight %}
 
-p. So _initialize()_ is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don't have to include it in your model declaration but you will find yourself using it more often than not.
+h4. The "el" property
 
-h4. Setting attributes
+p. The "el" property references the DOM object created in the browser for the Backbone.js view.   Every Backbone.js view has an "el" property and if not user defined Backbone.js will construct it's own, usually a empty div.   
 
-p. Now we want to pass some parameters when we create an instance of our model.
+In this tutorial, we are going to set our view's "el" to a container in our html effectivly making Backbone.View the owner of the DOM element.
 
-{% highlight javascript %}
-    Person = Backbone.Model.extend({
+
+{% highlight html %}
+<div id="search_container"></div>
+
+<script type="text/javascript">
+	SearchView = Backbone.View.extend({
+		initialize: function(){
+			alert("Alerts suck.");
+		}   
+	});
+	
+	var search_view = new SearchView({ el: $("#search_container") });
+</script>
+{% endhighlight %}
+
+p. *Tip*: Keep in mind is that now that we have bound this container element any events we trigger have to be inside of this element.
+
+h4. Loading a template
+
+p. Backbone relies on a library called Underscore.js which rolls it's own micro-templating solution. You can view the documentation "here":http://documentcloud.github.com/underscore/#template. 
+
+We will now implement a "render()" function and call it when the view is initialized.   The "render()" function will load our template into our "el" using jQuery.   
+
+
+{% highlight html %}
+<div id="search_container"></div>
+
+<script type="text/javascript">
+	SearchView = Backbone.View.extend({
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			// Compile the template using underscore
+			var template = _.template( $("#search_template").html(), {} );
+			// Load the compiled HTML into the Backbone "el"
+			this.el.html( template );
+		}
+	});
+	
+	var search_view = new SearchView({ el: $("#search_container") });
+</script>
+
+<script type="text/template" id="search_template">
+	<label>Search</label>
+	<input type="text" id="search_input" />
+	<input type="button" id="search_button" value="Search" />
+</script>
+{% endhighlight %}
+
+p.  *Tip*: Place all your templates in a file and serve them from a CDN so your users can always have your application cached.
+
+h4. Listening for events
+
+p. To attach a listener to our view we use the "events" attribute of the Backbone.View.   Remember that event listeners can only be attached to children elements of the "el" property.   We are going to attach a "click" listener to our button.
+
+
+
+{% highlight html %}
+<div id="search_container"></div>
+
+<script type="text/javascript">
+    SearchView = Backbone.View.extend({
         initialize: function(){
-            alert("Welcome to this world");
+            this.render();
+        },
+        render: function(){
+            var template = _.template( $("#search_template").html(), {} );
+            this.el.html( template );
+        },
+        events: {
+            "click input[type=button]": "doSearch"  
+        },
+        doSearch: function( event ){
+            // Button clicked, you can access the element that was clicked with event.currentTarget
+            alert( "Search for " + $("#search_input").val() );
         }
     });
     
-    var person = new Person({ name: "Thomas", age: 67});
-    delete person;
-    // or we can set afterwards, these operations are equivelent
-    var person = new Person();
-    person.set({ name: "Thomas", age: 67});
-    
+    var search_view = new SearchView({ el: $("#search_container") });
+</script>
+
+<script type="text/template" id="search_template">
+	<label>Search</label>
+	<input type="text" id="search_input" />
+	<input type="button" id="search_button" value="Search" />
+</script>
 {% endhighlight %}
 
-p. So passing a javascript object to our constructor is the same as calling _model.set()_.   Now that these models have attributes set we need to be able to retrieve them.  
-
-h4. Getting attributes
-
-p. Using the _model.get()_ method we can access model properties at anytime.
-
-{% highlight javascript %}
-    Person = Backbone.Model.extend({
-        initialize: function(){
-            alert("Welcome to this world");
-        }
-    });
-    
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    
-    var age = person.get("age"); // 67
-    var name = person.get("name"); // "Thomas"
-    var children = person.get("children"); // ['Ryan']
-    
-{% endhighlight %}
-
-h4. Setting model defaults
-
-p. Sometimes you will want your model to contain default values.   This can easily be accomplished by setting a property name 'defaults' in your model declaration.
-
-{% highlight javascript %}
-    Person = Backbone.Model.extend({
-        defaults: {
-            name: 'Fetus',
-            age: 0,
-            children: []
-        },
-        initialize: function(){
-            alert("Welcome to this world");
-        }
-    });
-    
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    
-    var age = person.get("age"); // 67
-    var name = person.get("name"); // "Thomas"
-    var children = person.get("children"); // ['Ryan']
-    
-{% endhighlight %}
-
-h4. Manipulating model attributes
-
-p.  Models can contain as many custom methods as you like to manipulate attributes.   By default all methods are public.
-
-{% highlight javascript %}
-    Person = Backbone.Model.extend({
-        defaults: {
-            name: 'Fetus',
-            age: 0,
-            children: []
-        },
-        initialize: function(){
-            alert("Welcome to this world");
-        },
-        adopt: function( newChildsName ){
-            var children_array = this.get("children");
-            children_array.push( newChildsName );
-            this.set({ children: children_array });
-        }
-    });
-    
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    person.adopt('John Resig');
-    var children = person.get("children"); // ['Ryan', 'John Resig']
-    
-{% endhighlight %}
-
-p. So we can implement methods to get/set and perform other calculations using attributes from our model at any time.   
-
-
-h4. Listening for changes to the model
-
-p. Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case every time we adopt a new kid we are going to throw a party.
-
-{% highlight javascript %}
-    Person = Backbone.Model.extend({
-        defaults: {
-            name: 'Fetus',
-            age: 0,
-            children: []
-        },
-        initialize: function(){
-            alert("Welcome to this world");
-            this.bind("change:children", function(){
-                alert("More children, single parenting is great!");
-                var children = this.get("children"); // ['Ryan', 'Stewie Griffin']
-            });
-        },
-        adopt: function( newChildsName ){
-            var children_array = this.get("children");
-            children_array.push( newChildsName );
-            this.set({ children: children_array });
-        }
-    });
-    
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    person.adopt('Stewie Griffin'); // This triggers a change and will alert()
-    
-{% endhighlight %}
-
-p. So we can bind the a change listener to individual attributes or if we like simply '_this.bind("change", function(){});_' to listen for changes to all attributes of the model.
-
-h4. Fetching, Saving and Destroying
-
-p. Models actually have to be a part of a collection for requests to the server to work by default.   This tutorial is more of a focus on individual models.  Check back soon for a tutorial on collection implementation.
 
 h4. Tips and Tricks
 
-p. *Get all the current attributes*
+p. *Using template variables*
 
-{% highlight javascript %}
-      
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    var attributes = person.toJSON; // { name: "Thomas", age: 67, children: ['Ryan']}
-    /* This simply returns a copy of the current attributes. */
-    delete attributes;
-    var attributes = person.attributes;
-    /* The line above gives a direct reference to the attributes and you should be careful when playing with it.   Best practise would suggest that you use .set() to edit attributes of a model to take advantage of backbone listeners. */
+{% highlight html %}
+<div id="search_container"></div>
+
+<script type="text/javascript">
+	 SearchView = Backbone.View.extend({
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			//Pass variables in using Underscore.js Template
+			var variables = { search_label: "My Search" };
+			// Compile the template using underscore
+			var template = _.template( $("#search_template").html(), variables );
+			// Load the compiled HTML into the Backbone "el"
+			this.el.html( template );
+		},
+		events: {
+			"click input[type=button]": "doSearch"  
+		},
+		doSearch: function( event ){
+			// Button clicked, you can access the element that was clicked with event.currentTarget
+			alert( "Search for " + $("#search_input").val() );
+		}
+	});
+		
+	var search_view = new SearchView({ el: $("#search_container") });
+</script>
+
+<script type="text/template" id="search_template">
+	<!-- Access template variables with <%= %> -->
+    <label><%= search_label %></label>
+    <input type="text" id="search_input" />
+    <input type="button" id="search_button" value="Search" />
+</script>
 {% endhighlight %}
 
-p. *Validate data before you set or save it*
+p.  Post any more questions you would like answered by this tutorial below
 
-{% highlight javascript %}
-
-    Person = Backbone.Model.extend({
-        // If you return a string from the validate function,
-        // Backbone will throw an error
-        validate: function( attributes ){
-            if( attributes.age < 0 && attributes.name != "Dr Manhatten" ){
-                return "You can't be negative years old";
-            }
-        },
-        initialize: function(){
-            alert("Welcome to this world");
-            this.bind("error", function(model, error){
-                // We have received an error, log it, alert it or forget it :)
-                alert( error );
-            });
-        }
-    });
-    
-    var person = new Person;
-    person.set({ name: "Mary Poppins", age: -1 }); 
-    // Will trigger an alert outputting the error
-    delete person;
-    
-    var person = new Person;
-    person.set({ name: "Dr Manhatten", age: -1 });
-    // God have mercy on our souls
-    
-{% endhighlight %}
 
 h3. Relevant Links
 * "backbone.js official website":http://documentcloud.github.com/backbone/
+* "this example implemented with google API":http://thomasdavis.github.com/2011/02/05/backbone-views-and-templates.html
+* "this examples exact code on jsfiddle.net":http://jsfiddle.net/thomas/C9wew/4/
+* "another semi-complete example on jsfiddle.net":http://jsfiddle.net/thomas/dKK9Y/6/
 
 h3. Author
 
