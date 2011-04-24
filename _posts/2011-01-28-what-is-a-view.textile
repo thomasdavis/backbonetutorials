@@ -7,29 +7,29 @@ posturl: http://backbonetutorials.com/what-is-a-view
 
 h2. What is a view?
 
-p. Backbone views are used reflect what your applications data model looks like.   They are also used to listen to events and react accordingly.   This tutorial will not be addressing binding models/collections with views.   This tutorial will focus on view functionality and how to use it with a javascript templating library ("underscore.js templating":http://documentcloud.github.com/underscore/#template).
+p. Backbone views are used to reflect what your applications' data models look like. They are also used to listen to events and react accordingly. This tutorial will not be addressing how to bind models and collections to views but will focus on view functionality and how to use views with a JavaScript templating library, specifically "Underscore.js's _.template":http://documentcloud.github.com/underscore/#template.
 
-We will be using jQuery 1.5.1 as our DOM manipulator. You could use other libraries such as MooTools or "Sizzle":http://sizzlejs.com/ to do this task but official Backbone.js documentation endorses jQuery.   Backbone.View events will possibly have errors with other libraries other then jQuery.
+We will be using "jQuery 1.5":http://jquery.com/ as our DOM manipulator. It's possible to use other libraries such as "MooTools":http://mootools.net/ or "Sizzle":http://sizzlejs.com/, but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with other libraries other than jQuery.
 
-For the purposes of this demostration we will be implementing a search box. A live example can be found "here":http://jsfiddle.net/thomas/C9wew/6.
+For the purposes of this demonstration, we will be implementing a search box. "A live example":http://jsfiddle.net/thomas/C9wew/6 can be found on jsFiddle.
 
 {% highlight javascript %}
     SearchView = Backbone.View.extend({
         initialize: function(){
             alert("Alerts suck.");
-        }   
+        }
     });
-    
+
+    // The initialize function is always called when instantiating a Backbone View.
+    // Consider it the constructor of the class.
     var search_view = new SearchView;
-    // The initialize function is always calld when instantiating a Backbone View.
 {% endhighlight %}
 
 h4. The "el" property
 
-p. The "el" property references the DOM object created in the browser for the Backbone.js view.   Every Backbone.js view has an "el" property and if not user defined Backbone.js will construct it's own, usually a empty div.   
+p. The "el" property references the DOM object created in the browser. Every Backbone.js view has an "el" property, and if it not defined, Backbone.js will construct its own, which is an empty div element.
 
-In this tutorial, we are going to set our view's "el" to a container in our html effectivly making Backbone.View the owner of the DOM element.
-
+Let us set our view's "el" property to div#search_container, effectively making Backbone.View the owner of the DOM element.
 
 {% highlight html %}
 <div id="search_container"></div>
@@ -38,21 +38,20 @@ In this tutorial, we are going to set our view's "el" to a container in our html
 	SearchView = Backbone.View.extend({
 		initialize: function(){
 			alert("Alerts suck.");
-		}   
+		}
 	});
 	
 	var search_view = new SearchView({ el: $("#search_container") });
 </script>
 {% endhighlight %}
 
-p. *Tip*: Keep in mind is that now that we have bound this container element any events we trigger have to be inside of this element.
+p. *Note*: Keep in mind that this binds the container element. Any events we trigger must be in this element.
 
 h4. Loading a template
 
-p. Backbone relies on a library called Underscore.js which rolls it's own micro-templating solution. You can view the documentation "here":http://documentcloud.github.com/underscore/#template. 
+p. Backbone.js is dependent on Underscore.js, which includes its own micro-templating solution. Refer to "Underscore.js's documentation":http://documentcloud.github.com/underscore/ for more information.
 
-We will now implement a "render()" function and call it when the view is initialized.   The "render()" function will load our template into our "el" using jQuery.   
-
+Let us implement a "render()" function and call it when the view is initialized. The "render()" function will load our template into the view's "el" property using jQuery.
 
 {% highlight html %}
 <div id="search_container"></div>
@@ -80,13 +79,11 @@ We will now implement a "render()" function and call it when the view is initial
 </script>
 {% endhighlight %}
 
-p.  *Tip*: Place all your templates in a file and serve them from a CDN so your users can always have your application cached.
+p. *Tip*: Place all your templates in a file and serve them from a CDN. This ensures your users will always have your application cached.
 
 h4. Listening for events
 
-p. To attach a listener to our view we use the "events" attribute of the Backbone.View.   Remember that event listeners can only be attached to children elements of the "el" property.   We are going to attach a "click" listener to our button.
-
-
+p. To attach a listener to our view, we use the "events" attribute of Backbone.View. Remember that event listeners can only be attached to child elements of the "el" property. Let us attach a "click" listener to our button.
 
 {% highlight html %}
 <div id="search_container"></div>
@@ -101,14 +98,14 @@ p. To attach a listener to our view we use the "events" attribute of the Backbon
             this.el.html( template );
         },
         events: {
-            "click input[type=button]": "doSearch"  
+            "click input[type=button]": "doSearch"
         },
         doSearch: function( event ){
             // Button clicked, you can access the element that was clicked with event.currentTarget
             alert( "Search for " + $("#search_input").val() );
         }
     });
-    
+
     var search_view = new SearchView({ el: $("#search_container") });
 </script>
 
@@ -153,21 +150,20 @@ p. *Using template variables*
 </script>
 
 <script type="text/template" id="search_template">
-	<!-- Access template variables with <%= %> -->
+    <!-- Access template variables with <%= %> -->
     <label><%= search_label %></label>
     <input type="text" id="search_input" />
     <input type="button" id="search_button" value="Search" />
 </script>
 {% endhighlight %}
 
-p.  Post any more questions you would like answered by this tutorial below
-
+p.  If you have any questions, leave a comment below.
 
 h3. Relevant Links
-* "backbone.js official website":http://documentcloud.github.com/backbone/
-* "this example implemented with google API":http://thomasdavis.github.com/2011/02/05/backbone-views-and-templates.html
-* "this examples exact code on jsfiddle.net":http://jsfiddle.net/thomas/C9wew/4/
-* "another semi-complete example on jsfiddle.net":http://jsfiddle.net/thomas/dKK9Y/6/
+* "Backbone.js official website":http://documentcloud.github.com/backbone/
+* "This example implemented with google API":http://thomasdavis.github.com/2011/02/05/backbone-views-and-templates.html
+* "This examples exact code on jsfiddle.net":http://jsfiddle.net/thomas/C9wew/4/
+* "Another semi-complete example on jsFiddle":http://jsfiddle.net/thomas/dKK9Y/6/
 
 h3. Author
 
