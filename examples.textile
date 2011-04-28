@@ -15,5 +15,4 @@ h3. "GetFlow.com":http://getflow.com
 
 p. Flow is a task management app that makes working with your team a breeze.   You can see the internals under window.Flow.
 
-_CouchDb and Node.js Backend_
 
