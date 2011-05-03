@@ -21,3 +21,12 @@ p. Backbone is an incredibly small library for the amount of functionality and s
 h3. Relevant Links
 * "Backbone.js official website":http://documentcloud.github.com/backbone/
 * "great hackernews discussion /w post from author":http://news.ycombinator.com/item?id=2119704
+
+
+h3. Author
+
+* "Thomas Davis":https://github.com/thomasdavis
+
+h3. Contributors
+
+* "FND":https://github.com/FND
