@@ -121,7 +121,7 @@ p. So we can implement methods to get/set and perform other calculations using a
 
 h4. Listening for changes to the model
 
-p. Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case every time we adopt a new kid we are going to throw a party.
+p. Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case if the name of our "person" changes we will alert their new name.
 
 {% highlight javascript %}
     Person = Backbone.Model.extend({
@@ -132,21 +132,18 @@ p. Now onto one of the more useful parts of using a library such as backbone.   
         },
         initialize: function(){
             alert("Welcome to this world");
-            this.bind("change:children", function(){
-                alert("More children, single parenting is great!");
-                var children = this.get("children"); // ['Ryan', 'Stewie Griffin']
+            this.bind("change:name", function(){
+                var name = this.get("name"); // 'Stewie Griffin'
+                alert("Changed my name to " + name );
             });
         },
-        adopt: function( newChildsName ){
-            var children_array = this.get("children");
-            children_array.push( newChildsName );
-            this.set({ children: children_array });
+        changeName: function( name ){
+            this.set({ name: name });
         }
     });
     
     var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    person.adopt('Stewie Griffin'); // This triggers a change and will alert()
-    
+    person.changeName('Stewie Griffin'); // This triggers a change and will alert()
 {% endhighlight %}
 
 p. So we can bind the a change listener to individual attributes or if we like simply '_this.bind("change", function(){});_' to listen for changes to all attributes of the model.
