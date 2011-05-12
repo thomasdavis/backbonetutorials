@@ -9,4 +9,6 @@ p. As single page apps and large scale javascript applications become more promi
 
 I started this site to not only consolidate my understanding of backbone.js but to also document what I have learned thus far for myself and others.
 
-p. You can contact the original owner of this site through "github":https://github.com/thomasdavis or via twitter("@neutralthoughts":http://twitter.com/neutralthoughts).
+p. You can contact the original owner of this site through "github":https://github.com/thomasdavis or via twitter("@neutralthoughts":http://twitter.com/neutralthoughts).   You can also find me at #cdnjs on freenode.net.
+
+
