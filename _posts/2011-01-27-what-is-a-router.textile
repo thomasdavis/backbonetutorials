@@ -1,22 +1,22 @@
 ---
 layout: post
-title: What is a controller?
+title: What is a router?
 type: beginner
-posturl: http://backbonetutorials.com/what-is-a-controller
+posturl: http://backbonetutorials.com/what-is-a-router
 ---
 
-h2. What is a controller?
+h2. What is a router?
 
-p. Backbone controllers are used for routing your applications URL's when using hash tags(#).   In the traditional MVC sense they don't neccesarily fit the semantics and if you have read ""What is a view?":http://backbonetutorials.com/what-is-a-view" it will elaborate on this point.   Though a Backbone "controller" is still very useful for any application/feature that needs URL routing/history capabilities.   
+p. Backbone routers are used for routing your applications URL's when using hash tags(#).   In the traditional MVC sense they don't neccesarily fit the semantics and if you have read ""What is a view?":http://backbonetutorials.com/what-is-a-view" it will elaborate on this point.   Though a Backbone "router" is still very useful for any application/feature that needs URL routing/history capabilities.   
 
-Defined controllers should always contain at least one route and a function to map the particular route to.   In the example below we are going to define a route that is always called.
+Defined routers should always contain at least one route and a function to map the particular route to.   In the example below we are going to define a route that is always called.
 
 Also note that routes intepret anything after "#" tag in the url.   All links in your application should target "#/action" or "#action".   (Appending a forward slash after the hashtag looks a bit nicer e.g. http://example.com/#/user/help)
 
 {% highlight html %}
 
 <script>
-    var AppController = Backbone.Controller.extend({
+    var AppRouter = Backbone.Router.extend({
         routes: {
             "*actions": "defaultRoute" // matches http://example.com/#anything-here
         },
@@ -25,19 +25,20 @@ Also note that routes intepret anything after "#" tag in the url.   All links in
             alert( actions ); 
         }
     });
-    // Initiate the controller
-    var app_controller = new AppController;
+    // Initiate the router
+    var app_router = new AppRouter;
     // Start Backbone history a neccesary step for bookmarkable URL's
     Backbone.history.start();
 
 </script>
 
 <a href="#action">Activate route</a>
-<a href="#/controller/action">Activate another route</a>
+<a href="#/route/action">Activate another route</a>
 <!-- Notice the change in the url -->
 
 {% endhighlight %}
 
+*Please note: * Prior to Backbone 0.5 (released 1. July 2011) Routes was originally called Controllers. Due to clearity developers on the Backbone team renamed it to Routes. Hence, if you find yourself using an older version of Backbone you should write Backbone.Controller.extend({ ** });
 
 h4. Dynamic Routing
 
@@ -46,7 +47,7 @@ p. Most conventional frameworks allow you to define routes that contain a mix of
 {% highlight html %}
 
 <script>
-    var AppController = Backbone.Controller.extend({
+    var AppRouter = Backbone.Router.extend({
         routes: {
             "/posts/:id": "getPost",
             "*actions": "defaultRoute" // Backbone will try match the route above first
@@ -59,8 +60,8 @@ p. Most conventional frameworks allow you to define routes that contain a mix of
             alert( actions ); 
         }
     });
-    // Instantiate the controller
-    var app_controller = new AppController;
+    // Instantiate the router
+    var app_router = new AppRouter;
     // Start Backbone history a neccesary step for bookmarkable URL's
     Backbone.history.start();
 
@@ -76,7 +77,7 @@ h4. Dynamic Routing Cont. ":params" and "*splats"
 
 p. Backbone uses two styles of variables when implementing routes.   First there are ":params" which match any URL components between slashes.  Then there are "*splats" which match any number of URL components.   Note that due to the nature of a "*splat" it will always be the last variable in your URL as it will match any and all components.
 
-Any "*splats" or ":params" in route definitions are passed as variables respective order to the associated function.  A route defined as "/:controller/:action" will pass 2 variables(controller, action) to the call back function.   Which can be accessed with "function( controller, action )".   (If this is confusing please post a comment and I will try articulate it better)
+Any "*splats" or ":params" in route definitions are passed as variables respective order to the associated function.  A route defined as "/:route/:action" will pass 2 variables(route, action) to the call back function.   Which can be accessed with "function( route, action )".   (If this is confusing please post a comment and I will try articulate it better)
 
 Here are some examples of using ":params" and "*splats"
 
@@ -90,15 +91,15 @@ Here are some examples of using ":params" and "*splats"
             "/download/*path": "downloadFile",
             // <a href="http://example.com/#/download/user/images/hey.gif">Download</a>
             
-            "/:controller/:action": "loadView",
-            // <a href="http://example.com/#/dashboard/graph">Load Controller/Action View</a>
+            "/:route/:action": "loadView",
+            // <a href="http://example.com/#/dashboard/graph">Load Route/Action View</a>
             
         },
         
         getPost: function( id ){ alert(id); /* 121 */ },
         downloadFile: function( path ){ alert(path); /* user/images/hey.gif */ },
-        loadView: function( controller, action ){ 
-            alert(controller + "_" + action); 
+        loadView: function( route, action ){ 
+            alert(route + "_" + action); 
             /* dashboard_graph */ 
         }
 
@@ -114,7 +115,7 @@ h4. Tips and Tricks
 p. No Tips and Tricks
 
 h3. Relevant Links
-* "Backbone.js official controller documentation":http://documentcloud.github.com/backbone/#Controller
+* "Backbone.js official router documentation":http://documentcloud.github.com/backbone/#Router
 * "Using routes and understanding the hash tag":http://thomasdavis.github.com/2011/02/07/making-a-restful-ajax-app.html
 
 h3. Author
@@ -123,4 +124,4 @@ h3. Author
 
 h3. Contributors
 
-* No contributions
+* "Herman Schistad":http://schistad.info (Backbone 0.5 rename from Controller to Router)
