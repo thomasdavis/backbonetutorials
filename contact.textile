@@ -1,9 +1,0 @@
----
-layout: default
-title: Contact
----
-
-h2. Contact
-
-p. You can contact the original owner of this site through "github":https://github.com/thomasdavis or via twitter("@neutralthoughts":http://twitter.com/neutralthoughts).
-

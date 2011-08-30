@@ -1,7 +1,0 @@
----
-layout: default
-title: Chat
----
-<p>
-#cdnjs on irc.freenode.net, don't forget to follow me on <a href="http://twitter.com/neutralthoughts" target="_blank">twitter</a>.</p>
-<iframe src="http://webchat.freenode.net/?channels=cdnjs" width="100%" height="500px"></iframe>
