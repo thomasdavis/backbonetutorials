@@ -1,0 +1,96 @@
+/*
+* StackLayout by Campbell McGuiness
+*
+* http://stacklayout.com/
+* http://twitter.com/stacklayout
+* http://www.decalcms.com/
+* http://workingsoftware.com.au/
+*
+* This work is licensed under Creative Commons * Attribution-ShareAlike 3.0 Australia License * http://creativecommons.org/licenses/by-sa/3.0/au/
+*
+* Please retain this credit and let us know if you use StackLayout for inclusion on http://stacklayout.com/who.html
+*
+* cam@workingsoftware.com.au
+*/ 
+.stack,
+.stack1of2,
+.stack1of3,
+.stack2of3,
+.stack1of4,
+.stack3of4,
+.stack1of5,
+.stack2of5,
+.stack3of5,
+.stack4of5,
+.stackAuto
+{
+    display:inline-block;
+    font-family:'Courier New',monospace;
+    letter-spacing:-0.65em;
+    word-spacing:-0.65em;
+    text-align:center;
+    vertical-align:top;
+}
+.stackContent
+{
+    display:block;
+    letter-spacing:normal;
+    word-spacing:normal;
+    text-align:left;
+}
+.stackContent:after
+{
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.stackAuto .stackContent
+{
+    text-align:center;
+}
+.stackAuto
+{
+    width:auto;
+}
+.stack
+{
+    width:100%;
+}
+.stack1of2
+{
+    width:50%;
+}
+.stack1of3
+{
+    width:33.334%;
+}
+.stack2of3
+{
+    width:66.667%;
+}
+.stack1of4
+{
+    width:25%;
+}
+.stack3of4
+{
+    width:75%;
+}
+.stack1of5
+{
+    width:20%;
+}
+.stack2of5
+{
+    width:40%;
+}
+.stack3of5
+{
+    width:60%;
+}
+.stack4of5
+{
+    width:80%;
+}
