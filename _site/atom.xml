@@ -4,7 +4,7 @@
  <title>Backbone Tutorials</title>
  <link href="http://backbonetutorials.com/atom.xml" rel="self"/>
  <link href="http://backbonetutorials.com/"/>
- <updated>2011-10-10T22:54:34+10:00</updated>
+ <updated>2011-10-11T20:39:23+10:00</updated>
  <id>http://backbonetutorials.com/</id>
  <author>
    <name>Thomas Davis</name>
@@ -22,8 +22,8 @@
 &lt;p&gt;This was quite a different decision to other Javascript &lt;span class=&quot;caps&quot;&gt;MVC&lt;/span&gt; frameworks who were more in favor of setting a development philosophy.&lt;/p&gt;
 &lt;p&gt;This tutorial will get you started on combining Backbone.js with &lt;a href=&quot;http://www.com&quot;&gt;&lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt;&lt;/a&gt; (Asynchronous Module Definitions).&lt;/p&gt;
 &lt;h3&gt;What is &lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt;?&lt;/h3&gt;
-&lt;p&gt;Asynchronous Module Definitions designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around &lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt;, seeing it as the future of modular Javascript development.&lt;/p&gt;
-&lt;p&gt;This tutorial will use Require.js to implement a modular and organized Backbone.js.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http:www.com&quot;&gt;Asynchronous Module Definitions&lt;/a&gt; designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around &lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt;, seeing it as the future of modular Javascript development.&lt;/p&gt;
+&lt;p&gt;This tutorial will use &lt;a href=&quot;http://requirejs.org&quot;&gt;Require.js&lt;/a&gt; to implement a modular and organized Backbone.js.&lt;/p&gt;
 &lt;p&gt;&lt;b&gt;I highly recommend using &lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt; for application development&lt;/b&gt;&lt;/p&gt;
 &lt;p&gt;Quick Overview&lt;/p&gt;
 &lt;ul&gt;
@@ -33,6 +33,11 @@
 &lt;h3&gt;Why Require.js?&lt;/h3&gt;
 &lt;p&gt;Require.js has a great community.&lt;/p&gt;
 &lt;h3&gt;Getting started&lt;/h3&gt;
+&lt;p&gt;To easily understand this tutorial you should jump straight into the example code base.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;http://www.com&quot;&gt;Example Codebase&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;To continue you must really understand what we are aiming towards as described in the introduction.&lt;/p&gt;
+&lt;h3&gt;Bootstrapping your application&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
 &lt;ul&gt;
 	&lt;li&gt;Model: Student, Collection: ClassStudents&lt;/li&gt;
 	&lt;li&gt;Model: Todo Item, Collection: Todo List&lt;/li&gt;

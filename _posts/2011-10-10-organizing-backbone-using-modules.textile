@@ -31,6 +31,16 @@ p. Require.js has a great community.
 
 h3. Getting started
 
+To easily understand this tutorial you should jump straight into the example code base.
+
+h3. "Example Codebase":http://www.com
+
+p. To continue you must really understand what we are aiming towards as described in the introduction.
+
+h3. Bootstrapping your application
+
+p. Using Require.js we are able to define a single entry point for your application that will int
+p. Using Require.js we are able to define a single entry point for your application that will int
 
 * Model: Student, Collection: ClassStudents 
 * Model: Todo Item, Collection: Todo List
