@@ -110,53 +110,24 @@
 <h3><a href="http://www.com">Example Codebase</a></h3>
 <p>To continue you must really understand what we are aiming towards as described in the introduction.</p>
 <h3>Bootstrapping your application</h3>
-<p></p>
-<ul>
-	<li>Model: Student, Collection: ClassStudents</li>
-	<li>Model: Todo Item, Collection: Todo List</li>
-	<li>Model: Animals, Collection: Zoo</li>
-</ul>
-<p>Typically your collection will only use one type of model but models themselves are not limited to a type of collection;</p>
-<ul>
-	<li>Model: Student, Collection: Gym Class</li>
-	<li>Model: Student, Collection: Art Class</li>
-	<li>Model: Student, Collection: English Class</li>
-</ul>
-<p>Here is a generic Model/Collection example.</p>
-<div class="highlight"><pre><code class="javascript">    <span class="kd">var</span> <span class="nx">Song</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-        <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Music is the answer&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">});</span>
-    
-    <span class="kd">var</span> <span class="nx">Album</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-		<span class="nx">model</span><span class="o">:</span> <span class="nx">Song</span>
-	<span class="p">});</span>
-</code></pre>
-</div>
-<h3>Building a collection</h3>
-<p>Now we are going to populate a creation with some useful data.</p>
-<div class="highlight"><pre><code class="javascript">    <span class="kd">var</span> <span class="nx">Song</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-		<span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
-			<span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Not specified&quot;</span><span class="p">,</span>
-			<span class="nx">artist</span><span class="o">:</span> <span class="s2">&quot;Not specified&quot;</span>
-		<span class="p">},</span>
-        <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Music is the answer&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">});</span>
-    
-    <span class="kd">var</span> <span class="nx">Album</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-		<span class="nx">model</span><span class="o">:</span> <span class="nx">Song</span>
-	<span class="p">});</span>
-	
-	<span class="kd">var</span> <span class="nx">song1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Song</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;How Bizarre&quot;</span><span class="p">,</span> <span class="nx">artist</span><span class="o">:</span> <span class="s2">&quot;OMC&quot;</span> <span class="p">});</span>
-	<span class="kd">var</span> <span class="nx">song2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Song</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Sexual Healing&quot;</span><span class="p">,</span> <span class="nx">artist</span><span class="o">:</span> <span class="s2">&quot;Marvin Gaye&quot;</span> <span class="p">});</span>
-	<span class="kd">var</span> <span class="nx">song3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Song</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Talk It Over In Bed&quot;</span><span class="p">,</span> <span class="nx">artist</span><span class="o">:</span> <span class="s2">&quot;OMC&quot;</span> <span class="p">});</span>
-	
-	<span class="kd">var</span> <span class="nx">myAlbum</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Album</span><span class="p">([</span> <span class="nx">song1</span><span class="p">,</span> <span class="nx">song2</span><span class="p">,</span> <span class="nx">song3</span><span class="p">]);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">myAlbum</span><span class="p">.</span><span class="nx">models</span> <span class="p">);</span> <span class="c1">// [song1, song2, song3]</span>
-	
+<p>Using Require.js we define a single entry point on our index page.  <br />
+We should setup any useful containers that might be used by our Backbone views.</p>
+<p><b>Note</b>: The data-main attribute on our single script tag tells Require.js to load the script located at &#8220;js/main.js&#8221;.  It automatically appends the &#8220;.js&#8221;</p>
+<div class="highlight"><pre><code class="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+	<span class="nt">&lt;title&gt;</span>Jackie Chan<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">data-main=</span><span class="s">&quot;js/main&quot;</span> <span class="na">src=</span><span class="s">&quot;js/libs/require/require.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;menu&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </code></pre>
 </div>
 <h3>Relevant Links</h3>

@@ -39,63 +39,78 @@ p. To continue you must really understand what we are aiming towards as describe
 
 h3. Bootstrapping your application
 
-p. Using Require.js we are able to define a single entry point for your application that will int
-p. Using Require.js we are able to define a single entry point for your application that will int
+p. Using Require.js we define a single entry point on our index page.  
+We should setup any useful containers that might be used by our Backbone views.
 
-* Model: Student, Collection: ClassStudents 
-* Model: Todo Item, Collection: Todo List
-* Model: Animals, Collection: Zoo
+**Note**: The data-main attribute on our single script tag tells Require.js to load the script located at "js/main.js".  It automatically appends the ".js"
 
-Typically your collection will only use one type of model but models themselves are not limited to a type of collection;
+{% highlight html %}
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Jackie Chan</title>
+	<!-- Load the script "js/main.js" as our entry point -->
+	<script data-main="js/main" src="js/libs/require/require.js"></script>
+</head>
+<body>
 
-* Model: Student, Collection: Gym Class
-* Model: Student, Collection: Art Class
-* Model: Student, Collection: English Class
+<div id="container">
+  <div id="menu"></div>
+  <div id="content"></div>
+</div>
 
-Here is a generic Model/Collection example.
+</body>
+</html>
+{% endhighlight %}
+
+p. You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be.
+
+h4. What does the bootstrap look like?
+
+p. Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.   
+
+In the below example we configure Require.js to create shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.
+
+Due to the nature of these libraries implementations we actually have to load them in order because they each depend on each other existing in the global namespace(which is bad but is all we have to work with).
+
+Hopefully if the AMD specification takes off these libraries will add code to allow themselves to be loaded asynchronously.   Due to this inconvience the bootstrap is not as intuitive as it could be, I hope to solve this problem in the near future.
+
+We also request a module called "app", this will contain the entireity of our application logic.
+
+**Note:** Modules are loaded relativly to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap.
 
 {% highlight javascript %}
 
-    var Song = Backbone.Model.extend({
-        initialize: function(){
-            console.log("Music is the answer");
-        }
-    });
-    
-    var Album = Backbone.Collection.extend({
-		model: Song
-	});
+// Require.js allows us to configure shortcut alias
+// There usage will become more apparent futher along in the tutorial.
+require.config({
+  paths: {
+    jQuery: "libs/jquery/jquery",
+    Underscore: "libs/underscore/underscore",
+    Backbone: "libs/backbone/backbone"
+  }
+
+});
+
+require([
+
+  // Load our app module and pass it to our definition function
+  "app",
+
+  // Some plugins have to be loaded in order due to there non AMD compliance
+  // Because these scripts are not "modules" they do not pass any values to the definition function below
+  "order!libs/jquery/jquery-min",
+  "order!libs/underscore/underscore-min",
+  "order!libs/backbone/backbone-min"
+], function(App){
+  // The "app" dependency is passed in as "App"
+  // Again, the other dependencies passed in are not "AMD" therefore don't pass a parameter to this function
+  App.initialize();
+});
 
 {% endhighlight %}
 
-h3. Building a collection
-
-p. Now we are going to populate a creation with some useful data.
-
-{% highlight javascript %}
-
-    var Song = Backbone.Model.extend({
-		defaults: {
-			name: "Not specified",
-			artist: "Not specified"
-		},
-        initialize: function(){
-            console.log("Music is the answer");
-        }
-    });
-    
-    var Album = Backbone.Collection.extend({
-		model: Song
-	});
-	
-	var song1 = new Song({ name: "How Bizarre", artist: "OMC" });
-	var song2 = new Song({ name: "Sexual Healing", artist: "Marvin Gaye" });
-	var song3 = new Song({ name: "Talk It Over In Bed", artist: "OMC" });
-	
-	var myAlbum = new Album([ song1, song2, song3]);
-	console.log( myAlbum.models ); // [song1, song2, song3]
-	
-{% endhighlight %}
+h3. 
 
 h3. Relevant Links
 * "Backbone.js official website":http://documentcloud.github.com/backbone/
