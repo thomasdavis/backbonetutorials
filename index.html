@@ -13,7 +13,11 @@ title:
 
 <h2>Intermediate</h2>
 <ul class="tutorials">
-    <li>Coming Soon</li>
+    {% for post in site.posts %}
+        {% if post.type == "intermediate" %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a> &raquo; <a href="http://thomasdavis.github.com">Thomas Davis</a></li>
+        {% endif %}
+    {% endfor %}
 </ul>
 
 <h2>Advanced</h2>

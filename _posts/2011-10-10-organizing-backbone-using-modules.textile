@@ -1,15 +1,36 @@
 ---
 layout: post
-title: What is a collection?
-type: beginner
-posturl: http://backbonetutorials.com/what-would-you-use-backbone
+title: Organizing your application using Modules (require.js)
+type: intermediate
+posturl: http://backbonetutorials.com/organizing-backbone-using-modules
 ---
 
-h1. In progress
+h2. Organizing your application using Modules (require.js)
 
-h2. What is a collection?
+p. Unfortunatly Backbone.js does not tell you how to organize your code leaving many developers in the dark of how to load scripts and lay out their development enviroments.
 
-p. Backbone collections are simply an ordered set of "models":/what-is-a-model.   Such that it can be used in situations such as;
+This was quite a different decision to other Javascript MVC frameworks who were more in favor of setting a development philosophy.
+
+This tutorial will get you started on combining Backbone.js with "AMD":http://www.com (Asynchronous Module Definitions).
+
+h3. What is AMD?
+
+p. "Asynchronous Module Definitions":http:www.com designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around AMD, seeing it as the future of modular Javascript development.
+
+This tutorial will use "Require.js":http://requirejs.org to implement a modular and organized Backbone.js.
+
+**I highly recommend using AMD for application development**
+
+Quick Overview
+* Modular
+* Scalable
+
+h3. Why Require.js?
+
+p. Require.js has a great community.
+
+h3. Getting started
+
 
 * Model: Student, Collection: ClassStudents 
 * Model: Todo Item, Collection: Todo List

@@ -1,4 +1,3 @@
-
 # Backbone Tutorials
 
 This site is by no means the definite guide to backbone.js and all corrections and contributions are welcome.
@@ -13,6 +12,7 @@ Thomas Davis - [@neutralthoughts](http://twitter.com/neutralthoughts) - Twitter
 ## Contributions
 
 * Thanks to Cactus([https://github.com/cactus](https://github.com/cactus)) for creating the blog feed
+* Thanks to Wes Bos ([https://github.com/wesbos](https://github.com/wesbos)) for CSS fixes
 
 ## About the author
 

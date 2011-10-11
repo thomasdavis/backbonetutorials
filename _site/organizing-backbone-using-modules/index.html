@@ -3,7 +3,7 @@
 <head>
 <meta name="readability-verification" content="QaMWXDtxjtrFwfPQ2an55eWRMRLr7F2ermV5E9ch"/> 
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>What is a collection? - Backbone.js Tutorials</title>
+   <title>Organizing your application using Modules (require.js) - Backbone.js Tutorials</title>
 <link href="/atom.xml" rel="alternate" title="backbone tutorials" type="application/atom+xml">
    <meta name="author" content="Backbone Tutorials" />
 
@@ -90,9 +90,22 @@
             <p class="homepagedescription">This site is by no means the definite guide to backbone.js and all corrections and contributions are welcome.</p>
             <hr>
              <div id="post">
-<h1>In progress</h1>
-<h2>What is a collection?</h2>
-<p>Backbone collections are simply an ordered set of <a href="/what-is-a-model">models</a>.   Such that it can be used in situations such as;</p>
+<h2>Organizing your application using Modules (require.js)</h2>
+<p>Unfortunatly Backbone.js does not tell you how to organize your code leaving many developers in the dark of how to load scripts and lay out their development enviroments.</p>
+<p>This was quite a different decision to other Javascript <span class="caps">MVC</span> frameworks who were more in favor of setting a development philosophy.</p>
+<p>This tutorial will get you started on combining Backbone.js with <a href="http://www.com"><span class="caps">AMD</span></a> (Asynchronous Module Definitions).</p>
+<h3>What is <span class="caps">AMD</span>?</h3>
+<p>Asynchronous Module Definitions designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around <span class="caps">AMD</span>, seeing it as the future of modular Javascript development.</p>
+<p>This tutorial will use Require.js to implement a modular and organized Backbone.js.</p>
+<p><b>I highly recommend using <span class="caps">AMD</span> for application development</b></p>
+<p>Quick Overview</p>
+<ul>
+	<li>Modular</li>
+	<li>Scalable</li>
+</ul>
+<h3>Why Require.js?</h3>
+<p>Require.js has a great community.</p>
+<h3>Getting started</h3>
 <ul>
 	<li>Model: Student, Collection: ClassStudents</li>
 	<li>Model: Todo Item, Collection: Todo List</li>
@@ -165,7 +178,7 @@
 <script>
 var idcomments_acct = 'e6c0e0096f8106ea52c674a85b26ecf9';
 var idcomments_post_id;
-var idcomments_post_url = 'http://backbonetutorials.com/what-would-you-use-backbone';
+var idcomments_post_url = 'http://backbonetutorials.com/organizing-backbone-using-modules';
 </script>
 <span id="IDCommentsPostTitle" style="display:none"></span>
 <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
