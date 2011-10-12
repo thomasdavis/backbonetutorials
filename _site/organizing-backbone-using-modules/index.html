@@ -117,6 +117,7 @@ We should setup any useful containers that might be used by our Backbone views.<
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
 	<span class="nt">&lt;title&gt;</span>Jackie Chan<span class="nt">&lt;/title&gt;</span>
+	<span class="c">&lt;!-- Load the script &quot;js/main.js&quot; as our entry point --&gt;</span>
 	<span class="nt">&lt;script </span><span class="na">data-main=</span><span class="s">&quot;js/main&quot;</span> <span class="na">src=</span><span class="s">&quot;js/libs/require/require.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
@@ -130,7 +131,167 @@ We should setup any useful containers that might be used by our Backbone views.<
 <span class="nt">&lt;/html&gt;</span>
 </code></pre>
 </div>
+<p>You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a <span class="caps">CDN</span> ensuring that everything that can be cached, will be.</p>
+<h4>What does the bootstrap look like?</h4>
+<p>Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.</p>
+<p>In the below example we configure Require.js to create shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.</p>
+<p>Due to the nature of these libraries implementations we actually have to load them in order because they each depend on each other existing in the global namespace(which is bad but is all we have to work with).</p>
+<p>Hopefully if the <span class="caps">AMD</span> specification takes off these libraries will add code to allow themselves to be loaded asynchronously.   Due to this inconvience the bootstrap is not as intuitive as it could be, I hope to solve this problem in the near future.</p>
+<p>We also request a module called &#8220;app&#8221;, this will contain the entireity of our application logic.</p>
+<p><b>Note:</b> Modules are loaded relativly to the boot strap and always append with &#8220;.js&#8221;.   So the module &#8220;app&#8221; will load &#8220;app.js&#8221; which is in the same directory as the bootstrap.</p>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: main.js</span>
+
+<span class="c1">// Require.js allows us to configure shortcut alias</span>
+<span class="c1">// There usage will become more apparent futher along in the tutorial.</span>
+<span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+  <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">jQuery</span><span class="o">:</span> <span class="s2">&quot;libs/jquery/jquery&quot;</span><span class="p">,</span>
+    <span class="nx">Underscore</span><span class="o">:</span> <span class="s2">&quot;libs/underscore/underscore&quot;</span><span class="p">,</span>
+    <span class="nx">Backbone</span><span class="o">:</span> <span class="s2">&quot;libs/backbone/backbone&quot;</span>
+  <span class="p">}</span>
+
+<span class="p">});</span>
+
+<span class="nx">require</span><span class="p">([</span>
+
+  <span class="c1">// Load our app module and pass it to our definition function</span>
+  <span class="s2">&quot;app&quot;</span><span class="p">,</span>
+
+  <span class="c1">// Some plugins have to be loaded in order due to there non AMD compliance</span>
+  <span class="c1">// Because these scripts are not &quot;modules&quot; they do not pass any values to the definition function below</span>
+  <span class="s2">&quot;order!libs/jquery/jquery-min&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;order!libs/underscore/underscore-min&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;order!libs/backbone/backbone-min&quot;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">App</span><span class="p">){</span>
+  <span class="c1">// The &quot;app&quot; dependency is passed in as &quot;App&quot;</span>
+  <span class="c1">// Again, the other dependencies passed in are not &quot;AMD&quot; therefore don&#39;t pass a parameter to this function</span>
+  <span class="nx">App</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<h3>How should we lay out external scripts?</h3>
+<p>Any modules we develop for our application using <span class="caps">AMD</span>/Require.js will be asynchronously loaded.</p>
+<p>We have a heavy dependency on jQuery, Underscore and Backbone, unfortunatly this libraries are loaded synchronously and also depend on each other existing in the global namespace.</p>
+<p>Below I propose a solution(until these libraries allow themselves to be loaded asynchronously) to allow these libraries to be loaded properly(synchronously) and also removing themselves from global scope.</p>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: libs/jquery/jquery.js</span>
+
+<span class="nx">define</span><span class="p">([</span>
+<span class="c1">// Load the original jQuery source file</span>
+  <span class="s1">&#39;order!libs/jquery/jquery-min&#39;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">// Tell Require.js that this module returns a reference to jQuery</span>
+  <span class="k">return</span> <span class="nx">$</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: libs/underscore/underscore</span>
+<span class="c1">// As above lets load the original underscore source code</span>
+<span class="nx">define</span><span class="p">([</span><span class="s1">&#39;order!libs/underscore/underscore-min&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">// Tell Require.js that this module returns  a reference to Underscore</span>
+  <span class="k">return</span> <span class="nx">_</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<div class="highlight"><pre><code class="javascript"> <span class="c1">// Filename: libs/backbone/backbone</span>
+ <span class="c1">// Finally lets load the original backbone source code</span>
+<span class="nx">define</span><span class="p">([</span><span class="s1">&#39;order!libs/backbone/backbone-min&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">// Now that all the orignal source codes have ran and accessed each other</span>
+  <span class="c1">// We can call noConflict() to remove them from the global name space</span>
+  <span class="c1">// Require.js will keep a reference to them so we can use them in our modules</span>
+  <span class="nx">_</span><span class="p">.</span><span class="nx">noConflict</span><span class="p">();</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">noConflict</span><span class="p">();</span>
+  <span class="k">return</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">noConflict</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<h3>A boiler plate module</h3>
+<p>So before we start developing our application, let&#8217;s quickly look over boiler plate code that will be reused quite often.</p>
+<p>For convience sake I generally keep a &#8220;boilerplate.js&#8221; in my application root so I can copy it when I need to.</p>
+<div class="highlight"><pre><code class="javascript"><span class="c1">//Filename: boilerplate.js</span>
+
+<span class="nx">define</span><span class="p">([</span>
+  <span class="c1">// These are path alias that we configured in our bootstrap</span>
+  <span class="s1">&#39;jQuery&#39;</span><span class="p">,</span>     <span class="c1">// lib/jquery/jquery</span>
+  <span class="s1">&#39;Underscore&#39;</span><span class="p">,</span> <span class="c1">// lib/underscore/underscore</span>
+  <span class="s1">&#39;Backbone&#39;</span>    <span class="c1">// lib/backbone/backbone</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">){</span>
+  <span class="c1">// Above we have passed in jQuery, Underscore and Backbone</span>
+  <span class="c1">// They will not be accesible in the global scope</span>
+  <span class="k">return</span> <span class="p">{};</span>
+  <span class="c1">// What we return here will be used by other modules	</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<p>The first argument of the define function is our dependency array, we can pass in any modules we like in the future.</p>
+<h3>App.js Building our applications main module</h3>
+<p>Our applications main module should always remain quite light weight.   This tutorial covers only setting up a Backbone Router and initializing it in our main module.</p>
+<p>The router will then load the correct dependencies depending on the current <span class="caps">URL</span>.</p>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: app.js</span>
+<span class="nx">define</span><span class="p">([</span>
+  <span class="s1">&#39;jQuery&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;Underscore&#39;</span><span class="p">,</span> 
+  <span class="s1">&#39;Backbone&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;router&#39;</span><span class="p">,</span> <span class="c1">// Request router.js</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">Router</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">initialize</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="c1">// Pass in our Router module and call it&#39;s initialize function</span>
+    <span class="nx">Router</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">{</span> 
+    <span class="nx">initialize</span><span class="o">:</span> <span class="nx">initialize</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: router.js</span>
+<span class="nx">define</span><span class="p">([</span>
+  <span class="s1">&#39;jQuery&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Underscore&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Backbone&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;views/projects/list&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;views/users/list&#39;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">Session</span><span class="p">,</span> <span class="nx">projectListView</span><span class="p">,</span> <span class="nx">userListView</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">AppRouter</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">routes</span><span class="o">:</span> <span class="p">{</span>
+      <span class="c1">// Define some URL routes</span>
+      <span class="s1">&#39;/projects&#39;</span><span class="o">:</span> <span class="s1">&#39;showProjects&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/users&#39;</span><span class="o">:</span> <span class="s1">&#39;showUsers&#39;</span><span class="p">,</span>
+      
+      <span class="c1">// Default</span>
+      <span class="s2">&quot;*actions&quot;</span><span class="o">:</span> <span class="s2">&quot;defaultAction&quot;</span>
+    <span class="p">},</span>
+    <span class="nx">showProjects</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="c1">// Call render on the module we loaded in via the dependency array</span>
+      <span class="c1">// &#39;views/projects/list&#39;</span>
+      <span class="nx">projectListView</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+    <span class="p">},</span>
+      <span class="c1">// As above, call render on our loaded module</span>
+      <span class="c1">// &#39;views/users/list&#39;</span>
+    <span class="nx">showUsers</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">userListView</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+    <span class="p">},</span>
+    <span class="k">default</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actions</span><span class="p">){</span>
+      <span class="c1">// We have no matching route, lets just log what the URL was</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;No route:&quot;</span><span class="p">,</span> <span class="nx">actions</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">initialize</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">app_router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AppRouter</span><span class="p">;</span>
+    <span class="nx">Backbone</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="p">{</span> 
+    <span class="nx">initialize</span><span class="o">:</span> <span class="nx">initialize</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<p>By now you should be familiar with</p>
 <h3>Relevant Links</h3>
+<p>28 2.8 <br />
+25.2</p>
+<p>28/</p>
 <ul>
 	<li><a href="http://documentcloud.github.com/backbone/">Backbone.js official website</a></li>
 </ul>

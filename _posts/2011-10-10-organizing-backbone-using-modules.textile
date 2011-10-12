@@ -80,6 +80,7 @@ We also request a module called "app", this will contain the entireity of our ap
 **Note:** Modules are loaded relativly to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap.
 
 {% highlight javascript %}
+// Filename: main.js
 
 // Require.js allows us to configure shortcut alias
 // There usage will become more apparent futher along in the tutorial.
@@ -110,9 +111,177 @@ require([
 
 {% endhighlight %}
 
-h3. 
+h3. How should we lay out external scripts?
+
+p. Any modules we develop for our application using AMD/Require.js will be asynchronously loaded. 
+
+We have a heavy dependency on jQuery, Underscore and Backbone, unfortunatly this libraries are loaded synchronously and also depend on each other existing in the global namespace.
+
+Below I propose a solution(until these libraries allow themselves to be loaded asynchronously) to allow these libraries to be loaded properly(synchronously) and also removing themselves from global scope.
+
+
+{% highlight javascript %}
+// Filename: libs/jquery/jquery.js
+
+define([
+// Load the original jQuery source file
+  'order!libs/jquery/jquery-min'
+], function(){
+  // Tell Require.js that this module returns a reference to jQuery
+  return $;
+});
+{% endhighlight %}
+
+{% highlight javascript %}
+// Filename: libs/underscore/underscore
+// As above lets load the original underscore source code
+define(['order!libs/underscore/underscore-min'], function(){
+  // Tell Require.js that this module returns  a reference to Underscore
+  return _;
+});
+{% endhighlight %}
+
+{% highlight javascript %}
+ // Filename: libs/backbone/backbone
+ // Finally lets load the original backbone source code
+define(['order!libs/backbone/backbone-min'], function(){
+  // Now that all the orignal source codes have ran and accessed each other
+  // We can call noConflict() to remove them from the global name space
+  // Require.js will keep a reference to them so we can use them in our modules
+  _.noConflict();
+  $.noConflict();
+  return Backbone.noConflict();
+});
+{% endhighlight %}
+
+h3. A boiler plate module
+
+p. So before we start developing our application, let's quickly look over boiler plate code that will be reused quite often.
+
+For convience sake I generally keep a "boilerplate.js" in my application root so I can copy it when I need to.
+
+{%highlight javascript %}
+//Filename: boilerplate.js
+
+define([
+  // These are path alias that we configured in our bootstrap
+  'jQuery',     // lib/jquery/jquery
+  'Underscore', // lib/underscore/underscore
+  'Backbone'    // lib/backbone/backbone
+], function($, _, Backbone){
+  // Above we have passed in jQuery, Underscore and Backbone
+  // They will not be accesible in the global scope
+  return {};
+  // What we return here will be used by other modules	
+});
+{% endhighlight %}
+
+p. The first argument of the define function is our dependency array, we can pass in any modules we like in the future.
+
+h3. App.js Building our applications main module
+
+p. Our applications main module should always remain quite light weight.   This tutorial covers only setting up a Backbone Router and initializing it in our main module.
+
+The router will then load the correct dependencies depending on the current URL.
+
+{% highlight javascript %}
+// Filename: app.js
+define([
+  'jQuery', 
+  'Underscore', 
+  'Backbone',
+  'router', // Request router.js
+], function($, _, Backbone, Router){
+  var initialize = function(){
+    // Pass in our Router module and call it's initialize function
+    Router.initialize();
+  }
+
+  return { 
+    initialize: initialize
+  };
+});
+{% endhighlight %}
+
+{% highlight javascript %}
+// Filename: router.js
+define([
+  'jQuery',
+  'Underscore',
+  'Backbone',
+  'views/projects/list',
+  'views/users/list'
+], function($, _, Backbone, Session, projectListView, userListView){
+  var AppRouter = Backbone.Router.extend({
+    routes: {
+      // Define some URL routes
+      '/projects': 'showProjects',
+      '/users': 'showUsers',
+      
+      // Default
+      "*actions": "defaultAction"
+    },
+    showProjects: function(){
+      // Call render on the module we loaded in via the dependency array
+      // 'views/projects/list'
+      projectListView.render();
+    },
+      // As above, call render on our loaded module
+      // 'views/users/list'
+    showUsers: function(){
+      userListView.render();
+    },
+    default: function(actions){
+      // We have no matching route, lets just log what the URL was
+      console.log("No route:", actions);
+    }
+  });
+
+  var initialize = function(){
+    var app_router = new AppRouter;
+    Backbone.history.start();
+  };
+  return { 
+    initialize: initialize
+  };
+});
+{% endhighlight %}
+
+h3. Modulizing a Backbone View
+
+Backbone views most usually always interact with the DOM, using our new modular system we can load in Javascript templates using Require.js text! plugin.
+
+{% highlight javascript %}
+// Filename: views/project/list
+define([
+  'jQuery',
+  'Underscore',
+  'Backbone',
+  // Using the Require.js text! plugin, we are loaded raw text
+  // which will be used as our views primary template
+  'text!templates/project/list.html'
+], function($, _, Backbone, projectListTemplate){
+  var projectListView = Backbone.View.extend({
+    el: $("#contaienr"),
+    render: function(){
+      var compiledTemplate = _.template( projectListTemplate, {} );
+      this.el.append( compiledTemplate );
+    }
+  });
+  return new projectListView;
+});
+
+p. By now you should be familiar with 
 
 h3. Relevant Links
+
+
+28 2.8 
+25.2
+
+28/
+
+
 * "Backbone.js official website":http://documentcloud.github.com/backbone/
 
 
