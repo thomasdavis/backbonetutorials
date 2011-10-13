@@ -1,0 +1,7 @@
+---
+layout: default
+title: Lessons
+---
+p. If you and your team are looking to learn Backbone.js and other front end development skills, I am available to fly in and coach onsite.
+
+If you would like to discuss team training with me, send an email directly to thomasalwyndavis@gmail.com

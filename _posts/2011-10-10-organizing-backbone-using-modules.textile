@@ -13,7 +13,7 @@ This was quite a different decision to other Javascript MVC frameworks who were 
 
 Hopefully this tutorial will allow you to build  a much more robust project with great separation of concerns between design and code. 
 
-This tutorial will get you started on combining Backbone.js with "AMD":http://www.com (Asynchronous Module Definitions).
+This tutorial will get you started on combining Backbone.js with "AMD":https://github.com/amdjs/amdjs-api/wiki/AMD (Asynchronous Module Definitions).
 
 h3. What is AMD?
 
