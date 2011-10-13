@@ -4,7 +4,7 @@
  <title>Backbone Tutorials</title>
  <link href="http://backbonetutorials.com/atom.xml" rel="self"/>
  <link href="http://backbonetutorials.com/"/>
- <updated>2011-10-13T21:15:59+10:00</updated>
+ <updated>2011-10-14T00:16:08+10:00</updated>
  <id>http://backbonetutorials.com/</id>
  <author>
    <name>Thomas Davis</name>
@@ -20,6 +20,7 @@
    <content type="html">&lt;h2&gt;Organizing your application using Modules (require.js)&lt;/h2&gt;
 &lt;p&gt;Unfortunatly Backbone.js does not tell you how to organize your code leaving many developers in the dark of how to load scripts and lay out their development enviroments.&lt;/p&gt;
 &lt;p&gt;This was quite a different decision to other Javascript &lt;span class=&quot;caps&quot;&gt;MVC&lt;/span&gt; frameworks who were more in favor of setting a development philosophy.&lt;/p&gt;
+&lt;p&gt;Hopefully this tutorial will allow you to build  a much more robust project with great separation of concerns between design and code.&lt;/p&gt;
 &lt;p&gt;This tutorial will get you started on combining Backbone.js with &lt;a href=&quot;http://www.com&quot;&gt;&lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt;&lt;/a&gt; (Asynchronous Module Definitions).&lt;/p&gt;
 &lt;h3&gt;What is &lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt;?&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;http:www.com&quot;&gt;Asynchronous Module Definitions&lt;/a&gt; designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around &lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt;, seeing it as the future of modular Javascript development.&lt;/p&gt;
@@ -29,29 +30,63 @@
 &lt;ul&gt;
 	&lt;li&gt;Modular&lt;/li&gt;
 	&lt;li&gt;Scalable&lt;/li&gt;
+	&lt;li&gt;Compiles well(see &lt;a href=&quot;http://requirejs.org/docs/optimization.html&quot;&gt;r.js&lt;/a&gt;)&lt;/li&gt;
+	&lt;li&gt;Market Adoption( &lt;a href=&quot;http://dojotoolkit.org/reference-guide/releasenotes/1.6.html&quot;&gt;Dojo 1.6 converted fully to &lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt;&lt;/a&gt; )&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Why Require.js?&lt;/h3&gt;
-&lt;p&gt;Require.js has a great community.&lt;/p&gt;
+&lt;p&gt;Require.js has a boastful community and is growing rapidly.  &lt;a href=&quot;http://tagneto.blogspot.com/&quot;&gt;James Burke&lt;/a&gt; the author updates Require.js almost daily and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the &lt;span class=&quot;caps&quot;&gt;AMD&lt;/span&gt; specification.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/jrburke&quot; class=&quot;twitter-follow-button&quot;&gt;Follow @jrburke&lt;/a&gt;&lt;br /&gt;
+&lt;script src=&quot;//platform.twitter.com/widgets.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&lt;/p&gt;
 &lt;h3&gt;Getting started&lt;/h3&gt;
 &lt;p&gt;To easily understand this tutorial you should jump straight into the example code base.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;http://www.com&quot;&gt;Example Codebase&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a href=&quot;http://backbonetutorials.com/examples/modular-backbone&quot;&gt;Example Codebase&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive.&lt;/p&gt;
+&lt;p&gt;If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views)&lt;/p&gt;
+&lt;p&gt;The example isn&amp;#8217;t super fleshed out but should give you a vague idea.&lt;/p&gt;
+&lt;h3&gt;Example File Structure&lt;/h3&gt;
+&lt;p&gt;There are many different ways to lay out your files and I believe it is actually dependent on the size of the project.   In the example below views and template s are mirroed in file structure.  Collections and Models aren&amp;#8217;t categorized into folders.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* File Structure&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;├── assets&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│   ├── css&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│   │   └── main.css&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│   ├── images&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│   │   └── header.gif&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│   └── js&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│       └── libs&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│           ├── backbone.js&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│           ├── jquery.js&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;│           └── underscore.js&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;├── index.html&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;└── src&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;   ├── application.js&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;   └── modules&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;       ├── friend.js&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;       └── message.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;├── imgs&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;├── css&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   └── style.css&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;├── templates&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── projects&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   ├── list.html&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   └── edit.html&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   └── users&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│       ├── list.html&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│       └── edit.html&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;├── js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── libs&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   ├── jquery&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   │   ├── jquery.min.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   │   └── jquery.js // jQuery Library Wrapper&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   ├── backbone&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   │   ├── backbone.min.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   │   └── backbone.js // Backbone Library Wrapper&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   └── underscore&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   │   ├── underscore.min.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   │   └── underscore.js // Underscore Library Wrapper&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── models&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   ├── users.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   └── projects.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── collections&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   ├── users.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   └── projects.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── views&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   ├── projects&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   │   ├── list.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   │   └── edit.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   └── users&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │       ├── list.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │       └── edit.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── router.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── app.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── main.js  // Bootstrap&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── order.js //Require.js plugin&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   └── text.js  //Require.js plugin&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;└── index.html&lt;/span&gt;
+
 &lt;span class=&quot;cm&quot;&gt;*/&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -92,9 +127,9 @@ We should setup any useful containers that might be used by our Backbone views.&
 &lt;span class=&quot;c1&quot;&gt;// There usage will become more apparent futher along in the tutorial.&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
   &lt;span class=&quot;nx&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;jQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;libs/jquery/jquery&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;Underscore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;libs/underscore/underscore&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;Backbone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;libs/backbone/backbone&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;jQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;libs/jquery/jquery&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Underscore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;libs/underscore/underscore&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Backbone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;libs/backbone/backbone&amp;#39;&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
@@ -102,13 +137,13 @@ We should setup any useful containers that might be used by our Backbone views.&
 &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
 
   &lt;span class=&quot;c1&quot;&gt;// Load our app module and pass it to our definition function&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&amp;quot;app&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 
   &lt;span class=&quot;c1&quot;&gt;// Some plugins have to be loaded in order due to there non AMD compliance&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;// Because these scripts are not &amp;quot;modules&amp;quot; they do not pass any values to the definition function below&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&amp;quot;order!libs/jquery/jquery-min&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&amp;quot;order!libs/underscore/underscore-min&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&amp;quot;order!libs/backbone/backbone-min&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&amp;#39;order!libs/jquery/jquery-min&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&amp;#39;order!libs/underscore/underscore-min&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&amp;#39;order!libs/backbone/backbone-min&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;App&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;// The &amp;quot;app&amp;quot; dependency is passed in as &amp;quot;App&amp;quot;&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;// Again, the other dependencies passed in are not &amp;quot;AMD&amp;quot; therefore don&amp;#39;t pass a parameter to this function&lt;/span&gt;
@@ -206,7 +241,7 @@ We should setup any useful containers that might be used by our Backbone views.&
       &lt;span class=&quot;s1&quot;&gt;&amp;#39;/users&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;showUsers&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
       
       &lt;span class=&quot;c1&quot;&gt;// Default&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&amp;quot;*actions&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;defaultAction&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;*actions&amp;quot;: &amp;quot;defaultAction&amp;#39;&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;showProjects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
       &lt;span class=&quot;c1&quot;&gt;// Call render on the module we loaded in via the dependency array&lt;/span&gt;
@@ -220,7 +255,7 @@ We should setup any useful containers that might be used by our Backbone views.&
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;actions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
       &lt;span class=&quot;c1&quot;&gt;// We have no matching route, lets just log what the URL was&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;No route:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;actions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;No route:&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;actions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 
@@ -246,7 +281,7 @@ We should setup any useful containers that might be used by our Backbone views.&
   &lt;span class=&quot;s1&quot;&gt;&amp;#39;text!templates/project/list.html&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Backbone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;projectListTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;projectListView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Backbone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;#container&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;#container&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
       &lt;span class=&quot;c1&quot;&gt;// Using Underscore we can compile our template with data&lt;/span&gt;
       &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;

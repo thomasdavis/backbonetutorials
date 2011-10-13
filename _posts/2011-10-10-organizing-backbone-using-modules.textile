@@ -26,13 +26,15 @@ This tutorial will use "Require.js":http://requirejs.org to implement a modular 
 Quick Overview
 * Modular
 * Scalable
-* Compiles well(see "r.js":http)
-* Market Adoption( Dojo 1.6 converted fully to AMD )
+* Compiles well(see "r.js":http://requirejs.org/docs/optimization.html)
+* Market Adoption( "Dojo 1.6 converted fully to AMD":http://dojotoolkit.org/reference-guide/releasenotes/1.6.html )
 
 h3. Why Require.js?
 
-p. Require.js has a boastful community and is growing rapidly.  James Burke the author updates Require.js almost daily and responds to user feedback always.   He is also a contributer to the AMD specification.
+p. Require.js has a boastful community and is growing rapidly.  "James Burke":http://tagneto.blogspot.com/ the author updates Require.js almost daily and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the AMD specification.
 
+<a href="https://twitter.com/jrburke" class="twitter-follow-button">Follow @jrburke</a>
+<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 
 h3. Getting started
 
@@ -42,13 +44,13 @@ h3. "Example Codebase":http://backbonetutorials.com/examples/modular-backbone
 
 p. The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive. 
 
-If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views)
+If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views).
 
 The example isn't super fleshed out but should give you a vague idea.
 
 h3. Example File Structure
 
-p. There are many different ways to lay out your files and I believe it is actually dependent on the size of the project.   In the example below views and template s are mirroed in file structure.  Collections and Models aren't categorized into folders. 
+p. There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models aren't categorized into folders kind of like an ORM. 
 
 {% highlight javascript %}
 /* File Structure
@@ -95,6 +97,7 @@ p. There are many different ways to lay out your files and I believe it is actua
 
 */
 {% endhighlight %}
+
 p. To continue you must really understand what we are aiming towards as described in the introduction.
 
 h3. Bootstrapping your application
@@ -291,7 +294,7 @@ define([
     showUsers: function(){
       userListView.render();
     },
-    default: function(actions){
+    defaultAction: function(actions){
       // We have no matching route, lets just log what the URL was
       console.log('No route:', actions);
     }
@@ -352,60 +355,74 @@ define([
   'Backbone'
 ], function(_, Backbone){
   var projectModel = Backbone.Model.extend({
-    initialize: function(){
-      
+    defaults: {
+      name: "Harry Potter"
     }
   });
-  return new projectModel;
+  // You usually don't return a model instantiated
+  return projectModel;
 });
 {% endhighlight %}
 
-p. Now we have a model, our collection module can depend on it
+p. Now we have a model, our collection module can depend on it.  We will set the "model" attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.
+
+"Collection.model: Override this property to specify the model class that the collection contains. If defined, you can pass raw attributes objects (and arrays) to add, create, and reset, and the attributes will be converted into a model of the proper type."
 
 {% highlight javascript %}
-// Filename: collections/project
+// Filename: collections/projects
 define([
   'Underscore',
   'Backbone',
   // Pull in the Model module from above
   'models/project'
-], function(_, Backbone, projectModels){
+], function(_, Backbone, projectModel){
   var projectCollection = Backbone.Collection.extend({
-    initialize: function(){
-      
-    }
+    model: projectModel
   });
+  // You don't usually return a collection instantiated
   return new projectCollection;
 });
 {% endhighlight %}
 
-Now we can simply depend on our collection in our view.
+Now we can simply depend on our collection in our view and pass it to our Javascript template.
 
 {% highlight javascript %}
-// Filename: views/project/list
+// Filename: views/projects/list
 define([
   'jQuery',
   'Underscore',
   'Backbone',
   // Pull in the Collection module from above
-  'collections/project',
-  'text!templates/project/list
-], function(_, Backbone, projectModels){
-  var projectCollection = Backbone.Collection.extend({
+  'collections/projects',
+  'text!templates/projects/list
+], function(_, Backbone, projectsCollection, projectsListTemplate){
+  var projectListView = Backbone.View.extend({
+    el: $("#container"),
     initialize: function(){
-      
+      this.collection = new projectsCollection;
+      this.collection.add({ name: "Ginger Kid"});
+      // Compile the template using Underscores micro-templating
+      var compiledTemplate = _.template( projectsListTemplate, { projects: this.collection.models } );
+      this.el.html(compiledTemplate); 
     }
   });
-  return new projectCollection;
+  // Returning instantiated views can be quite useful for having "state"
+  return new projectListView;
 });
 {% endhighlight %}
 
+h3. Conclusion
+
+p. Looking forward to feedback so I can turn this post and example into quality references on building modular Javascript applications.
+
+Get in touch with me on twitter, comments or github!
+
+<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
+<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 
 h3. Relevant Links
 
-
-
-* "Backbone.js official website":http://documentcloud.github.com/backbone/
+"Organizing Your Backbone.js Application With Modules":http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules
 
 
 

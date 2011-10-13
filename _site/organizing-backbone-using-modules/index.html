@@ -93,6 +93,7 @@
 <h2>Organizing your application using Modules (require.js)</h2>
 <p>Unfortunatly Backbone.js does not tell you how to organize your code leaving many developers in the dark of how to load scripts and lay out their development enviroments.</p>
 <p>This was quite a different decision to other Javascript <span class="caps">MVC</span> frameworks who were more in favor of setting a development philosophy.</p>
+<p>Hopefully this tutorial will allow you to build  a much more robust project with great separation of concerns between design and code.</p>
 <p>This tutorial will get you started on combining Backbone.js with <a href="http://www.com"><span class="caps">AMD</span></a> (Asynchronous Module Definitions).</p>
 <h3>What is <span class="caps">AMD</span>?</h3>
 <p><a href="http:www.com">Asynchronous Module Definitions</a> designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around <span class="caps">AMD</span>, seeing it as the future of modular Javascript development.</p>
@@ -102,29 +103,63 @@
 <ul>
 	<li>Modular</li>
 	<li>Scalable</li>
+	<li>Compiles well(see <a href="http://requirejs.org/docs/optimization.html">r.js</a>)</li>
+	<li>Market Adoption( <a href="http://dojotoolkit.org/reference-guide/releasenotes/1.6.html">Dojo 1.6 converted fully to <span class="caps">AMD</span></a> )</li>
 </ul>
 <h3>Why Require.js?</h3>
-<p>Require.js has a great community.</p>
+<p>Require.js has a boastful community and is growing rapidly.  <a href="http://tagneto.blogspot.com/">James Burke</a> the author updates Require.js almost daily and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the <span class="caps">AMD</span> specification.</p>
+<p><a href="https://twitter.com/jrburke" class="twitter-follow-button">Follow @jrburke</a><br />
+<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script></p>
 <h3>Getting started</h3>
 <p>To easily understand this tutorial you should jump straight into the example code base.</p>
-<h3><a href="http://www.com">Example Codebase</a></h3>
+<h3><a href="http://backbonetutorials.com/examples/modular-backbone">Example Codebase</a></h3>
+<p>The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive.</p>
+<p>If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views)</p>
+<p>The example isn&#8217;t super fleshed out but should give you a vague idea.</p>
+<h3>Example File Structure</h3>
+<p>There are many different ways to lay out your files and I believe it is actually dependent on the size of the project.   In the example below views and template s are mirroed in file structure.  Collections and Models aren&#8217;t categorized into folders.</p>
 <div class="highlight"><pre><code class="javascript"><span class="cm">/* File Structure</span>
-<span class="cm">├── assets</span>
-<span class="cm">│   ├── css</span>
-<span class="cm">│   │   └── main.css</span>
-<span class="cm">│   ├── images</span>
-<span class="cm">│   │   └── header.gif</span>
-<span class="cm">│   └── js</span>
-<span class="cm">│       └── libs</span>
-<span class="cm">│           ├── backbone.js</span>
-<span class="cm">│           ├── jquery.js</span>
-<span class="cm">│           └── underscore.js</span>
-<span class="cm">├── index.html</span>
-<span class="cm">└── src</span>
-<span class="cm">   ├── application.js</span>
-<span class="cm">   └── modules</span>
-<span class="cm">       ├── friend.js</span>
-<span class="cm">       └── message.js</span>
+<span class="cm">├── imgs</span>
+<span class="cm">├── css</span>
+<span class="cm">│   └── style.css</span>
+<span class="cm">├── templates</span>
+<span class="cm">│   ├── projects</span>
+<span class="cm">│   │   ├── list.html</span>
+<span class="cm">│   │   └── edit.html</span>
+<span class="cm">│   └── users</span>
+<span class="cm">│       ├── list.html</span>
+<span class="cm">│       └── edit.html</span>
+<span class="cm">├── js</span>
+<span class="cm">│   ├── libs</span>
+<span class="cm">│   │   ├── jquery</span>
+<span class="cm">│   │   │   ├── jquery.min.js</span>
+<span class="cm">│   │   │   └── jquery.js // jQuery Library Wrapper</span>
+<span class="cm">│   │   ├── backbone</span>
+<span class="cm">│   │   │   ├── backbone.min.js</span>
+<span class="cm">│   │   │   └── backbone.js // Backbone Library Wrapper</span>
+<span class="cm">│   │   └── underscore</span>
+<span class="cm">│   │   │   ├── underscore.min.js</span>
+<span class="cm">│   │   │   └── underscore.js // Underscore Library Wrapper</span>
+<span class="cm">│   ├── models</span>
+<span class="cm">│   │   ├── users.js</span>
+<span class="cm">│   │   └── projects.js</span>
+<span class="cm">│   ├── collections</span>
+<span class="cm">│   │   ├── users.js</span>
+<span class="cm">│   │   └── projects.js</span>
+<span class="cm">│   ├── views</span>
+<span class="cm">│   │   ├── projects</span>
+<span class="cm">│   │   │   ├── list.js</span>
+<span class="cm">│   │   │   └── edit.js</span>
+<span class="cm">│   │   └── users</span>
+<span class="cm">│   │       ├── list.js</span>
+<span class="cm">│   │       └── edit.js</span>
+<span class="cm">│   ├── router.js</span>
+<span class="cm">│   ├── app.js</span>
+<span class="cm">│   ├── main.js  // Bootstrap</span>
+<span class="cm">│   ├── order.js //Require.js plugin</span>
+<span class="cm">│   └── text.js  //Require.js plugin</span>
+<span class="cm">└── index.html</span>
+
 <span class="cm">*/</span>
 </code></pre>
 </div>
@@ -165,9 +200,9 @@ We should setup any useful containers that might be used by our Backbone views.<
 <span class="c1">// There usage will become more apparent futher along in the tutorial.</span>
 <span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
   <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">jQuery</span><span class="o">:</span> <span class="s2">&quot;libs/jquery/jquery&quot;</span><span class="p">,</span>
-    <span class="nx">Underscore</span><span class="o">:</span> <span class="s2">&quot;libs/underscore/underscore&quot;</span><span class="p">,</span>
-    <span class="nx">Backbone</span><span class="o">:</span> <span class="s2">&quot;libs/backbone/backbone&quot;</span>
+    <span class="nx">jQuery</span><span class="o">:</span> <span class="s1">&#39;libs/jquery/jquery&#39;</span><span class="p">,</span>
+    <span class="nx">Underscore</span><span class="o">:</span> <span class="s1">&#39;libs/underscore/underscore&#39;</span><span class="p">,</span>
+    <span class="nx">Backbone</span><span class="o">:</span> <span class="s1">&#39;libs/backbone/backbone&#39;</span>
   <span class="p">}</span>
 
 <span class="p">});</span>
@@ -175,13 +210,13 @@ We should setup any useful containers that might be used by our Backbone views.<
 <span class="nx">require</span><span class="p">([</span>
 
   <span class="c1">// Load our app module and pass it to our definition function</span>
-  <span class="s2">&quot;app&quot;</span><span class="p">,</span>
+  <span class="s1">&#39;app&#39;</span><span class="p">,</span>
 
   <span class="c1">// Some plugins have to be loaded in order due to there non AMD compliance</span>
   <span class="c1">// Because these scripts are not &quot;modules&quot; they do not pass any values to the definition function below</span>
-  <span class="s2">&quot;order!libs/jquery/jquery-min&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;order!libs/underscore/underscore-min&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;order!libs/backbone/backbone-min&quot;</span>
+  <span class="s1">&#39;order!libs/jquery/jquery-min&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;order!libs/underscore/underscore-min&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;order!libs/backbone/backbone-min&#39;</span>
 <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">App</span><span class="p">){</span>
   <span class="c1">// The &quot;app&quot; dependency is passed in as &quot;App&quot;</span>
   <span class="c1">// Again, the other dependencies passed in are not &quot;AMD&quot; therefore don&#39;t pass a parameter to this function</span>
@@ -279,7 +314,7 @@ We should setup any useful containers that might be used by our Backbone views.<
       <span class="s1">&#39;/users&#39;</span><span class="o">:</span> <span class="s1">&#39;showUsers&#39;</span><span class="p">,</span>
       
       <span class="c1">// Default</span>
-      <span class="s2">&quot;*actions&quot;</span><span class="o">:</span> <span class="s2">&quot;defaultAction&quot;</span>
+      <span class="s1">&#39;*actions&quot;: &quot;defaultAction&#39;</span>
     <span class="p">},</span>
     <span class="nx">showProjects</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
       <span class="c1">// Call render on the module we loaded in via the dependency array</span>
@@ -293,7 +328,7 @@ We should setup any useful containers that might be used by our Backbone views.<
     <span class="p">},</span>
     <span class="k">default</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actions</span><span class="p">){</span>
       <span class="c1">// We have no matching route, lets just log what the URL was</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;No route:&quot;</span><span class="p">,</span> <span class="nx">actions</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;No route:&#39;</span><span class="p">,</span> <span class="nx">actions</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">});</span>
 
@@ -319,7 +354,7 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="s1">&#39;text!templates/project/list.html&#39;</span>
 <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">projectListTemplate</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">projectListView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-    <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#container&quot;</span><span class="p">),</span>
+    <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#container&#39;</span><span class="p">),</span>
     <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
       <span class="c1">// Using Underscore we can compile our template with data</span>
       <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{};</span>
