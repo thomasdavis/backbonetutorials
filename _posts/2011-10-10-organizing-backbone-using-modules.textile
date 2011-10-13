@@ -106,9 +106,9 @@ We also request a module called "app", this will contain the entireity of our ap
 // There usage will become more apparent futher along in the tutorial.
 require.config({
   paths: {
-    jQuery: "libs/jquery/jquery",
-    Underscore: "libs/underscore/underscore",
-    Backbone: "libs/backbone/backbone"
+    jQuery: 'libs/jquery/jquery',
+    Underscore: 'libs/underscore/underscore',
+    Backbone: 'libs/backbone/backbone'
   }
 
 });
@@ -116,13 +116,13 @@ require.config({
 require([
 
   // Load our app module and pass it to our definition function
-  "app",
+  'app',
 
   // Some plugins have to be loaded in order due to there non AMD compliance
   // Because these scripts are not "modules" they do not pass any values to the definition function below
-  "order!libs/jquery/jquery-min",
-  "order!libs/underscore/underscore-min",
-  "order!libs/backbone/backbone-min"
+  'order!libs/jquery/jquery-min',
+  'order!libs/underscore/underscore-min',
+  'order!libs/backbone/backbone-min'
 ], function(App){
   // The "app" dependency is passed in as "App"
   // Again, the other dependencies passed in are not "AMD" therefore don't pass a parameter to this function
@@ -239,7 +239,7 @@ define([
       '/users': 'showUsers',
       
       // Default
-      "*actions": "defaultAction"
+      '*actions": "defaultAction'
     },
     showProjects: function(){
       // Call render on the module we loaded in via the dependency array
@@ -253,7 +253,7 @@ define([
     },
     default: function(actions){
       // We have no matching route, lets just log what the URL was
-      console.log("No route:", actions);
+      console.log('No route:', actions);
     }
   });
 
@@ -282,7 +282,7 @@ define([
   'text!templates/project/list.html'
 ], function($, _, Backbone, projectListTemplate){
   var projectListView = Backbone.View.extend({
-    el: $("#container"),
+    el: $('#container'),
     render: function(){
       // Using Underscore we can compile our template with data
       var data = {};
