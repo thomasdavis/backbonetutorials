@@ -418,9 +418,6 @@ p. Looking forward to feedback so I can turn this post and example into quality 
 
 Get in touch with me on twitter, comments or github!
 
-<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
-
 h3. Relevant Links
 
 "Organizing Your Backbone.js Application With Modules":http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules
