@@ -5,7 +5,7 @@ define([
   'models/projects'
 ], function($, _, Backbone, projectsModel){
   var projectsCollection = Backbone.Collection.extend({
-    Model: projectsModel,
+    model: projectsModel,
     initialize: function(){
 
     }

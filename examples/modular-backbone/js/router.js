@@ -25,7 +25,7 @@ define([
     showUsers: function(){
       userListView.render();
     },
-    default: function(actions){
+    defaultAction: function(actions){
       // We have no matching route, lets just log what the URL was
       console.log('No route:', actions);
     }

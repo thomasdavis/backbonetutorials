@@ -11,6 +11,8 @@ p. Unfortunatly Backbone.js does not tell you how to organize your code leaving 
 
 This was quite a different decision to other Javascript MVC frameworks who were more in favor of setting a development philosophy.
 
+Hopefully this tutorial will allow you to build  a much more robust project with great separation of concerns between design and code. 
+
 This tutorial will get you started on combining Backbone.js with "AMD":http://www.com (Asynchronous Module Definitions).
 
 h3. What is AMD?
@@ -24,35 +26,73 @@ This tutorial will use "Require.js":http://requirejs.org to implement a modular 
 Quick Overview
 * Modular
 * Scalable
+* Compiles well(see "r.js":http)
+* Market Adoption( Dojo 1.6 converted fully to AMD )
 
 h3. Why Require.js?
 
-p. Require.js has a great community.
+p. Require.js has a boastful community and is growing rapidly.  James Burke the author updates Require.js almost daily and responds to user feedback always.   He is also a contributer to the AMD specification.
+
 
 h3. Getting started
 
 To easily understand this tutorial you should jump straight into the example code base.
 
-h3. "Example Codebase":http://www.com
+h3. "Example Codebase":http://backbonetutorials.com/examples/modular-backbone
+
+p. The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive. 
+
+If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views)
+
+The example isn't super fleshed out but should give you a vague idea.
+
+h3. Example File Structure
+
+p. There are many different ways to lay out your files and I believe it is actually dependent on the size of the project.   In the example below views and template s are mirroed in file structure.  Collections and Models aren't categorized into folders. 
 
 {% highlight javascript %}
 /* File Structure
-├── assets
-│   ├── css
-│   │   └── main.css
-│   ├── images
-│   │   └── header.gif
-│   └── js
-│       └── libs
-│           ├── backbone.js
-│           ├── jquery.js
-│           └── underscore.js
-├── index.html
-└── src
-   ├── application.js
-   └── modules
-       ├── friend.js
-       └── message.js
+├── imgs
+├── css
+│   └── style.css
+├── templates
+│   ├── projects
+│   │   ├── list.html
+│   │   └── edit.html
+│   └── users
+│       ├── list.html
+│       └── edit.html
+├── js
+│   ├── libs
+│   │   ├── jquery
+│   │   │   ├── jquery.min.js
+│   │   │   └── jquery.js // jQuery Library Wrapper
+│   │   ├── backbone
+│   │   │   ├── backbone.min.js
+│   │   │   └── backbone.js // Backbone Library Wrapper
+│   │   └── underscore
+│   │   │   ├── underscore.min.js
+│   │   │   └── underscore.js // Underscore Library Wrapper
+│   ├── models
+│   │   ├── users.js
+│   │   └── projects.js
+│   ├── collections
+│   │   ├── users.js
+│   │   └── projects.js
+│   ├── views
+│   │   ├── projects
+│   │   │   ├── list.js
+│   │   │   └── edit.js
+│   │   └── users
+│   │       ├── list.js
+│   │       └── edit.js
+│   ├── router.js
+│   ├── app.js
+│   ├── main.js  // Bootstrap
+│   ├── order.js //Require.js plugin
+│   └── text.js  //Require.js plugin
+└── index.html
+
 */
 {% endhighlight %}
 p. To continue you must really understand what we are aiming towards as described in the introduction.

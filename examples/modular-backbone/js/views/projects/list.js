@@ -12,14 +12,19 @@ define([
     el: $("#page"),
     initialize: function(){
       this.collection = projectsCollection;
-      this.collection.bind("add", this.something);
-      this.collection = projectsCollection.add({ user: "Asd"});
+      this.collection.bind("add", this.exampleBind);
+      this.collection = projectsCollection.add({ name: "Twitter"});
+      this.collection = projectsCollection.add({ name: "Facebook"});
+      this.collection = projectsCollection.add({ name: "Myspace", score: 20});
     },
-    something: function(){
-      console.log("qwe");
+    exampleBind: function( model ){
+      console.log(model);
     },
     render: function(){
-      var data = {};
+      var data = {
+        projects: this.collection.models,
+        _: _ 
+      };
       var compiledTemplate = _.template( projectListTemplate, data );
       $("#page").html( compiledTemplate ); 
     }

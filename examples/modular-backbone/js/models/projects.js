@@ -4,13 +4,12 @@ define([
 ], function(_, Backbone) {
   var projectsModel = Backbone.Model.extend({
     defaults: {
-      test: "tomasomas"
+      score: 10
     },
     initialize: function(){
-      console.log("Hi Nicola");
     }
     
   });
-  return new projectsModel;
+  return projectsModel;
 
 });
