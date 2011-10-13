@@ -4,7 +4,7 @@
  <title>Backbone Tutorials</title>
  <link href="http://backbonetutorials.com/atom.xml" rel="self"/>
  <link href="http://backbonetutorials.com/"/>
- <updated>2011-10-13T14:41:08+10:00</updated>
+ <updated>2011-10-13T15:04:22+10:00</updated>
  <id>http://backbonetutorials.com/</id>
  <author>
    <name>Thomas Davis</name>
@@ -35,6 +35,26 @@
 &lt;h3&gt;Getting started&lt;/h3&gt;
 &lt;p&gt;To easily understand this tutorial you should jump straight into the example code base.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;http://www.com&quot;&gt;Example Codebase&lt;/a&gt;&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* File Structure&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;├── assets&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── css&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   └── main.css&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   ├── images&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   │   └── header.gif&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│   └── js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│       └── libs&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│           ├── backbone.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│           ├── jquery.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;│           └── underscore.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;├── index.html&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;└── src&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;   ├── application.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;   └── modules&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;       ├── friend.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;       └── message.js&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;To continue you must really understand what we are aiming towards as described in the introduction.&lt;/p&gt;
 &lt;h3&gt;Bootstrapping your application&lt;/h3&gt;
 &lt;p&gt;Using Require.js we define a single entry point on our index page.  &lt;br /&gt;
@@ -226,9 +246,12 @@ We should setup any useful containers that might be used by our Backbone views.&
   &lt;span class=&quot;s1&quot;&gt;&amp;#39;text!templates/project/list.html&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Backbone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;projectListTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;projectListView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Backbone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;extend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;#contaienr&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;#container&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;compiledTemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;projectListTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// Using Underscore we can compile our template with data&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;compiledTemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;projectListTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// Append our compiled template to this Views &amp;quot;el&amp;quot;&lt;/span&gt;
       &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;compiledTemplate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
@@ -236,7 +259,8 @@ We should setup any useful containers that might be used by our Backbone views.&
 &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;By now you should be familiar with&lt;/p&gt;
+&lt;p&gt;Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.&lt;/p&gt;
+&lt;h3&gt;Modulizing a Backbone Model&lt;/h3&gt;
 &lt;h3&gt;Relevant Links&lt;/h3&gt;
 &lt;p&gt;28 2.8 &lt;br /&gt;
 25.2&lt;/p&gt;

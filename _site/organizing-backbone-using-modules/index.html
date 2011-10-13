@@ -108,6 +108,26 @@
 <h3>Getting started</h3>
 <p>To easily understand this tutorial you should jump straight into the example code base.</p>
 <h3><a href="http://www.com">Example Codebase</a></h3>
+<div class="highlight"><pre><code class="javascript"><span class="cm">/* File Structure</span>
+<span class="cm">├── assets</span>
+<span class="cm">│   ├── css</span>
+<span class="cm">│   │   └── main.css</span>
+<span class="cm">│   ├── images</span>
+<span class="cm">│   │   └── header.gif</span>
+<span class="cm">│   └── js</span>
+<span class="cm">│       └── libs</span>
+<span class="cm">│           ├── backbone.js</span>
+<span class="cm">│           ├── jquery.js</span>
+<span class="cm">│           └── underscore.js</span>
+<span class="cm">├── index.html</span>
+<span class="cm">└── src</span>
+<span class="cm">   ├── application.js</span>
+<span class="cm">   └── modules</span>
+<span class="cm">       ├── friend.js</span>
+<span class="cm">       └── message.js</span>
+<span class="cm">*/</span>
+</code></pre>
+</div>
 <p>To continue you must really understand what we are aiming towards as described in the introduction.</p>
 <h3>Bootstrapping your application</h3>
 <p>Using Require.js we define a single entry point on our index page.  <br />
@@ -299,9 +319,12 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="s1">&#39;text!templates/project/list.html&#39;</span>
 <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">projectListTemplate</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">projectListView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-    <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#contaienr&quot;</span><span class="p">),</span>
+    <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#container&quot;</span><span class="p">),</span>
     <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-      <span class="kd">var</span> <span class="nx">compiledTemplate</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span> <span class="nx">projectListTemplate</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+      <span class="c1">// Using Underscore we can compile our template with data</span>
+      <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{};</span>
+      <span class="kd">var</span> <span class="nx">compiledTemplate</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span> <span class="nx">projectListTemplate</span><span class="p">,</span> <span class="nx">data</span> <span class="p">);</span>
+      <span class="c1">// Append our compiled template to this Views &quot;el&quot;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span> <span class="nx">compiledTemplate</span> <span class="p">);</span>
     <span class="p">}</span>
   <span class="p">});</span>
@@ -309,7 +332,8 @@ We should setup any useful containers that might be used by our Backbone views.<
 <span class="p">});</span>
 </code></pre>
 </div>
-<p>By now you should be familiar with</p>
+<p>Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.</p>
+<h3>Modulizing a Backbone Model</h3>
 <h3>Relevant Links</h3>
 <p>28 2.8 <br />
 25.2</p>

@@ -35,6 +35,26 @@ To easily understand this tutorial you should jump straight into the example cod
 
 h3. "Example Codebase":http://www.com
 
+{% highlight javascript %}
+/* File Structure
+├── assets
+│   ├── css
+│   │   └── main.css
+│   ├── images
+│   │   └── header.gif
+│   └── js
+│       └── libs
+│           ├── backbone.js
+│           ├── jquery.js
+│           └── underscore.js
+├── index.html
+└── src
+   ├── application.js
+   └── modules
+       ├── friend.js
+       └── message.js
+*/
+{% endhighlight %}
 p. To continue you must really understand what we are aiming towards as described in the introduction.
 
 h3. Bootstrapping your application
@@ -262,25 +282,83 @@ define([
   'text!templates/project/list.html'
 ], function($, _, Backbone, projectListTemplate){
   var projectListView = Backbone.View.extend({
-    el: $("#contaienr"),
+    el: $("#container"),
     render: function(){
-      var compiledTemplate = _.template( projectListTemplate, {} );
+      // Using Underscore we can compile our template with data
+      var data = {};
+      var compiledTemplate = _.template( projectListTemplate, data );
+      // Append our compiled template to this Views "el"
       this.el.append( compiledTemplate );
     }
   });
+  // Our module now returns an instantiated view
+  // Sometimes you might return an un-instantiated view e.g. return projectListView
   return new projectListView;
 });
 {% endhighlight %}
 
-p. By now you should be familiar with 
+p. Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.
+
+h3. Modulizing a Collection, Model and View
+
+p. Now we put it altogether by chaining up a Model, Collection and View which is a typical scenairo when building a Backbone.js application.
+
+First off we will define our model
+
+{% highlight javascript %}
+// Filename: models/project
+define([
+  'Underscore',
+  'Backbone'
+], function(_, Backbone){
+  var projectModel = Backbone.Model.extend({
+    initialize: function(){
+      
+    }
+  });
+  return new projectModel;
+});
+{% endhighlight %}
+
+p. Now we have a model, our collection module can depend on it
+
+{% highlight javascript %}
+// Filename: collections/project
+define([
+  'Underscore',
+  'Backbone',
+  // Pull in the Model module from above
+  'models/project'
+], function(_, Backbone, projectModels){
+  var projectCollection = Backbone.Collection.extend({
+    initialize: function(){
+      
+    }
+  });
+  return new projectCollection;
+});
+{% endhighlight %}
+
+{% highlight javascript %}
+// Filename: views/project/list
+define([
+  'Underscore',
+  'Backbone',
+  // Pull in the Collection module from above
+  'collection/project'
+], function(_, Backbone, projectModels){
+  var projectCollection = Backbone.Collection.extend({
+    initialize: function(){
+      
+    }
+  });
+  return new projectCollection;
+});
+{% endhighlight %}
+
 
 h3. Relevant Links
 
-
-28 2.8 
-25.2
-
-28/
 
 
 * "Backbone.js official website":http://documentcloud.github.com/backbone/
