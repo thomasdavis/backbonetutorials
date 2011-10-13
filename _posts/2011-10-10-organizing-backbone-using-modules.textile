@@ -270,6 +270,7 @@ define([
   });
   return new projectListView;
 });
+{% endhighlight %}
 
 p. By now you should be familiar with 
 

@@ -287,6 +287,28 @@ We should setup any useful containers that might be used by our Backbone views.<
 <span class="p">});</span>
 </code></pre>
 </div>
+<h3>Modulizing a Backbone View</h3>
+<p>Backbone views most usually always interact with the <span class="caps">DOM</span>, using our new modular system we can load in Javascript templates using Require.js text! plugin.</p>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: views/project/list</span>
+<span class="nx">define</span><span class="p">([</span>
+  <span class="s1">&#39;jQuery&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Underscore&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Backbone&#39;</span><span class="p">,</span>
+  <span class="c1">// Using the Require.js text! plugin, we are loaded raw text</span>
+  <span class="c1">// which will be used as our views primary template</span>
+  <span class="s1">&#39;text!templates/project/list.html&#39;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">projectListTemplate</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">projectListView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#contaienr&quot;</span><span class="p">),</span>
+    <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="kd">var</span> <span class="nx">compiledTemplate</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span> <span class="nx">projectListTemplate</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span> <span class="nx">compiledTemplate</span> <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">projectListView</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+</div>
 <p>By now you should be familiar with</p>
 <h3>Relevant Links</h3>
 <p>28 2.8 <br />
