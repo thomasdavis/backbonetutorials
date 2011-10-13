@@ -328,16 +328,67 @@ We should setup any useful containers that might be used by our Backbone views.<
       <span class="k">this</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span> <span class="nx">compiledTemplate</span> <span class="p">);</span>
     <span class="p">}</span>
   <span class="p">});</span>
+  <span class="c1">// Our module now returns an instantiated view</span>
+  <span class="c1">// Sometimes you might return an un-instantiated view e.g. return projectListView</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nx">projectListView</span><span class="p">;</span>
 <span class="p">});</span>
 </code></pre>
 </div>
 <p>Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.</p>
-<h3>Modulizing a Backbone Model</h3>
+<h3>Modulizing a Collection, Model and View</h3>
+<p>Now we put it altogether by chaining up a Model, Collection and View which is a typical scenairo when building a Backbone.js application.</p>
+<p>First off we will define our model</p>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: models/project</span>
+<span class="nx">define</span><span class="p">([</span>
+  <span class="s1">&#39;Underscore&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Backbone&#39;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">projectModel</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+      
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">projectModel</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<p>Now we have a model, our collection module can depend on it</p>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: collections/project</span>
+<span class="nx">define</span><span class="p">([</span>
+  <span class="s1">&#39;Underscore&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Backbone&#39;</span><span class="p">,</span>
+  <span class="c1">// Pull in the Model module from above</span>
+  <span class="s1">&#39;models/project&#39;</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">projectModels</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">projectCollection</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+      
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">projectCollection</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<p>Now we can simply depend on our collection in our view.</p>
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: views/project/list</span>
+<span class="nx">define</span><span class="p">([</span>
+  <span class="s1">&#39;jQuery&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Underscore&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Backbone&#39;</span><span class="p">,</span>
+  <span class="c1">// Pull in the Collection module from above</span>
+  <span class="s1">&#39;collections/project&#39;</span><span class="p">,</span>
+  <span class="err">&#39;</span><span class="nx">text</span><span class="o">!</span><span class="nx">templates</span><span class="o">/</span><span class="nx">project</span><span class="o">/</span><span class="nx">list</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">projectModels</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">projectCollection</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+      
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">projectCollection</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+</div>
 <h3>Relevant Links</h3>
-<p>28 2.8 <br />
-25.2</p>
-<p>28/</p>
 <ul>
 	<li><a href="http://documentcloud.github.com/backbone/">Backbone.js official website</a></li>
 </ul>

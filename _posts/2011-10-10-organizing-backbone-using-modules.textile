@@ -339,13 +339,17 @@ define([
 });
 {% endhighlight %}
 
+Now we can simply depend on our collection in our view.
+
 {% highlight javascript %}
 // Filename: views/project/list
 define([
+  'jQuery',
   'Underscore',
   'Backbone',
   // Pull in the Collection module from above
-  'collection/project'
+  'collections/project',
+  'text!templates/project/list
 ], function(_, Backbone, projectModels){
   var projectCollection = Backbone.Collection.extend({
     initialize: function(){
