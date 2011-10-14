@@ -42,7 +42,7 @@ To easily understand this tutorial you should jump straight into the example cod
 
 h3. "Example Codebase":http://backbonetutorials.com/examples/modular-backbone
 
- "Example Demo":https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/modular-backbone
+h3. "Example Demo":https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/modular-backbone
 
 p. The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive. 
 
