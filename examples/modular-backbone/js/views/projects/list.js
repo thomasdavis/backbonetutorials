@@ -18,7 +18,7 @@ define([
       this.collection = projectsCollection.add({ name: "Myspace", score: 20});
     },
     exampleBind: function( model ){
-      console.log(model);
+      //console.log(model);
     },
     render: function(){
       var data = {
