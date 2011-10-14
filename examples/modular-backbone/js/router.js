@@ -6,7 +6,7 @@ define([
   'views/home/main',
   'views/projects/list',
   'views/users/list'
-], function($, _, Backbone, projectListView, userListView, mainHomeView){
+], function($, _, Backbone, mainHomeView, projectListView, userListView ){
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
