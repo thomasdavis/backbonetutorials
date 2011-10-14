@@ -231,10 +231,10 @@ body {
   color: #ccc;
 }
 #container {
- padding-top: 20px;  
+
 }
 #logo {
-   padding-left: 20px;
+   padding: 20px;
 }
 h1{
   padding: 0;
