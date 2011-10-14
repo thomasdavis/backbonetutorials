@@ -4,8 +4,9 @@ define([
   'Backbone',
   'text!templates/home/main.html'
 ], function($, _, Backbone, mainHomeTemplate){
-  el: $("#page"),
+
   var mainHomeView = Backbone.View.extend({
+    el: $("#page"),
     render: function(){
       this.el.html(mainHomeTemplate);
     }
