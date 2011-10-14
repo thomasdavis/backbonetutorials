@@ -3,9 +3,10 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
+  'views/home/main',
   'views/projects/list',
   'views/users/list'
-], function($, _, Backbone, projectListView, userListView){
+], function($, _, Backbone, projectListView, userListView, mainHomeView){
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
@@ -26,8 +27,8 @@ define([
       userListView.render();
     },
     defaultAction: function(actions){
-      // We have no matching route, lets just log what the URL was
-      $("#page").html('Homepage, we should implement a view for this');
+      // We have no matching route, lets display the home page 
+      mainHomeView.render(); 
     }
   });
 
