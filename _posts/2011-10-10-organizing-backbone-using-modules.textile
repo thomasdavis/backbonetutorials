@@ -343,7 +343,7 @@ define([
 
 p. Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.
 
-h3. Modulizing a Collection, Model and View
+h3. Modularizing a Collection, Model and View
 
 p. Now we put it altogether by chaining up a Model, Collection and View which is a typical scenairo when building a Backbone.js application.
 
