@@ -27,7 +27,7 @@ define([
     },
     defaultAction: function(actions){
       // We have no matching route, lets just log what the URL was
-      console.log('No route:', actions);
+      $("#page").html('Homepage, we should implement a view for this');
     }
   });
 
