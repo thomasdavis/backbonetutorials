@@ -7,7 +7,7 @@ posturl: http://backbonetutorials.com/organizing-backbone-using-modules
 
 h2. Organizing your application using Modules (require.js)
 
-p. Unfortunatly Backbone.js does not tell you how to organize your code leaving many developers in the dark of how to load scripts and lay out their development enviroments.
+p. Unfortunatly Backbone.js does not tell you how to organize your code leaving many developers in the dark regarding how to load scripts and lay out their development enviroments.
 
 This was quite a different decision to other Javascript MVC frameworks who were more in favor of setting a development philosophy.
 
@@ -17,7 +17,7 @@ This tutorial will get you started on combining Backbone.js with "AMD":https://g
 
 h3. What is AMD?
 
-p. "Asynchronous Module Definitions":http:www.com designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around AMD, seeing it as the future of modular Javascript development.
+p. "Asynchronous Module Definitions":https://github.com/amdjs/amdjs-api/wiki/AMD designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around AMD, seeing it as the future of modular Javascript development.
 
 This tutorial will use "Require.js":http://requirejs.org to implement a modular and organized Backbone.js.
 
@@ -31,7 +31,7 @@ Quick Overview
 
 h3. Why Require.js?
 
-p. Require.js has a boastful community and is growing rapidly.  "James Burke":http://tagneto.blogspot.com/ the author updates Require.js almost daily and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the AMD specification.
+p. Require.js has a boastful community and is growing rapidly.  "James Burke":http://tagneto.blogspot.com/ the author is married to Require.js and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the AMD specification.
 
 <a href="https://twitter.com/jrburke" class="twitter-follow-button">Follow @jrburke</a>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
