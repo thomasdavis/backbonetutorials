@@ -137,13 +137,13 @@ p. Now onto one of the more useful parts of using a library such as backbone.   
                 alert("Changed my name to " + name );
             });
         },
-        changeName: function( name ){
+        replaceNameAttr: function( name ){
             this.set({ name: name });
         }
     });
     
     var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    person.changeName('Stewie Griffin'); // This triggers a change and will alert()
+    person.replaceNameAttr('Stewie Griffin'); // This triggers a change and will alert()
 {% endhighlight %}
 
 p. So we can bind the a change listener to individual attributes or if we like simply '_this.bind("change", function(){});_' to listen for changes to all attributes of the model.
