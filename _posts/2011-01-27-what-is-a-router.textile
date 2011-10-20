@@ -38,7 +38,7 @@ Also note that routes intepret anything after "#" tag in the url.   All links in
 
 {% endhighlight %}
 
-*Please note: * Prior to Backbone 0.5 (released 1. July 2011) Routes was originally called Controllers. Due to clearity developers on the Backbone team renamed it to Routes. Hence, if you find yourself using an older version of Backbone you should write Backbone.Controller.extend({ ** });
+*Please note: * Prior to Backbone 0.5 (released 1. July 2011) a Router was called a Controller. To avoid confusion, the Backbone developers changed the name to Router. Hence, if you find yourself using an older version of Backbone you should write Backbone.Controller.extend({ ** });
 
 h4. Dynamic Routing
 
