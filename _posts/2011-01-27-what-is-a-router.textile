@@ -127,3 +127,4 @@ h3. Author
 h3. Contributors
 
 * "Herman Schistad":http://schistad.info (Backbone 0.5 rename from Controller to Router)
+* "Paul Irish":http://paulirish.com
