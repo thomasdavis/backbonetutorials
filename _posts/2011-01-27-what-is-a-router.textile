@@ -77,7 +77,7 @@ h4. Dynamic Routing Cont. ":params" and "*splats"
 
 p. Backbone uses two styles of variables when implementing routes.   First there are ":params" which match any URL components between slashes.  Then there are "*splats" which match any number of URL components.   Note that due to the nature of a "*splat" it will always be the last variable in your URL as it will match any and all components.
 
-Any "*splats" or ":params" in route definitions are passed as variables respective order to the associated function.  A route defined as "/:route/:action" will pass 2 variables(route, action) to the call back function.   Which can be accessed with "function( route, action )".   (If this is confusing please post a comment and I will try articulate it better)
+Any "*splats" or ":params" in route definitions are passed as arguments (in respective order) to the associated function.  A route defined as "/:route/:action" will pass 2 variables (“route” and “action”) to the callback function.     (If this is confusing please post a comment and I will try articulate it better)
 
 Here are some examples of using ":params" and "*splats"
 
@@ -96,13 +96,15 @@ Here are some examples of using ":params" and "*splats"
             
         },
         
-        getPost: function( id ){ alert(id); /* 121 */ },
-        downloadFile: function( path ){ alert(path); /* user/images/hey.gif */ },
+        getPost: function( id ){ 
+            alert(id); // 121 
+        },
+        downloadFile: function( path ){ 
+            alert(path); // user/images/hey.gif 
+        },
         loadView: function( route, action ){ 
-            alert(route + "_" + action); 
-            /* dashboard_graph */ 
+            alert(route + "_" + action); // dashboard_graph 
         }
-
 
 {% endhighlight %}
 
