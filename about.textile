@@ -11,4 +11,4 @@ I started this site to not only consolidate my understanding of backbone.js but 
 
 p. You can contact the original owner of this site through "github":https://github.com/thomasdavis or via twitter("@neutralthoughts":http://twitter.com/neutralthoughts).   You can also find me at #cdnjs on freenode.net.
 
-
+thomasalwyndavis@gmail.com
