@@ -1,8 +1,8 @@
 // Filename: app.js
 define([
-  'jQuery', 
-  'Underscore', 
-  'Backbone',
+  'jquery',
+  'underscore',
+  'backbone',
   'router', // Request router.js
 ], function($, _, Backbone, Router){
   var initialize = function(){
@@ -10,7 +10,7 @@ define([
     Router.initialize();
   }
 
-  return { 
+  return {
     initialize: initialize
   };
 });
