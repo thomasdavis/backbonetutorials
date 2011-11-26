@@ -1,7 +1,8 @@
+// Filename: views/home/main
 define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
+  'jquery',
+  'underscore',
+  'backbone',
   'text!templates/home/main.html'
 ], function($, _, Backbone, mainHomeTemplate){
 

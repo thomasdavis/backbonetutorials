@@ -1,8 +1,8 @@
 // Filename: router.js
 define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
+  'jquery',
+  'underscore',
+  'backbone',
   'views/home/main',
   'views/projects/list',
   'views/users/list'
@@ -10,9 +10,9 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
-      '/projects': 'showProjects',
-      '/users': 'showUsers',
-      
+      'projects': 'showProjects',
+      'users': 'showUsers',
+
       // Default
       '*actions': 'defaultAction'
     },
@@ -27,8 +27,8 @@ define([
       userListView.render();
     },
     defaultAction: function(actions){
-      // We have no matching route, lets display the home page 
-      mainHomeView.render(); 
+      // We have no matching route, lets display the home page
+      mainHomeView.render();
     }
   });
 
@@ -36,7 +36,7 @@ define([
     var app_router = new AppRouter;
     Backbone.history.start();
   };
-  return { 
+  return {
     initialize: initialize
   };
 });

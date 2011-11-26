@@ -1,8 +1,8 @@
 // Filename: views/projects/list
 define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
+  'jquery',
+  'underscore',
+  'backbone',
   // Pull in the Collection module from above
   'collections/projects',
   'text!templates/projects/list.html'
@@ -23,10 +23,10 @@ define([
     render: function(){
       var data = {
         projects: this.collection.models,
-        _: _ 
+        _: _
       };
       var compiledTemplate = _.template( projectListTemplate, data );
-      $("#page").html( compiledTemplate ); 
+      $("#page").html( compiledTemplate );
     }
   });
   return new projectListView;

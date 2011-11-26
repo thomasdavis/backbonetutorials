@@ -1,6 +1,6 @@
 define([
-  'Underscore',
-  'Backbone'
+  'underscore',
+  'backbone'
 ], function(_, Backbone) {
   var projectsModel = Backbone.Model.extend({
     defaults: {
@@ -8,7 +8,7 @@ define([
     },
     initialize: function(){
     }
-    
+
   });
   return projectsModel;
 
