@@ -11,7 +11,7 @@ p. Unfortunatly Backbone.js does not tell you how to organize your code leaving 
 
 This was quite a different decision to other Javascript MVC frameworks who were more in favor of setting a development philosophy.
 
-Hopefully this tutorial will allow you to build  a much more robust project with great separation of concerns between design and code. 
+Hopefully this tutorial will allow you to build  a much more robust project with great separation of concerns between design and code.
 
 This tutorial will get you started on combining Backbone.js with "AMD":https://github.com/amdjs/amdjs-api/wiki/AMD (Asynchronous Module Definitions).
 
@@ -45,7 +45,7 @@ h3. "Example Codebase":https://github.com/thomasdavis/backbonetutorials/tree/gh-
 h3. "Example Demo":http://backbonetutorials.com/examples/modular-backbone
 
 
-p. The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive. 
+p. The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive.
 
 If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views).
 
@@ -53,7 +53,7 @@ The example isn't super fleshed out but should give you a vague idea.
 
 h3. Example File Structure
 
-p. There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models aren't categorized into folders kind of like an ORM. 
+p. There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models aren't categorized into folders kind of like an ORM.
 
 {% highlight javascript %}
 /* File Structure
@@ -105,7 +105,7 @@ p. To continue you must really understand what we are aiming towards as describe
 
 h3. Bootstrapping your application
 
-p. Using Require.js we define a single entry point on our index page.  
+p. Using Require.js we define a single entry point on our index page.
 We should setup any useful containers that might be used by our Backbone views.
 
 **Note**: The data-main attribute on our single script tag tells Require.js to load the script located at "js/main.js".  It automatically appends the ".js"
@@ -133,7 +133,7 @@ p. You should most always end up with quite a light weight index file.   You can
 
 h4. What does the bootstrap look like?
 
-p. Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.   
+p. Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.
 
 In the below example we configure Require.js to create shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.
 
@@ -179,7 +179,7 @@ require([
 
 h3. How should we lay out external scripts?
 
-p. Any modules we develop for our application using AMD/Require.js will be asynchronously loaded. 
+p. Any modules we develop for our application using AMD/Require.js will be asynchronously loaded.
 
 We have a heavy dependency on jQuery, Underscore and Backbone, unfortunatly this libraries are loaded synchronously and also depend on each other existing in the global namespace.
 
@@ -238,7 +238,7 @@ define([
   // Above we have passed in jQuery, Underscore and Backbone
   // They will not be accesible in the global scope
   return {};
-  // What we return here will be used by other modules	
+  // What we return here will be used by other modules
 });
 {% endhighlight %}
 
@@ -253,8 +253,8 @@ The router will then load the correct dependencies depending on the current URL.
 {% highlight javascript %}
 // Filename: app.js
 define([
-  'jQuery', 
-  'Underscore', 
+  'jQuery',
+  'Underscore',
   'Backbone',
   'router', // Request router.js
 ], function($, _, Backbone, Router){
@@ -263,7 +263,7 @@ define([
     Router.initialize();
   }
 
-  return { 
+  return {
     initialize: initialize
   };
 });
@@ -283,7 +283,7 @@ define([
       // Define some URL routes
       '/projects': 'showProjects',
       '/users': 'showUsers',
-      
+
       // Default
       '*actions": "defaultAction'
     },
@@ -307,7 +307,7 @@ define([
     var app_router = new AppRouter;
     Backbone.history.start();
   };
-  return { 
+  return {
     initialize: initialize
   };
 });
@@ -406,7 +406,7 @@ define([
       this.collection.add({ name: "Ginger Kid"});
       // Compile the template using Underscores micro-templating
       var compiledTemplate = _.template( projectsListTemplate, { projects: this.collection.models } );
-      this.el.html(compiledTemplate); 
+      this.el.html(compiledTemplate);
     }
   });
   // Returning instantiated views can be quite useful for having "state"
@@ -432,4 +432,4 @@ h3. Author
 
 h3. Contributors
 
-* None
+* "Jakub Kozisek":https://github.com/dzejkej (created modular-backbone-updated containing updated libs with AMD support)
