@@ -7,7 +7,7 @@ posturl: http://backbonetutorials.com/organizing-backbone-using-modules
 
 h2. Organizing your application using Modules (require.js)
 
-p. Unfortunatly Backbone.js does not tell you how to organize your code leaving many developers in the dark regarding how to load scripts and lay out their development enviroments.
+p. Unfortunately Backbone.js does not tell you how to organize your code, leaving many developers in the dark regarding how to load scripts and lay out their development enviroments.
 
 This was quite a different decision to other Javascript MVC frameworks who were more in favor of setting a development philosophy.
 
