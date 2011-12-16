@@ -5,7 +5,7 @@ type: beginner
 posturl: http://backbonetutorials.com/what-would-you-use-backbone
 ---
 
-h1. In progress
+h1. _In progress_
 
 h2. What is a collection?
 

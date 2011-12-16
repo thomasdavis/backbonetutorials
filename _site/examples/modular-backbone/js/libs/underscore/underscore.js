@@ -1,3 +1,3 @@
-define(['order!libs/underscore/underscore-min'], function(){
-  return _;
+define(['loader'], function(Loader){
+  return Loader._;
 });

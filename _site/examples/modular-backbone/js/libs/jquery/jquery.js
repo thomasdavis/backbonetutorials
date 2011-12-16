@@ -1,5 +1,3 @@
-define([
-  'order!libs/jquery/jquery-min', 
-], function(){
-  return $;
+define([ 'loader'], function(Loader){
+  return Loader.$;
 });

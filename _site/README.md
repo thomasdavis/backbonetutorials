@@ -13,6 +13,7 @@ Thomas Davis - [@neutralthoughts](http://twitter.com/neutralthoughts) - Twitter
 
 * Thanks to Cactus([https://github.com/cactus](https://github.com/cactus)) for creating the blog feed
 * Thanks to Wes Bos ([https://github.com/wesbos](https://github.com/wesbos)) for CSS fixes
+* Thanks to Paul Irish ([https://github.com/https://github.com/paulirish](https://github.com/paulirish)) for tutorial clarification
 
 ## About the author
 
