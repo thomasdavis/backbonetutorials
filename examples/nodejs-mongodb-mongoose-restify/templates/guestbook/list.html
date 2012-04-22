@@ -1,7 +1,6 @@
-<% console.log(messages);_.each(messages, function(message) { %>
+<% _.each(messages, function(message) { %>
 
 <p><%= message.get('message') %></p>
 <em><%= message.get('date') %></em>
-
 
 <% }); %>

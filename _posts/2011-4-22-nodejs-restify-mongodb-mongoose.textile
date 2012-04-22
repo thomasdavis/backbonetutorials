@@ -40,7 +40,7 @@ h3. "Example Codebase":https://github.com/thomasdavis/backbonetutorials/tree/gh-
 
 h3. "Example Demo":http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/
 
-This tutorial will assist you in saving data(Backbone.js Models) to MongoDb and retreiving a list(Backbone.js Collections) of them back.
+This tutorial will assist you in saving data(Backbone.js Models) to MongoDb and retrieving a list(Backbone.js Collections) of them back.
 
 
 h3. Building the server
@@ -49,7 +49,7 @@ p. In the example repository there is a server.js example which can be executed 
 
 h4. Restify configuration
 
-p. The first thing to do is require the Restify module. Restify will be in control of handling our restFul end points and returning the appropiate JSON.
+p. The first thing to do is require the Restify module. Restify will be in control of handling our restFul end points and returning the appropriate JSON.
 
 {% highlight javascript %}
 var restify = require('restify');  
@@ -92,7 +92,7 @@ Note: `Message` can now be used for all things CRUD related.
 
 h4. Setting up the routes
 
-p. Just like in Backbone, Restify allows you to configure different routes and their associated callbacks. In the code below we want to define two routes.  One for saving new messages and one for retreiving all messages. After we have created our function definitions, we then attach them to either GET/POST/PUT/DELETE on a particular restful endpoint e.g. GET /messages
+p. Just like in Backbone, Restify allows you to configure different routes and their associated callbacks. In the code below we want to define two routes.  One for saving new messages and one for retrieving all messages. After we have created our function definitions, we then attach them to either GET/POST/PUT/DELETE on a particular restful endpoint e.g. GET /messages
 
 {% highlight javascript %}
 // This function is responsible for returning all entries for the Message model
@@ -211,9 +211,9 @@ define([
 
 Note: `trigger` is from Backbone Events, I binded a listener to this view in `views/dashboard/page.js` so that when a new message is submitted, the list is re-rendered. We are setting the date of post on the server so there is no need to pass it up now.
 
-h4. Retreiving a list of messages
+h4. Retrieving a list of messages
 
-We setup a route on our server to generate a list of all available messages at `GET /messages`. So we need to define a collection with the appropiate `url` to fetch this data down.
+We setup a route on our server to generate a list of all available messages at `GET /messages`. So we need to define a collection with the appropriate `url` to fetch this data down.
 
 {% highlight javascript %}
 define([
@@ -278,6 +278,8 @@ p. In this example you should really be using relative url's in your collections
 This example is hosted on github therefore we had to include the absolute url to the server which is hosted on nodejitsu.com
 
 On a personal note, I have of recent used the Joyent, Nodejitsu, MongoDbHq stack after they have now partnered up and I have nothing but good things to say. Highly recommend you check it out!
+
+As always I hope I made this tutorial easy to follow!
 
 Get in touch with me on twitter, comments or github!
 
