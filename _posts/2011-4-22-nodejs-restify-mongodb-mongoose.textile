@@ -48,7 +48,8 @@ h3. Building the server
 p. In the example repository there is a server.js example which can be executed by running `node server.js`. If you use this example in your own applications make sure to update the Backbone.js "Model":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/models/message.js and "Collection":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/collections/messages.js definitions to match your server address.
 
 h4. Restify configuration
-The first thing to do is require the Restify module. Restify will be in control of handling our restFul end points and returning the appropiate JSON.
+
+p. The first thing to do is require the Restify module. Restify will be in control of handling our restFul end points and returning the appropiate JSON.
 
 {% highlight javascript %}
 var restify = require('restify');  
@@ -134,298 +135,149 @@ This wraps up the server side of things, if you follow the "example":https://git
 
 Note: Again you must remember to change the "Model":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/models/message.js and "Collection":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/collections/messages.js definitions to match your server address.
 
-Inside of our function definitions we have used our Mongoose model to perform the appropiate action.
+h3. Setting up the client(Backbone.js)
 
-Note: We have created a shortcut to Mongooses Schema variable. Mongoose makes some of the typical MongoDb paradigms easier to implement and understand.
+I've actually used the latest copy of "http://backboneboilerplate.com":http://backboneboilerplate.com to set up the example page.
 
-p. You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be.
+The important files you will want to check out are;
 
-h4. What does the bootstrap look like?
+* views/dashboard/page.js
+* views/guestbook/form.js
+* views/guestbook/list.js
+* models/message.js
+* collections/messages.js
+* templates/guestbook/
 
-p. Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.
+h4. Saving a message
 
-In the below example we configure Require.js to create shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.
-
-Due to the nature of these libraries implementations we actually have to load them in order because they each depend on each other existing in the global namespace(which is bad but is all we have to work with).
-
-Hopefully if the AMD specification takes off these libraries will add code to allow themselves to be loaded asynchronously.   Due to this inconvience the bootstrap is not as intuitive as it could be, I hope to solve this problem in the near future.
-
-We also request a module called "app", this will contain the entireity of our application logic.
-
-**Note:** Modules are loaded relativly to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap.
+p. First of all we want to setup a "template":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/templates/guestbook/form.html for showing our form that creates new messages.
 
 {% highlight javascript %}
-// Filename: main.js
-
-// Require.js allows us to configure shortcut alias
-// There usage will become more apparent futher along in the tutorial.
-require.config({
-  paths: {
-    jQuery: 'libs/jquery/jquery',
-    Underscore: 'libs/underscore/underscore',
-    Backbone: 'libs/backbone/backbone'
-  }
-
-});
-
-require([
-
-  // Load our app module and pass it to our definition function
-  'app',
-
-  // Some plugins have to be loaded in order due to there non AMD compliance
-  // Because these scripts are not "modules" they do not pass any values to the definition function below
-  'order!libs/jquery/jquery-min',
-  'order!libs/underscore/underscore-min',
-  'order!libs/backbone/backbone-min'
-], function(App){
-  // The "app" dependency is passed in as "App"
-  // Again, the other dependencies passed in are not "AMD" therefore don't pass a parameter to this function
-  App.initialize();
-});
-
+<textarea class="message"></textarea>
+<button class="post-message">Post Message</button>
 {% endhighlight %}
 
-h3. How should we lay out external scripts?
+This template gets inserted into the DOM by `views/guestbook/form.js`, this Backbone view also handles the interaction of the form and the posting of the new data.
 
-p. Any modules we develop for our application using AMD/Require.js will be asynchronously loaded.
-
-We have a heavy dependency on jQuery, Underscore and Backbone, unfortunatly this libraries are loaded synchronously and also depend on each other existing in the global namespace.
-
-Below I propose a solution(until these libraries allow themselves to be loaded asynchronously) to allow these libraries to be loaded properly(synchronously) and also removing themselves from global scope.
-
+Let us create a Backbone Model that has the correct url for our restFul interface.
 
 {% highlight javascript %}
-// Filename: libs/jquery/jquery.js
-
 define([
-// Load the original jQuery source file
-  'order!libs/jquery/jquery-min'
-], function(){
-  // Tell Require.js that this module returns a reference to jQuery
-  return $;
+  'underscore',
+  'backbone'
+], function(_, Backbone) {
+  var Message = Backbone.Model.extend({
+      url: 'http://localhost:8080/messages'
+  });
+  return Message;
 });
+
 {% endhighlight %}
+
+
+We can see how we require our pre-defined model for messages and also our form template.
 
 {% highlight javascript %}
-// Filename: libs/underscore/underscore
-// As above lets load the original underscore source code
-define(['order!libs/underscore/underscore-min'], function(){
-  // Tell Require.js that this module returns  a reference to Underscore
-  return _;
-});
-{% endhighlight %}
-
-{% highlight javascript %}
- // Filename: libs/backbone/backbone
- // Finally lets load the original backbone source code
-define(['order!libs/backbone/backbone-min'], function(){
-  // Now that all the orignal source codes have ran and accessed each other
-  // We can call noConflict() to remove them from the global name space
-  // Require.js will keep a reference to them so we can use them in our modules
-  _.noConflict();
-  $.noConflict();
-  return Backbone.noConflict();
-});
-{% endhighlight %}
-
-h3. A boiler plate module
-
-p. So before we start developing our application, let's quickly look over boiler plate code that will be reused quite often.
-
-For convience sake I generally keep a "boilerplate.js" in my application root so I can copy it when I need to.
-
-{%highlight javascript %}
-//Filename: boilerplate.js
-
 define([
-  // These are path alias that we configured in our bootstrap
-  'jQuery',     // lib/jquery/jquery
-  'Underscore', // lib/underscore/underscore
-  'Backbone'    // lib/backbone/backbone
-], function($, _, Backbone){
-  // Above we have passed in jQuery, Underscore and Backbone
-  // They will not be accesible in the global scope
-  return {};
-  // What we return here will be used by other modules
-});
-{% endhighlight %}
-
-p. The first argument of the define function is our dependency array, we can pass in any modules we like in the future.
-
-h3. App.js Building our applications main module
-
-p. Our applications main module should always remain quite light weight.   This tutorial covers only setting up a Backbone Router and initializing it in our main module.
-
-The router will then load the correct dependencies depending on the current URL.
-
-{% highlight javascript %}
-// Filename: app.js
-define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
-  'router', // Request router.js
-], function($, _, Backbone, Router){
-  var initialize = function(){
-    // Pass in our Router module and call it's initialize function
-    Router.initialize();
-  }
-
-  return {
-    initialize: initialize
-  };
-});
-{% endhighlight %}
-
-{% highlight javascript %}
-// Filename: router.js
-define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
-  'views/projects/list',
-  'views/users/list'
-], function($, _, Backbone, Session, projectListView, userListView){
-  var AppRouter = Backbone.Router.extend({
-    routes: {
-      // Define some URL routes
-      '/projects': 'showProjects',
-      '/users': 'showUsers',
-
-      // Default
-      '*actions": "defaultAction'
+  'jquery',
+  'underscore',
+  'backbone',
+  'models/message',
+  'text!templates/guestbook/form.html'
+], function($, _, Backbone, MessageModel, guestbookFormTemplate){
+  var GuestbookForm = Backbone.View.extend({
+    el: '.guestbook-form-container',
+    render: function () {
+      $(this.el).html(guestbookFormTemplate);
+      
     },
-    showProjects: function(){
-      // Call render on the module we loaded in via the dependency array
-      // 'views/projects/list'
-      projectListView.render();
+    events: {
+      'click .post-message': 'postMessage'
     },
-      // As above, call render on our loaded module
-      // 'views/users/list'
-    showUsers: function(){
-      userListView.render();
-    },
-    defaultAction: function(actions){
-      // We have no matching route, lets just log what the URL was
-      console.log('No route:', actions);
+    postMessage: function() {
+      var that = this;
+
+      var message = new MessageModel();
+      message.save({ message: $('.message').val()}, {
+        success: function () {
+          that.trigger('postMessage');
+        }
+      });
     }
   });
-
-  var initialize = function(){
-    var app_router = new AppRouter;
-    Backbone.history.start();
-  };
-  return {
-    initialize: initialize
-  };
+  return GuestbookForm;
 });
 {% endhighlight %}
 
-h3. Modularizing a Backbone View
+Note: `trigger` is from Backbone Events, I binded a listener to this view in `views/dashboard/page.js` so that when a new message is submitted, the list is re-rendered. We are setting the date of post on the server so there is no need to pass it up now.
 
-Backbone views most usually always interact with the DOM, using our new modular system we can load in Javascript templates using Require.js text! plugin.
+h4. Retreiving a list of messages
+
+We setup a route on our server to generate a list of all available messages at `GET /messages`. So we need to define a collection with the appropiate `url` to fetch this data down.
 
 {% highlight javascript %}
-// Filename: views/project/list
 define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
-  // Using the Require.js text! plugin, we are loaded raw text
-  // which will be used as our views primary template
-  'text!templates/project/list.html'
-], function($, _, Backbone, projectListTemplate){
-  var projectListView = Backbone.View.extend({
-    el: $('#container'),
-    render: function(){
-      // Using Underscore we can compile our template with data
-      var data = {};
-      var compiledTemplate = _.template( projectListTemplate, data );
-      // Append our compiled template to this Views "el"
-      this.el.append( compiledTemplate );
+  'jquery',
+  'underscore',
+  'backbone',
+  'models/message'
+], function($, _, Backbone, MessageModel){
+  var Messages = Backbone.Collection.extend({
+    model: MessageModel, // Generally best practise to bring down a Model/Schema for your collection
+    url: 'http://localhost:8080/messages'
+  });
+
+  return Messages;
+});
+{% endhighlight %}
+
+Now that we have a collection to use we can setup our `views/list.js` to require the collection and trigger a fetch. Once the fetch is complete we want to render our returned data to a template and insert it into the DOM.
+
+{% endhighlight %}
+define([
+  'jquery',
+  'underscore',
+  'backbone',
+  'collections/messages',
+  'text!templates/guestbook/list.html'
+], function($, _, Backbone, MessagesCollection, guestbookListTemplate){
+  var GuestbookList = Backbone.View.extend({
+    el: '.guestbook-list-container',
+    render: function () {
+      var that = this;
+      var messages = new MessagesCollection();
+      messages.fetch({
+        success: function(messages) {
+          $(that.el).html(_.template(guestbookListTemplate, {messages: messages.models, _:_}));
+        }
+      });
     }
   });
-  // Our module now returns an instantiated view
-  // Sometimes you might return an un-instantiated view e.g. return projectListView
-  return new projectListView;
+  return GuestbookList;
 });
 {% endhighlight %}
 
-p. Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.
+The template file should iterate over `messages.models` which is an array and print out a HTML fragment for each model.
 
-h3. Modularizing a Collection, Model and View
+{% endhighlight %}
+<% _.each(messages, function(message) { %>
 
-p. Now we put it altogether by chaining up a Model, Collection and View which is a typical scenairo when building a Backbone.js application.
+<p><%= message.get('message') %></p>
+<em><%= message.get('date') %></em>
 
-First off we will define our model
+<% }); %>
 
-{% highlight javascript %}
-// Filename: models/project
-define([
-  'Underscore',
-  'Backbone'
-], function(_, Backbone){
-  var projectModel = Backbone.Model.extend({
-    defaults: {
-      name: "Harry Potter"
-    }
-  });
-  // You usually don't return a model instantiated
-  return projectModel;
-});
 {% endhighlight %}
 
-p. Now we have a model, our collection module can depend on it.  We will set the "model" attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.
-
-"Collection.model: Override this property to specify the model class that the collection contains. If defined, you can pass raw attributes objects (and arrays) to add, create, and reset, and the attributes will be converted into a model of the proper type."
-
-{% highlight javascript %}
-// Filename: collections/projects
-define([
-  'Underscore',
-  'Backbone',
-  // Pull in the Model module from above
-  'models/project'
-], function(_, Backbone, projectModel){
-  var projectCollection = Backbone.Collection.extend({
-    model: projectModel
-  });
-  // You don't usually return a collection instantiated
-  return new projectCollection;
-});
-{% endhighlight %}
-
-Now we can simply depend on our collection in our view and pass it to our Javascript template.
-
-{% highlight javascript %}
-// Filename: views/projects/list
-define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
-  // Pull in the Collection module from above
-  'collections/projects',
-  'text!templates/projects/list
-], function(_, Backbone, projectsCollection, projectsListTemplate){
-  var projectListView = Backbone.View.extend({
-    el: $("#container"),
-    initialize: function(){
-      this.collection = new projectsCollection;
-      this.collection.add({ name: "Ginger Kid"});
-      // Compile the template using Underscores micro-templating
-      var compiledTemplate = _.template( projectsListTemplate, { projects: this.collection.models } );
-      this.el.html(compiledTemplate);
-    }
-  });
-  // Returning instantiated views can be quite useful for having "state"
-  return new projectListView;
-});
-{% endhighlight %}
+This actually sums up everything you need to know to implement this simple example.
 
 h3. Conclusion
 
-p. Looking forward to feedback so I can turn this post and example into quality references on building modular Javascript applications.
+p. In this example you should really be using relative url's in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.
+
+This example is hosted on github therefore we had to include the absolute url to the server which is hosted on nodejitsu.com
+
+On a personal note, I have of recent used the Joyent, Nodejitsu, MongoDbHq stack after they have now partnered up and I have nothing but good things to say. Highly recommend you check it out!
 
 Get in touch with me on twitter, comments or github!
 
@@ -438,7 +290,3 @@ h3. Relevant Links
 h3. Author
 
 * "Thomas Davis":https://github.com/thomasdavis
-
-h3. Contributors
-
-* "Jakub Kozisek":https://github.com/dzejkej (created modular-backbone-updated containing updated libs with AMD support)
