@@ -27,3 +27,13 @@ a:hover {
 .un-bulleted {
   list-style: none;
 }
+
+.message {
+  font-size: 110%;
+}
+
+.date {
+  color: #ccc;
+  font-size: 90%;
+  
+}
