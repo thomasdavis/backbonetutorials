@@ -7,12 +7,12 @@ posturl: http://backbonetutorials.com/nodejs-restify-mongodb-mongoose
 
 h2. Simple example - Node.js, Restify, MongoDb and Mongoose 
 
-p. Before I start, the Backbone.js parts of this tutorial will be using techniques described in "Organizing your application using Modules":http://backbonetutorials.com/organizing-backbone-using-modules/
+p. Before I start, the Backbone.js parts of this tutorial will be using techniques described in "Organizing your application using Modules":http://backbonetutorials.com/organizing-backbone-using-modules/ to construct a simple guestbook.
 
 
 h3. The technologies
 
-This stack is great for rapid prototyping and highly intuitive.
+This stack is great for rapid prototyping and highly intuitive. Personal note: I love using Javascript as my only language for the entire application(FrontEnd/BackEnd/API/Database). Restify is still in early development but is essentially just an extension of Express. So for anyone needing more stability you can easily just substitute Express in.
 
 h4. Node.js
 
@@ -233,7 +233,7 @@ define([
 
 Now that we have a collection to use we can setup our `views/list.js` to require the collection and trigger a fetch. Once the fetch is complete we want to render our returned data to a template and insert it into the DOM.
 
-{% endhighlight %}
+{% highlight javascript %}
 define([
   'jquery',
   'underscore',
@@ -259,7 +259,7 @@ define([
 
 The template file should iterate over `messages.models` which is an array and print out a HTML fragment for each model.
 
-{% endhighlight %}
+{% highlight javascript %}
 <% _.each(messages, function(message) { %>
 
 <p><%= message.get('message') %></p>
