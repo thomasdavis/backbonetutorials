@@ -9,6 +9,15 @@ h2. Simple example - Node.js, Restify, MongoDb and Mongoose
 
 p. Before I start, the Backbone.js parts of this tutorial will be using techniques described in "Organizing your application using Modules":http://backbonetutorials.com/organizing-backbone-using-modules/ to construct a simple guestbook.
 
+h3. Getting started
+
+To easily understand this tutorial you should jump straight into the example code base.
+
+h3. "Example Codebase":https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/nodejs-mongodb-mongoose-restify
+
+h3. "Example Demo":http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/
+
+This tutorial will assist you in saving data(Backbone.js Models) to MongoDb and retrieving a list(Backbone.js Collections) of them back.
 
 h3. The technologies
 
@@ -32,15 +41,7 @@ h4. Mongoose
 p. "Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment."
 
 
-h3. Getting started
 
-To easily understand this tutorial you should jump straight into the example code base.
-
-h3. "Example Codebase":https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/nodejs-mongodb-mongoose-restify
-
-h3. "Example Demo":http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/
-
-This tutorial will assist you in saving data(Backbone.js Models) to MongoDb and retrieving a list(Backbone.js Collections) of them back.
 
 
 h3. Building the server
@@ -272,6 +273,10 @@ The template file should iterate over `messages.models` which is an array and pr
 This actually sums up everything you need to know to implement this simple example.
 
 h3. Conclusion
+
+h3. "Example Codebase":https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/nodejs-mongodb-mongoose-restify
+
+h3. "Example Demo":http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/
 
 p. In this example you should really be using relative url's in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.
 
