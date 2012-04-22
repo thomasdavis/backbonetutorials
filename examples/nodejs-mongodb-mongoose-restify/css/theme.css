@@ -1,0 +1,29 @@
+.container {
+  background-color: #fff;
+}
+body {
+  color: #444;
+}
+
+code {
+  border:1px dashed #E1E1E1;
+  color:#333344;
+  background:#FAFAFA;
+  font-family:monospace;
+  overflow:auto;
+  font-size:11px;
+  padding:0.2em;
+}
+
+a, a:visited {
+  color: #444;
+}
+ 
+a:hover {
+  color: #000;
+  text-decoration: none;
+} 
+
+.un-bulleted {
+  list-style: none;
+}

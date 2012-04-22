@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  margin: auto;
+  width: 960px; 
+}
+.page {
+  margin: 10px 0 10px 0;
+}
+.submenu {
+  width: 200px;
+  float: left;
+}
+.content {
+  width: 460px;
+  float: left;
+}

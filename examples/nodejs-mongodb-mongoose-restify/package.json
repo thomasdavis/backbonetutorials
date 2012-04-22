@@ -1,0 +1,15 @@
+{
+  "name": "budder",
+  "subdomain": "budder",
+  "scripts": {
+    "start": "server.js"
+  },
+  "version": "0.0.0-8",
+  "engines": {
+    "node": "0.6.x"
+  },
+  "dependencies": {
+    "restify": "1.4.x",
+    "mongoose": "2.6.x"
+  }
+}
