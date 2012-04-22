@@ -15,127 +15,118 @@ h3. The technologies
 This stack is great for rapid prototyping and highly intuitive.
 
 h4. Node.js
-"Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices."
+
+p. "Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices."
+
 
 h4. Restify
-"restify is a node.js module built specifically to enable you to build correct REST web services. It borrows heavily from express (intentionally) as that is more or less the de facto API for writing web applications on top of node.js."
+
+p. restify is a node.js module built specifically to enable you to build correct REST web services. It borrows heavily from express (intentionally) as that is more or less the de facto API for writing web applications on top of node.js."
 
 h4. MongoDb
-"MongoDB (from "humongous") is a scalable, high-performance, open source NoSQL database."
+
+p. "MongoDB (from "humongous") is a scalable, high-performance, open source NoSQL database."
 
 h4. Mongoose
-"Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment."
 
+p. "Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment."
 
-This tutorial will use "Require.js":http://requirejs.org to implement a modular and organized Backbone.js.
-
-**I highly recommend using AMD for application development**
-
-Quick Overview
-* Modular
-* Scalable
-* Compiles well(see "r.js":http://requirejs.org/docs/optimization.html)
-* Market Adoption( "Dojo 1.6 converted fully to AMD":http://dojotoolkit.org/reference-guide/releasenotes/1.6.html )
-
-h3. Why Require.js?
-
-p. Require.js has a boastful community and is growing rapidly.  "James Burke":http://tagneto.blogspot.com/ the author is married to Require.js and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the AMD specification.
-
-<a href="https://twitter.com/jrburke" class="twitter-follow-button">Follow @jrburke</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 
 h3. Getting started
 
 To easily understand this tutorial you should jump straight into the example code base.
 
-h3. "Example Codebase":https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/modular-backbone
+h3. "Example Codebase":https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/nodejs-mongodb-mongoose-restify
 
-h3. "Example Demo":http://backbonetutorials.com/examples/modular-backbone
+h3. "Example Demo":http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/
+
+This tutorial will assist you in saving data(Backbone.js Models) to MongoDb and retreiving a list(Backbone.js Collections) of them back.
 
 
-p. The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive.
+h3. Building the server
 
-If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views).
+p. In the example repository there is a server.js example which can be executed by running `node server.js`. If you use this example in your own applications make sure to update the Backbone.js "Model":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/models/message.js and "Collection":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/collections/messages.js definitions to match your server address.
 
-The example isn't super fleshed out but should give you a vague idea.
-
-h3. Example File Structure
-
-p. There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models aren't categorized into folders kind of like an ORM.
+h4. Restify configuration
+The first thing to do is require the Restify module. Restify will be in control of handling our restFul end points and returning the appropiate JSON.
 
 {% highlight javascript %}
-/* File Structure
-├── imgs
-├── css
-│   └── style.css
-├── templates
-│   ├── projects
-│   │   ├── list.html
-│   │   └── edit.html
-│   └── users
-│       ├── list.html
-│       └── edit.html
-├── js
-│   ├── libs
-│   │   ├── jquery
-│   │   │   ├── jquery.min.js
-│   │   │   └── jquery.js // jQuery Library Wrapper
-│   │   ├── backbone
-│   │   │   ├── backbone.min.js
-│   │   │   └── backbone.js // Backbone Library Wrapper
-│   │   └── underscore
-│   │   │   ├── underscore.min.js
-│   │   │   └── underscore.js // Underscore Library Wrapper
-│   ├── models
-│   │   ├── users.js
-│   │   └── projects.js
-│   ├── collections
-│   │   ├── users.js
-│   │   └── projects.js
-│   ├── views
-│   │   ├── projects
-│   │   │   ├── list.js
-│   │   │   └── edit.js
-│   │   └── users
-│   │       ├── list.js
-│   │       └── edit.js
-│   ├── router.js
-│   ├── app.js
-│   ├── main.js  // Bootstrap
-│   ├── order.js //Require.js plugin
-│   └── text.js  //Require.js plugin
-└── index.html
-
-*/
+var restify = require('restify');  
+var server = restify.createServer();
+server.use(restify.bodyParser());
 {% endhighlight %}
 
-p. To continue you must really understand what we are aiming towards as described in the introduction.
+Note: bodyParser() takes care of turning your request data into a Javascript object on the server automatically.
 
-h3. Bootstrapping your application
+h4. MongoDb/Mongoose configuration
 
-p. Using Require.js we define a single entry point on our index page.
-We should setup any useful containers that might be used by our Backbone views.
 
-**Note**: The data-main attribute on our single script tag tells Require.js to load the script located at "js/main.js".  It automatically appends the ".js"
+We simply want to require the MongoDb module and pass it a MongoDb authentication URI  e.g. mongodb://username:server@mongoserver:10059/somecollection
 
-{% highlight html %}
-<!doctype html>
-<html lang="en">
-<head>
-	<title>Jackie Chan</title>
-	<!-- Load the script "js/main.js" as our entry point -->
-	<script data-main="js/main" src="js/libs/require/require.js"></script>
-</head>
-<body>
+The code below presupposes you have another file in the same directory called `config.js`. Your config should never be public as it contains your credentials. So for this repository I have added `config.js` to my `.gitignore` but added in a "sample config":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/config-sample.js.
 
-<div id="container">
-  <div id="menu"></div>
-  <div id="content"></div>
-</div>
-
-</body>
-</html>
+{% highlight javascript %}
+var mongoose = require('mongoose/');
+var config = require('./config');
+db = mongoose.connect(config.creds.mongoose_auth),
+Schema = mongoose.Schema;  
 {% endhighlight %}
+
+h4. Mongoose Schema
+
+p. Mongoose introduces a concept of "model/schema":http://mongoosejs.com/docs/model-definition.html enforcing types which allow for easier input validation etc
+
+{% highlight javascript %}
+// Create a schema for our data
+var MessageSchema = new Schema({
+  message: String,
+  date: Date
+});
+// Use the schema to register a model with MongoDb
+mongoose.model('Message', MessageSchema); 
+var Message = mongoose.model('Message'); 
+{% endhighlight %}
+
+Note: `Message` can now be used for all things CRUD related.
+
+h4. Setting up the routes
+
+p. Just like in Backbone, Restify allows you to configure different routes and their associated callbacks. In the code below we want to define two routes.  One for saving new messages and one for retreiving all messages. After we have created our function definitions, we then attach them to either GET/POST/PUT/DELETE on a particular restful endpoint e.g. GET /messages
+
+{% highlight javascript %}
+// This function is responsible for returning all entries for the Message model
+function getMessages(req, res, next) {
+  // Resitify currently has a bug which doesn't allow you to set default headers
+  // This headers comply with CORS and allow us to server our response to any origin
+  res.header("Access-Control-Allow-Origin", "*"); 
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  Message.find().sort('date', -1).execFind(function (arr,data) {
+    res.send(data);
+  });
+}
+
+
+
+function postMessage(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  // Create a new message model, fill it up and save it to Mongodb
+  var message = new Message(); 
+  message.message = req.params.message;
+  message.date = new Date() 
+  message.save(function () {
+    res.send(req.body);
+  });
+}
+
+// Set up our routes and start the server
+server.get('/messages', getMessages);
+server.post('/messages', postMessage);
+
+{% endhighlight %}
+
+
+Note: We have created a shortcut to Mongooses Schema variable. Mongoose makes some of the typical MongoDb paradigms easier to implement and understand.
 
 p. You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be.
 
