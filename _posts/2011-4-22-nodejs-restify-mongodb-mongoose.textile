@@ -100,6 +100,8 @@ function getMessages(req, res, next) {
   // This headers comply with CORS and allow us to server our response to any origin
   res.header("Access-Control-Allow-Origin", "*"); 
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  // .find() without any arguments, will return all results
+  // the `-1` in .sort() means descending order
   Message.find().sort('date', -1).execFind(function (arr,data) {
     res.send(data);
   });
@@ -125,6 +127,14 @@ server.post('/messages', postMessage);
 
 {% endhighlight %}
 
+This wraps up the server side of things, if you follow the "example":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/server.js then you should see something like
+
+"http://backbonetutorials.nodejitsu.com/messages":http://backbonetutorials.nodejitsu.com/messages
+
+
+Note: Again you must remember to change the "Model":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/models/message.js and "Collection":https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/collections/messages.js definitions to match your server address.
+
+Inside of our function definitions we have used our Mongoose model to perform the appropiate action.
 
 Note: We have created a shortcut to Mongooses Schema variable. Mongoose makes some of the typical MongoDb paradigms easier to implement and understand.
 
