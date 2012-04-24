@@ -5,7 +5,9 @@ type: intermediate
 posturl: http://backbonetutorials.com/nodejs-restify-mongodb-mongoose
 ---
 
-em. Notice: If anyone could ever so kindly submit this tutorial to Hacker news for me, I'm having trouble getting with the spam filter
+em. Notice: If anyone could ever so kindly submit this tutorial to Hacker news for me, I'm having trouble with the spam filter
+
+p. 
 
 h2. Simple example - Node.js, Restify, MongoDb and Mongoose 
 
