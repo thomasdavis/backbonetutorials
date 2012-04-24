@@ -5,6 +5,8 @@ type: intermediate
 posturl: http://backbonetutorials.com/nodejs-restify-mongodb-mongoose
 ---
 
+em. Notice: If anyone could ever so kindly submit this tutorial to Hacker news for me, I'm having trouble getting with the spam filter
+
 h2. Simple example - Node.js, Restify, MongoDb and Mongoose 
 
 p. Before I start, the Backbone.js parts of this tutorial will be using techniques described in "Organizing your application using Modules":http://backbonetutorials.com/organizing-backbone-using-modules/ to construct a simple guestbook.
