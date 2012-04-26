@@ -167,4 +167,5 @@ _Using template variables_
 
 ### Contributors
 
-* [Michael Macias[(https://github.com/zaeleus)
+* [Michael Macias](https://github.com/zaeleus)
+* [Alex Lande](https://github.com/lawnday)
