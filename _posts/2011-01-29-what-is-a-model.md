@@ -5,13 +5,13 @@ type: beginner
 posturl: http://backbonetutorials.com/what-is-a-model
 ---
 
-h2. What is a model?
+# What is a model?
 
-p. Across the internet the definition of "MVC":http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller is so diluted that it's hard to tell what exactly your model should be doing.   The authors of backbone.js have quite a clear definition of what they believe the model represents in backbone.js.
+Across the internet the definition of [MVC](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) is so diluted that it's hard to tell what exactly your model should be doing.   The authors of backbone.js have quite a clear definition of what they believe the model represents in backbone.js.
 
-bq. Models are the heart of any JavaScript application, containing the interactive data as well as a large part of the logic surrounding it: conversions, validations, computed properties, and access control.
+> Models are the heart of any JavaScript application, containing the interactive data as well as a large part of the logic surrounding it: conversions, validations, computed properties, and access control.
 
-p. So for the purpose of the tutorial let's create a model.
+So for the purpose of the tutorial let's create a model.
 
 {% highlight javascript %}
     Person = Backbone.Model.extend({
@@ -23,11 +23,11 @@ p. So for the purpose of the tutorial let's create a model.
     var person = new Person;
 {% endhighlight %}
 
-p. So _initialize()_ is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don't have to include it in your model declaration but you will find yourself using it more often than not.
+So _initialize()_ is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don't have to include it in your model declaration but you will find yourself using it more often than not.
 
-h4. Setting attributes
+## Setting attributes
 
-p. Now we want to pass some parameters when we create an instance of our model.
+Now we want to pass some parameters when we create an instance of our model.
 
 {% highlight javascript %}
     Person = Backbone.Model.extend({
@@ -44,11 +44,11 @@ p. Now we want to pass some parameters when we create an instance of our model.
     
 {% endhighlight %}
 
-p. So passing a javascript object to our constructor is the same as calling _model.set()_.   Now that these models have attributes set we need to be able to retrieve them.  
+So passing a javascript object to our constructor is the same as calling _model.set()_.   Now that these models have attributes set we need to be able to retrieve them.  
 
-h4. Getting attributes
+## Getting attributes
 
-p. Using the _model.get()_ method we can access model properties at anytime.
+Using the _model.get()_ method we can access model properties at anytime.
 
 {% highlight javascript %}
     Person = Backbone.Model.extend({
@@ -65,9 +65,9 @@ p. Using the _model.get()_ method we can access model properties at anytime.
     
 {% endhighlight %}
 
-h4. Setting model defaults
+## Setting model defaults
 
-p. Sometimes you will want your model to contain default values.   This can easily be accomplished by setting a property name 'defaults' in your model declaration.
+Sometimes you will want your model to contain default values.   This can easily be accomplished by setting a property name 'defaults' in your model declaration.
 
 {% highlight javascript %}
     Person = Backbone.Model.extend({
@@ -89,9 +89,9 @@ p. Sometimes you will want your model to contain default values.   This can easi
     
 {% endhighlight %}
 
-h4. Manipulating model attributes
+## Manipulating model attributes
 
-p.  Models can contain as many custom methods as you like to manipulate attributes.   By default all methods are public.
+Models can contain as many custom methods as you like to manipulate attributes.   By default all methods are public.
 
 {% highlight javascript %}
     Person = Backbone.Model.extend({
@@ -116,12 +116,11 @@ p.  Models can contain as many custom methods as you like to manipulate attribut
     
 {% endhighlight %}
 
-p. So we can implement methods to get/set and perform other calculations using attributes from our model at any time.   
+So we can implement methods to get/set and perform other calculations using attributes from our model at any time.   
 
+## Listening for changes to the model
 
-h4. Listening for changes to the model
-
-p. Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case if the name of our "person" changes we will alert their new name.
+Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case if the name of our "person" changes we will alert their new name.
 
 {% highlight javascript %}
     Person = Backbone.Model.extend({
@@ -146,15 +145,15 @@ p. Now onto one of the more useful parts of using a library such as backbone.   
     person.replaceNameAttr('Stewie Griffin'); // This triggers a change and will alert()
 {% endhighlight %}
 
-p. So we can bind the a change listener to individual attributes or if we like simply '_this.bind("change", function(){});_' to listen for changes to all attributes of the model.
+So we can bind the a change listener to individual attributes or if we like simply '_this.bind("change", function(){});_' to listen for changes to all attributes of the model.
 
-h4. Fetching, Saving and Destroying
+## Fetching, Saving and Destroying
 
-p. Models actually have to be a part of a collection for requests to the server to work by default.   This tutorial is more of a focus on individual models.  Check back soon for a tutorial on collection implementation.
+Models actually have to be a part of a collection for requests to the server to work by default.   This tutorial is more of a focus on individual models.  Check back soon for a tutorial on collection implementation.
 
-h4. Tips and Tricks
+### Tips and Tricks
 
-p. *Get all the current attributes*
+_Get all the current attributes_
 
 {% highlight javascript %}
       
@@ -166,7 +165,7 @@ p. *Get all the current attributes*
     /* The line above gives a direct reference to the attributes and you should be careful when playing with it.   Best practise would suggest that you use .set() to edit attributes of a model to take advantage of backbone listeners. */
 {% endhighlight %}
 
-p. *Validate data before you set or save it*
+_Validate data before you set or save it_
 
 {% highlight javascript %}
 
@@ -198,13 +197,6 @@ p. *Validate data before you set or save it*
     
 {% endhighlight %}
 
-h3. Relevant Links
-* "backbone.js official website":http://documentcloud.github.com/backbone/
+### Contributors
 
-h3. Author
-
-* "Thomas Davis":https://github.com/thomasdavis
-
-h3. Contributors
-
-* "Utkarsh Kukreti":https://github.com/utkarshkukreti
+* [Utkarsh Kukreti](https://github.com/utkarshkukreti)

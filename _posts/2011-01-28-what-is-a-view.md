@@ -5,13 +5,13 @@ type: beginner
 posturl: http://backbonetutorials.com/what-is-a-view
 ---
 
-h2. What is a view?
+# What is a view?
 
-p. Backbone views are used to reflect what your applications' data models look like. They are also used to listen to events and react accordingly. This tutorial will not be addressing how to bind models and collections to views but will focus on view functionality and how to use views with a JavaScript templating library, specifically "Underscore.js's _.template":http://documentcloud.github.com/underscore/#template.
+Backbone views are used to reflect what your applications' data models look like. They are also used to listen to events and react accordingly. This tutorial will not be addressing how to bind models and collections to views but will focus on view functionality and how to use views with a JavaScript templating library, specifically [Underscore.js's _.template](http://documentcloud.github.com/underscore/#template).
 
-We will be using "jQuery 1.5":http://jquery.com/ as our DOM manipulator. It's possible to use other libraries such as "MooTools":http://mootools.net/ or "Sizzle":http://sizzlejs.com/, but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with other libraries other than jQuery.
+We will be using [jQuery 1.5](http://jquery.com/) as our DOM manipulator. It's possible to use other libraries such as [MooTools](http://mootools.net/) or [Sizzle](http://sizzlejs.com/), but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with other libraries other than jQuery.
 
-For the purposes of this demonstration, we will be implementing a search box. "A live example":http://jsfiddle.net/thomas/C9wew/6 can be found on jsFiddle.
+For the purposes of this demonstration, we will be implementing a search box. [A live example](http://jsfiddle.net/thomas/C9wew/6) can be found on jsFiddle.
 
 {% highlight javascript %}
     SearchView = Backbone.View.extend({
@@ -45,11 +45,11 @@ Let us set our view's "el" property to div#search_container, effectively making 
 </script>
 {% endhighlight %}
 
-p. *Note*: Keep in mind that this binds the container element. Any events we trigger must be in this element.
+_Note: Keep in mind that this binds the container element. Any events we trigger must be in this element._
 
-h4. Loading a template
+## Loading a template
 
-p. Backbone.js is dependent on Underscore.js, which includes its own micro-templating solution. Refer to "Underscore.js's documentation":http://documentcloud.github.com/underscore/ for more information.
+Backbone.js is dependent on Underscore.js, which includes its own micro-templating solution. Refer to [Underscore.js's documentation](http://documentcloud.github.com/underscore/) for more information.
 
 Let us implement a "render()" function and call it when the view is initialized. The "render()" function will load our template into the view's "el" property using jQuery.
 
@@ -79,11 +79,11 @@ Let us implement a "render()" function and call it when the view is initialized.
 </script>
 {% endhighlight %}
 
-p. *Tip*: Place all your templates in a file and serve them from a CDN. This ensures your users will always have your application cached.
+_Tip: Place all your templates in a file and serve them from a CDN. This ensures your users will always have your application cached._
 
-h4. Listening for events
+## Listening for events
 
-p. To attach a listener to our view, we use the "events" attribute of Backbone.View. Remember that event listeners can only be attached to child elements of the "el" property. Let us attach a "click" listener to our button.
+To attach a listener to our view, we use the "events" attribute of Backbone.View. Remember that event listeners can only be attached to child elements of the "el" property. Let us attach a "click" listener to our button.
 
 {% highlight html %}
 <div id="search_container"></div>
@@ -117,9 +117,9 @@ p. To attach a listener to our view, we use the "events" attribute of Backbone.V
 {% endhighlight %}
 
 
-h4. Tips and Tricks
+## Tips and Tricks
 
-p. *Using template variables*
+_Using template variables_
 
 {% highlight html %}
 <div id="search_container"></div>
@@ -157,18 +157,14 @@ p. *Using template variables*
 </script>
 {% endhighlight %}
 
-p.  If you have any questions, leave a comment below.
+### Relevant Links
 
-h3. Relevant Links
-* "Backbone.js official website":http://documentcloud.github.com/backbone/
-* "This example implemented with google API":http://thomasdavis.github.com/2011/02/05/backbone-views-and-templates.html
-* "This examples exact code on jsfiddle.net":http://jsfiddle.net/thomas/C9wew/4/
-* "Another semi-complete example on jsFiddle":http://jsfiddle.net/thomas/dKK9Y/6/
+* [This example implemented with google API](http://thomasdavis.github.com/2011/02/05/backbone-views-and-templates.html)
+* [This examples exact code on jsfiddle.net](http://jsfiddle.net/thomas/C9wew/4/)
+* [Another semi-complete example on jsFiddle](http://jsfiddle.net/thomas/dKK9Y/6/)
 
-h3. Author
 
-* "Thomas Davis":https://github.com/thomasdavis
 
-h3. Contributors
+### Contributors
 
-* "Michael Macias":https://github.com/zaeleus
+* [Michael Macias[(https://github.com/zaeleus)

@@ -5,55 +5,56 @@ type: intermediate
 posturl: http://backbonetutorials.com/organizing-backbone-using-modules
 ---
 
-h2. Organizing your application using Modules (require.js)
+# Organizing your application using Modules (require.js)
 
-p. Unfortunately Backbone.js does not tell you how to organize your code, leaving many developers in the dark regarding how to load scripts and lay out their development enviroments.
+Unfortunately Backbone.js does not tell you how to organize your code, leaving many developers in the dark regarding how to load scripts and lay out their development enviroments.
 
 This was quite a different decision to other Javascript MVC frameworks who were more in favor of setting a development philosophy.
 
 Hopefully this tutorial will allow you to build  a much more robust project with great separation of concerns between design and code.
 
-This tutorial will get you started on combining Backbone.js with "AMD":https://github.com/amdjs/amdjs-api/wiki/AMD (Asynchronous Module Definitions).
+This tutorial will get you started on combining Backbone.js with [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) (Asynchronous Module Definitions).
 
-h3. What is AMD?
+## What is AMD?
 
-p. "Asynchronous Module Definitions":https://github.com/amdjs/amdjs-api/wiki/AMD designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around AMD, seeing it as the future of modular Javascript development.
+[Asynchronous Module Definitions](https://github.com/amdjs/amdjs-api/wiki/AMD) designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around AMD, seeing it as the future of modular Javascript development.
 
-This tutorial will use "Require.js":http://requirejs.org to implement a modular and organized Backbone.js.
+This tutorial will use [Require.js](http://requirejs.org) to implement a modular and organized Backbone.js.
 
 **I highly recommend using AMD for application development**
 
 Quick Overview
+
 * Modular
 * Scalable
-* Compiles well(see "r.js":http://requirejs.org/docs/optimization.html)
-* Market Adoption( "Dojo 1.6 converted fully to AMD":http://dojotoolkit.org/reference-guide/releasenotes/1.6.html )
+* Compiles well(see [r.js](http://requirejs.org/docs/optimization.html) )
+* Market Adoption( [Dojo 1.6 converted fully to AMD](http://dojotoolkit.org/reference-guide/releasenotes/1.6.html) )
 
-h3. Why Require.js?
+## Why Require.js?
 
-p. Require.js has a boastful community and is growing rapidly.  "James Burke":http://tagneto.blogspot.com/ the author is married to Require.js and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the AMD specification.
+p. Require.js has a great community and it is growing rapidly.  [James Burke](http://tagneto.blogspot.com/) the author is married to Require.js and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the AMD specification.
 
 <a href="https://twitter.com/jrburke" class="twitter-follow-button">Follow @jrburke</a>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 
-h3. Getting started
+## Getting started
 
 To easily understand this tutorial you should jump straight into the example code base.
 
-h3. "Example Codebase":https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/modular-backbone
+[Example Codebase](https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/modular-backbone)
 
-h3. "Example Demo":http://backbonetutorials.com/examples/modular-backbone
+[Example Demo](http://backbonetutorials.com/examples/modular-backbone)
 
 
-p. The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive.
+The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive.
 
 If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views).
 
 The example isn't super fleshed out but should give you a vague idea.
 
-h3. Example File Structure
+## Example File Structure
 
-p. There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models aren't categorized into folders kind of like an ORM.
+There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models aren't categorized into folders kind of like an ORM.
 
 {% highlight javascript %}
 /* File Structure
@@ -101,14 +102,14 @@ p. There are many different ways to lay out your files and I believe it is actua
 */
 {% endhighlight %}
 
-p. To continue you must really understand what we are aiming towards as described in the introduction.
+To continue you must really understand what we are aiming towards as described in the introduction.
 
-h3. Bootstrapping your application
+## Bootstrapping your application
 
-p. Using Require.js we define a single entry point on our index page.
+Using Require.js we define a single entry point on our index page.
 We should setup any useful containers that might be used by our Backbone views.
 
-**Note**: The data-main attribute on our single script tag tells Require.js to load the script located at "js/main.js".  It automatically appends the ".js"
+_Note: The data-main attribute on our single script tag tells Require.js to load the script located at "js/main.js".  It automatically appends the ".js"_
 
 {% highlight html %}
 <!doctype html>
@@ -129,11 +130,11 @@ We should setup any useful containers that might be used by our Backbone views.
 </html>
 {% endhighlight %}
 
-p. You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be.
+You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be.
 
-h4. What does the bootstrap look like?
+### What does the bootstrap look like?
 
-p. Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.
+Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.
 
 In the below example we configure Require.js to create shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.
 
@@ -143,7 +144,7 @@ Hopefully if the AMD specification takes off these libraries will add code to al
 
 We also request a module called "app", this will contain the entireity of our application logic.
 
-**Note:** Modules are loaded relativly to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap.
+_Note: Modules are loaded relativly to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap._
 
 {% highlight javascript %}
 // Filename: main.js
@@ -177,9 +178,9 @@ require([
 
 {% endhighlight %}
 
-h3. How should we lay out external scripts?
+## How should we lay out external scripts?
 
-p. Any modules we develop for our application using AMD/Require.js will be asynchronously loaded.
+Any modules we develop for our application using AMD/Require.js will be asynchronously loaded.
 
 We have a heavy dependency on jQuery, Underscore and Backbone, unfortunatly this libraries are loaded synchronously and also depend on each other existing in the global namespace.
 
@@ -220,9 +221,9 @@ define(['order!libs/backbone/backbone-min'], function(){
 });
 {% endhighlight %}
 
-h3. A boiler plate module
+## A boiler plate module
 
-p. So before we start developing our application, let's quickly look over boiler plate code that will be reused quite often.
+So before we start developing our application, let's quickly look over boiler plate code that will be reused quite often.
 
 For convience sake I generally keep a "boilerplate.js" in my application root so I can copy it when I need to.
 
@@ -242,11 +243,11 @@ define([
 });
 {% endhighlight %}
 
-p. The first argument of the define function is our dependency array, we can pass in any modules we like in the future.
+The first argument of the define function is our dependency array, we can pass in any modules we like in the future.
 
-h3. App.js Building our applications main module
+## App.js Building our applications main module
 
-p. Our applications main module should always remain quite light weight.   This tutorial covers only setting up a Backbone Router and initializing it in our main module.
+Our applications main module should always remain quite light weight.   This tutorial covers only setting up a Backbone Router and initializing it in our main module.
 
 The router will then load the correct dependencies depending on the current URL.
 
@@ -313,7 +314,7 @@ define([
 });
 {% endhighlight %}
 
-h3. Modularizing a Backbone View
+## Modularizing a Backbone View
 
 Backbone views most usually always interact with the DOM, using our new modular system we can load in Javascript templates using Require.js text! plugin.
 
@@ -343,11 +344,11 @@ define([
 });
 {% endhighlight %}
 
-p. Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.
+Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.
 
-h3. Modularizing a Collection, Model and View
+## Modularizing a Collection, Model and View
 
-p. Now we put it altogether by chaining up a Model, Collection and View which is a typical scenairo when building a Backbone.js application.
+Now we put it altogether by chaining up a Model, Collection and View which is a typical scenairo when building a Backbone.js application.
 
 First off we will define our model
 
@@ -367,9 +368,9 @@ define([
 });
 {% endhighlight %}
 
-p. Now we have a model, our collection module can depend on it.  We will set the "model" attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.
+Now we have a model, our collection module can depend on it.  We will set the "model" attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.
 
-"Collection.model: Override this property to specify the model class that the collection contains. If defined, you can pass raw attributes objects (and arrays) to add, create, and reset, and the attributes will be converted into a model of the proper type."
+> Collection.model: Override this property to specify the model class that the collection contains. If defined, you can pass raw attributes objects (and arrays) to add, create, and reset, and the attributes will be converted into a model of the proper type.
 
 {% highlight javascript %}
 // Filename: collections/projects
@@ -414,22 +415,16 @@ define([
 });
 {% endhighlight %}
 
-h3. Conclusion
+## Conclusion
 
-p. Looking forward to feedback so I can turn this post and example into quality references on building modular Javascript applications.
+Looking forward to feedback so I can turn this post and example into quality references on building modular Javascript applications.
 
 Get in touch with me on twitter, comments or github!
 
-h3. Relevant Links
+### Relevant Links
 
-"Organizing Your Backbone.js Application With Modules":http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules
+* [Organizing Your Backbone.js Application With Modules](http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules)
 
+### Contributors
 
-
-h3. Author
-
-* "Thomas Davis":https://github.com/thomasdavis
-
-h3. Contributors
-
-* "Jakub Kozisek":https://github.com/dzejkej (created modular-backbone-updated containing updated libs with AMD support)
+* [Jakub Kozisek](https://github.com/dzejkej) (created modular-backbone-updated containing updated libs with AMD support)
