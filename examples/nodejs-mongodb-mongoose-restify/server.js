@@ -29,7 +29,7 @@ function getMessages(req, res, next) {
   // This headers comply with CORS and allow us to server our response to any origin
   res.header("Access-Control-Allow-Origin", "*"); 
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  Message.find().sort('date', -1).execFind(function (arr,data) {
+  Message.find().limit(20).sort('date', -1).execFind(function (arr,data) {
     res.send(data);
   });
 }
