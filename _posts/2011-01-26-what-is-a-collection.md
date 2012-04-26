@@ -5,11 +5,9 @@ type: beginner
 posturl: http://backbonetutorials.com/what-would-you-use-backbone
 ---
 
-# _In progress_
+# What is a collection?
 
-h2. What is a collection?
-
-p. Backbone collections are simply an ordered set of "models":/what-is-a-model.   Such that it can be used in situations such as;
+Backbone collections are simply an ordered set of [models](/what-is-a-model).   Such that it can be used in situations such as;
 
 * Model: Student, Collection: ClassStudents 
 * Model: Todo Item, Collection: Todo List
@@ -37,9 +35,9 @@ Here is a generic Model/Collection example.
 
 {% endhighlight %}
 
-h3. Building a collection
+## Building a collection
 
-p. Now we are going to populate a creation with some useful data.
+Now we are going to populate a creation with some useful data.
 
 {% highlight javascript %}
 
@@ -65,16 +63,3 @@ p. Now we are going to populate a creation with some useful data.
 	console.log( myAlbum.models ); // [song1, song2, song3]
 	
 {% endhighlight %}
-
-h3. Relevant Links
-* "Backbone.js official website":http://documentcloud.github.com/backbone/
-
-
-
-h3. Author
-
-* "Thomas Davis":https://github.com/thomasdavis
-
-h3. Contributors
-
-* None
