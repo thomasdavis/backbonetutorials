@@ -13,7 +13,7 @@ define([
       return resp.results;
     },
     page: 1,
-    query: 'backbone.js tutorials'
+    query: 'backbone.js'
   });
 
   return Tweets;

@@ -25,6 +25,7 @@ define([
       this.twitterCollection.fetch({ 
         success: function (tweets) {
           // Once the results are returned lets populate our template
+          console.log(_.template(TwitterListTemplate, {tweets: tweets.models, _:_}));
           $(that.el).append(_.template(TwitterListTemplate, {tweets: tweets.models, _:_}));
           // Now we have finished loading set isLoading back to false
           that.isLoading = false;
