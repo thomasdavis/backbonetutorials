@@ -120,14 +120,16 @@ _Note: `triggerPoint` will allow you to set an offset where the user has to scro
 
 Our view above passes into our underscore template the variable tweets which we can simply iterate over with using underscore's `each` method.
 
-    <!-- templates/twitter/list.html -->
-    <ul class="tweets">
-    <% _.each(tweets, function (tweet) { %>
+{% highlight javascript %}
+<!-- templates/twitter/list.html -->
+<ul class="tweets">
+<% _.each(tweets, function (tweet) { %>
 
-      <li><%= tweet.get('text') %></li> 
+  <li><%= tweet.get('text') %></li> 
 
-    <% }); %>
-    </ul>
+<% }); %>
+</ul>
+{% endhighlight %}
 
 ## Conclusion
 
