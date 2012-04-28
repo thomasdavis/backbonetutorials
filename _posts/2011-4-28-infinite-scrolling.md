@@ -26,88 +26,93 @@ Using the 'q' and 'page' query parameters we can find the results we are after. 
 
 Twitter's search API actually returns a whole bunch of meta information alongside the results.  Though this is a problem for Backbone.js because a Collection expects to be populated with an array of objects. So in our collection definition we can override the Backbone.js default parse function to instead choose the correct property to populate the collection.  
 
-    // collections/twitter.js
-    define([
-      'jquery',
-      'underscore',
-      'backbone'
-    ], function($, _, Backbone){
-      var Tweets = Backbone.Collection.extend({
-        url: function () {
-          return 'http://search.twitter.com/search.json?q=' + this.query + '&page=' + this.page + '&callback=?'
-        },
-        // Because twitter doesn't return an array of models by default we need
-        // to point Backbone.js at the correct property
-        parse: function(resp, xhr) {
-          return resp.results;
-        },
-        page: 1,
-        query: 'backbone.js tutorials'
-      });
+{% highlight javascript %}
+// collections/twitter.js
+define([
+  'jquery',
+  'underscore',
+  'backbone'
+], function($, _, Backbone){
+  var Tweets = Backbone.Collection.extend({
+    url: function () {
+      return 'http://search.twitter.com/search.json?q=' + this.query + '&page=' + this.page + '&callback=?'
+    },
+    // Because twitter doesn't return an array of models by default we need
+    // to point Backbone.js at the correct property
+    parse: function(resp, xhr) {
+      return resp.results;
+    },
+    page: 1,
+    query: 'backbone.js tutorials'
+  });
 
-      return Tweets;
-    });
-
+  return Tweets;
+});
+{% endhighlight %}
     
 _Note: Feel free to attach the meta information returned by Twitter to the collection itself e.g._
 
-    parse: function(resp, xhr) {
-      this.completed_in = resp.completed_in
-      return resp.results;
-    },
+{% highlight javascript %}
+parse: function(resp, xhr) {
+  this.completed_in = resp.completed_in
+  return resp.results;
+},
+{% endhighlight %}
 
 ## Setting up the View
 
 The first thing to do is load our Twitter collection and template into the widget module. We should attach our collection to our view in our `initialize` function. `loadResults` will be responsible for calling fetch on our Twitter collection. On success we will append the latest results to our widget using our template. Our Backbone.js `events` will listen for `scroll` on the current `el` of the view which is '.twitter-widget'. If the current `scrollTop` is at the bottom then we simply increment the Twitter collections current page property and call `loadResults` again.
   
-    // views/twitter/widget.js
-    define([
-      'jquery',
-      'underscore',
-      'backbone',
-      'vm',
-      'collections/twitter',
-      'text!templates/twitter/list.html'
-    ], function($, _, Backbone, Vm, TwitterCollection, TwitterListTemplate){
-      var TwitterWidget = Backbone.View.extend({
-        el: '.twitter-widget',
-        initialize: function () {
-          // isLoading is a useful flag to make sure we don't send off more than
-          // one request at a time
-          this.isLoading = false;
-          this.twitterCollection = new TwitterCollection();
-        },
-        render: function () {
-          this.loadResults();
-        },
-        loadResults: function () {
-          var that = this;
-          // we are starting a new load of results so set isLoading to true
-          this.isLoading = true;
-          // fetch is Backbone.js native function for calling and parsing the collection url
-          this.twitterCollection.fetch({ 
-            success: function (tweets) {
-              // Once the results are returned lets populate our template
-              $(that.el).append(_.template(TwitterListTemplate, {tweets: tweets.models, _:_}));
-              // Now we have finished loading set isLoading back to false
-              that.isLoading = false;
-            }
-          });      
-        },
-        // This will simply listen for scroll events on the current el
-        events: {
-          'scroll': 'checkScroll'
-        },
-        checkScroll: function () {
-          var triggerPoint = 100; // 100px from the bottom
-            if( !this.isLoading && this.el.scrollTop + this.el.clientHeight + triggerPoint > this.el.scrollHeight ) {
-              this.twitterCollection.page += 1; // Load next page
-              this.loadResults();
-            }
+{% highlight javascript %}
+// views/twitter/widget.js
+define([
+  'jquery',
+  'underscore',
+  'backbone',
+  'vm',
+  'collections/twitter',
+  'text!templates/twitter/list.html'
+], function($, _, Backbone, Vm, TwitterCollection, TwitterListTemplate){
+  var TwitterWidget = Backbone.View.extend({
+    el: '.twitter-widget',
+    initialize: function () {
+      // isLoading is a useful flag to make sure we don't send off more than
+      // one request at a time
+      this.isLoading = false;
+      this.twitterCollection = new TwitterCollection();
+    },
+    render: function () {
+      this.loadResults();
+    },
+    loadResults: function () {
+      var that = this;
+      // we are starting a new load of results so set isLoading to true
+      this.isLoading = true;
+      // fetch is Backbone.js native function for calling and parsing the collection url
+      this.twitterCollection.fetch({ 
+        success: function (tweets) {
+          // Once the results are returned lets populate our template
+          $(that.el).append(_.template(TwitterListTemplate, {tweets: tweets.models, _:_}));
+          // Now we have finished loading set isLoading back to false
+          that.isLoading = false;
         }
-      });
-      return TwitterWidget;
-    });
+      });      
+    },
+    // This will simply listen for scroll events on the current el
+    events: {
+      'scroll': 'checkScroll'
+    },
+    checkScroll: function () {
+      var triggerPoint = 100; // 100px from the bottom
+        if( !this.isLoading && this.el.scrollTop + this.el.clientHeight + triggerPoint > this.el.scrollHeight ) {
+          this.twitterCollection.page += 1; // Load next page
+          this.loadResults();
+        }
+    }
+  });
+  return TwitterWidget;
+});
+{% endhighlight %}
 
 _Note: `triggerPoint` will allow you to set an offset where the user has to scroll to before loading the next page_
 
