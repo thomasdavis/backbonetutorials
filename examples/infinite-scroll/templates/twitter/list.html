@@ -1,0 +1,9 @@
+<ul class="tweets">
+<% _.each(tweets, function (tweet) { 
+  console.log(tweet);
+  %>
+
+  <li><%= tweet.get('text') %></li> 
+
+<% }); %>
+</ul>
