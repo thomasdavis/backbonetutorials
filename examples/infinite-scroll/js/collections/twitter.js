@@ -3,15 +3,18 @@ define([
   'underscore',
   'backbone'
 ], function($, _, Backbone){
-  var Messages = Backbone.Collection.extend({
+  var Tweets = Backbone.Collection.extend({
     url: function () {
-      return 'http://search.twitter.com/search.json?q=blue%20angels&page=' + this.page + '&callback=?'
+      return 'http://search.twitter.com/search.json?q=' + this.query + '&page=' + this.page + '&callback=?'
     },
+    // Because twitter doesn't return an array of models by default we need
+    // to point Backbone.js at the correct property
     parse: function(resp, xhr) {
       return resp.results;
     },
-    page: 1
+    page: 1,
+    query: 'backbone.js tutorials'
   });
 
-  return Messages;
+  return Tweets;
 });

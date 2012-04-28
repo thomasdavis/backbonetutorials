@@ -16,9 +16,9 @@ define([
     var router = new AppRouter(options);
 
 		router.on('route:defaultAction', function (actions) {
-			require(['views/dashboard/page'], function (DashboardPage) {
-        var dashboardPage = Vm.create(appView, 'DashboardPage', DashboardPage);
-        dashboardPage.render();
+			require(['views/twitter/widget'], function (TwitterWidget) {
+        var twitterWidget = Vm.create(appView, 'TwitterWidget', TwitterWidget);
+        twitterWidget.render();
       });
 		});
     
