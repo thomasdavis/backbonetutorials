@@ -25,7 +25,8 @@ Twitter offers a jsonp API for browsing tweets.  The first thing to note is that
 Using the 'q' and 'page' query parameters we can find the results we are after.  In the collection definition below we have set some defaults which can be overridden at any point.
 
 Twitter's search API actually returns a whole bunch of meta information alongside the results.  Though this is a problem for Backbone.js because a Collection expects to be populated with an array of objects. So in our collection definition we can override the Backbone.js default parse function to instead choose the correct property to populate the collection.  
-
+  
+    ```javascript
     // collections/twitter.js
     define([
       'jquery',
@@ -47,19 +48,22 @@ Twitter's search API actually returns a whole bunch of meta information alongsid
 
       return Tweets;
     });
+    ```
 
     
 _Note: Feel free to attach the meta information returned by Twitter to the collection itself e.g._
-
-      parse: function(resp, xhr) {
-        this.completed_in = resp.completed_in
-        return resp.results;
-      },
-
+    
+    ```javascript
+    parse: function(resp, xhr) {
+      this.completed_in = resp.completed_in
+      return resp.results;
+    },
+    ```
 ## Setting up the View
 
 The first thing to do is load our Twitter collection and template into the widget module. We should attach our collection to our view in our `initialize` function. `loadResults` will be responsible for calling fetch on our Twitter collection. On success we will append the latest results to our widget using our template. Our Backbone.js `events` will listen for `scroll` on the current `el` of the view which is '.twitter-widget'. If the current `scrollTop` is at the bottom then we simply increment the Twitter collections current page property and call `loadResults` again.
   
+    ```javascript
     // views/twitter/widget.js
     define([
       'jquery',
@@ -108,7 +112,7 @@ The first thing to do is load our Twitter collection and template into the widge
       });
       return TwitterWidget;
     });
-
+    ```
 _Note: `triggerPoint` will allow you to set an offset where the user has to scroll to before loading the next page_
 
 ## The widget template
