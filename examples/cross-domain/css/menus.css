@@ -1,0 +1,18 @@
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menu li {
+  float: left;
+  margin-left: 10px;
+}
+
+.menu li.other-link {
+  float: right;
+}
+
+a.active {
+  color: #000;
+  text-decoration: none;
+} 
