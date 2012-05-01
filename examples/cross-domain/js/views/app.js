@@ -4,13 +4,15 @@ define([
   'backbone',
   'vm',
 	'events',
+  'models/session',
   'text!templates/layout.html' 
-], function($, _, Backbone, Vm, Events, layoutTemplate){
+], function($, _, Backbone, Vm, Events, Session, layoutTemplate){
   var AppView = Backbone.View.extend({
     el: '.container',
     initialize: function () {
       
-          
+      // This snipper should usually be loaded elsewhere
+      // It simply takes a <form> and converts its values to an object
       $.fn.serializeObject = function() {
           var o = {};
           var a = this.serializeArray();
@@ -30,6 +32,7 @@ define([
     
       $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
       // Your server goes below
+      //options.url = 'http://localhost:8000' + options.url;
       options.url = 'http://cross-domain.nodejitsu.com' + options.url;
       options.xhrFields = {
         withCredentials: true
@@ -40,7 +43,13 @@ define([
     render: function () {
 			var that = this;
       $(this.el).html(layoutTemplate);
-      Backbone.history.start();
+      // This is the entry point to your app, therefore
+      // when the user refreshes the page we should
+      // really know if they're authed. We will give it
+      // A call back when we know what the auth status is
+      Session.getAuth(function () {
+        Backbone.history.start();
+      })
 		} 
 	});
   return AppView;

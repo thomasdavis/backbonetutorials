@@ -3,37 +3,44 @@ define([
   'underscore',
   'backbone',
   'models/session',
-  'text!templates/example/page.html'
-], function($, _, Backbone, Session, examplePageTemplate){
+  'text!templates/example/login.html',
+  'text!templates/example/logout.html'
+], function($, _, Backbone, Session, exampleLoginTemplate, exampleLogoutTemplate){
   var ExamplePage = Backbone.View.extend({
     el: '.page',
     initialize: function () {
-  
+      var that = this;
+      // Bind to the Session auth attribute so we
+      // make our view act recordingly when auth changes
+      Session.on('change:auth', function (session) {
+          that.render();
+      });
     },
     render: function () {
-      this.$el.html(examplePageTemplate);
+      // Simply choose which template to choose depending on
+      // our Session models auth attribute
+      if(Session.get('auth')){
+        this.$el.html(_.template(exampleLogoutTemplate, {username: Session.get('username')}));
+      } else {
+        this.$el.html(exampleLoginTemplate); 
+      }
     },
-    // This will simply listen for scroll events on the current el
     events: {
-      'submit form.login': 'login',
+      'submit form.login': 'login', // On form submission
       'click .logout': 'logout'
     },
     login: function (ev) {
-      var that = this;
- 
+      // Disable the button
+      $('[type=submit]', ev.currentTarget).val('Logging in').attr('disabled', 'disabled');
+      // Serialize the form into an object using a jQuery plgin
       var creds = $(ev.currentTarget).serializeObject();
-      Session.login(creds, function () {
-          that.updateSessionStatus('Authed');
-      });
+      Session.login(creds);
       return false;
     },
-    logout: function () {
-      Session.logout(function () {
-          that.updateSessionStatus('Un-Authed');
-      });
-    },
-    updateSessionStatus: function(response) {
-      $('.session-status').html(response);
+    logout: function (ev) {
+      // Disable the button
+      $(ev.currentTarget).text('Logging out').attr('disabled', 'disabled');
+      Session.logout();
     }
   });
   return ExamplePage;

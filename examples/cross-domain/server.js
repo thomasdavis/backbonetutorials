@@ -18,25 +18,29 @@ app.configure(function() {
 });
 
 app.get('/session', function(req, res){ 
-  if(typeof req.session.id !== 'undefined'){
-    res.send({auth: true});
+  // Check auth
+  if(typeof req.session.username !== 'undefined'){
+    res.send({auth: true, id: req.session.id, username: req.session.username});
   } else {
     res.send({auth: false});
   }
 });
 
 app.post('/session', function(req, res){  
+  // Login
   // Here you would pull down your user credentials and match them up
-  // Instead we are just assigning the session a random id
-  var someUserId = Math.ceil(Math.random() * 100000);
-  req.session.id = someUserId;
+  // to the request
+  var randomSessionId = Math.ceil(Math.random() * 100000);
+  req.session.id = randomSessionId;
   req.session.username = req.body.username;
-  res.send({auth: true, id: someUserId});
+  res.send({auth: true, id: req.session.id, username: req.session.username});
 });
 
-app.del('/session', function(req, res, next){  
-  req.session.destroy();
-  res.send({auth: false});
+app.del('/session/:id', function(req, res, next){  
+  // Logout
+  req.session.destroy(function(err){
+    res.send({auth: false});  
+  });  
 });
 
 app.listen(8000);
