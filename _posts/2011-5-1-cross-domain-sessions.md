@@ -86,6 +86,7 @@ define([
 	});
   return AppView;
 });
+{% endhighlight %}
 
 _Note: We have used jQuery `ajaxPrefilter` to hook into all AJAX requests before they are executed. This is where we specify what server we want the application to hit._
 
@@ -149,7 +150,6 @@ define([
   return new SessionModel();
 
 });
-
 {% endhighlight %}
 
 _Note: This session model is missing one useful feature. If a user looses auth when navigating your application then the application should set {auth: false} on this model. To do this, in the `ajaxPrefilter` edit outgoing `success` functions to check if the server response was {auth: false} and then call the original `success()` function._
@@ -332,7 +332,6 @@ app.del('/session/:id', function(req, res, next){
 });
 
 app.listen(8000);
-
 {% endhighlight %}
 
 _Note: I wrote a custom csrf module for this which can be found in the example directory. It's based of connects and uses the `crypto` library.   I didn't spend much time on it but other traditional csrf modules won't work because they aren't exactly built for this implentation technique._

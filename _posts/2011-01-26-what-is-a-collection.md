@@ -2,7 +2,7 @@
 layout: post
 title: What is a collection?
 type: beginner
-posturl: http://backbonetutorials.com/what-would-you-use-backbone
+posturl: http://backbonetutorials.com/what-is-a-collection
 ---
 
 # What is a collection?
