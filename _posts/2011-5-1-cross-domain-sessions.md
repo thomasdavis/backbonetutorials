@@ -13,6 +13,7 @@ This tutorial will teach you how to completely separate the server and client al
 
 On a personal note, I consider this development practise highly desirable and encourage others to think of the possible benefits but the security still needs to be prooved.
 
+
 > Cross-Origin Resource Sharing (CORS) is a specification that enables a truly open access across domain-boundaries. - [enable-cors.org](http://enable-cors.org/)
 
 **Some benefits include**
@@ -344,6 +345,8 @@ This approach really hammers in the need for a well documented and designed API.
 Again, it would be great for some more analysis of the security model.
 
 Enjoy using Backbone.js cross domain!
+
+_I cannot get passed the spam filter on HackerNews so feel free to submit this tutorial_
 
 [Example Codebase](https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/cross-domain)
 
