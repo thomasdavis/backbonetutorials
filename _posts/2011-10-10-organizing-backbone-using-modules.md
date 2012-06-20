@@ -380,11 +380,11 @@ define([
   // Pull in the Model module from above
   'models/project'
 ], function(_, Backbone, projectModel){
-  var projectCollection = Backbone.Collection.extend({
+  var ProjectCollection = Backbone.Collection.extend({
     model: projectModel
   });
   // You don't usually return a collection instantiated
-  return new projectCollection;
+  return ProjectCollection;
 });
 {% endhighlight %}
 
@@ -399,11 +399,11 @@ define([
   // Pull in the Collection module from above
   'collections/projects',
   'text!templates/projects/list
-], function(_, Backbone, projectsCollection, projectsListTemplate){
+], function(_, Backbone, ProjectsCollection, projectsListTemplate){
   var projectListView = Backbone.View.extend({
     el: $("#container"),
     initialize: function(){
-      this.collection = new projectsCollection;
+      this.collection = new ProjectsCollection;
       this.collection.add({ name: "Ginger Kid"});
       // Compile the template using Underscores micro-templating
       var compiledTemplate = _.template( projectsListTemplate, { projects: this.collection.models } );
