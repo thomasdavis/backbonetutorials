@@ -286,7 +286,7 @@ define([
       '/users': 'showUsers',
 
       // Default
-      '*actions": "defaultAction'
+      '*actions": 'defaultAction'
     },
     showProjects: function(){
       // Call render on the module we loaded in via the dependency array
