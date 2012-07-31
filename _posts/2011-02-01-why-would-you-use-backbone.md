@@ -9,7 +9,7 @@ posturl: http://backbonetutorials.com/what-would-you-use-backbone
 
 Building single-page web apps or complicated user interfaces will get extremely difficult by simply using [jQuery](http://jquery.com) or [MooTools](http://mootools.net).   The problem is standard JavaScript libraries are great at what they do - and without realizing it you can build an entire application without any formal structure.   You will with ease turn your application into a nested pile of jQuery callbacks, all tied to concrete DOM elements.
 
-I shouldn't need to explain why building something without any structure is a bad idea.   Of course you can always invent your own way of implement your own way of structuring your application but you miss out on the benefits of the open source community.
+I shouldn't need to explain why building something without any structure is a bad idea.   Of course you can always invent your own way of structuring your application but you miss out on the benefits of the open source community.
 
 
 
