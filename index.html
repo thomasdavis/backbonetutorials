@@ -8,7 +8,7 @@ title:
 <ul class="tutorials">
     {% for post in site.posts %}
         {% if post.type == "beginner" %}
-      <li><a href="{{ post.url }}">{{ post.title }}</a> &raquo; <a href="http://thomasdavis.github.com">Thomas Davis</a></li>
+      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endif %}
     {% endfor %}
 </ul>
@@ -29,7 +29,6 @@ title:
 </ul>
 
 
-<br /><br /><br />
 <h2>External Tutorials</h2>
 <ul class="tutorials">
     <li><a target="_blank" href="http://thomasdavis.github.com/2011/02/01/backbone-introduction.html">Backbone.js Tutorial – by noob for noobs</a></li>

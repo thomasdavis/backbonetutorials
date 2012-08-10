@@ -4,7 +4,7 @@
  <title>Backbone Tutorials</title>
  <link href="http://backbonetutorials.com/atom.xml" rel="self"/>
  <link href="http://backbonetutorials.com/"/>
- <updated>2012-08-10T19:43:06+10:00</updated>
+ <updated>2012-08-10T20:34:15+10:00</updated>
  <id>http://backbonetutorials.com/</id>
  <author>
    <name>Thomas Davis</name>
@@ -1306,7 +1306,7 @@ We should setup any useful containers that might be used by our Backbone views.&
 
 &lt;h2&gt;So how does Backbone.js help?&lt;/h2&gt;
 
-&lt;p&gt;p. Backbone is an incredibly small library for the amount of functionality and structure it gives you.   One can not easily summarize the benefits you will reap from using it.   If you read through some of the beginner tutorials the benefits will soon become self evident and due to Backbone.js light nature you can incrementally include it in any current or future projects.&lt;/p&gt;
+&lt;p&gt;Backbone is an incredibly small library for the amount of functionality and structure it gives you.   It is essentially MVC for the client and allows you to make your code modular.   If you read through some of the beginner tutorials the benefits will soon become self evident and due to Backbone.js light nature you can incrementally include it in any current or future projects.&lt;/p&gt;
 
 &lt;h3&gt;Relevant Links&lt;/h3&gt;
 

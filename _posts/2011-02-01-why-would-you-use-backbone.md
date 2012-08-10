@@ -15,7 +15,9 @@ I shouldn't need to explain why building something without any structure is a ba
 
 ## So how does Backbone.js help?
 
-p. Backbone is an incredibly small library for the amount of functionality and structure it gives you.   One can not easily summarize the benefits you will reap from using it.   If you read through some of the beginner tutorials the benefits will soon become self evident and due to Backbone.js light nature you can incrementally include it in any current or future projects.
+Backbone is an incredibly small library for the amount of functionality and structure it gives you.   It is essentially MVC for the client and allows you to make your code modular.   If you read through some of the beginner tutorials the benefits will soon become self evident and due to Backbone.js light nature you can incrementally include it in any current or future projects.
+
+
 
 
 ### Relevant Links
