@@ -8,46 +8,21 @@
    <meta name="author" content="Backbone Tutorials" />
 
    <!-- syntax highlighting CSS -->
-   <link rel="stylesheet" href="/css/reset.css" type="text/css" />
 
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-   <!-- github ribbon CSS -->
-   <link rel="stylesheet" href="/css/ribbon.css" type="text/css" />
 
    <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
    
-   <!-- Homepage CSS -->
-   <link rel="stylesheet" href="/css/stacklayout.css" type="text/css" media="screen, projection" />
+
 
    <!-- Typekit -->
    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
  
-    <style>
-        .container {
-            width: 760px;
-            margin: auto;
-        }
-        .menu {
-            margin-left: 40px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        .menu a {
-            margin-right: 10px;
-        }
-        p {
-            width: 720px;
-            margin: auto;
-        }
-        .FlattrButton {
-			position: absolute;
-			top: 15px;
-			right: 15px;
-		}
-    </style>
+  
     <script type="text/javascript">
 /* <![CDATA[ */
     (function() {
@@ -61,45 +36,51 @@
 </script>
 </head>
 <body>
-   <div class="left ribbon-holder">
-        <a href="https://github.com/thomasdavis/backbonetutorials" class="red ribbon">
-          <span class="text">Fork on GitHub</span>
-        </a>
+   <div class="navbar ">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button"class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="/">Backbone Tutorials</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="">
+            <a href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
+          </li>
+          <li class="">
+            <a href="http://leanpub.com/backbonetutorials">download free - (.pdf, .MOBI, .ePUB)</a>
+          </li>
+        </ul>
       </div>
-      
+    </div>
+  </div>
+  </div>
+      <!--
      <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
 <noscript><a href="http://flattr.com/thing/176986/Backbone-js-Tutorials" target="_blank">
 <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
-
+-->
 <div class="container">
-            <div class="menu">
-            <a href="/">home</a>
-            <a href="/examples.html">examples</a>
-            <!-- <a href="/contribute.html">contribute</a>-->
-            <a href="/about.html">about</a>
-            <a href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
-            <a style="margin-left: 320px;" href="http://pledgie.com/campaigns/16174"><strong>donate</strong></a>
-          </div>
+
           
                     
-         
+         <div class="row">
+          <div class="span12">
           
-    <div class="stack">
-        <div class="stackContent">
-            <h1>Backbone Tutorials</h1>
-            <p class="homepagedescription">This site is by no means the definitive guide to backbone.js and all corrections and contributions are welcome.</p>
-            
-<a style="margin-left: 20px;" href="https://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 
-            <hr>
+
              <div id="post">
-<h2>What is a model?</h2>
-<p>Across the internet the definition of <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller"><span class="caps">MVC</span></a> is so diluted that it&#8217;s hard to tell what exactly your model should be doing.   The authors of backbone.js have quite a clear definition of what they believe the model represents in backbone.js.</p>
-<blockquote>
-<p>Models are the heart of any JavaScript application, containing the interactive data as well as a large part of the logic surrounding it: conversions, validations, computed properties, and access control.</p>
-</blockquote>
-<p>So for the purpose of the tutorial let&#8217;s create a model.</p>
+<h1>What is a model?</h1>
+
+<p>Across the internet the definition of <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> is so diluted that it's hard to tell what exactly your model should be doing.   The authors of backbone.js have quite a clear definition of what they believe the model represents in backbone.js.</p>
+
+<blockquote><p>Models are the heart of any JavaScript application, containing the interactive data as well as a large part of the logic surrounding it: conversions, validations, computed properties, and access control.</p></blockquote>
+
+<p>So for the purpose of the tutorial let's create a model.</p>
+
 <div class="highlight"><pre><code class="javascript">    <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
             <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Welcome to this world&quot;</span><span class="p">);</span>
@@ -109,9 +90,14 @@
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">;</span>
 </code></pre>
 </div>
-<p>So <em>initialize()</em> is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don&#8217;t have to include it in your model declaration but you will find yourself using it more often than not.</p>
-<h4>Setting attributes</h4>
+
+
+<p>So <em>initialize()</em> is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don't have to include it in your model declaration but you will find yourself using it more often than not.</p>
+
+<h2>Setting attributes</h2>
+
 <p>Now we want to pass some parameters when we create an instance of our model.</p>
+
 <div class="highlight"><pre><code class="javascript">    <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
             <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Welcome to this world&quot;</span><span class="p">);</span>
@@ -126,9 +112,14 @@
     
 </code></pre>
 </div>
+
+
 <p>So passing a javascript object to our constructor is the same as calling <em>model.set()</em>.   Now that these models have attributes set we need to be able to retrieve them.</p>
-<h4>Getting attributes</h4>
+
+<h2>Getting attributes</h2>
+
 <p>Using the <em>model.get()</em> method we can access model properties at anytime.</p>
+
 <div class="highlight"><pre><code class="javascript">    <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
             <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Welcome to this world&quot;</span><span class="p">);</span>
@@ -143,8 +134,12 @@
     
 </code></pre>
 </div>
-<h4>Setting model defaults</h4>
-<p>Sometimes you will want your model to contain default values.   This can easily be accomplished by setting a property name &#8216;defaults&#8217; in your model declaration.</p>
+
+
+<h2>Setting model defaults</h2>
+
+<p>Sometimes you will want your model to contain default values.   This can easily be accomplished by setting a property name 'defaults' in your model declaration.</p>
+
 <div class="highlight"><pre><code class="javascript">    <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Fetus&#39;</span><span class="p">,</span>
@@ -164,8 +159,12 @@
     
 </code></pre>
 </div>
-<h4>Manipulating model attributes</h4>
+
+
+<h2>Manipulating model attributes</h2>
+
 <p>Models can contain as many custom methods as you like to manipulate attributes.   By default all methods are public.</p>
+
 <div class="highlight"><pre><code class="javascript">    <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Fetus&#39;</span><span class="p">,</span>
@@ -188,9 +187,14 @@
     
 </code></pre>
 </div>
+
+
 <p>So we can implement methods to get/set and perform other calculations using attributes from our model at any time.</p>
-<h4>Listening for changes to the model</h4>
-<p>Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case if the name of our &#8220;person&#8221; changes we will alert their new name.</p>
+
+<h2>Listening for changes to the model</h2>
+
+<p>Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case if the name of our "person" changes we will alert their new name.</p>
+
 <div class="highlight"><pre><code class="javascript">    <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Fetus&#39;</span><span class="p">,</span>
@@ -213,11 +217,18 @@
     <span class="nx">person</span><span class="p">.</span><span class="nx">replaceNameAttr</span><span class="p">(</span><span class="s1">&#39;Stewie Griffin&#39;</span><span class="p">);</span> <span class="c1">// This triggers a change and will alert()</span>
 </code></pre>
 </div>
-<p>So we can bind the a change listener to individual attributes or if we like simply &#8216;<em>this.bind(&#8220;change&#8221;, function(){});</em>&#8217; to listen for changes to all attributes of the model.</p>
-<h4>Fetching, Saving and Destroying</h4>
+
+
+<p>So we can bind the a change listener to individual attributes or if we like simply '<em>this.bind("change", function(){});</em>' to listen for changes to all attributes of the model.</p>
+
+<h2>Fetching, Saving and Destroying</h2>
+
 <p>Models actually have to be a part of a collection for requests to the server to work by default.   This tutorial is more of a focus on individual models.  Check back soon for a tutorial on collection implementation.</p>
-<h4>Tips and Tricks</h4>
-<p><strong>Get all the current attributes</strong></p>
+
+<h3>Tips and Tricks</h3>
+
+<p><em>Get all the current attributes</em></p>
+
 <div class="highlight"><pre><code class="javascript">      
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">]});</span>
     <span class="kd">var</span> <span class="nx">attributes</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span> <span class="c1">// { name: &quot;Thomas&quot;, age: 67, children: [&#39;Ryan&#39;]}</span>
@@ -227,7 +238,10 @@
     <span class="cm">/* The line above gives a direct reference to the attributes and you should be careful when playing with it.   Best practise would suggest that you use .set() to edit attributes of a model to take advantage of backbone listeners. */</span>
 </code></pre>
 </div>
-<p><strong>Validate data before you set or save it</strong></p>
+
+
+<p><em>Validate data before you set or save it</em></p>
+
 <div class="highlight"><pre><code class="javascript">    <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="c1">// If you return a string from the validate function,</span>
         <span class="c1">// Backbone will throw an error</span>
@@ -256,18 +270,15 @@
     
 </code></pre>
 </div>
-<h3>Relevant Links</h3>
-<ul>
-	<li><a href="http://documentcloud.github.com/backbone/">backbone.js official website</a></li>
-</ul>
-<h3>Author</h3>
-<ul>
-	<li><a href="https://github.com/thomasdavis">Thomas Davis</a></li>
-</ul>
+
+
 <h3>Contributors</h3>
+
 <ul>
-	<li><a href="https://github.com/utkarshkukreti">Utkarsh Kukreti</a></li>
+<li><a href="https://github.com/utkarshkukreti">Utkarsh Kukreti</a></li>
 </ul>
+
+
 </div>
 
 <p>Leave a comment or question and I will try my very hardest to get back to you!</p>
@@ -277,35 +288,29 @@
 <a class="addthis_button_tweet"></a>
 <a class="addthis_counter addthis_pill_style"></a>
 </div>
-<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4db44541292b653d"></script>
-<!-- AddThis Button END -->
-<script>
-var idcomments_acct = 'e6c0e0096f8106ea52c674a85b26ecf9';
-var idcomments_post_id;
-var idcomments_post_url = 'http://backbonetutorials.com/what-is-a-model';
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'bbtutes'; // required: replace example with your forum shortname
+    var disqus_url = 'http://backbonetutorials.com/what-is-a-model';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
-<span id="IDCommentsPostTitle" style="display:none"></span>
-<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
-</div>
 
-            
+            </div>
+            </div>
 
 
-        </div>
       
-    </div>
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>
 <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66406579ns.gif" /></p></noscript>
-<!-- ClickDesk - <a href='http://www.clickdesk.com'> Live Chat Service </a> for websites -->
-<script type='text/javascript'>
-var _glc =_glc || [];
-_glc.push('ag9jb250YWN0dXN3aWRnZXRyDwsSB3dpZGdldHMYq7ZNDA');
-var glcpath = (('https:' == document.location.protocol) ? 'https://contactuswidget.appspot.com/livily/browser/' : 'http://gae.clickdesk.com/livily/browser/');
-var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
-var glcspt = document.createElement('script'); glcspt.type = 'text/javascript'; glcspt.async = true;glcspt.src = glcpath + 'livechat.js';
-var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(glcspt, s);
-</script>
 </body>
 </html>

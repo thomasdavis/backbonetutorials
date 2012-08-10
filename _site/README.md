@@ -17,23 +17,20 @@ Thomas Davis - [@neutralthoughts](http://twitter.com/neutralthoughts) - Twitter
 
 ## About the author
 
-Looking for feedback on my latest startup Protosal(http://protosal.com) any and all would be great!
-
 **Contact:**
 
-*   \#cdnjs on freenode
-*   @neutralthoughts on twitter
+*   [@neutralthoughts](http://twitter.com/neutralthoughts) on twitter
+*   Github - https://github.com/thomasdavis
 *   thomasalwyndavis@gmail.com
 
 **Projects:**
 
 *   Javascript Library CDN - http://cdnjs.com
-*   Proposal Generation Start up - http://protosal.com
 *   Backbone.js Tutorials - http://backbonetutorials.com
+*   Proposal Generation Start up - http://protosal.com
 *   Technical Blog - http://thomasdavis.github.com
-*   Github Account - https://github.com/thomasdavis
-*   Freelance Blog - http://thomasalwyndavis.com
 *   Quora - http://www.quora.com/Thomas-Davis
 *   StackOverflow - http://stackoverflow.com/users/580675/thomas-davis
 
 Love you mum!
+<img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66606907ns.gif" />
