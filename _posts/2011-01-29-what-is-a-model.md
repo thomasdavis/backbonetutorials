@@ -37,7 +37,6 @@ Now we want to pass some parameters when we create an instance of our model.
     });
     
     var person = new Person({ name: "Thomas", age: 67});
-    delete person;
     // or we can set afterwards, these operations are equivelent
     var person = new Person();
     person.set({ name: "Thomas", age: 67});
@@ -160,7 +159,7 @@ _Get all the current attributes_
     var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
     var attributes = person.toJSON(); // { name: "Thomas", age: 67, children: ['Ryan']}
     /* This simply returns a copy of the current attributes. */
-    delete attributes;
+    
     var attributes = person.attributes;
     /* The line above gives a direct reference to the attributes and you should be careful when playing with it.   Best practise would suggest that you use .set() to edit attributes of a model to take advantage of backbone listeners. */
 {% endhighlight %}
@@ -189,7 +188,6 @@ _Validate data before you set or save it_
     var person = new Person;
     person.set({ name: "Mary Poppins", age: -1 }); 
     // Will trigger an alert outputting the error
-    delete person;
     
     var person = new Person;
     person.set({ name: "Dr Manhatten", age: -1 });
