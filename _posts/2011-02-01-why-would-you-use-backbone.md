@@ -21,7 +21,7 @@ Backbone is an incredibly small library for the amount of functionality and stru
 
 
 ### Relevant Links
-* [Backbone.js official website"](http://documentcloud.github.com/backbone/)
+* [Backbone.js official website](http://documentcloud.github.com/backbone/)
 * [great hackernews discussion /w post from author](http://news.ycombinator.com/item?id=2119704)
 
 
