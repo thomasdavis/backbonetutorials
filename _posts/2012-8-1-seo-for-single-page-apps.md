@@ -19,7 +19,109 @@ Using modern headless browsers, we can easily return the fully rendered content 
 
 ![headless seo](http://acris.googlecode.com/svn/wiki/images/seo_google_crawlability.png)
 
+<div style='clear: both;'></div>
 
+## Implementation using Phantom.js
+
+[Phantom.js](http://phantomjs.org/) is a headless webkit browser.  We are going to setup a node.js server that given a url, it will fully render the page content. Then we will redirect bots to this server to retrieve the correct content.
+
+You will need to install node.js and phantom.js onto a box. Then start up this server below. There are two files, one which is the webserver and the other is a phantomjs script that renders the page.
+
+{% highlight javascript %}
+// web.js
+
+// Express is our web server that can handle request
+var express = require('express');
+var app = express();
+
+
+var getContent = function(url, callback) {
+  var content = '';
+  // Here we spawn a phantom.js process, the first element of the 
+  // array is our phantomjs script and the second element is our url 
+  var phantom = require('child_process').spawn('phantomjs', ['phantom-server.js', url]);
+  phantom.stdout.setEncoding('utf8');
+  phantom.stdout.on('data', function(data) {
+    content += data.toString();
+  });
+  phantom.on('exit', function(code) {
+    if (code !== 0) {
+      console.log('We have an error');
+    } else {
+      callback(content);
+    }
+  });
+};
+
+var respond = function (req, res) {
+  url = 'http://' + req.headers['x-forwarded-host'] + req.params[0];
+  getContent(url, function (content) {
+    res.send(content);
+  });
+}
+
+app.get(/(.*)/, respond);
+app.listen(3000);
+{% endhighlight %}
+
+The script below is `phantom-server.js` and will be in charge of fully rendering the content. We don't return the content  until the page is fully rendered. We hook into the resources listener to do this.
+
+{% highlight javascript %}
+var page = require('webpage').create();
+var system = require('system');
+
+var lastReceived = new Date().getTime();
+var requestCount = 0;
+var responseCount = 0;
+var requestIds = [];
+var startTime = new Date().getTime();
+
+page.onResourceReceived = function (response) {
+    if(requestIds.indexOf(response.id) !== -1) {
+        lastReceived = new Date().getTime();
+        responseCount++;
+        requestIds[requestIds.indexOf(response.id)] = null;
+    }
+};
+page.onResourceRequested = function (request) {
+    if(requestIds.indexOf(request.id) === -1) {
+        requestIds.push(request.id);
+        requestCount++;
+    }
+};
+page.open(system.args[1], function () {
+
+});
+
+var checkComplete = function () {
+  
+  if((new Date().getTime() - lastReceived > 300 && requestCount === responseCount) || new Date().getTime() - startTime > 5000)  {
+    clearInterval(checkCompleteInterval);
+    console.log(page.content);
+    phantom.exit();
+  }
+}
+var checkCompleteInterval = setInterval(checkComplete, 1);
+{% endhighlight %}
+
+Once we have this server up and running we just redirect bots to the server in our client's webserver configuration.
+
+## Redirecting bots
+
+If you are using apache we can edit out `.htaccess` such that Google requests are proxied to our middle man phantom.js server.
+
+{% highlight javascript %}
+RewriteEngine on
+RewriteCond %{QUERY_STRING} ^_escaped_fragment_=(.*)$
+RewriteRule (.*) http://webserver:3000/%1? [P]
+{% endhighlight %}
+
+Though Google won't use query string unless we tell it to by either including a meta tag;
+`<meta name="fragment" content="!">`
+or
+using `#!` url's in our links.
+
+You will most likely have to use both.
 
 ### Relevant Links
 
