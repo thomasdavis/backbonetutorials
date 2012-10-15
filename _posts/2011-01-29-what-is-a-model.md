@@ -130,25 +130,144 @@ Now onto one of the more useful parts of using a library such as backbone.   All
         },
         initialize: function(){
             alert("Welcome to this world");
-            this.bind("change:name", function(){
-                var name = this.get("name"); // 'Stewie Griffin'
+            this.on("change:name", function(model){
+                var name = model.get("name"); // 'Stewie Griffin'
                 alert("Changed my name to " + name );
             });
-        },
-        replaceNameAttr: function( name ){
-            this.set({ name: name });
         }
     });
     
     var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    person.replaceNameAttr('Stewie Griffin'); // This triggers a change and will alert()
+    person.set({name: 'Stewie Griffin'}); // This triggers a change and will alert()
 {% endhighlight %}
 
-So we can bind the a change listener to individual attributes or if we like simply '_this.bind("change", function(){});_' to listen for changes to all attributes of the model.
+So we can bind the a change listener to individual attributes or if we like simply '_this.on("change", function(model){});_' to listen for changes to all attributes of the model.
 
-## Fetching, Saving and Destroying
+## Interacting with the server
 
-Models actually have to be a part of a collection for requests to the server to work by default.   This tutorial is more of a focus on individual models.  Check back soon for a tutorial on collection implementation.
+Models are used to represent data from your server and actions you perform on them will be translated to RESTful operations.
+
+The `id` attribute of a model identifies how to find it on the database usually mapping to the [surrogate key](http://en.wikipedia.org/wiki/Surrogate_key).
+
+For the purpose of this tutorial imagine that we have a mysql table called `Users` with the columns `id`, `name`, `email`.
+
+The server has implemented a RESTful url `/user` which allows us to interact with it.
+
+Our model definition shall thus look like;
+
+{% highlight javascript %}
+    var UserModel = Backbone.Model.extend({
+        urlRoot: '/user',
+        defaults: {
+            name: '',
+            email: ''
+        }
+
+    });
+{% endhighlight %}
+
+### Creating a new model
+
+If we wish to create a new user on the server then we will instantiate a new UserModel and call `save`.  If the `id` attribute of the model is `null`, Backbone.js will send send of POST request to the server to the urlRoot. 
+
+{% highlight javascript %}
+    var UserModel = Backbone.Model.extend({
+        urlRoot: '/user',
+        defaults: {
+            name: '',
+            email: ''
+        }
+    });
+    var user = new Usermodel();
+    // Notice that we haven't set an `id`
+    var userDetails = {
+        name: 'Thomas',
+        email: 'thomasalwyndavis@gmail.com'
+    };
+    // Because we have not set a `id` the server will call
+    // POST /user with a payload of {name:'Thomas', email: 'thomasalwyndavis@gmail.com'}
+    // The server should save the data and return a response containing the new `id`
+    user.save(userDetails, {
+        success: function (user) {
+            alert(user.toJSON());
+        }
+    })
+
+{% endhighlight %}
+
+Our table should now have the values
+
+1, 'Thomas', 'thomasalwyndavis@gmail.com'
+
+### Getting a model
+
+Now that we have saved a new user model, we can retrieve it from the server.   We know that the `id` is 1 from the above example.
+
+If we instantiate a model with an `id`, Backbone.js will automatically perform a get request to the urlRoot + '/id' (conforming to RESTful conventions)
+
+{% highlight javascript %}
+
+    // Here we have set the `id` of the model
+    var user = new Usermodel({id: 1});
+
+    // The fetch below will perform GET /user/1
+    // The server should return the id, name and email from the database
+    user.fetch({
+        success: function (user) {
+            alert(user.toJSON());
+        }
+    })
+
+{% endhighlight %}
+
+### Updating a model
+
+Now that we model that exist on the server we can perform an update using a PUT request.
+We will use the `save` api call which is intelligent and will send a PUT request instead of a POST request if an `id` is present(conforming to RESTful conventions)
+
+{% highlight javascript %}
+
+    // Here we have set the `id` of the model
+    var user = new Usermodel({
+        id: 1,
+        name: 'Thomas',
+        email: 'thomasalwyndavis@gmail.com'
+    });
+
+    // Let's change the name and update the server
+    // Because there is `id` present, Backbone.js will fire
+    // PUT /user/1 with a payload of `{name: 'Davis', email: 'thomasalwyndavis@gmail.com'}`
+    user.save({name: 'Davis'}, {
+        success: function (model) {
+            alert(user.toJSON());
+        }
+    });
+
+
+{% endhighlight %}
+
+### Deleteing a model
+
+When a model has an `id` we know that it exist on the server, so if we wish to remove it from the server we can call `destroy`.  `destroy` will fire off a DELETE /user/id (conforming to RESTful conventions).
+
+{% highlight javascript %}
+
+    // Here we have set the `id` of the model
+    var user = new Usermodel({
+        id: 1,
+        name: 'Thomas',
+        email: 'thomasalwyndavis@gmail.com'
+    });
+
+    // Because there is `id` present, Backbone.js will fire
+    // DESTROY /user/1 
+    user.destroy({
+        success: function () {
+            alert('Destroyed');
+        }
+    });
+
+{% endhighlight %}
 
 ### Tips and Tricks
 
