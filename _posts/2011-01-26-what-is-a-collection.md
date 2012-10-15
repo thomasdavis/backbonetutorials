@@ -23,15 +23,14 @@ Here is a generic Model/Collection example.
 
 {% highlight javascript %}
 
-    var Song = Backbone.Model.extend({
-        initialize: function(){
-            console.log("Music is the answer");
-        }
-    });
-    
-    var Album = Backbone.Collection.extend({
-		model: Song
-	});
+  var Song = Backbone.Model.extend({
+      initialize: function(){
+          console.log("Music is the answer");
+      }
+  });
+  
+  var Album = Backbone.Collection.extend({
+	model: Song
 
 {% endhighlight %}
 
