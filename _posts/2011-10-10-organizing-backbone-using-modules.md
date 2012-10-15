@@ -54,7 +54,7 @@ The example isn't super fleshed out but should give you a vague idea.
 
 ## Example File Structure
 
-There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models aren't categorized into folders kind of like an ORM.
+There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models are categorized into folders kind of like an ORM.
 
 {% highlight javascript %}
 /* File Structure
@@ -72,13 +72,10 @@ There are many different ways to lay out your files and I believe it is actually
 │   ├── libs
 │   │   ├── jquery
 │   │   │   ├── jquery.min.js
-│   │   │   └── jquery.js // jQuery Library Wrapper
 │   │   ├── backbone
 │   │   │   ├── backbone.min.js
-│   │   │   └── backbone.js // Backbone Library Wrapper
 │   │   └── underscore
 │   │   │   ├── underscore.min.js
-│   │   │   └── underscore.js // Underscore Library Wrapper
 │   ├── models
 │   │   ├── users.js
 │   │   └── projects.js
@@ -130,7 +127,7 @@ _Note: The data-main attribute on our single script tag tells Require.js to load
 </html>
 {% endhighlight %}
 
-You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be.
+You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be. (You can also now serve the index file off the CDN using Cloudfront)
 
 ### What does the bootstrap look like?
 
@@ -138,9 +135,9 @@ Our bootstrap file will be responsible for configuring Require.js and loading in
 
 In the below example we configure Require.js to create shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.
 
-Due to the nature of these libraries implementations we actually have to load them in order because they each depend on each other existing in the global namespace(which is bad but is all we have to work with).
+Underscore.js and Backbone.js aren't AMD enabled so I have download the community managed repository versions which are.  You can find them [here](https://github.com/amdjs)
 
-Hopefully if the AMD specification takes off these libraries will add code to allow themselves to be loaded asynchronously.   Due to this inconvience the bootstrap is not as intuitive as it could be, I hope to solve this problem in the near future.
+Hopefully if the AMD specification takes off these libraries will add code to allow themselves to be loaded asynchronously.   Due to this inconvience the bootstrap is not as intuitive as it could be.
 
 We also request a module called "app", this will contain the entireity of our application logic.
 
@@ -153,9 +150,9 @@ _Note: Modules are loaded relativly to the boot strap and always append with ".j
 // There usage will become more apparent futher along in the tutorial.
 require.config({
   paths: {
-    jQuery: 'libs/jquery/jquery',
-    Underscore: 'libs/underscore/underscore',
-    Backbone: 'libs/backbone/backbone'
+    jquery: 'libs/jquery/jquery',
+    underscore: 'libs/underscore/underscore',
+    backbone: 'libs/backbone/backbone'
   }
 
 });
@@ -164,15 +161,8 @@ require([
 
   // Load our app module and pass it to our definition function
   'app',
-
-  // Some plugins have to be loaded in order due to there non AMD compliance
-  // Because these scripts are not "modules" they do not pass any values to the definition function below
-  'order!libs/jquery/jquery-min',
-  'order!libs/underscore/underscore-min',
-  'order!libs/backbone/backbone-min'
 ], function(App){
   // The "app" dependency is passed in as "App"
-  // Again, the other dependencies passed in are not "AMD" therefore don't pass a parameter to this function
   App.initialize();
 });
 
@@ -184,42 +174,7 @@ Any modules we develop for our application using AMD/Require.js will be asynchro
 
 We have a heavy dependency on jQuery, Underscore and Backbone, unfortunatly this libraries are loaded synchronously and also depend on each other existing in the global namespace.
 
-Below I propose a solution(until these libraries allow themselves to be loaded asynchronously) to allow these libraries to be loaded properly(synchronously) and also removing themselves from global scope.
 
-
-{% highlight javascript %}
-// Filename: libs/jquery/jquery.js
-
-define([
-// Load the original jQuery source file
-  'order!libs/jquery/jquery-min'
-], function(){
-  // Tell Require.js that this module returns a reference to jQuery
-  return jQuery;
-});
-{% endhighlight %}
-
-{% highlight javascript %}
-// Filename: libs/underscore/underscore
-// As above lets load the original underscore source code
-define(['order!libs/underscore/underscore-min'], function(){
-  // Tell Require.js that this module returns  a reference to Underscore
-  return _;
-});
-{% endhighlight %}
-
-{% highlight javascript %}
- // Filename: libs/backbone/backbone
- // Finally lets load the original backbone source code
-define(['order!libs/backbone/backbone-min'], function(){
-  // Now that all the orignal source codes have ran and accessed each other
-  // We can call noConflict() to remove them from the global name space
-  // Require.js will keep a reference to them so we can use them in our modules
-  _.noConflict();
-  $.noConflict();
-  return Backbone.noConflict();
-});
-{% endhighlight %}
 
 ## A boiler plate module
 
@@ -232,9 +187,9 @@ For convience sake I generally keep a "boilerplate.js" in my application root so
 
 define([
   // These are path alias that we configured in our bootstrap
-  'jQuery',     // lib/jquery/jquery
-  'Underscore', // lib/underscore/underscore
-  'Backbone'    // lib/backbone/backbone
+  'jquery',     // lib/jquery/jquery
+  'underscore', // lib/underscore/underscore
+  'backbone'    // lib/backbone/backbone
 ], function($, _, Backbone){
   // Above we have passed in jQuery, Underscore and Backbone
   // They will not be accesible in the global scope
@@ -254,9 +209,9 @@ The router will then load the correct dependencies depending on the current URL.
 {% highlight javascript %}
 // Filename: app.js
 define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
+  'jquery',
+  'underscore',
+  'backbone',
   'router', // Request router.js
 ], function($, _, Backbone, Router){
   var initialize = function(){
@@ -273,12 +228,12 @@ define([
 {% highlight javascript %}
 // Filename: router.js
 define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
+  'jquery',
+  'underscore',
+  'backbone',
   'views/projects/list',
   'views/users/list'
-], function($, _, Backbone, Session, projectListView, userListView){
+], function($, _, Backbone, Session, ProjectListView, UserListView){
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
@@ -287,25 +242,27 @@ define([
 
       // Default
       '*actions": 'defaultAction'
-    },
-    showProjects: function(){
-      // Call render on the module we loaded in via the dependency array
-      // 'views/projects/list'
-      projectListView.render();
-    },
-      // As above, call render on our loaded module
-      // 'views/users/list'
-    showUsers: function(){
-      userListView.render();
-    },
-    defaultAction: function(actions){
-      // We have no matching route, lets just log what the URL was
-      console.log('No route:', actions);
     }
   });
 
   var initialize = function(){
     var app_router = new AppRouter;
+    app_router.on('showProjects', function(){
+      // Call render on the module we loaded in via the dependency array
+      // 'views/projects/list'
+      var projectListView = new ProjectListView();
+      projectListView.render();
+    });
+      // As above, call render on our loaded module
+      // 'views/users/list'
+    app_router.on('showUsers', function(){
+      var userListView = new UserListView();
+      userListView.render();
+    });
+    app_router.on('defaultAction', function(actions){
+      // We have no matching route, lets just log what the URL was
+      console.log('No route:', actions);
+    });
     Backbone.history.start();
   };
   return {
@@ -321,26 +278,25 @@ Backbone views most usually always interact with the DOM, using our new modular 
 {% highlight javascript %}
 // Filename: views/project/list
 define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
+  'jquery',
+  'underscore',
+  'backbone',
   // Using the Require.js text! plugin, we are loaded raw text
   // which will be used as our views primary template
   'text!templates/project/list.html'
 ], function($, _, Backbone, projectListTemplate){
-  var projectListView = Backbone.View.extend({
+  var ProjectListView = Backbone.View.extend({
     el: $('#container'),
     render: function(){
       // Using Underscore we can compile our template with data
       var data = {};
       var compiledTemplate = _.template( projectListTemplate, data );
       // Append our compiled template to this Views "el"
-      this.el.append( compiledTemplate );
+      this.$el.append( compiledTemplate );
     }
   });
-  // Our module now returns an instantiated view
-  // Sometimes you might return an un-instantiated view e.g. return projectListView
-  return new projectListView;
+  // Our module now returns our view
+  return ProjectListView;
 });
 {% endhighlight %}
 
@@ -348,23 +304,23 @@ Javascript templating allows us to seperate the design from the application logi
 
 ## Modularizing a Collection, Model and View
 
-Now we put it altogether by chaining up a Model, Collection and View which is a typical scenairo when building a Backbone.js application.
+Now we put it altogether by chaining up a Model, Collection and View which is a typical scenario when building a Backbone.js application.
 
 First off we will define our model
 
 {% highlight javascript %}
 // Filename: models/project
 define([
-  'Underscore',
-  'Backbone'
+  'underscore',
+  'backbone'
 ], function(_, Backbone){
-  var projectModel = Backbone.Model.extend({
+  var ProjectModel = Backbone.Model.extend({
     defaults: {
       name: "Harry Potter"
     }
   });
-  // You usually don't return a model instantiated
-  return projectModel;
+  // Return the model for the module
+  return ProjectModel;
 });
 {% endhighlight %}
 
@@ -375,13 +331,13 @@ Now we have a model, our collection module can depend on it.  We will set the "m
 {% highlight javascript %}
 // Filename: collections/projects
 define([
-  'Underscore',
-  'Backbone',
+  'underscore',
+  'backbone',
   // Pull in the Model module from above
   'models/project'
-], function(_, Backbone, projectModel){
+], function(_, Backbone, ProjectModel){
   var ProjectCollection = Backbone.Collection.extend({
-    model: projectModel
+    model: ProjectModel
   });
   // You don't usually return a collection instantiated
   return ProjectCollection;
@@ -393,25 +349,25 @@ Now we can simply depend on our collection in our view and pass it to our Javasc
 {% highlight javascript %}
 // Filename: views/projects/list
 define([
-  'jQuery',
-  'Underscore',
-  'Backbone',
+  'jquery',
+  'underscore',
+  'backbone',
   // Pull in the Collection module from above
   'collections/projects',
   'text!templates/projects/list
 ], function($, _, Backbone, ProjectsCollection, projectsListTemplate){
-  var projectListView = Backbone.View.extend({
+  var ProjectListView = Backbone.View.extend({
     el: $("#container"),
     initialize: function(){
-      this.collection = new ProjectsCollection;
+      this.collection = new ProjectsCollection();
       this.collection.add({ name: "Ginger Kid"});
       // Compile the template using Underscores micro-templating
       var compiledTemplate = _.template( projectsListTemplate, { projects: this.collection.models } );
-      this.el.html(compiledTemplate);
+      this.$el.html(compiledTemplate);
     }
   });
   // Returning instantiated views can be quite useful for having "state"
-  return new projectListView;
+  return ProjectListView;
 });
 {% endhighlight %}
 

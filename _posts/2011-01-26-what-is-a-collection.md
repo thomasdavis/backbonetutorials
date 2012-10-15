@@ -37,7 +37,7 @@ Here is a generic Model/Collection example.
 
 ## Building a collection
 
-Now we are going to populate a creation with some useful data.
+Now we are going to populate a collection with some useful data.
 
 {% highlight javascript %}
 
