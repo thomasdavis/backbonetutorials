@@ -94,18 +94,20 @@ page.onResourceRequested = function (request) {
         requestCount++;
     }
 };
-page.open(system.args[1], function () {
 
-});
+// Open the page
+page.open(system.args[1], function () {});
 
 var checkComplete = function () {
-  
+  // We don't allow it to take longer than 5 seconds but
+  // don't return until all requests are finished
   if((new Date().getTime() - lastReceived > 300 && requestCount === responseCount) || new Date().getTime() - startTime > 5000)  {
     clearInterval(checkCompleteInterval);
     console.log(page.content);
     phantom.exit();
   }
 }
+// Let us check to see if the page is finished rendering
 var checkCompleteInterval = setInterval(checkComplete, 1);
 {% endhighlight %}
 
@@ -121,10 +123,10 @@ RewriteCond %{QUERY_STRING} ^_escaped_fragment_=(.*)$
 RewriteRule (.*) http://webserver:3000/%1? [P]
 {% endhighlight %}
 
-We could also include other RewriteCond, such as user agent to redirect other search engines we wish to be indexed on.
+We could also include other `RewriteCond`, such as `user agent` to redirect other search engines we wish to be indexed on.
 
 
-Though Google won't use query string unless we tell it to by either including a meta tag;
+Though Google won't use `_escaped_fragment_` unless we tell it to by either including a meta tag;
 `<meta name="fragment" content="!">`
 or
 using `#!` url's in our links.
