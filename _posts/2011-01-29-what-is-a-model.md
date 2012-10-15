@@ -56,11 +56,11 @@ Using the _model.get()_ method we can access model properties at anytime.
         }
     });
     
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
+    var person = new Person({ name: "Thomas", age: 67, child: 'Ryan'});
     
     var age = person.get("age"); // 67
     var name = person.get("name"); // "Thomas"
-    var children = person.get("children"); // ['Ryan']
+    var child = person.get("child"); // 'Ryan'
     
 {% endhighlight %}
 
@@ -73,18 +73,18 @@ Sometimes you will want your model to contain default values.   This can easily 
         defaults: {
             name: 'Fetus',
             age: 0,
-            children: []
+            child: ''
         },
         initialize: function(){
             alert("Welcome to this world");
         }
     });
     
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
+    var person = new Person({ name: "Thomas", age: 67, child: 'Ryan'});
     
     var age = person.get("age"); // 67
     var name = person.get("name"); // "Thomas"
-    var children = person.get("children"); // ['Ryan']
+    var child = person.get("child"); // ['Ryan']
     
 {% endhighlight %}
 
@@ -97,21 +97,19 @@ Models can contain as many custom methods as you like to manipulate attributes. 
         defaults: {
             name: 'Fetus',
             age: 0,
-            children: []
+            child: ''
         },
         initialize: function(){
             alert("Welcome to this world");
         },
         adopt: function( newChildsName ){
-            var children_array = this.get("children");
-            children_array.push( newChildsName );
-            this.set({ children: children_array });
+            this.set({ child: newChildsName });
         }
     });
     
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
+    var person = new Person({ name: "Thomas", age: 67, child: 'Ryan'});
     person.adopt('John Resig');
-    var children = person.get("children"); // ['Ryan', 'John Resig']
+    var child = person.get("child"); // 'John Resig'
     
 {% endhighlight %}
 
@@ -125,8 +123,7 @@ Now onto one of the more useful parts of using a library such as backbone.   All
     Person = Backbone.Model.extend({
         defaults: {
             name: 'Fetus',
-            age: 0,
-            children: []
+            age: 0
         },
         initialize: function(){
             alert("Welcome to this world");
@@ -137,7 +134,7 @@ Now onto one of the more useful parts of using a library such as backbone.   All
         }
     });
     
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
+    var person = new Person({ name: "Thomas", age: 67});
     person.set({name: 'Stewie Griffin'}); // This triggers a change and will alert()
 {% endhighlight %}
 
@@ -275,8 +272,8 @@ _Get all the current attributes_
 
 {% highlight javascript %}
       
-    var person = new Person({ name: "Thomas", age: 67, children: ['Ryan']});
-    var attributes = person.toJSON(); // { name: "Thomas", age: 67, children: ['Ryan']}
+    var person = new Person({ name: "Thomas", age: 67});
+    var attributes = person.toJSON(); // { name: "Thomas", age: 67}
     /* This simply returns a copy of the current attributes. */
     
     var attributes = person.attributes;
