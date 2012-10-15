@@ -11,7 +11,7 @@ Backbone views are used to reflect what your applications' data models look like
 
 We will be using [jQuery 1.5](http://jquery.com/) as our DOM manipulator. It's possible to use other libraries such as [MooTools](http://mootools.net/) or [Sizzle](http://sizzlejs.com/), but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with other libraries other than jQuery.
 
-For the purposes of this demonstration, we will be implementing a search box. [A live example](http://jsfiddle.net/thomas/C9wew/6) can be found on jsFiddle.
+For the purposes of this demonstration, we will be implementing a search box. [A live example](http://jsfiddle.net/tBS4X/1/) can be found on jsFiddle.
 
 {% highlight javascript %}
     SearchView = Backbone.View.extend({
