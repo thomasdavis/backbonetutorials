@@ -17,7 +17,7 @@ The idea simply stating that if a search engine should come across your Javascri
 
 Using modern headless browsers, we can easily return the fully rendered content per request by redirecting bots using our webservers configuration.   Here is an image made by Google depicting the setup.
 
-~[headless seo](http://acris.googlecode.com/svn/wiki/images/seo_google_crawlability.png)
+![headless seo](http://acris.googlecode.com/svn/wiki/images/seo_google_crawlability.png)
 
 
 
