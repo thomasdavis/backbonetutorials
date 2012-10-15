@@ -84,7 +84,7 @@ Sometimes you will want your model to contain default values.   This can easily 
     
     var age = person.get("age"); // 67
     var name = person.get("name"); // "Thomas"
-    var child = person.get("child"); // ['Ryan']
+    var child = person.get("child"); // 'Ryan'
     
 {% endhighlight %}
 

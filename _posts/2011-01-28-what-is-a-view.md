@@ -22,7 +22,7 @@ For the purposes of this demonstration, we will be implementing a search box. [A
 
     // The initialize function is always called when instantiating a Backbone View.
     // Consider it the constructor of the class.
-    var search_view = new SearchView;
+    var search_view = new SearchView();
 {% endhighlight %}
 
 ## The "el" property
@@ -54,6 +54,13 @@ Backbone.js is dependent on Underscore.js, which includes its own micro-templati
 Let us implement a "render()" function and call it when the view is initialized. The "render()" function will load our template into the view's "el" property using jQuery.
 
 {% highlight html %}
+
+<script type="text/template" id="search_template">
+  <label>Search</label>
+  <input type="text" id="search_input" />
+  <input type="button" id="search_button" value="Search" />
+</script>
+
 <div id="search_container"></div>
 
 <script type="text/javascript">
@@ -65,18 +72,13 @@ Let us implement a "render()" function and call it when the view is initialized.
 			// Compile the template using underscore
 			var template = _.template( $("#search_template").html(), {} );
 			// Load the compiled HTML into the Backbone "el"
-			this.el.html( template );
+			this.$el.html( template );
 		}
 	});
 	
 	var search_view = new SearchView({ el: $("#search_container") });
 </script>
 
-<script type="text/template" id="search_template">
-	<label>Search</label>
-	<input type="text" id="search_input" />
-	<input type="button" id="search_button" value="Search" />
-</script>
 {% endhighlight %}
 
 _Tip: Place all your templates in a file and serve them from a CDN. This ensures your users will always have your application cached._
@@ -86,6 +88,13 @@ _Tip: Place all your templates in a file and serve them from a CDN. This ensures
 To attach a listener to our view, we use the "events" attribute of Backbone.View. Remember that event listeners can only be attached to child elements of the "el" property. Let us attach a "click" listener to our button.
 
 {% highlight html %}
+
+<script type="text/template" id="search_template">
+  <label>Search</label>
+  <input type="text" id="search_input" />
+  <input type="button" id="search_button" value="Search" />
+</script>
+
 <div id="search_container"></div>
 
 <script type="text/javascript">
@@ -95,7 +104,7 @@ To attach a listener to our view, we use the "events" attribute of Backbone.View
         },
         render: function(){
             var template = _.template( $("#search_template").html(), {} );
-            this.el.html( template );
+            this.$el.html( template );
         },
         events: {
             "click input[type=button]": "doSearch"
@@ -109,11 +118,7 @@ To attach a listener to our view, we use the "events" attribute of Backbone.View
     var search_view = new SearchView({ el: $("#search_container") });
 </script>
 
-<script type="text/template" id="search_template">
-	<label>Search</label>
-	<input type="text" id="search_input" />
-	<input type="button" id="search_button" value="Search" />
-</script>
+
 {% endhighlight %}
 
 
@@ -122,6 +127,13 @@ To attach a listener to our view, we use the "events" attribute of Backbone.View
 _Using template variables_
 
 {% highlight html %}
+<script type="text/template" id="search_template">
+    <!-- Access template variables with <%= %> -->
+    <label><%= search_label %></label>
+    <input type="text" id="search_input" />
+    <input type="button" id="search_button" value="Search" />
+</script>
+
 <div id="search_container"></div>
 
 <script type="text/javascript">
@@ -135,7 +147,7 @@ _Using template variables_
 			// Compile the template using underscore
 			var template = _.template( $("#search_template").html(), variables );
 			// Load the compiled HTML into the Backbone "el"
-			this.el.html( template );
+			this.$el.html( template );
 		},
 		events: {
 			"click input[type=button]": "doSearch"  
@@ -149,12 +161,6 @@ _Using template variables_
 	var search_view = new SearchView({ el: $("#search_container") });
 </script>
 
-<script type="text/template" id="search_template">
-    <!-- Access template variables with <%= %> -->
-    <label><%= search_label %></label>
-    <input type="text" id="search_input" />
-    <input type="button" id="search_button" value="Search" />
-</script>
 {% endhighlight %}
 
 ### Relevant Links
