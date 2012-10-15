@@ -41,6 +41,8 @@ var getContent = function(url, callback) {
   // array is our phantomjs script and the second element is our url 
   var phantom = require('child_process').spawn('phantomjs', ['phantom-server.js', url]);
   phantom.stdout.setEncoding('utf8');
+  // Our phantom.js script is simply logging the output and
+  // we access it here through stdout
   phantom.stdout.on('data', function(data) {
     content += data.toString();
   });
@@ -48,12 +50,15 @@ var getContent = function(url, callback) {
     if (code !== 0) {
       console.log('We have an error');
     } else {
+      // once our phantom.js script exits, let's call out call back
+      // which outputs the contents to the page
       callback(content);
     }
   });
 };
 
 var respond = function (req, res) {
+  // Because we use [P] in htaccess we have access to this header
   url = 'http://' + req.headers['x-forwarded-host'] + req.params[0];
   getContent(url, function (content) {
     res.send(content);
@@ -116,6 +121,9 @@ RewriteCond %{QUERY_STRING} ^_escaped_fragment_=(.*)$
 RewriteRule (.*) http://webserver:3000/%1? [P]
 {% endhighlight %}
 
+We could also include other RewriteCond, such as user agent to redirect other search engines we wish to be indexed on.
+
+
 Though Google won't use query string unless we tell it to by either including a meta tag;
 `<meta name="fragment" content="!">`
 or
@@ -123,8 +131,12 @@ using `#!` url's in our links.
 
 You will most likely have to use both.
 
+I have released an open source npm package called [seo server](http://seo.apiengine.io) for anyone wanting to jump straight in.
+
+And also via request I have setup a service currently in beta, which takes care of the whole process and even generates sitemap.xml's for your Javascript applications. It is also called [Seo Server](http://seoserver.apiengine.io). (currently in beta)
+
+This has been tested with Google Webmasters fetch tool.  Make sure you include `#!` on your urls when using the fetch tool.
+
 ### Relevant Links
 
-* [cross-site xmlhttprequest with CORS](http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/)
-* [Cross-Origin Resource Sharing](http://www.w3.org/TR/cors/)
-* [Using CORS with All (Modern) Browsers](http://www.kendoui.com/blogs/teamblog/posts/11-10-04/using_cors_with_all_modern_browsers.aspx)
+* [Open source node.js Seo Server](http://seo.apiengine.io)
