@@ -19,18 +19,20 @@ Also note that routes intepret anything after "#" tag in the url.   All links in
     var AppRouter = Backbone.Router.extend({
         routes: {
             "*actions": "defaultRoute" // matches http://example.com/#anything-here
-        },
-        defaultRoute: function( actions ){
-            // The variable passed in matches the variable in the route definition "actions"
-            alert( actions ); 
         }
     });
     // Initiate the router
     var app_router = new AppRouter;
+
+    app_router.on('route:defaultRoute', function(actions) {
+        alert(actions);
+    })
+
     // Start Backbone history a neccesary step for bookmarkable URL's
     Backbone.history.start();
 
 </script>
+{% endhighlight %}
 
 [Activate route](#action)
 
@@ -38,9 +40,6 @@ Also note that routes intepret anything after "#" tag in the url.   All links in
 
 _Notice the change in the url_
 
-{% endhighlight %}
-
-_Please note: Prior to Backbone 0.5 (released 1. July 2011) a Router was called a Controller. To avoid confusion, the Backbone developers changed the name to Router. Hence, if you find yourself using an older version of Backbone you should write Backbone.Controller.extend({ ** });_
 
 ## Dynamic Routing
 
@@ -53,21 +52,22 @@ Most conventional frameworks allow you to define routes that contain a mix of st
         routes: {
             "/posts/:id": "getPost",
             "*actions": "defaultRoute" // Backbone will try match the route above first
-        },
-        getPost: function( id ) {
-            // Note the variable in the route definition being passed in here
-            alert( "Get post number " + id );   
-        },
-        defaultRoute: function( actions ){
-            alert( actions ); 
         }
     });
     // Instantiate the router
     var app_router = new AppRouter;
+    app_router.on('route:getPost', function (id) {
+        // Note the variable in the route definition being passed in here
+        alert( "Get post number " + id );   
+    });
+    app_router.on('route:defaultRoute', function (actions) {
+        alert( actions ); 
+    });
     // Start Backbone history a neccesary step for bookmarkable URL's
     Backbone.history.start();
 
 </script>
+{% endhighlight %}
 
 [Post 120](#/posts/120)
 
@@ -75,7 +75,6 @@ Most conventional frameworks allow you to define routes that contain a mix of st
 
 _Notice the change in the url_
 
-{% endhighlight %}
 
 ## Dynamic Routing Cont. ":params" and "*splats"
 
@@ -100,19 +99,19 @@ Here are some examples of using ":params" and "*splats"
             
         },
         
-        getPost: function( id ){ 
+        app_router.on('route:getPost', function( id ){ 
             alert(id); // 121 
-        },
-        downloadFile: function( path ){ 
+        });
+        app_router.on('route:downloadFile', function( path ){ 
             alert(path); // user/images/hey.gif 
-        },
-        loadView: function( route, action ){ 
+        });
+        app_router.on('route:loadView', function( route, action ){ 
             alert(route + "_" + action); // dashboard_graph 
-        }
+        });
 
 {% endhighlight %}
 
-Routes are quite powerful and in an ideal world your application should never contain too many.   If you need to implement hash tags with SEO in mind, do a google search for "google seo hashbangs".
+Routes are quite powerful and in an ideal world your application should never contain too many.   If you need to implement hash tags with SEO in mind, do a google search for "google seo hashbangs". Also check out [Seo Server](http://seo.apiengine.io)
 
 Remember to do a pull request for any errors you come across.
 
