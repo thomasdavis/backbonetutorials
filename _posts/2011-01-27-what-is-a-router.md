@@ -50,7 +50,7 @@ Most conventional frameworks allow you to define routes that contain a mix of st
 <script>
     var AppRouter = Backbone.Router.extend({
         routes: {
-            "/posts/:id": "getPost",
+            "posts/:id": "getPost",
             "*actions": "defaultRoute" // Backbone will try match the route above first
         }
     });
@@ -88,13 +88,13 @@ Here are some examples of using ":params" and "*splats"
 
         routes: {
         
-            "/posts/:id": "getPost",
+            "posts/:id": "getPost",
             // <a href="http://example.com/#/posts/121">Example</a>
             
-            "/download/*path": "downloadFile",
+            "download/*path": "downloadFile",
             // <a href="http://example.com/#/download/user/images/hey.gif">Download</a>
             
-            "/:route/:action": "loadView",
+            ":route/:action": "loadView",
             // <a href="http://example.com/#/dashboard/graph">Load Route/Action View</a>
             
         },
