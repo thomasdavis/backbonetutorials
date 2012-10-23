@@ -7,11 +7,11 @@ posturl: http://backbonetutorials.com/what-is-a-router
 
 # What is a router?
 
-Backbone routers are used for routing your applications URL's when using hash tags(#).   In the traditional MVC sense they don't neccesarily fit the semantics and if you have read "[What is a view?](http://backbonetutorials.com/what-is-a-view)" it will elaborate on this point.   Though a Backbone "router" is still very useful for any application/feature that needs URL routing/history capabilities.   
+Backbone routers are used for routing your applications URL's when using hash tags(#).   In the traditional MVC sense they don't necessarily fit the semantics and if you have read "[What is a view?](http://backbonetutorials.com/what-is-a-view)" it will elaborate on this point.   Though a Backbone "router" is still very useful for any application/feature that needs URL routing/history capabilities.   
 
 Defined routers should always contain at least one route and a function to map the particular route to.   In the example below we are going to define a route that is always called.
 
-Also note that routes intepret anything after "#" tag in the url.   All links in your application should target "#/action" or "#action".   (Appending a forward slash after the hashtag looks a bit nicer e.g. http://example.com/#/user/help)
+Also note that routes interpret anything after "#" tag in the URL.   All links in your application should target "#/action" or "#action".   (Appending a forward slash after the hashtag looks a bit nicer e.g. http://example.com/#/user/help)
 
 {% highlight html %}
 
@@ -28,7 +28,7 @@ Also note that routes intepret anything after "#" tag in the url.   All links in
         alert(actions);
     })
 
-    // Start Backbone history a neccesary step for bookmarkable URL's
+    // Start Backbone history a necessary step for bookmarkable URL's
     Backbone.history.start();
 
 </script>
@@ -63,7 +63,7 @@ Most conventional frameworks allow you to define routes that contain a mix of st
     app_router.on('route:defaultRoute', function (actions) {
         alert( actions ); 
     });
-    // Start Backbone history a neccesary step for bookmarkable URL's
+    // Start Backbone history a necessary step for bookmarkable URL's
     Backbone.history.start();
 
 </script>

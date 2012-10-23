@@ -20,12 +20,12 @@ Thomas Davis - [@neutralthoughts](http://twitter.com/neutralthoughts) - Twitter
 **Contact:**
 
 *   [@neutralthoughts](http://twitter.com/neutralthoughts) on twitter
-*   Github - https://github.com/thomasdavis
+*   GitHub - https://github.com/thomasdavis
 *   thomasalwyndavis@gmail.com
 
 **Projects:**
 
-*   Javascript Library CDN - http://cdnjs.com
+*   JavaScript Library CDN - http://cdnjs.com
 *   Backbone.js Tutorials - http://backbonetutorials.com
 *   Proposal Generation Start up - http://protosal.com
 *   Technical Blog - http://thomasdavis.github.com

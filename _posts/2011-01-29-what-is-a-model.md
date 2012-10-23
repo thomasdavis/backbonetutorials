@@ -43,7 +43,7 @@ Now we want to pass some parameters when we create an instance of our model.
     
 {% endhighlight %}
 
-So passing a javascript object to our constructor is the same as calling _model.set()_.   Now that these models have attributes set we need to be able to retrieve them.  
+So passing a JavaScript object to our constructor is the same as calling _model.set()_.   Now that these models have attributes set we need to be able to retrieve them.  
 
 ## Getting attributes
 
@@ -138,7 +138,7 @@ Now onto one of the more useful parts of using a library such as backbone.   All
     person.set({name: 'Stewie Griffin'}); // This triggers a change and will alert()
 {% endhighlight %}
 
-So we can bind the a change listener to individual attributes or if we like simply '_this.on("change", function(model){});_' to listen for changes to all attributes of the model.
+So we can bind the change listener to individual attributes or if we like simply '_this.on("change", function(model){});_' to listen for changes to all attributes of the model.
 
 ## Interacting with the server
 
@@ -148,7 +148,7 @@ The `id` attribute of a model identifies how to find it on the database usually 
 
 For the purpose of this tutorial imagine that we have a mysql table called `Users` with the columns `id`, `name`, `email`.
 
-The server has implemented a RESTful url `/user` which allows us to interact with it.
+The server has implemented a RESTful URL `/user` which allows us to interact with it.
 
 Our model definition shall thus look like;
 
@@ -243,7 +243,7 @@ We will use the `save` api call which is intelligent and will send a PUT request
 
 {% endhighlight %}
 
-### Deleteing a model
+### Deleting a model
 
 When a model has an `id` we know that it exist on the server, so if we wish to remove it from the server we can call `destroy`.  `destroy` will fire off a DELETE /user/id (conforming to RESTful conventions).
 
@@ -257,7 +257,7 @@ When a model has an `id` we know that it exist on the server, so if we wish to r
     });
 
     // Because there is `id` present, Backbone.js will fire
-    // DESTROY /user/1 
+    // DELETE /user/1 
     user.destroy({
         success: function () {
             alert('Destroyed');

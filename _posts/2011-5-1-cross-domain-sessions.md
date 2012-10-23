@@ -11,36 +11,36 @@ posturl: http://backbonetutorials.com/cross-domain-sessions
 
 This tutorial will teach you how to completely separate the server and client allowing for developers to work with freedom in their respective areas.
 
-On a personal note, I consider this development practise highly desirable and encourage others to think of the possible benefits but the security still needs to be prooved.
+On a personal note, I consider this development practice highly desirable and encourage others to think of the possible benefits but the security still needs to be proved.
 
 
 > Cross-Origin Resource Sharing (CORS) is a specification that enables a truly open access across domain-boundaries. - [enable-cors.org](http://enable-cors.org/)
 
 **Some benefits include**
 
-* The client and back end exist independently regardless of where they are each hosted and built
+* The client and back end exist independently regardless of where they are each hosted and built.
 * Due to the separation of concerns, testing now becomes easier and more controlled.
-* Develop only one API on the server, your front-end could be outsourced or built by a inhouse team.
-* As a front-end developer you can host the client anywhere
-* This separation enforces that the API be built robustly, documented, collaborativly and versioned.
+* Develop only one API on the server, your front-end could be outsourced or built by a in-house team.
+* As a front-end developer you can host the client anywhere.
+* This separation enforces that the API be built robustly, documented, collaboratively and versioned.
 
 
 ** Cons of this tutorial **
 
-* This tutorial doesn't explain how to perform this with cross browser support. CORS headers aren't supported by Opera and Ie 6/7. Though it is do-able using [easyXDM](http://easyxdm.net/wp/)
+* This tutorial doesn't explain how to perform this with cross browser support. CORS headers aren't supported by Opera and IE 6/7. Though it is do-able using [easyXDM](http://easyxdm.net/wp/)
 * Security is somewhat addressed but maybe a more thorough security expert can chime in.
 
 ## Security
 
-* Don't allow GET request to change data, only retrieve
-* Whitelist your allowed domains (see [server.js](https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/cross-domain/server.js)
+* Don't allow GET request to change data, only retrieve.
+* Whitelist your allowed domains (see [server.js](https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/cross-domain/server.js))
 * Protect again [JSON padding](http://blog.opensecurityresearch.com/2012/02/json-csrf-with-parameter-padding.html)
 
 ## Getting started
 
 To easily understand this tutorial you should jump straight into the example code base.
 
-Host the codebase on a simple http server such that the domain is `localhost` with port 80 hidden.
+Host the codebase on a simple HTTP server such that the domain is `localhost` with port 80 hidden.
 
 [Example Codebase](https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/cross-domain)
 
@@ -51,7 +51,7 @@ This tutorial focuses on building a flexible Session model to control session st
 
 ## Checking session state at first load
 
-Before starting any routes, we should really know if the user is authed or not. This will allow us to load the appropiate views. We will simply wrap our `Backbone.history.start` in a callback that executes after `Session.getAuth` has checked the server. We will jump into our Session model next.
+Before starting any routes, we should really know whether the user is authenticated. This will allow us to load the appropriate views. We will simply wrap our `Backbone.history.start` in a callback that executes after `Session.getAuth` has checked the server. We will jump into our Session model next.
 
 {% highlight javascript %}
 define([
@@ -93,7 +93,7 @@ _Note: We have used jQuery `ajaxPrefilter` to hook into all AJAX requests before
 
 ## An example Session model
 
-This is a very light weight Session model which handles most situations. Read through the code and comments below. The model simply has a login, logout and check function. Again we have hooked into jQuery `ajaxPrefilter` to allow for csrf tokens and also telling jQuery to send cookies with the `withCredentials` property. The model relies heavily on it's `auth` property. Throughout your application, each view can simply bind to `change:auth` on the Session model and react accordingly. Because we return this AMD module instantiated using the new keyword, then it will keep state throughout the page. (This may not be best practise but it's highly convenient)
+This is a very light weight Session model which handles most situations. Read through the code and comments below. The model simply has a login, logout and check function. Again we have hooked into jQuery `ajaxPrefilter` to allow for csrf tokens and also telling jQuery to send cookies with the `withCredentials` property. The model relies heavily on it's `auth` property. Throughout your application, each view can simply bind to `change:auth` on the Session model and react accordingly. Because we return this AMD module instantiated using the new keyword, then it will keep state throughout the page. (This may not be best practice but it's highly convenient)
 
 {% highlight javascript %}
 // views/app.js
@@ -157,7 +157,7 @@ _Note: This session model is missing one useful feature. If a user looses auth w
 
 ## Hooking up views to listen to changes in `auth`
 
-Now that we have a Session model, let's hook up our `login/logout` view to listen to changes in `auth`. When creating the view we use `on` to bind a listener to the `auth` attribute of our model. Everytime is changes we will re-render the view which will conditionally load a template depending on the value of `Session.get('auth')`.
+Now that we have a Session model, let's hook up our `login/logout` view to listen to changes in `auth`. When creating the view we use `on` to bind a listener to the `auth` attribute of our model. Everytime it changes we will re-render the view which will conditionally load a template depending on the value of `Session.get('auth')`.
 
 {% highlight javascript %}
 // models/session.js
@@ -210,7 +210,7 @@ define([
 });
 {% endhighlight %}
 
-_Note: `.serializeObject` is not a native jQuery function and I have included it in `[app.js](https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/cross-domain/js/views/app.js)` in the demo folder. `creds` can be an object of any variation of inputs, regardless it will be converted to JSON and posted to the server like any normal Backbone model._
+_Note: `.serializeObject` is not a native jQuery function and I have included it as [app.js](https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/cross-domain/js/views/app.js) in the demo folder. `creds` can be an object of any variation of inputs, regardless it will be converted to JSON and posted to the server like any normal Backbone model._
 
 Here are the templates we are using for our login view
 
@@ -253,13 +253,13 @@ To save you sometime here are some gotchas;
 * jQuery ajax will trigger the browser to send these headers to enforce security `origin, x-requested-with, accept` so our server must allow them.
 * The browser might send out a `pre-flight` request to verify that it can talk to the server. The server must return `200 OK` on these  `pre-flight` request.
 
-Be sure to read this Mozilla [documentation](http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/) on the above
+Be sure to read this Mozilla [documentation](http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/) on the above.
 
 ## Example node server
 
-This server below implements everything we talked about above. It should be relativly easy to see how would translate into other frameworks and languages. `app.configure` runs the specified libraries against every request. We have told the server that on each request it should check the csrf token and check if the origin domain is white-listed. If so we edit each request to contain the appropiate headers.
+This server below implements everything we have talked about so far. It should be relatively easy to see how would translate into other frameworks and languages. `app.configure` runs the specified libraries against every request. We have told the server that on each request it should check the csrf token and check if the origin domain is white-listed. If so we edit each request to contain the appropriate headers.
 
-This server has 3 end points, that are pseduo-restful;
+This server has 3 endpoints, that are pseudo-restful;
 
 * POST /session - Login - Sets the session username and returns a csrf token for the user to use
 * DELETE /session - Logout - Destroys the session and regenerates a new csrf token if the user wants to re-login
@@ -335,7 +335,7 @@ app.del('/session/:id', function(req, res, next){
 app.listen(8000);
 {% endhighlight %}
 
-_Note: I wrote a custom csrf module for this which can be found in the example directory. It's based of connects and uses the `crypto` library.   I didn't spend much time on it but other traditional csrf modules won't work because they aren't exactly built for this implentation technique._
+_Note: I wrote a custom csrf module for this which can be found in the example directory. It's based of connects and uses the `crypto` library.   I didn't spend much time on it but other traditional csrf modules won't work because they aren't exactly built for this implementation technique._
 
 
 ## Conclusion
