@@ -7,9 +7,9 @@ posturl: http://backbonetutorials.com/organizing-backbone-using-modules
 
 # Organizing your application using Modules (require.js)
 
-Unfortunately Backbone.js does not tell you how to organize your code, leaving many developers in the dark regarding how to load scripts and lay out their development enviroments.
+Unfortunately Backbone.js does not tell you how to organize your code, leaving many developers in the dark regarding how to load scripts and lay out their development environments.
 
-This was quite a different decision to other Javascript MVC frameworks who were more in favor of setting a development philosophy.
+This was quite a different decision to other JavaScript MVC frameworks who were more in favor of setting a development philosophy.
 
 Hopefully this tutorial will allow you to build  a much more robust project with great separation of concerns between design and code.
 
@@ -17,7 +17,7 @@ This tutorial will get you started on combining Backbone.js with [AMD](https://g
 
 ## What is AMD?
 
-[Asynchronous Module Definitions](https://github.com/amdjs/amdjs-api/wiki/AMD) designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around AMD, seeing it as the future of modular Javascript development.
+[Asynchronous Module Definitions](https://github.com/amdjs/amdjs-api/wiki/AMD) designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around AMD, seeing it as the future of modular JavaScript development.
 
 This tutorial will use [Require.js](http://requirejs.org) to implement a modular and organized Backbone.js.
 
@@ -32,7 +32,7 @@ Quick Overview
 
 ## Why Require.js?
 
-p. Require.js has a great community and it is growing rapidly.  [James Burke](http://tagneto.blogspot.com/) the author is married to Require.js and responds to user feedback always.   A leading expert in script loading, he is also a contributer to the AMD specification.
+p. Require.js has a great community and it is growing rapidly.  [James Burke](http://tagneto.blogspot.com/) the author is married to Require.js and always responds to user feedback.   He is a leading expert in script loading and a contributer to the AMD specification.
 
 <a href="https://twitter.com/jrburke" class="twitter-follow-button">Follow @jrburke</a>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
@@ -48,13 +48,13 @@ To easily understand this tutorial you should jump straight into the example cod
 
 The tutorial is only loosely coupled with the example and you will find the example to be more comprehensive.
 
-If you would like to see how a particuliar use case would be implemented please visit the Github page and create an issue.(Example Request: How to do nested views).
+If you would like to see how a particular use case would be implemented please visit the GitHub page and create an issue.(Example Request: How to do nested views).
 
 The example isn't super fleshed out but should give you a vague idea.
 
 ## Example File Structure
 
-There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirroed in file structure.  Collections and Models are categorized into folders kind of like an ORM.
+There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirrored in file structure.  Collections and Models are categorized into folders kind of like an ORM.
 
 {% highlight javascript %}
 /* File Structure
@@ -133,21 +133,21 @@ You should most always end up with quite a light weight index file.   You can se
 
 Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.
 
-In the below example we configure Require.js to create shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.
+In the example below we configure Require.js to create a shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.
 
-Underscore.js and Backbone.js aren't AMD enabled so I have download the community managed repository versions which are.  You can find them [here](https://github.com/amdjs)
+Unfortunately Backbone.js isn't AMD enabled so I downloaded the community managed repository and patched it on [amdjs](https://github.com/amdjs).
 
-Hopefully if the AMD specification takes off these libraries will add code to allow themselves to be loaded asynchronously.   Due to this inconvience the bootstrap is not as intuitive as it could be.
+Hopefully if the AMD specification takes off these libraries will add code to allow themselves to be loaded asynchronously.   Due to this inconvenience the bootstrap is not as intuitive as it could be.
 
-We also request a module called "app", this will contain the entireity of our application logic.
+We also request a module called "app", this will contain the entirety of our application logic.
 
-_Note: Modules are loaded relativly to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap._
+_Note: Modules are loaded relatively to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap._
 
 {% highlight javascript %}
 // Filename: main.js
 
 // Require.js allows us to configure shortcut alias
-// There usage will become more apparent futher along in the tutorial.
+// There usage will become more apparent further along in the tutorial.
 require.config({
   paths: {
     jquery: 'libs/jquery/jquery',
@@ -172,7 +172,7 @@ require([
 
 Any modules we develop for our application using AMD/Require.js will be asynchronously loaded.
 
-We have a heavy dependency on jQuery, Underscore and Backbone, unfortunatly this libraries are loaded synchronously and also depend on each other existing in the global namespace.
+We have a heavy dependency on jQuery, Underscore and Backbone, unfortunately this libraries are loaded synchronously and also depend on each other existing in the global namespace.
 
 
 
@@ -180,7 +180,7 @@ We have a heavy dependency on jQuery, Underscore and Backbone, unfortunatly this
 
 So before we start developing our application, let's quickly look over boiler plate code that will be reused quite often.
 
-For convience sake I generally keep a "boilerplate.js" in my application root so I can copy it when I need to.
+For convenience sake I generally keep a "boilerplate.js" in my application root so I can copy it when I need to.
 
 {%highlight javascript %}
 //Filename: boilerplate.js
@@ -192,17 +192,17 @@ define([
   'backbone'    // lib/backbone/backbone
 ], function($, _, Backbone){
   // Above we have passed in jQuery, Underscore and Backbone
-  // They will not be accesible in the global scope
+  // They will not be accessible in the global scope
   return {};
   // What we return here will be used by other modules
 });
 {% endhighlight %}
 
-The first argument of the define function is our dependency array, we can pass in any modules we like in the future.
+The first argument of the define function is our dependency array, in the future we can pass in any modules we like.
 
 ## App.js Building our applications main module
 
-Our applications main module should always remain quite light weight.   This tutorial covers only setting up a Backbone Router and initializing it in our main module.
+Our applications main module should always remain light weight.   This tutorial only covers setting up a Backbone Router and initializing it in our main module.
 
 The router will then load the correct dependencies depending on the current URL.
 
@@ -273,7 +273,7 @@ define([
 
 ## Modularizing a Backbone View
 
-Backbone views most usually always interact with the DOM, using our new modular system we can load in Javascript templates using Require.js text! plugin.
+Backbone views usually interact with the DOM. Using our new modular system we can load in JavaScript templates using the Require.js text! plug-in.
 
 {% highlight javascript %}
 // Filename: views/project/list
@@ -300,13 +300,13 @@ define([
 });
 {% endhighlight %}
 
-Javascript templating allows us to seperate the design from the application logic placing all our html in the templates folder.
+JavaScript templating allows us to separate the design from the application logic by placing all our HTML in the templates folder.
 
 ## Modularizing a Collection, Model and View
 
 Now we put it altogether by chaining up a Model, Collection and View which is a typical scenario when building a Backbone.js application.
 
-First off we will define our model
+First we will define our model
 
 {% highlight javascript %}
 // Filename: models/project
@@ -324,7 +324,7 @@ define([
 });
 {% endhighlight %}
 
-Now we have a model, our collection module can depend on it.  We will set the "model" attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.
+Now that we have a model, our collection module can depend on it.  We will set the "model" attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.
 
 > Collection.model: Override this property to specify the model class that the collection contains. If defined, you can pass raw attributes objects (and arrays) to add, create, and reset, and the attributes will be converted into a model of the proper type.
 
@@ -344,7 +344,7 @@ define([
 });
 {% endhighlight %}
 
-Now we can simply depend on our collection in our view and pass it to our Javascript template.
+Now we can simply depend on our collection in our view and pass it to our JavaScript template.
 
 {% highlight javascript %}
 // Filename: views/projects/list
@@ -373,9 +373,9 @@ define([
 
 ## Conclusion
 
-Looking forward to feedback so I can turn this post and example into quality references on building modular Javascript applications.
+Looking forward to feedback so I can turn this post and example into quality references on building modular JavaScript applications.
 
-Get in touch with me on twitter, comments or github!
+Get in touch with me on twitter, comments or GitHub!
 
 ### Relevant Links
 

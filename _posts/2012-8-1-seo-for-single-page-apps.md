@@ -9,13 +9,13 @@ posturl: http://backbonetutorials.com/seo-for-single-page-apps
 
 This tutorial will show you how to index your application on search engines.   As the author I believe that servers should be completely independent of the client in the age of API's.  Which speeds up development for the ever increasing array of clients.   It is on the shoulders of the search engines to conform and they should not dictate how the web is stored and accessed.
 
-In 2009 google released the idea of [escaped fragments](http://googlewebmastercentral.blogspot.com.au/2009/10/proposal-for-making-ajax-crawlable.html).   
+In 2009 Google released the idea of [escaped fragments](http://googlewebmastercentral.blogspot.com.au/2009/10/proposal-for-making-ajax-crawlable.html).   
 
-The idea simply stating that if a search engine should come across your Javascript application then you have the permission to redirect the search engine to another url that serves the fullly rendered version of the page(The current search engines cannot execute much javascript (Some people speculate that Google Chrome was born of Google Seach wishing to succesfully render every web page to retrieve ajaxed content)).
+The idea simply stating that if a search engine should come across your JavaScript application then you have the permission to redirect the search engine to another URL that serves the fully rendered version of the page (The current search engines cannot execute much JavaScript (Some people speculate that Google Chrome was born of Google Search wishing to successfully render every web page to retrieve ajaxed content)).
 
 ## How does redirecting bots work?
 
-Using modern headless browsers, we can easily return the fully rendered content per request by redirecting bots using our webservers configuration.   Here is an image made by Google depicting the setup.
+Using modern headless browsers, we can easily return the fully rendered content per request by redirecting bots using our web servers configuration.   Here is an image made by Google depicting the setup.
 
 ![headless seo](http://acris.googlecode.com/svn/wiki/images/seo_google_crawlability.png)
 
@@ -23,9 +23,9 @@ Using modern headless browsers, we can easily return the fully rendered content 
 
 ## Implementation using Phantom.js
 
-[Phantom.js](http://phantomjs.org/) is a headless webkit browser.  We are going to setup a node.js server that given a url, it will fully render the page content. Then we will redirect bots to this server to retrieve the correct content.
+[Phantom.js](http://phantomjs.org/) is a headless webkit browser.  We are going to setup a node.js server that given a URL, it will fully render the page content. Then we will redirect bots to this server to retrieve the correct content.
 
-You will need to install node.js and phantom.js onto a box. Then start up this server below. There are two files, one which is the webserver and the other is a phantomjs script that renders the page.
+You will need to install node.js and phantom.js onto a box. Then start up this server below. There are two files, one which is the web server and the other is a phantomjs script that renders the page.
 
 {% highlight javascript %}
 // web.js
@@ -111,7 +111,7 @@ var checkComplete = function () {
 var checkCompleteInterval = setInterval(checkComplete, 1);
 {% endhighlight %}
 
-Once we have this server up and running we just redirect bots to the server in our client's webserver configuration.
+Once we have this server up and running we just redirect bots to the server in our client's web server configuration.
 
 ## Redirecting bots
 
@@ -129,15 +129,15 @@ We could also include other `RewriteCond`, such as `user agent` to redirect othe
 Though Google won't use `_escaped_fragment_` unless we tell it to by either including a meta tag;
 `<meta name="fragment" content="!">`
 or
-using `#!` url's in our links.
+using `#!` URLs in our links.
 
 You will most likely have to use both.
 
 I have released an open source npm package called [seo server](http://seo.apiengine.io) for anyone wanting to jump straight in.
 
-And also via request I have setup a service currently in beta, which takes care of the whole process and even generates sitemap.xml's for your Javascript applications. It is also called [Seo Server](http://seoserver.apiengine.io). (currently in beta)
+And also via request I have setup a service currently in beta, which takes care of the whole process and even generates sitemap.xml's for your JavaScript applications. It is also called [Seo Server](http://seoserver.apiengine.io). (currently in beta)
 
-This has been tested with Google Webmasters fetch tool.  Make sure you include `#!` on your urls when using the fetch tool.
+This has been tested with Google Webmasters fetch tool.  Make sure you include `#!` on your URLs when using the fetch tool.
 
 ### Relevant Links
 

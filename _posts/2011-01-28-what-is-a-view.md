@@ -9,7 +9,7 @@ posturl: http://backbonetutorials.com/what-is-a-view
 
 Backbone views are used to reflect what your applications' data models look like. They are also used to listen to events and react accordingly. This tutorial will not be addressing how to bind models and collections to views but will focus on view functionality and how to use views with a JavaScript templating library, specifically [Underscore.js's _.template](http://documentcloud.github.com/underscore/#template).
 
-We will be using [jQuery 1.5](http://jquery.com/) as our DOM manipulator. It's possible to use other libraries such as [MooTools](http://mootools.net/) or [Sizzle](http://sizzlejs.com/), but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with other libraries other than jQuery.
+We will be using [jQuery 1.8.2](http://jquery.com/) as our DOM manipulator. It's possible to use other libraries such as [MooTools](http://mootools.net/) or [Sizzle](http://sizzlejs.com/), but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with other libraries other than jQuery.
 
 For the purposes of this demonstration, we will be implementing a search box. [A live example](http://jsfiddle.net/tBS4X/1/) can be found on jsFiddle.
 

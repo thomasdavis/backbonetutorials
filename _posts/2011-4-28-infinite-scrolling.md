@@ -10,7 +10,7 @@ posturl: http://backbonetutorials.com/infinite-scroll
 
 ## Getting started
 
-In this example we are going to build a widget that pulls in tweets and when the user scrolls to the bottom of the widget Backbone.js will resync with the server to bring down the next page of results.
+In this example we are going to build a widget that pulls in tweets and when the user scrolls to the bottom of the widget Backbone.js will re-sync with the server to bring down the next page of results.
 
 [Example Demo](http://backbonetutorials.com/examples/infinite-scroll/)
 
@@ -20,7 +20,7 @@ _Note: This tutorial will use [AMD](http://backbonetutorials.com/organizing-back
 
 ## The Twitter Collection
 
-Twitter offers a jsonp API for browsing tweets.  The first thing to note is that we have to append '&callback?' to allow cross domain ajax calls which is a feature of [jsonp](http://en.wikipedia.org/wiki/JSONP).
+Twitter offers a jsonp API for browsing tweets.  The first thing to note is that we have to append '&callback?' to allow cross domain Ajax calls which is a feature of [jsonp](http://en.wikipedia.org/wiki/JSONP).
 
 Using the 'q' and 'page' query parameters we can find the results we are after.  In the collection definition below we have set some defaults which can be overridden at any point.
 
@@ -61,7 +61,7 @@ parse: function(resp, xhr) {
 
 ## Setting up the View
 
-The first thing to do is load our Twitter collection and template into the widget module. We should attach our collection to our view in our `initialize` function. `loadResults` will be responsible for calling fetch on our Twitter collection. On success we will append the latest results to our widget using our template. Our Backbone.js `events` will listen for `scroll` on the current `el` of the view which is '.twitter-widget'. If the current `scrollTop` is at the bottom then we simply increment the Twitter collections current page property and call `loadResults` again.
+The first thing to do is to load our Twitter collection and template into the widget module. We should attach our collection to our view in our `initialize` function. `loadResults` will be responsible for calling fetch on our Twitter collection. On success we will append the latest results to our widget using our template. Our Backbone.js `events` will listen for `scroll` on the current `el` of the view which is '.twitter-widget'. If the current `scrollTop` is at the bottom then we simply increment the Twitter collections current page property and call `loadResults` again.
   
 {% highlight javascript %}
 // views/twitter/widget.js
@@ -133,7 +133,7 @@ Our view above passes into our underscore template the variable tweets which we 
 
 ## Conclusion
 
-This is a very light weight but robust infinite scroll example. There are caveats to using infinite scroll in UI/UX so make sure to use it only when applicable.
+This is a very lightweight but robust infinite scroll example. There are caveats to using infinite scroll in UI/UX so make sure to only use it when applicable.
 
 [Example Demo](http://backbonetutorials.com/examples/infinite-scroll/)
 

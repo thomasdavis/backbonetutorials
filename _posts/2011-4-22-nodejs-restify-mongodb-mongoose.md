@@ -21,7 +21,7 @@ This tutorial will assist you in saving data(Backbone.js Models) to MongoDb and 
 
 ## The technologies
 
-This stack is great for rapid prototyping and highly intuitive. Personal note: I love using Javascript as my only language for the entire application(FrontEnd/BackEnd/API/Database). Restify is still in early development but is essentially just an extension of Express. So for anyone needing more stability you can easily just substitute Express in.
+This stack is great for rapid prototyping and highly intuitive. Personal note: I love using JavaScript as my only language for the entire application (FrontEnd/BackEnd/API/Database). Restify is still in early development but is essentially just an extension of Express. So for anyone needing more stability you can easily just substitute Express in.
 
 ### Node.js
 
@@ -46,7 +46,7 @@ In the example repository there is a server.js example which can be executed by 
 
 ## Restify configuration
 
-The first thing to do is require the Restify module. Restify will be in control of handling our restFul end points and returning the appropriate JSON.
+The first thing to do is require the Restify module. Restify will be in control of handling our restful endpoints and returning the appropriate JSON.
 
 {% highlight javascript %}
 var restify = require('restify');  
@@ -54,7 +54,7 @@ var server = restify.createServer();
 server.use(restify.bodyParser());
 {% endhighlight %}
 
-Note: bodyParser() takes care of turning your request data into a Javascript object on the server automatically.
+Note: bodyParser() takes care of turning your request data into a JavaScript object on the server automatically.
 
 ## MongoDb/Mongoose configuration
 
@@ -89,7 +89,7 @@ _Note: `Message` can now be used for all things CRUD related._
 
 ## Setting up the routes
 
-Just like in Backbone, Restify allows you to configure different routes and their associated callbacks. In the code below we want to define two routes.  One for saving new messages and one for retrieving all messages. After we have created our function definitions, we then attach them to either GET/POST/PUT/DELETE on a particular restful endpoint e.g. GET /messages
+Just like in Backbone, Restify allows you to configure different routes and their associated callbacks. In the code below we define two routes.  One for saving new messages and one for retrieving all messages. After we have created our function definitions, we attach them to either GET/POST/PUT/DELETE on a particular restful endpoint e.g. GET /messages
 
 {% highlight javascript %}
 // This function is responsible for returning all entries for the Message model
@@ -111,9 +111,9 @@ function postMessage(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   // Create a new message model, fill it up and save it to Mongodb
-  var message = new Message(); 
+  var message = new Message();
   message.message = req.params.message;
-  message.date = new Date() 
+  message.date = new Date();
   message.save(function () {
     res.send(req.body);
   });
@@ -132,7 +132,7 @@ This wraps up the server side of things, if you follow the [example](https://git
 
 _Note: Again you must remember to change the [Model](https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/models/message.js) and [Collection](https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/collections/messages.js) definitions to match your server address._
 
-## Setting up the client(Backbone.js)
+## Setting up the client (Backbone.js)
 
 I've actually used the latest copy of [http://backboneboilerplate.com](http://backboneboilerplate.com) to set up the example page.
 
@@ -156,7 +156,7 @@ First of all we want to setup a [template](https://github.com/thomasdavis/backbo
 
 This template gets inserted into the DOM by `views/guestbook/form.js`, this Backbone view also handles the interaction of the form and the posting of the new data.
 
-Let us create a Backbone Model that has the correct url for our restFul interface.
+Let us create a Backbone Model that has the correct URL for our restful interface.
 
 {% highlight javascript %}
 define([
@@ -172,7 +172,7 @@ define([
 {% endhighlight %}
 
 
-We can see how we require our pre-defined model for messages and also our form template.
+We can see how we require our predefined model for messages and also our form template.
 
 {% highlight javascript %}
 define([
@@ -206,7 +206,7 @@ define([
 });
 {% endhighlight %}
 
-_Note: `trigger` is from Backbone Events, I binded a listener to this view in `views/dashboard/page.js` so that when a new message is submitted, the list is re-rendered. We are setting the date of post on the server so there is no need to pass it up now._
+_Note: `trigger` is from Backbone Events, I binded a listener to this view in `views/dashboard/page.js` so when a new message is submitted, the list is re-rendered. We are setting the date of the POST on the server so there is no need to pass it up._
 
 ## Retrieving a list of messages
 
@@ -274,15 +274,15 @@ This actually sums up everything you need to know to implement this simple examp
 
 [Example Demo](http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/)
 
-In this example you should really be using relative url's in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.
+In this example you should really be using relative URL's in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.
 
-This example is hosted on github therefore we had to include the absolute url to the server which is hosted on nodejitsu.com
+This example is hosted on GitHub therefore we had to include the absolute URL to the server which is hosted on nodejitsu.com
 
 On a personal note, I have of recent used the Joyent, Nodejitsu, MongoDbHq stack after they have now partnered up and I have nothing but good things to say. Highly recommend you check it out!
 
 As always I hope I made this tutorial easy to follow!
 
-Get in touch with me on twitter, comments or github!
+Get in touch with me on twitter, comments or GitHub!
 
 ### Relevant Links
 
