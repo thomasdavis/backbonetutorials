@@ -6,16 +6,16 @@ The server code base can be found [here](https://github.com/thomasdavis/video-ba
 
 The example runs against this server which exposes the API shown below
 
-```
-// Used for populating our users collection
+Used for populating our users collection
+
 GET /users - Returns an array of user objects e.g. `[{firstname: 'Thomas', lastname: 'Davis', age: 12}]`
 
-// Used for populating our user model
-GET /users/:id - Returns a single user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`
-POST /users - Creates a user based off the payload and returns the new user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`
-PUT /users/:id - Updates the given user with the given payload and returns the newly updated user object
-DELETE /users/:id - Deletes the given used from the server
-```
+Used for populating our user model
+
+GET /users/:id - _Returns a single user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`_
+POST /users - _Creates a user based off the payload and returns the new user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`_
+PUT /users/:id - _Updates the given user with the given payload and returns the newly updated user object_
+DELETE /users/:id - _Deletes the given used from the server_
 
 ## Extra Snippets
 
