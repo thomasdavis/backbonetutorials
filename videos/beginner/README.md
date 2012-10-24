@@ -13,8 +13,11 @@ GET /users - Returns an array of user objects e.g. `[{firstname: 'Thomas', lastn
 Used for populating our user model
 
 GET /users/:id - _Returns a single user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`_
+
 POST /users - _Creates a user based off the payload and returns the new user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`_
+
 PUT /users/:id - _Updates the given user with the given payload and returns the newly updated user object_
+
 DELETE /users/:id - _Deletes the given used from the server_
 
 ## Extra Snippets
