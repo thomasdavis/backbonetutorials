@@ -8,17 +8,17 @@ The example runs against this server which exposes the API shown below
 
 Used for populating our users collection
 
-**GET** /users - __Returns an array of user objects e.g. `[{firstname: 'Thomas', lastname: 'Davis', age: 12}]`__
+**GET** /users - _Returns an array of user objects e.g. `[{firstname: 'Thomas', lastname: 'Davis', age: 12}]`_
 
 Used for populating our user model
 
-**GET** /users/:id - __Returns a single user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`__
+**GET** /users/:id - __Returns a single user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`
 
-**POST** /users - __Creates a user based off the payload and returns the new user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`__
+**POST** /users - _Creates a user based off the payload and returns the new user object e.g. `{id: 'xxxx', firstname: 'Thomas', lastname: 'Davis', age: 12}`_
 
-**PUT** /users/:id - __Updates the given user with the given payload and returns the newly updated user object__
+**PUT** /users/:id - _Updates the given user with the given payload and returns the newly updated user object_
 
-**DELETE** /users/:id - __Deletes the given used from the server__
+**DELETE** /users/:id - _Deletes the given used from the server_
 
 ## Extra Snippets
 
