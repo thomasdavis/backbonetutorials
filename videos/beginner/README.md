@@ -53,3 +53,17 @@ $.fn.serializeObject = function() {
   return o;
 };
 ```  
+
+### Preventing XSS
+
+As always you need to protect your users by encoding input and output, here is some simple methods for doing so.
+
+```js
+function htmlEncode(value){
+  return $('<div/>').text(value).html();
+}
+
+function htmlDecode(value){
+  return $('<div/>').html(value).text();
+}
+```
