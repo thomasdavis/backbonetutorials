@@ -1,6 +1,17 @@
+# Backbone.js Beginner Video Tutorial
 
+## Links
+
+* [Link to client repo](https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/videos/beginner)
+* [Link to server repo](https://github.com/thomasdavis/video-backbone-beginner-server)
+* [cdnjs](http://cdnjs.com)
+* [My homepage](http://thomasdav.is)
 
 ## Example RESTful Documentation
+
+A deployed CORS enabled version of this server is available at
+
+`http://backbonejs-beginner.herokuapp.com`
 
 The server code base can be found [here](https://github.com/thomasdavis/video-backbone-beginner-server).
 
