@@ -165,7 +165,7 @@ Our model definition shall thus look like;
 
 ### Creating a new model
 
-If we wish to create a new user on the server then we will instantiate a new UserModel and call `save`.  If the `id` attribute of the model is `null`, Backbone.js will send send of POST request to the server to the urlRoot. 
+If we wish to create a new user on the server then we will instantiate a new UserModel and call `save`.  If the `id` attribute of the model is `null`, Backbone.js will send of POST request to the server to the urlRoot. 
 
 {% highlight javascript %}
     var UserModel = Backbone.Model.extend({
