@@ -17,8 +17,9 @@ define([
 	        return 'https://api.github.com/users/' + this.query;
 	    },
 	    
-	    parse : function(data) {  
-	        return data;
+	    parse : function(res) { 
+        // because of jsonp 
+	        return data.data;
 	    }
 
     });
