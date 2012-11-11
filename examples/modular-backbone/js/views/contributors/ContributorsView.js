@@ -20,7 +20,7 @@ define([
       }
 
       this.collection = new ContributorsCollection([]); 
-      this.collection.fetch({ success : onDataHandler });
+      this.collection.fetch({ success : onDataHandler, dataType: "jsonp" });
 
     },
 

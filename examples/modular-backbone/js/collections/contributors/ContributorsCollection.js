@@ -15,7 +15,7 @@ define([
       },
     
       parse : function(data) {
-          var uniqueArray = this.removeDuplicates(data);
+          var uniqueArray = this.removeDuplicates(data.data);
           return uniqueArray;
       },
       
