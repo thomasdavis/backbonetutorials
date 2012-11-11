@@ -1,8 +1,10 @@
-<div class="contributors-stats">
-  <ul>
-    <li><p>total contributions: <%= total_contributions %></p></li>
-    <li><p>total contributors: <%= total_contributors %></p></li>
-  </ul>
-</div>
+<table class="table striped">
+  <thead>
+    <tr><th>Contributions</th><th>Contributors</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><%= total_contributions %></td><td><%= total_contributors %></td></tr>
+  </tbody>
+</table>
 <div id="contributors-list"></div>
 

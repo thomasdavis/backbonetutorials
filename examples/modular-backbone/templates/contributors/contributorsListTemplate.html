@@ -4,7 +4,7 @@
    <div class="contributor" style="width:<%= contributor.get('picWidth')%>; height: <%= contributor.get('picWidth')%>">
       <ul>
         <li class="pic" style="width:<%= contributor.get('picWidth')%>; height: <%= contributor.get('picWidth')%>">
-          <p><a href="<%= contributor.get('githubPath') %>"><img width="<%= contributor.get("picWidth") %>" src="<%= contributor.get('avatar_url') %>"></a></p>
+          <p><a href="<%= contributor.get('githubPath') %>"><img width="<%= contributor.get("picWidth") %>" src="<%= contributor.get('avatar_url') %>&s=<%= contributor.get("picWidth") %>"></a></p>
         </li>
         <li class="username" style="width:<%= contributor.get('picWidth')%>;">
             <p><a href="<%= contributor.get('githubPath') %>"><%= contributor.get("login") %></a></p>

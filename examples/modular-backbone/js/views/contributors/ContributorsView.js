@@ -26,6 +26,8 @@ define([
 
     render: function(){
 
+      $('.menu li').removeClass('active');
+      $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');
       var total_contributions = this.getTotalContributions(this.collection.models);
       var total_contributors = this.collection.models.length;  
     

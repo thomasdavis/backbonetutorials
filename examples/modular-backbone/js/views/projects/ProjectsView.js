@@ -12,7 +12,8 @@ define([
   var ProjectsView = Backbone.View.extend({
     el: $("#page"),
     render: function(){
-      
+      $('.menu li').removeClass('active');
+      $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');
       this.$el.html(projectsTemplate);
 
       var project0 = new ProjectModel({title: 'Cross Domain', url: 'https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/cross-domain'}); 
