@@ -41,8 +41,8 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
  * Also: hot pink!
  */
 
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: #666; color: #fff; text-shadow: none; }
+::selection { background: #666; color: #fff; text-shadow: none; }
 
 
 /* =============================================================================
@@ -245,11 +245,333 @@ h1{
   border-bottom: 1px solid #ebebeb;
   min-height: 400px;
   padding: 20px;
+  overflow: hidden;
 }
 
-#footer {
-  text-align: center;
+#page  {
+  
 }
+
+ #page .main {
+    display: block;
+    position:relative;
+    top: 0px;
+    left: 0px;
+    padding: 0px;
+    margin: 0px;
+    width: 500px;
+    float: left;
+    overflow: hidden;
+  }
+
+ #page .sidebar {
+    display: block;
+    position:relative;
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+    margin: 0px;
+    width: 400px;
+    height: 300px;
+    background-color:#FFF;
+    float: left;
+  }
+
+  #page .sidebar .ad {
+    clear:both;
+  }
+
+  #page .sidebar .ad .pic {
+    display: block;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    top: 0px;
+    left: 0px;
+    width: 150px;
+  }  
+
+  #page .sidebar .ad .info {
+    display: block;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    top: 0px;
+    left: 0px;
+    width: 250px;
+  }  
+
+  #page .sidebar .ad .info h4 {
+    font-size: 16px;
+    color:#666;
+  }
+
+  #page .sidebar .ad .info p {
+    font-size: 10px;
+    color:#999;
+  }
+
+#page .contributors-stats ul {
+  list-style: none;
+}
+
+#page .contributors-stats ul li {
+  display:block;
+  position: relative;
+  height: 20px;
+}
+
+#page .contributors-stats ul li p {
+  font-size: 20px;
+  color:#999;
+  font-weight: bold; 
+  margin: 0px;
+  padding: 0px;
+}
+
+#page #contributors-list {
+
+}
+
+#page #contributors-list ul.contributors {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  #page #contributors-list ul.contributors li {
+    display: block;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    float: left;
+  }
+
+ #page #contributors-list ul.contributors li div.contributor {
+    display: block;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    border: 1px solid #CCC;
+ } 
+
+ #page #contributors-list ul.contributors li div.contributor ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+
+ } 
+
+ #page #contributors-list ul.contributors li div.contributor ul li {
+    display: block;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.username {
+    z-index: 2;
+    height: 14px;
+    border: none;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.username p {
+    display:block;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 14px;
+    background-color: #CCC;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    color:#999;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.username p a {
+    color:#999;
+    text-decoration: none;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.username p a:hover {
+    color:#334231;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.pic {
+    z-index: 1;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.pic a {
+    display:block;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    border: none;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.pic p {
+    display: block;
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.contributions {
+    z-index: 3;
+    pointer-events:none;
+ }
+
+ #page #contributors-list ul.contributors li div.contributor ul li.contributions p {
+    display:block;
+    position: absolute;
+    left:0px;
+    width:100%;
+    height: 15%;
+    top: 85%;
+    background-color: #333;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    color:#666;
+    margin:0px;
+    padding:0px;
+ }
+
+
+#footer {
+  display: block;
+  position:relative;
+  text-align: left;
+  background-color:#CCC;
+  height: 100px; 
+  margin:0px;
+  padding:0px;
+  -webkit-box-shadow: inset 0px 3px 5px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0px 3px 5px 0px rgba(0, 0, 0, 0.35);
+}
+
+#footer ul {
+  list-style-type: none;
+  margin:0px;
+  padding:0px;
+}
+
+#footer ul li {
+  display:block;
+  position:relative;
+  width: 100%;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#footer p {
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(153, 153, 153, 0.35);
+  margin: 0px;
+  padding: 0px;
+}
+
+#footer .pic {
+  display:block;
+  position:absolute;
+  float: left;
+  margin:5px;
+  padding:0px;
+  width: 90px;
+  height: 90px;
+  top: 0px;
+  left: 0px;
+}
+
+#footer .pic a {
+  display:block;
+  position:absolute;
+  margin:0px;
+  padding:0px;
+  width: 90px;
+  height: 90px;
+  top: 0px;
+  left: 0px;
+  border: 1px #999 solid;
+}
+
+#footer .pic a img {
+  display:block;
+  position:absolute;
+  margin:0px;
+  padding:0px;
+  width: 90px;
+  height: 90px;
+  top: 0px;
+  left: 0px;
+  filter: grayscale(100%);
+  /*filter: url(filters.svg#grayscale); 
+  filter: gray;*/
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+}
+
+#footer .info {
+  display:block;
+  position:relative;
+  float: left;
+  margin:0px;
+  padding:0px;
+  width: 100%;
+  height: 100px;
+  top: 10px;
+  left: 120px;
+}
+
+
+
+/* =============================================================================
+   Page styles
+   ========================================================================== */
+
+#home {
+
+}
+
+#home .main {
+
+}
+
+#home #sidebar {
+
+}
+
+#projects {
+
+}
+
+#contributors {
+
+}
+
+
+
 /* =============================================================================
    Non-semantic helper classes
    Please define your styles before this section.
