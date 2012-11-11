@@ -19,7 +19,7 @@ define([
 	    
 	    parse : function(res) { 
         // because of jsonp 
-	        return data.data;
+	        return res.data;
 	    }
 
     });

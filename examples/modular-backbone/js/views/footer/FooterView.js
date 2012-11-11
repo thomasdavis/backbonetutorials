@@ -20,7 +20,7 @@ define([
       }
 
       this.model = new OwnerModel(options);
-      this.model.fetch({ success : onDataHandle, dataType: "jsonp"});
+      this.model.fetch({ success : onDataHandler, dataType: "jsonp"});
 
     },
 
