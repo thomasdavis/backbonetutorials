@@ -52,7 +52,7 @@ h1{
 }
 
 #page  {
-  
+  width: 960px;
 }
 
  #page .main {
@@ -138,6 +138,37 @@ h1{
 
 }
 
+#page #contributors-list .podium {
+  display: block;
+  position: relative;
+  float: left;
+  height: 100%;
+  width: 320px;
+}
+
+#page #contributors-list .podium .top {
+  display: block;
+  position: relative;
+  float: left;
+  width: 320px;
+}
+
+#page #contributors-list .podium .base {
+  display: block;
+  position: relative;
+  float: left;
+  width: 320px;
+  background-color: rgba(214, 214, 214, 0.38);
+}
+
+#page #contributors-list .podium .base p {
+  text-align: left;
+  color: #666;
+  font-weight: normal; 
+  font-size: 12px; 
+  margin-left: 10px;
+}
+
 #page #contributors-list ul.contributors {
     list-style: none;
     margin: 0px;
@@ -161,7 +192,6 @@ h1{
     padding: 0px;
     top: 0px;
     left: 0px;
-    border: 1px solid #CCC;
  } 
 
  #page #contributors-list ul.contributors li div.contributor ul {
@@ -195,16 +225,15 @@ h1{
     left: 0px;
     width: 100%;
     height: 14px;
-    background-color: #CCC;
     text-align: center;
     font-size: 10px;
-    font-weight: bold;
-    color:#999;
+    font-weight: normal;
+    color:#333;
     line-height: 14px !important;
  }
 
  #page #contributors-list ul.contributors li div.contributor ul li.username p a {
-    color:#999;
+    color:#333;
     text-decoration: none;
  }
 
@@ -249,12 +278,11 @@ h1{
     width:100%;
     height: 15%;
     top: 85%;
-    background-color: #333;
     text-align: center;
     line-height: 14px !important;
     font-size: 10px;
-    font-weight: bold;
-    color:#666;
+    font-weight: normal;
+    color:#333;
     margin:0px;
     padding:0px;
  }
