@@ -34,10 +34,7 @@ define([
     render : function() {
    
         // when it returns to this view, why does it redraw without clearing the lists?!
-        $("#gold-podium").empty();
-        $("#silver-podium").empty();
-        $("#bronze-podium").empty();
-
+        // something to do with how it's animating I think...not sure
         var that = this;
 
         that.clearListView(); 
