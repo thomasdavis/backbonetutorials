@@ -7,6 +7,8 @@ define([
   'text!templates/contributors/contributorsTemplate.html'
 ], function($, _, Backbone, ContributorsCollection, ContributorsListView, contributorsTemplate){
 
+  var contributorsListView;
+
   var ContributorsView = Backbone.View.extend({
     
     el: $("#page"),
@@ -21,7 +23,7 @@ define([
 
       this.collection = new ContributorsCollection([]); 
       this.collection.fetch({ success : onDataHandler, dataType: "jsonp" });
-
+  
     },
 
     render: function(){
@@ -39,7 +41,7 @@ define([
       this.$el.html( compiledTemplate ); 
 
       // sub view 
-      var contributorsListView = new ContributorsListView({ collection: this.collection}); 
+      contributorsListView = new ContributorsListView({ collection: this.collection}); 
       contributorsListView.render();
 
     },
@@ -54,7 +56,13 @@ define([
       });
 
       return total; 
+    },
+
+    clearListView: function() {
+      console.log("clearing sub view");
+      contributorsListView.clearListView();
     }
+
 
 
   });

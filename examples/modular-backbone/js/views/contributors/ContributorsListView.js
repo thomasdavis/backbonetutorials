@@ -14,11 +14,34 @@ define([
 
     el : $("#contributors-list"),
     tagName:"ul",
-    render : function() {
+    
+    initialize : function() {
+     
+      var that = this;
+      that.bind("reset", that.clearView);
+    },
 
-        var that = this; 
+    clearListView : function(){
+
+      console.log("clearing sub sub view");
+
+      $("#gold-podium").empty();
+      $("#silver-podium").empty();
+      $("#bronze-podium").empty();
+      
+    }, 
+
+    render : function() {
+   
+        // when it returns to this view, why does it redraw without clearing the lists?!
+        $("#gold-podium").empty();
+        $("#silver-podium").empty();
+        $("#bronze-podium").empty();
 
         var that = this;
+
+        that.clearListView(); 
+       
         that.awardMedals(this.collection.models); 
 
         // hide the container list while adding contributors
@@ -29,16 +52,19 @@ define([
 
         var goldPodium = {
             baseHeight: '80px',
+            baseWidth: '120px',
             achievement: 'Over 50 Contributions'
         }; 
 
         var silverPodium = {
            baseHeight: '60px',
+           baseWidth: '160px',
            achievement: '5 - 50 Contributions'
         }
 
          var bronzePodium = {
            baseHeight: '40px',
+           baseWidth: '680px',
            achievement: '1 - 5 Contributions'
         }
 
@@ -91,11 +117,11 @@ define([
 
             if ( contributions >= 50 ) {
               medalHex = goldMedalHex;
-              picWidth = '160px';
+              picWidth = '120px';
               contributors = that.goldContributors; 
             } else if ( contributions < 50 && contributions >= 5) {
               medalHex = silverMedalHex;
-              picWidth = '105px';
+              picWidth = '100px';
               contributors = that.silverContributors; 
             } else {
               medalHex = bronzeMedalHex;

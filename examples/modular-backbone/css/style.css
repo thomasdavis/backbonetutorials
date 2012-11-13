@@ -150,15 +150,14 @@ h1{
   display: block;
   position: relative;
   float: left;
-  width: 320px;
 }
 
 #page #contributors-list .podium .base {
   display: block;
   position: relative;
   float: left;
-  width: 320px;
   background-color: rgba(214, 214, 214, 0.38);
+  width: 100%;
 }
 
 #page #contributors-list .podium .base p {
