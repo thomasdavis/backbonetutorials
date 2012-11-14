@@ -21,13 +21,13 @@ define([
       that.bind("reset", that.clearView);
     },
 
-    clearListView : function(){
+    resetMedalists : function(){
 
-      console.log("clearing sub sub view");
+      var that = this;
 
-      $("#gold-podium").empty();
-      $("#silver-podium").empty();
-      $("#bronze-podium").empty();
+      that.goldContributors = [];
+      that.silverContributors = [];
+      that.bronzeContributors = [];
       
     }, 
 
@@ -37,7 +37,7 @@ define([
         // something to do with how it's animating I think...not sure
         var that = this;
 
-        that.clearListView(); 
+        that.resetMedalists(); 
        
         that.awardMedals(this.collection.models); 
 
@@ -65,30 +65,32 @@ define([
            achievement: '1 - 5 Contributions'
         }
 
-
         var data = {
               contributors: that.goldContributors,
               _: _,
               podium : goldPodium 
-            };
-
-        // render gold list  
-        data.contributors = that.goldContributors;
-        data.podium = goldPodium;
-        var compiledTemplate = _.template( contributorListTemplate, data );
-        $("#gold-podium").html( compiledTemplate ); 
- 
-        // render silver list
-        data.contributors = that.silverContributors;
-        data.podium = silverPodium;
-        var compiledTemplate = _.template( contributorListTemplate, data );
-        $("#silver-podium").html( compiledTemplate ); 
+        };
 
         // render bronze list 
         data.contributors = that.bronzeContributors;
         data.podium = bronzePodium;
-        var compiledTemplate = _.template( contributorListTemplate, data );
-        $("#bronze-podium").html( compiledTemplate ); 
+
+        var bronzeCompiledTemplate = _.template( contributorListTemplate, data );
+        $("#bronze-podium").html( bronzeCompiledTemplate ); 
+
+        // render silver list
+        data.contributors = that.silverContributors;
+        data.podium = silverPodium;
+
+        var silverCompiledTemplate = _.template( contributorListTemplate, data );
+        
+        $("#silver-podium").html( silverCompiledTemplate ); 
+
+        // render gold list  
+        data.contributors = that.goldContributors;
+        data.podium = goldPodium;
+        var goldCompiledTemplate = _.template( contributorListTemplate, data );
+        $("#gold-podium").html( goldCompiledTemplate ); 
 
         that.animate();
 
@@ -143,8 +145,6 @@ define([
 
         var that = this; 
 
-        console.log("animating...");
-
         $("#gold-podium").hide();
         $("#silver-podium").hide();
         $("#bronze-podium").hide();
@@ -172,10 +172,7 @@ define([
             $( animateId ).delay(bronzeDelayCount).slideDown('slow');
             bronzeDelayCount += bronzeDelayInc;
         });
-
         
-        console.log(bronzeDelayCount);
-
         // animate in silver
         $("#silver-podium").find(".base").hide();
         $("#silver-podium").find(".base").slideDown('slow').delay(bronzeDelayCount);
