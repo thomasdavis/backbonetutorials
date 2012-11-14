@@ -21,15 +21,9 @@ define([
       that.bind("reset", that.clearView);
     },
 
-    clearListView : function(){
+    resetMedalists : function(){
 
       var that = this;
-
-      console.log("clearing sub sub view");
-
-      $("#gold-podium").empty();
-      $("#silver-podium").empty();
-      $("#bronze-podium").empty();
 
       that.goldContributors = [];
       that.silverContributors = [];
@@ -43,7 +37,7 @@ define([
         // something to do with how it's animating I think...not sure
         var that = this;
 
-        that.clearListView(); 
+        that.resetMedalists(); 
        
         that.awardMedals(this.collection.models); 
 
@@ -151,8 +145,6 @@ define([
 
         var that = this; 
 
-        console.log("animating...");
-
         $("#gold-podium").hide();
         $("#silver-podium").hide();
         $("#bronze-podium").hide();
@@ -180,10 +172,7 @@ define([
             $( animateId ).delay(bronzeDelayCount).slideDown('slow');
             bronzeDelayCount += bronzeDelayInc;
         });
-
         
-        console.log(bronzeDelayCount);
-
         // animate in silver
         $("#silver-podium").find(".base").hide();
         $("#silver-podium").find(".base").slideDown('slow').delay(bronzeDelayCount);

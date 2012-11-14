@@ -4,9 +4,8 @@ define([
   'backbone',
   'collections/contributors/ContributorsCollection',
   'views/contributors/ContributorsListView',
-  'events/contributors/ContributorsEvent',
   'text!templates/contributors/contributorsTemplate.html'
-], function($, _, Backbone, ContributorsCollection, ContributorsListView, ContributorsEvent, contributorsTemplate){
+], function($, _, Backbone, ContributorsCollection, ContributorsListView, contributorsTemplate){
 
   //var contributorsListView;
 
