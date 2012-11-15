@@ -1,6 +1,6 @@
 # Backbone Tutorials
 
-This site is by no means the definite guide to backbone.js and all corrections and contributions are welcome.
+This site is by no means the definitive guide to backbone.js and all corrections and contributions are welcome.
 About Backbone Tutorials
 
 As single page apps and large scale javascript applications become more prominent on the web, useful resources for those developers who are jumping the ship are crucial
