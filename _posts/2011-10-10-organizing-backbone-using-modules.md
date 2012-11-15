@@ -241,7 +241,7 @@ define([
       '/users': 'showUsers',
 
       // Default
-      '*actions": 'defaultAction'
+      '*actions': 'defaultAction'
     }
   });
 
