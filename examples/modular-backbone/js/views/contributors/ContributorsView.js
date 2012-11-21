@@ -7,6 +7,8 @@ define([
   'text!templates/contributors/contributorsTemplate.html'
 ], function($, _, Backbone, ContributorsCollection, ContributorsListView, contributorsTemplate){
 
+  //var contributorsListView;
+
   var ContributorsView = Backbone.View.extend({
     
     el: $("#page"),
@@ -19,8 +21,8 @@ define([
           that.render();
       }
 
-      this.collection = new ContributorsCollection([]); 
-      this.collection.fetch({ success : onDataHandler, dataType: "jsonp" });
+      that.collection = new ContributorsCollection([]); 
+      that.collection.fetch({ success : onDataHandler, dataType: "jsonp" });
 
     },
 
@@ -28,6 +30,7 @@ define([
 
       $('.menu li').removeClass('active');
       $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');
+
       var total_contributions = this.getTotalContributions(this.collection.models);
       var total_contributors = this.collection.models.length;  
     
@@ -54,7 +57,13 @@ define([
       });
 
       return total; 
+    },
+
+    clearListView: function() {
+      console.log("clearing sub view");
+      contributorsListView.clearListView();
     }
+
 
 
   });

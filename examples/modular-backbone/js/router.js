@@ -8,6 +8,7 @@ define([
   'views/contributors/ContributorsView',
   'views/footer/FooterView'
 ], function($, _, Backbone, HomeView, ProjectsView, ContributorsView, FooterView) {
+  
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
@@ -18,7 +19,9 @@ define([
       '*actions': 'defaultAction'
     }
   });
+  
   var initialize = function(){
+
     var app_router = new AppRouter;
     
     app_router.on('route:showProjects', function(){
@@ -34,9 +37,6 @@ define([
         // Like above, call render but know that this view has nested sub views which 
         // handle loading and displaying data from the GitHub API  
         var contributorsView = new ContributorsView();
-        //contributorsView.initialize();
-        //contributorsView.render();
-
     });
 
     app_router.on('route:defaultAction', function (actions) {
