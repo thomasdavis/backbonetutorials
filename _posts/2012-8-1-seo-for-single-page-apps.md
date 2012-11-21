@@ -135,8 +135,6 @@ You will most likely have to use both.
 
 I have released an open source npm package called [seo server](http://seo.apiengine.io) for anyone wanting to jump straight in.
 
-And also via request I have setup a service currently in beta, which takes care of the whole process and even generates sitemap.xml's for your JavaScript applications. It is also called [Seo Server](http://seoserver.apiengine.io). (currently in beta)
-
 This has been tested with Google Webmasters fetch tool.  Make sure you include `#!` on your URLs when using the fetch tool.
 
 ### Relevant Links
