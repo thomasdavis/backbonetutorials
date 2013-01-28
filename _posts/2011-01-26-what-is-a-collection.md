@@ -9,9 +9,9 @@ posturl: http://backbonetutorials.com/what-is-a-collection
 
 Backbone collections are simply an ordered set of [models](/what-is-a-model).   Such that it can be used in situations such as;
 
-* Model: Student, Collection: ClassStudents 
+* Model: Student, Collection: ClassStudents
 * Model: Todo Item, Collection: Todo List
-* Model: Animals, Collection: Zoo
+* Model: Animal, Collection: Zoo
 
 Typically your collection will only use one type of model but models themselves are not limited to a type of collection;
 
@@ -28,9 +28,10 @@ Here is a generic Model/Collection example.
           console.log("Music is the answer");
       }
   });
-  
+
   var Album = Backbone.Collection.extend({
 	model: Song
+  });
 
 {% endhighlight %}
 
@@ -49,16 +50,16 @@ Now we are going to populate a collection with some useful data.
             console.log("Music is the answer");
         }
     });
-    
+
     var Album = Backbone.Collection.extend({
 		model: Song
 	});
-	
+
 	var song1 = new Song({ name: "How Bizarre", artist: "OMC" });
 	var song2 = new Song({ name: "Sexual Healing", artist: "Marvin Gaye" });
 	var song3 = new Song({ name: "Talk It Over In Bed", artist: "OMC" });
-	
+
 	var myAlbum = new Album([ song1, song2, song3]);
 	console.log( myAlbum.models ); // [song1, song2, song3]
-	
+
 {% endhighlight %}
