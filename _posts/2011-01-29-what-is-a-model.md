@@ -165,7 +165,7 @@ Our model definition shall thus look like;
 
 ### Creating a new model
 
-If we wish to create a new user on the server then we will instantiate a new UserModel and call `save`.  If the `id` attribute of the model is `null`, Backbone.js will send of POST request to the server to the urlRoot. 
+If we wish to create a new user on the server then we will instantiate a new UserModel and call `save`.  If the `id` attribute of the model is `null`, Backbone.js will send a POST request to the urlRoot of the server. 
 
 {% highlight javascript %}
     var UserModel = Backbone.Model.extend({
@@ -219,7 +219,7 @@ If we instantiate a model with an `id`, Backbone.js will automatically perform a
 
 ### Updating a model
 
-Now that we model that exist on the server we can perform an update using a PUT request.
+Now that we have a model that exist on the server we can perform an update using a PUT request.
 We will use the `save` api call which is intelligent and will send a PUT request instead of a POST request if an `id` is present(conforming to RESTful conventions)
 
 {% highlight javascript %}
