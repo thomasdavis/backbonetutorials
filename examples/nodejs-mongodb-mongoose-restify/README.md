@@ -3,9 +3,9 @@
 There are basically two big parts to this demo - two servers. The first server, httpServer, serves up static html/js/css to the 
 browser and the second, mongodbServer, is purely for saving and retrieving data from the mongodb.  
 
-I've put both servers in the server.js which makes it extremely long and challenging to maintain but it does the job for this demo. Also, each server is listening on its own port. If you required only one public port, you could choose one server to listen on that port then pass the events to the other port which may be interested in different routes.  
+I've put both servers in the server.js which makes it extremely long and challenging to maintain but it does the job for this demo. Also, each server is listening on its own port. If you are only allowed access to one public port, you could choose one server to listen on that port then pass the events to the other server which may be interested in different routes. For instance, in this case, if the http server listens for a /messages route, it could trigger an event and pass that to the mongo server. 
 
-In addition to server.js, I've refactored it into two separate files: server-http.js and server-mongo.js. 
+In addition to server.js, I've also refactored it into two separate files: server-http.js and server-mongo.js. 
 
 ## HTTP SERVER
 
