@@ -20,9 +20,13 @@ $ yeoman server
 
 By default, yeoman looks at the "app" directory. If you update to Yeoman 1.0, you are able to configure this path in the grunt.js file and configure it to look any folder like "public" but at the time of writing this demo, I'm using Yeoman 0.9.6 so will keep the "app" directory.
  
-It automatically launches a browser window to: 
+Yeoman automatically launches a browser window to: 
 
 http://localhost:3501/ 
+
+You can also see this same view by visiting the redundant http server: 
+
+http://localhost:8080/
 
 If you'd like to see the raw messages as a json dump, you can point your browser to: 
 
@@ -45,13 +49,17 @@ $ mongo
 
 In the mongo shell, I've created a database called "nationalpark"
 
-> use nationalpark <-- will automatically create and use this new database 
+> use nationalpark 
+
+This will automatically create and use this new database called nationalpark 
 
 then, I've added a collection called "messages" and inserted a message
 
 var message = { message: "onward, upward", hiker: "rosella"}; 
 
-> db.messages.insert(message); <--- once you use nationalpark, db becomes the link to it
+> db.messages.insert(message); 
+
+Once you use nationalpark, db becomes the link to it
 
 Just to prove you've added a message, you can display all the messages 
 
