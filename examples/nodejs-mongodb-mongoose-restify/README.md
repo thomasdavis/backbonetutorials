@@ -23,9 +23,9 @@ http://localhost:3501/
 
 I should see the index.html which presents MainView and its MessagesCollection will then go out and talk to:  
 
-http://localhost:8080/messages 
+http://localhost:8888/messages 
 
-This static server is taken very largely from this example: 
+This static server is taken very largely (line for line) from this example: 
 http://thecodinghumanist.com/blog/archives/2011/5/6/serving-static-files-from-node-js
 
 ## MONGODB
