@@ -354,7 +354,7 @@ define([
   'backbone',
   // Pull in the Collection module from above
   'collections/projects',
-  'text!templates/projects/list
+  'text!templates/projects/list.html'
 ], function($, _, Backbone, ProjectsCollection, projectsListTemplate){
   var ProjectListView = Backbone.View.extend({
     el: $("#container"),

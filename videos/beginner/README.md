@@ -29,7 +29,7 @@ Used for populating our user model
 
 **PUT** /users/:id - _Updates the given user with the given payload and returns the newly updated user object_
 
-**DELETE** /users/:id - _Deletes the given used from the server_
+**DELETE** /users/:id - _Deletes the given user from the server_
 
 ## Extra Snippets
 
