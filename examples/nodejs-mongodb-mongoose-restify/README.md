@@ -1,5 +1,8 @@
 # Simple example - Node.js, Restify, MongoDb and Mongoose
 
+original author: Thomas Davis | https://github.com/thomasdavis
+editor/hi-jacker: Brandon Flowers | https://github.com/headwinds 
+
 There are basically two big parts to this demo - two servers. The first server, httpServer, serves up static html/js/css to the 
 browser and the second, mongodbServer, is purely for saving and retrieving data from the mongodb.  
 
@@ -17,11 +20,11 @@ $ yeoman server
 
 By default, yeoman looks at the "app" directory. If you update to Yeoman 1.0, you are able to configure this path in the grunt.js file and configure it to look any folder like "public" but at the time of writing this demo, I'm using Yeoman 0.9.6 so will keep the "app" directory.
  
-It automatically launches a browswer window to: 
+It automatically launches a browser window to: 
 
 http://localhost:3501/ 
 
-I should see the index.html which presents MainView and its MessagesCollection will then go out and talk to:  
+If you'd like to see the raw messages as a json dump, you can point your browser to: 
 
 http://localhost:8888/messages 
 
@@ -54,24 +57,30 @@ Just to prove you've added a message, you can display all the messages
 
 > db.messages.find();
 
-Now, I have a database with a collection of messages containing at least one message.
+Now, I have a database with a collection of messages containing at least one message. You view this message in the browser, visit:
 
-## DATABASE
-
- If you opened your browser to http://localhost:8080/messages, you might see this cryptic message:
-{"message":"Invalid sort() argument. Must be a string or object."}
-
-It means there are no messages in your database but we'll get rid of that message by manually inserting a message.
-
-Once you've inserted a mesage, you can open your brower to: http://localhost:8080/messages
-and it should spit out the message   
-
+http://localhost:8888/messages
 
 ## CONFIG
 
-if you plan to work with a public github, it is a good idea to protect your production mongodb connection uri 
+If you plan to work with a public github, it is a good idea to protect your production mongodb connection uri 
 and put it in a config file which you include in .gitignore so that it doesn't get committed  
 
 var config = require('./config'); // Local congig file to hide creds
 db = mongoose.connect(config.mongoose_auth),
 Schema = mongoose.Schema;  
+
+When you go to host it on a platform like nodejitsu, you will need to deploy that config file so ensure it is included by using a .npmignore file
+
+Within my .gitignore file, I have three line to not include my config.js and my sublime project files: 
+
+config.js 
+backbone.sublime-project
+backbone.sublime-workspace 
+
+Within my .npmignore file, I have one to include the config:
+
+!./config.js
+
+
+
