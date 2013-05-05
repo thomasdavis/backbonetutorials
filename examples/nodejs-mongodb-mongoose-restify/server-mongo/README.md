@@ -2,11 +2,6 @@
 
 In order to persist data to a mongodb database, a server is created to handle all the CRUD operations.
 
-This demo attempts to answer two burning questions:
-
-1. how do I setup a local server to test mongodb?
-2. how do I deploy this server to the internet and use it to store date for my other projects?
-
 ## LOCAL
 
 The quickest way to learn mongodb is by installing it on your local machine using a service like brew or mac ports. For instance, to install mongodb using brew open a terminal window:

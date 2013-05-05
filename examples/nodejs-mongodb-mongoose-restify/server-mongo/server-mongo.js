@@ -84,7 +84,7 @@ mongodbServer.listen(mongodbPort, function() {
   var consoleMessage = '\n MongoDb, Mongoose, Restify, and Backbone Tutorial'
   consoleMessage += '\n +++++++++++++++++++++++++++++++++++++++++++++++++++++' 
   consoleMessage += '\n\n %s your mongodbServer is listening at %s';
-  consoleMessage += '\n\n open your browser to http://localhost:8888 \n\n';
+  consoleMessage += '\n\n open your browser to http://localhost:8888/messages \n\n';
   consoleMessage += '+++++++++++++++++++++++++++++++++++++++++++++++++++++ \n\n'  
  
   console.log(consoleMessage, mongodbServer.name, mongodbServer.url);

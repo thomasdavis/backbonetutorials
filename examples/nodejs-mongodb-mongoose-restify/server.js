@@ -50,8 +50,8 @@ var sendHTML = function( filePath, contentType, response ){
 
 var getFilePath = function(url) {
 
-  var filePath = './public' + url;
-  if (url == '/' ) filePath = './public/index.html';
+  var filePath = './app' + url;
+  if (url == '/' ) filePath = './app/index.html';
 
   console.log("url: " + url)
 
@@ -135,28 +135,59 @@ var MessageSchema = new Schema({
 
 // Use the schema to register a model
 mongoose.model('Message', MessageSchema); 
-var Message = mongoose.model('Message'); 
+var MessageMongooseModel = mongoose.model('Message'); // just to emphasize this isn't a Backbone Model
+
+
+/*
+
+this approach was recommended to remove the CORS restrictions instead of adding them to each request
+but its not working right now?! Something is wrong with adding it to mongodbServer
+
+// Enable CORS
+mongodbServer.all( '/*', function( req, res, next ) {
+  res.header( 'Access-Control-Allow-Origin', '*' );
+  res.header( 'Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS' );
+  res.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control' );
+  if( 'OPTIONS' == req.method ) {
+  res.send( 203, 'OK' );
+  }
+  next();
+});
+
+
+*/
 
 
 // This function is responsible for returning all entries for the Message model
 var getMessages = function(req, res, next) {
   // Resitify currently has a bug which doesn't allow you to set default headers
   // This headers comply with CORS and allow us to mongodbServer our response to any origin
-  res.header("Access-Control-Allow-Origin", "*"); 
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header( 'Access-Control-Allow-Origin', '*' );
+  res.header( 'Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS' );
+  res.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control' );
+  
+  if( 'OPTIONS' == req.method ) {
+    res.send( 203, 'OK' );
+  }
   
   console.log("mongodbServer getMessages");
 
-  Message.find().limit(20).sort('date', -1).execFind(function (arr,data) {
+  MessageMongooseModel.find().limit(20).sort('date', -1).execFind(function (arr,data) {
     res.send(data);
   });
 }
 
 var postMessage = function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header( 'Access-Control-Allow-Origin', '*' );
+  res.header( 'Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS' );
+  res.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control' );
+  
+  if( 'OPTIONS' == req.method ) {
+    res.send( 203, 'OK' );
+  }
+  
   // Create a new message model, fill it up and save it to Mongodb
-  var message = new Message(); 
+  var message = new MessageMongooseModel(); 
   
   console.log("mongodbServer postMessage: " + req.params.message);
 
@@ -172,9 +203,9 @@ mongodbServer.listen(mongodbPort, function() {
   var consoleMessage = '\n A Simple MongoDb, Mongoose, Restify, and Backbone Tutorial'
   consoleMessage += '\n +++++++++++++++++++++++++++++++++++++++++++++++++++++' 
   consoleMessage += '\n\n %s says your mongodbServer is listening at %s';
-  consoleMessage += '\n great! now open your browser to http://localhost:3501';
-  consoleMessage += '\n where you will connect to your httpServer that will';
-  consoleMessage += '\n talk to your mongodbServer to get and post your messages. \n\n';
+  consoleMessage += '\n great! now open your browser to http://localhost:8080';
+  consoleMessage += '\n it will connect to your httpServer to get your static files';
+  consoleMessage += '\n and talk to your mongodbServer to get and post your messages. \n\n';
   consoleMessage += '+++++++++++++++++++++++++++++++++++++++++++++++++++++ \n\n'  
  
   console.log(consoleMessage, mongodbServer.name, mongodbServer.url);
@@ -183,4 +214,6 @@ mongodbServer.listen(mongodbPort, function() {
 
 mongodbServer.get('/messages', getMessages);
 mongodbServer.post('/messages', postMessage);
+
+
 

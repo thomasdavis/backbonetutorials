@@ -47,9 +47,9 @@ var getFilePath = function(url) {
 
   console.log("url: " + url);
 
-  var filePath = './public' + url;
+  var filePath = './app' + url;
 
-  if (url == '/' ) filePath = './public/index.html';
+  if (url == '/' ) filePath = './app/index.html';
   
   console.log("filePath: " + filePath);
         

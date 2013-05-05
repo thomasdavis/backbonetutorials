@@ -1,20 +1,37 @@
 # Simple example - Node.js, Restify, MongoDb and Mongoose
 
-original author: Thomas Davis | https://github.com/thomasdavis
-editor/hi-jacker: Brandon Flowers | https://github.com/headwinds 
+authors: Thomas Davis | https://github.com/thomasdavis
+ 		 Brandon Flowers | https://github.com/headwinds 
 
-There are basically two big parts to this demo - two servers. The first server, httpServer, serves up static html/js/css to the 
-browser and the second, mongodbServer, is purely for saving and retrieving data from the mongodb.  
+If you would like to discuss any of this code, please your leave comments using disqus at the bottom of this article:
+
+http://backbonetutorials.com/nodejs-restify-mongodb-mongoose/ 
+
+## STRUCTURE
+
+There are basically two parts to this demo - two servers - within one file, server.js, which may sound a little confusing but the two servers do different things. 
+
+The first server, httpServer, serves up static html/js/css to the browser and the second, mongodbServer, is purely for saving and retrieving data from the mongodb.  
 
 I've put both servers in the server.js which makes it extremely long and challenging to maintain but it does the job for this demo. Also, each server is listening on its own port. If you are only allowed access to one public port, you could choose one server to listen on that port then pass the events to the other server which may be interested in different routes. For instance, in this case, if the http server listens for a /messages route, it could trigger an event and pass that to the mongo server. 
 
-In addition to server.js, I've also refactored it into two separate files: server-http.js and server-mongo.js. 
+In addition to server.js, I've also refactored it into two separate files: server-http.js and server-mongo.js.
+
+If you only need the mongobd server, you might start with the server-mongo folder.  
 
 ## HTTP SERVER
 
-Originally, this tutorial started out as purely a mongodb one but I wanted to see the data in a browser and since this is a collection of Backbone tutorials, I might as well include some client-side backbone views. I aslo started working on it before discovering Google's Yeoman which includes its own web server that serves static files thus making the HTTP portion not necessary when testing locally, however, when you move to host these files somewhere else like nodejitsu, you may need to use your own static web server if it doesn't support nginx or apache.    
+Originally, this tutorial started out as purely a mongodb one but I wanted to see the data in a browser and since this is a collection of Backbone tutorials, I might as well include some client-side backbone views. I aslo started working on it before discovering Google's Yeoman which includes its own web server that serves static files thus making the HTTP portion not necessary when testing locally, however, when you move to host these files somewhere else like nodejitsu, you may need to use your own static web server if it doesn't support nginx or apache. 
 
-To view the data in your browser, you will need to host the app locally. In my case, I started up Yeoman using the terminal. 
+But before using Yeoman, you might want to try open a terminal to the directory of this app and typing:
+
+$ node server   
+
+Next, you will need to open browser and point it to:
+
+http://localhost:8080/
+
+Alternatively, you can use Yeoman which would automatically launch a browswer window and also you more features like live reload. 
 
 $ yeoman server
 
@@ -24,9 +41,8 @@ Yeoman automatically launches a browser window to:
 
 http://localhost:3501/ 
 
-You can also see this same view by visiting the redundant http server: 
+http server: 
 
-http://localhost:8080/
 
 If you'd like to see the raw messages as a json dump, you can point your browser to: 
 
