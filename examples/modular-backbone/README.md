@@ -8,7 +8,7 @@ Learn how to use Backbone and Require together to create modular applications th
 
 Once you have a working applicaiton and you're read to go to  production, you can apply R.js (or alternatively grunt.js ) to minify and concatenate this code base into one javascript file that you'll deploy to your website.    
 
-[demo](http://www.headwinds.net/lab/backbonetutorials/modular-backbone/index.html) | [discussion](http://backbonetutorials.com/organizing-backbone-using-modules/)
+[demo](http://backbonetutorials.com/examples/modular-backbone) | [discussion](http://backbonetutorials.com/organizing-backbone-using-modules/)
 
 
  
