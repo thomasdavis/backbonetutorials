@@ -49,16 +49,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <a class="navbar-brand" href="/">Backbone Tutorials</a>
           <div class="nav-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Link</a></li>
+              <li class="active"><a href="/">Home</a></li>
              
             </ul>
             <ul class="nav navbar-nav pull-right">
-              <li><a href="#">Subscribe</a></li>
-              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+              <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
+              <li><a href="https://www.google.com.au/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CC4QFjAA&url=https%3A%2F%2Fleanpub.com%2Fbackbonetutorials&ei=dC8LUvm0O-LtiwLWroDwDA&usg=AFQjCNFuPoy4DzhISX8MR65TDHBhhtKoKw&sig2=hZuDQxF1XDTsnardyQpd0A&bvm=bv.50723672,d.cGE">Download eBook (.pdf, .MOBI, .ePub)</a></li>
             </ul>
           </div><!-- /.nav-collapse -->
         </div><!-- /.container -->
@@ -72,9 +71,31 @@
 
 <div style=""></div>
 <div class="container">
-
+<div class="row">
+  <div class="col-lg-4">
+<div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">About</h3>
+      </div>
+    
+    <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
+    </div>
+  </div>
+  <div class="col-lg-8">
+        <h3 >Backbone.js Beginner Video Tutorial</h3>
+      <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+      <a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+  </div>
+</div>
   <div class="container">
-      <div id="post">
+      <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">Tutorial</h3>
+      </div>
+    
+
+
+<div id="post">
 <h1>What is a model?</h1>
 
 <p>Across the internet the definition of <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> is so diluted that it's hard to tell what exactly your model should be doing.   The authors of backbone.js have quite a clear definition of what they believe the model represents in backbone.js.</p>
@@ -380,27 +401,31 @@ We will use the <code>save</code> api call which is intelligent and will send a 
 
 
 </div>
+  </div>
 
-<div style="border: 1px solid #ccc; box-shadow: 0 0 10px #ccc; margin-top: 15px; margin-bottom: 20px;padding: 15px;">
-<h3 style="margin-bottom:15 px;">Backbone.js Beginner Video Tutorial</h3><img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
-<a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
-<div style="clear: both;"></div>
+
+<div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Share</h3>
+      </div>
+    
+             <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
+        <noscript><a href="http://flattr.com/thing/176986/Backbone-js-Tutorials" target="_blank">
+        <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+
+
+        <span class='st_facebook_vcount' displayText='Facebook'></span>
+        <span class='st_twitter_vcount' displayText='Tweet'></span>
+        <span class='st_reddit_vcount' displayText='Reddit'></span>
+        <span class='st_googleplus_vcount' displayText='Google +1'></span>
+        <script type="text/javascript">var switchTo5x=false;</script>
+        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript">stLight.options({publisher: "bdee6d8c-ed9a-4867-90f6-011704c29ee3"}); </script>
 </div>
-
-
-     <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
-<noscript><a href="http://flattr.com/thing/176986/Backbone-js-Tutorials" target="_blank">
-<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
-
-
-<span class='st_facebook_vcount' displayText='Facebook'></span>
-<span class='st_twitter_vcount' displayText='Tweet'></span>
-<span class='st_email_vcount' displayText='Reddit'></span>
-<span class='st_email_vcount' displayText='Google +1'></span>
-<script type="text/javascript">var switchTo5x=false;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "bdee6d8c-ed9a-4867-90f6-011704c29ee3"}); </script>
-<hr />
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Comments</h3>
+      </div>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -413,9 +438,12 @@ We will use the <code>save</code> api call which is intelligent and will send a 
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+</div>
 
   </div>
+
 </div>
+
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>
 <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66406579ns.gif" /></p></noscript>
