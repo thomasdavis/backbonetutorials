@@ -1,0 +1,30 @@
+<div class="base" style="height:<%= podium.baseHeight %>">
+  <p><%= podium.achievement %></p>
+</div>  
+<div class="top">
+  <ul class="contributors">
+     <% _.each(contributors, function(contributor){ %>
+     <li style="width:<%= contributor.get('picWidth')%>; height: <%= contributor.get('picWidth')%>">
+     <div class="contributor" id="<%= contributor.get('name')%>" style="width:<%= contributor.get('picWidth')%>; height: <%= contributor.get('picWidth')%>">
+        <ul>
+          <li class="pic" style="background-color: <%= contributor.get('medalHex') %>; width:<%= contributor.get('picWidth')%>; height: <%= contributor.get('picWidth')%>">
+            <p>
+              <a href="<%= contributor.get('githubPath') %>" style="width:<%= contributor.get('picWidth')%>; height: <%= contributor.get('picWidth')%>; background: url(<%= contributor.get('avatar_url') %>) no-repeat center; background-size: <%= String( Number(contributor.get('picWidth').split("px")[0] ) - 40) + 'px' %> <%= String( Number(contributor.get('picWidth').split("px")[0] ) - 40) + 'px'  %>">
+              </a>
+            </p>
+          </li>
+          <li class="username" style="width:<%= contributor.get('picWidth')%>;">
+              <p><a href="<%= contributor.get('githubPath') %>"><%= contributor.get("login") %></a></p>
+          </li>
+          <li class="contributions" style="width:<%= contributor.get('picWidth')%>; height: <%= contributor.get('picWidth')%>">
+              <p style="background-color:<%= contributor.get("medalHex") %>"><%= contributor.get("contributions") %></p>
+          </li>
+        </ul> 
+      </div>
+    </li>  
+    <% }); %>
+  </ul>
+</div>
+
+
+

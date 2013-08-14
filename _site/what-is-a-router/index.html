@@ -11,7 +11,7 @@
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-
+  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
@@ -33,78 +33,81 @@
     })();
 /* ]]> */
 </script>
+     <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 </head>
 <body>
-
-     
-
-
 <div class="container">
-          <hr />
 
-<div class="">
-
-   <div class="row">
-    <div class="span12" style="position: relative;">  <h1>
-   <a class="" href="/">Backbone Tutorials</a>
- </h1>
-      <h3>By <a href="http://thomasdavis.github.com">Thomas Davis</a></h3>
-             <span style="position: absolute; right: 0; top: 0;"><a href="http://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<br />
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
-
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
-
-             </span><a class="btn btn-warning btn-mini" href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
-            <a class="btn btn-success btn-mini" href="http://leanpub.com/backbonetutorials">download free - (.pdf, .MOBI, .ePUB)</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="navbar" style="margin-top:10px;">
+        <div class="container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="#">Subscribe</a></li>
+              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
       </div>
-     
+
+
+    </div>
   </div>
 </div>
-          <hr />
-                    
-         <div class="row">
-          <div class="span12">
-          
-          
 
-             <div id="post">
+
+<div style=""></div>
+<div class="container">
+
+  <div class="container">
+      <div id="post">
 <h1>What is a router?</h1>
 
-<p>Backbone routers are used for routing your applications URL's when using hash tags(#).   In the traditional MVC sense they don't neccesarily fit the semantics and if you have read "<a href="http://backbonetutorials.com/what-is-a-view">What is a view?</a>" it will elaborate on this point.   Though a Backbone "router" is still very useful for any application/feature that needs URL routing/history capabilities.</p>
+<p>Backbone routers are used for routing your applications URL's when using hash tags(#).   In the traditional MVC sense they don't necessarily fit the semantics and if you have read "<a href="http://backbonetutorials.com/what-is-a-view">What is a view?</a>" it will elaborate on this point.   Though a Backbone "router" is still very useful for any application/feature that needs URL routing/history capabilities.</p>
 
 <p>Defined routers should always contain at least one route and a function to map the particular route to.   In the example below we are going to define a route that is always called.</p>
 
-<p>Also note that routes intepret anything after "#" tag in the url.   All links in your application should target "#/action" or "#action".   (Appending a forward slash after the hashtag looks a bit nicer e.g. http://example.com/#/user/help)</p>
+<p>Also note that routes interpret anything after "#" tag in the URL.   All links in your application should target "#/action" or "#action".   (Appending a forward slash after the hashtag looks a bit nicer e.g. http://example.com/#/user/help)</p>
 
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;script&gt;</span>
     <span class="kd">var</span> <span class="nx">AppRouter</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">routes</span><span class="o">:</span> <span class="p">{</span>
             <span class="s2">&quot;*actions&quot;</span><span class="o">:</span> <span class="s2">&quot;defaultRoute&quot;</span> <span class="c1">// matches http://example.com/#anything-here</span>
-        <span class="p">},</span>
-        <span class="nx">defaultRoute</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">actions</span> <span class="p">){</span>
-            <span class="c1">// The variable passed in matches the variable in the route definition &quot;actions&quot;</span>
-            <span class="nx">alert</span><span class="p">(</span> <span class="nx">actions</span> <span class="p">);</span> 
         <span class="p">}</span>
     <span class="p">});</span>
     <span class="c1">// Initiate the router</span>
     <span class="kd">var</span> <span class="nx">app_router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AppRouter</span><span class="p">;</span>
-    <span class="c1">// Start Backbone history a neccesary step for bookmarkable URL&#39;s</span>
+
+    <span class="nx">app_router</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;route:defaultRoute&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">actions</span><span class="p">);</span>
+    <span class="p">})</span>
+
+    <span class="c1">// Start Backbone history a necessary step for bookmarkable URL&#39;s</span>
     <span class="nx">Backbone</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 
 <span class="nt">&lt;/script&gt;</span>
-
-[Activate route](#action)
-
-[Activate another route](#/route/action)
-
-_Notice the change in the url_
-</code></pre>
-</div>
+</code></pre></div>
 
 
-<p><em>Please note: Prior to Backbone 0.5 (released 1. July 2011) a Router was called a Controller. To avoid confusion, the Backbone developers changed the name to Router. Hence, if you find yourself using an older version of Backbone you should write Backbone.Controller.extend({ ** });</em></p>
+<p><a href="#action">Activate route</a></p>
+
+<p><a href="#/route/action">Activate another route</a></p>
+
+<p><em>Notice the change in the url</em></p>
 
 <h2>Dynamic Routing</h2>
 
@@ -113,32 +116,31 @@ _Notice the change in the url_
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;script&gt;</span>
     <span class="kd">var</span> <span class="nx">AppRouter</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">routes</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s2">&quot;/posts/:id&quot;</span><span class="o">:</span> <span class="s2">&quot;getPost&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;posts/:id&quot;</span><span class="o">:</span> <span class="s2">&quot;getPost&quot;</span><span class="p">,</span>
             <span class="s2">&quot;*actions&quot;</span><span class="o">:</span> <span class="s2">&quot;defaultRoute&quot;</span> <span class="c1">// Backbone will try match the route above first</span>
-        <span class="p">},</span>
-        <span class="nx">getPost</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">id</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// Note the variable in the route definition being passed in here</span>
-            <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;Get post number &quot;</span> <span class="o">+</span> <span class="nx">id</span> <span class="p">);</span>   
-        <span class="p">},</span>
-        <span class="nx">defaultRoute</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">actions</span> <span class="p">){</span>
-            <span class="nx">alert</span><span class="p">(</span> <span class="nx">actions</span> <span class="p">);</span> 
         <span class="p">}</span>
     <span class="p">});</span>
     <span class="c1">// Instantiate the router</span>
     <span class="kd">var</span> <span class="nx">app_router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AppRouter</span><span class="p">;</span>
-    <span class="c1">// Start Backbone history a neccesary step for bookmarkable URL&#39;s</span>
+    <span class="nx">app_router</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;route:getPost&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Note the variable in the route definition being passed in here</span>
+        <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;Get post number &quot;</span> <span class="o">+</span> <span class="nx">id</span> <span class="p">);</span>   
+    <span class="p">});</span>
+    <span class="nx">app_router</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;route:defaultRoute&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">actions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span> <span class="nx">actions</span> <span class="p">);</span> 
+    <span class="p">});</span>
+    <span class="c1">// Start Backbone history a necessary step for bookmarkable URL&#39;s</span>
     <span class="nx">Backbone</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 
 <span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
 
-[Post 120](#/posts/120)
 
-[Post 130](#/posts/130)
+<p><a href="#/posts/120">Post 120</a></p>
 
-_Notice the change in the url_
-</code></pre>
-</div>
+<p><a href="#/posts/130">Post 130</a></p>
 
+<p><em>Notice the change in the url</em></p>
 
 <h2>Dynamic Routing Cont. ":params" and "*splats"</h2>
 
@@ -150,31 +152,30 @@ _Notice the change in the url_
 
 <div class="highlight"><pre><code class="javascript">        <span class="nx">routes</span><span class="o">:</span> <span class="p">{</span>
         
-            <span class="s2">&quot;/posts/:id&quot;</span><span class="o">:</span> <span class="s2">&quot;getPost&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;posts/:id&quot;</span><span class="o">:</span> <span class="s2">&quot;getPost&quot;</span><span class="p">,</span>
             <span class="c1">// &lt;a href=&quot;http://example.com/#/posts/121&quot;&gt;Example&lt;/a&gt;</span>
             
-            <span class="s2">&quot;/download/*path&quot;</span><span class="o">:</span> <span class="s2">&quot;downloadFile&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;download/*path&quot;</span><span class="o">:</span> <span class="s2">&quot;downloadFile&quot;</span><span class="p">,</span>
             <span class="c1">// &lt;a href=&quot;http://example.com/#/download/user/images/hey.gif&quot;&gt;Download&lt;/a&gt;</span>
             
-            <span class="s2">&quot;/:route/:action&quot;</span><span class="o">:</span> <span class="s2">&quot;loadView&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;:route/:action&quot;</span><span class="o">:</span> <span class="s2">&quot;loadView&quot;</span><span class="p">,</span>
             <span class="c1">// &lt;a href=&quot;http://example.com/#/dashboard/graph&quot;&gt;Load Route/Action View&lt;/a&gt;</span>
             
         <span class="p">},</span>
         
-        <span class="nx">getPost</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">id</span> <span class="p">){</span> 
+        <span class="nx">app_router</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;route:getPost&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">id</span> <span class="p">){</span> 
             <span class="nx">alert</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span> <span class="c1">// 121 </span>
-        <span class="p">},</span>
-        <span class="nx">downloadFile</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">path</span> <span class="p">){</span> 
+        <span class="p">});</span>
+        <span class="nx">app_router</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;route:downloadFile&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">path</span> <span class="p">){</span> 
             <span class="nx">alert</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span> <span class="c1">// user/images/hey.gif </span>
-        <span class="p">},</span>
-        <span class="nx">loadView</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">route</span><span class="p">,</span> <span class="nx">action</span> <span class="p">){</span> 
+        <span class="p">});</span>
+        <span class="nx">app_router</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;route:loadView&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">route</span><span class="p">,</span> <span class="nx">action</span> <span class="p">){</span> 
             <span class="nx">alert</span><span class="p">(</span><span class="nx">route</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nx">action</span><span class="p">);</span> <span class="c1">// dashboard_graph </span>
-        <span class="p">}</span>
-</code></pre>
-</div>
+        <span class="p">});</span>
+</code></pre></div>
 
 
-<p>Routes are quite powerful and in an ideal world your application should never contain too many.   If you need to implement hash tags with SEO in mind, do a google search for "google seo hashbangs".</p>
+<p>Routes are quite powerful and in an ideal world your application should never contain too many.   If you need to implement hash tags with SEO in mind, do a google search for "google seo hashbangs". Also check out <a href="http://seo.apiengine.io">Seo Server</a></p>
 
 <p>Remember to do a pull request for any errors you come across.</p>
 
@@ -196,7 +197,11 @@ _Notice the change in the url_
 
 </div>
 
-<p>Leave a comment or question and I will try my very hardest to get back to you!</p>
+<div style="border: 1px solid #ccc; box-shadow: 0 0 10px #ccc; margin-top: 15px; margin-bottom: 20px;padding: 15px;">
+<h3 style="margin-bottom:15 px;">Backbone.js Beginner Video Tutorial</h3><img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+<a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+<div style="clear: both;"></div>
+</div>
 
 
      <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
@@ -225,11 +230,7 @@ _Notice the change in the url_
     })();
 </script>
 
-            </div>
-            </div>
-
-
-      
+  </div>
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>

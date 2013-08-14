@@ -11,7 +11,7 @@
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-
+  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
@@ -33,43 +33,48 @@
     })();
 /* ]]> */
 </script>
+     <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 </head>
 <body>
-
-     
-
-
 <div class="container">
-          <hr />
 
-<div class="">
-
-   <div class="row">
-    <div class="span12" style="position: relative;">  <h1>
-   <a class="" href="/">Backbone Tutorials</a>
- </h1>
-      <h3>By <a href="http://thomasdavis.github.com">Thomas Davis</a></h3>
-             <span style="position: absolute; right: 0; top: 0;"><a href="http://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<br />
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
-
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
-
-             </span><a class="btn btn-warning btn-mini" href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
-            <a class="btn btn-success btn-mini" href="http://leanpub.com/backbonetutorials">download free - (.pdf, .MOBI, .ePUB)</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="navbar" style="margin-top:10px;">
+        <div class="container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="#">Subscribe</a></li>
+              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
       </div>
-     
+
+
+    </div>
   </div>
 </div>
-          <hr />
-                    
-         <div class="row">
-          <div class="span12">
-          
-          
 
-             <div id="post">
+
+<div style=""></div>
+<div class="container">
+
+  <div class="container">
+      <div id="post">
 <h1>What is a model?</h1>
 
 <p>Across the internet the definition of <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> is so diluted that it's hard to tell what exactly your model should be doing.   The authors of backbone.js have quite a clear definition of what they believe the model represents in backbone.js.</p>
@@ -85,8 +90,7 @@
     <span class="p">});</span>
     
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>So <em>initialize()</em> is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don't have to include it in your model declaration but you will find yourself using it more often than not.</p>
@@ -102,16 +106,14 @@
     <span class="p">});</span>
     
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">});</span>
-    <span class="k">delete</span> <span class="nx">person</span><span class="p">;</span>
     <span class="c1">// or we can set afterwards, these operations are equivelent</span>
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
     <span class="nx">person</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">});</span>
     
-</code></pre>
-</div>
+</code></pre></div>
 
 
-<p>So passing a javascript object to our constructor is the same as calling <em>model.set()</em>.   Now that these models have attributes set we need to be able to retrieve them.</p>
+<p>So passing a JavaScript object to our constructor is the same as calling <em>model.set()</em>.   Now that these models have attributes set we need to be able to retrieve them.</p>
 
 <h2>Getting attributes</h2>
 
@@ -123,14 +125,13 @@
         <span class="p">}</span>
     <span class="p">});</span>
     
-    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">]});</span>
+    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">child</span><span class="o">:</span> <span class="s1">&#39;Ryan&#39;</span><span class="p">});</span>
     
     <span class="kd">var</span> <span class="nx">age</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">);</span> <span class="c1">// 67</span>
     <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span> <span class="c1">// &quot;Thomas&quot;</span>
-    <span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;children&quot;</span><span class="p">);</span> <span class="c1">// [&#39;Ryan&#39;]</span>
+    <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">);</span> <span class="c1">// &#39;Ryan&#39;</span>
     
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h2>Setting model defaults</h2>
@@ -141,21 +142,20 @@
         <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Fetus&#39;</span><span class="p">,</span>
             <span class="nx">age</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="nx">children</span><span class="o">:</span> <span class="p">[]</span>
+            <span class="nx">child</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
         <span class="p">},</span>
         <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
             <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Welcome to this world&quot;</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">});</span>
     
-    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">]});</span>
+    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">child</span><span class="o">:</span> <span class="s1">&#39;Ryan&#39;</span><span class="p">});</span>
     
     <span class="kd">var</span> <span class="nx">age</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">);</span> <span class="c1">// 67</span>
     <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span> <span class="c1">// &quot;Thomas&quot;</span>
-    <span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;children&quot;</span><span class="p">);</span> <span class="c1">// [&#39;Ryan&#39;]</span>
+    <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">);</span> <span class="c1">// &#39;Ryan&#39;</span>
     
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h2>Manipulating model attributes</h2>
@@ -166,24 +166,21 @@
         <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Fetus&#39;</span><span class="p">,</span>
             <span class="nx">age</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="nx">children</span><span class="o">:</span> <span class="p">[]</span>
+            <span class="nx">child</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
         <span class="p">},</span>
         <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
             <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Welcome to this world&quot;</span><span class="p">);</span>
         <span class="p">},</span>
         <span class="nx">adopt</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">newChildsName</span> <span class="p">){</span>
-            <span class="kd">var</span> <span class="nx">children_array</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;children&quot;</span><span class="p">);</span>
-            <span class="nx">children_array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span> <span class="nx">newChildsName</span> <span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="nx">children</span><span class="o">:</span> <span class="nx">children_array</span> <span class="p">});</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="nx">child</span><span class="o">:</span> <span class="nx">newChildsName</span> <span class="p">});</span>
         <span class="p">}</span>
     <span class="p">});</span>
     
-    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">]});</span>
+    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">child</span><span class="o">:</span> <span class="s1">&#39;Ryan&#39;</span><span class="p">});</span>
     <span class="nx">person</span><span class="p">.</span><span class="nx">adopt</span><span class="p">(</span><span class="s1">&#39;John Resig&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;children&quot;</span><span class="p">);</span> <span class="c1">// [&#39;Ryan&#39;, &#39;John Resig&#39;]</span>
+    <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">);</span> <span class="c1">// &#39;John Resig&#39;</span>
     
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>So we can implement methods to get/set and perform other calculations using attributes from our model at any time.</p>
@@ -195,46 +192,154 @@
 <div class="highlight"><pre><code class="javascript">    <span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Fetus&#39;</span><span class="p">,</span>
-            <span class="nx">age</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="nx">children</span><span class="o">:</span> <span class="p">[]</span>
+            <span class="nx">age</span><span class="o">:</span> <span class="mi">0</span>
         <span class="p">},</span>
         <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
             <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Welcome to this world&quot;</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;change:name&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-                <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span> <span class="c1">// &#39;Stewie Griffin&#39;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;change:name&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">model</span><span class="p">){</span>
+                <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span> <span class="c1">// &#39;Stewie Griffin&#39;</span>
                 <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Changed my name to &quot;</span> <span class="o">+</span> <span class="nx">name</span> <span class="p">);</span>
             <span class="p">});</span>
-        <span class="p">},</span>
-        <span class="nx">replaceNameAttr</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">name</span> <span class="p">){</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span> <span class="p">});</span>
         <span class="p">}</span>
     <span class="p">});</span>
     
-    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">]});</span>
-    <span class="nx">person</span><span class="p">.</span><span class="nx">replaceNameAttr</span><span class="p">(</span><span class="s1">&#39;Stewie Griffin&#39;</span><span class="p">);</span> <span class="c1">// This triggers a change and will alert()</span>
-</code></pre>
-</div>
+    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">});</span>
+    <span class="nx">person</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Stewie Griffin&#39;</span><span class="p">});</span> <span class="c1">// This triggers a change and will alert()</span>
+</code></pre></div>
 
 
-<p>So we can bind the a change listener to individual attributes or if we like simply '<em>this.bind("change", function(){});</em>' to listen for changes to all attributes of the model.</p>
+<p>So we can bind the change listener to individual attributes or if we like simply '<em>this.on("change", function(model){});</em>' to listen for changes to all attributes of the model.</p>
 
-<h2>Fetching, Saving and Destroying</h2>
+<h2>Interacting with the server</h2>
 
-<p>Models actually have to be a part of a collection for requests to the server to work by default.   This tutorial is more of a focus on individual models.  Check back soon for a tutorial on collection implementation.</p>
+<p>Models are used to represent data from your server and actions you perform on them will be translated to RESTful operations.</p>
+
+<p>The <code>id</code> attribute of a model identifies how to find it on the database usually mapping to the <a href="http://en.wikipedia.org/wiki/Surrogate_key">surrogate key</a>.</p>
+
+<p>For the purpose of this tutorial imagine that we have a mysql table called <code>Users</code> with the columns <code>id</code>, <code>name</code>, <code>email</code>.</p>
+
+<p>The server has implemented a RESTful URL <code>/user</code> which allows us to interact with it.</p>
+
+<p>Our model definition shall thus look like;</p>
+
+<div class="highlight"><pre><code class="javascript">    <span class="kd">var</span> <span class="nx">UserModel</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+        <span class="nx">urlRoot</span><span class="o">:</span> <span class="s1">&#39;/user&#39;</span><span class="p">,</span>
+        <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+        <span class="p">}</span>
+
+    <span class="p">});</span>
+</code></pre></div>
+
+
+<h3>Creating a new model</h3>
+
+<p>If we wish to create a new user on the server then we will instantiate a new UserModel and call <code>save</code>.  If the <code>id</code> attribute of the model is <code>null</code>, Backbone.js will send a POST request to the urlRoot of the server.</p>
+
+<div class="highlight"><pre><code class="javascript">    <span class="kd">var</span> <span class="nx">UserModel</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+        <span class="nx">urlRoot</span><span class="o">:</span> <span class="s1">&#39;/user&#39;</span><span class="p">,</span>
+        <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">();</span>
+    <span class="c1">// Notice that we haven&#39;t set an `id`</span>
+    <span class="kd">var</span> <span class="nx">userDetails</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Thomas&#39;</span><span class="p">,</span>
+        <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;thomasalwyndavis@gmail.com&#39;</span>
+    <span class="p">};</span>
+    <span class="c1">// Because we have not set a `id` the server will call</span>
+    <span class="c1">// POST /user with a payload of {name:&#39;Thomas&#39;, email: &#39;thomasalwyndavis@gmail.com&#39;}</span>
+    <span class="c1">// The server should save the data and return a response containing the new `id`</span>
+    <span class="nx">user</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">userDetails</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+</code></pre></div>
+
+
+<p>Our table should now have the values</p>
+
+<p>1, 'Thomas', 'thomasalwyndavis@gmail.com'</p>
+
+<h3>Getting a model</h3>
+
+<p>Now that we have saved a new user model, we can retrieve it from the server.   We know that the <code>id</code> is 1 from the above example.</p>
+
+<p>If we instantiate a model with an <code>id</code>, Backbone.js will automatically perform a get request to the urlRoot + '/id' (conforming to RESTful conventions)</p>
+
+<div class="highlight"><pre><code class="javascript">    <span class="c1">// Here we have set the `id` of the model</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">({</span><span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">});</span>
+
+    <span class="c1">// The fetch below will perform GET /user/1</span>
+    <span class="c1">// The server should return the id, name and email from the database</span>
+    <span class="nx">user</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span>
+        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+</code></pre></div>
+
+
+<h3>Updating a model</h3>
+
+<p>Now that we have a model that exist on the server we can perform an update using a PUT request.
+We will use the <code>save</code> api call which is intelligent and will send a PUT request instead of a POST request if an <code>id</code> is present(conforming to RESTful conventions)</p>
+
+<div class="highlight"><pre><code class="javascript">    <span class="c1">// Here we have set the `id` of the model</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">({</span>
+        <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Thomas&#39;</span><span class="p">,</span>
+        <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;thomasalwyndavis@gmail.com&#39;</span>
+    <span class="p">});</span>
+
+    <span class="c1">// Let&#39;s change the name and update the server</span>
+    <span class="c1">// Because there is `id` present, Backbone.js will fire</span>
+    <span class="c1">// PUT /user/1 with a payload of `{name: &#39;Davis&#39;, email: &#39;thomasalwyndavis@gmail.com&#39;}`</span>
+    <span class="nx">user</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Davis&#39;</span><span class="p">},</span> <span class="p">{</span>
+        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">model</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+</code></pre></div>
+
+
+<h3>Deleting a model</h3>
+
+<p>When a model has an <code>id</code> we know that it exist on the server, so if we wish to remove it from the server we can call <code>destroy</code>.  <code>destroy</code> will fire off a DELETE /user/id (conforming to RESTful conventions).</p>
+
+<div class="highlight"><pre><code class="javascript">    <span class="c1">// Here we have set the `id` of the model</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">({</span>
+        <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Thomas&#39;</span><span class="p">,</span>
+        <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;thomasalwyndavis@gmail.com&#39;</span>
+    <span class="p">});</span>
+
+    <span class="c1">// Because there is `id` present, Backbone.js will fire</span>
+    <span class="c1">// DELETE /user/1 </span>
+    <span class="nx">user</span><span class="p">.</span><span class="nx">destroy</span><span class="p">({</span>
+        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Destroyed&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+</code></pre></div>
+
 
 <h3>Tips and Tricks</h3>
 
 <p><em>Get all the current attributes</em></p>
 
 <div class="highlight"><pre><code class="javascript">      
-    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Ryan&#39;</span><span class="p">]});</span>
-    <span class="kd">var</span> <span class="nx">attributes</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span> <span class="c1">// { name: &quot;Thomas&quot;, age: 67, children: [&#39;Ryan&#39;]}</span>
+    <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">attributes</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span> <span class="c1">// { name: &quot;Thomas&quot;, age: 67}</span>
     <span class="cm">/* This simply returns a copy of the current attributes. */</span>
-    <span class="k">delete</span> <span class="nx">attributes</span><span class="p">;</span>
+    
     <span class="kd">var</span> <span class="nx">attributes</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">attributes</span><span class="p">;</span>
     <span class="cm">/* The line above gives a direct reference to the attributes and you should be careful when playing with it.   Best practise would suggest that you use .set() to edit attributes of a model to take advantage of backbone listeners. */</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><em>Validate data before you set or save it</em></p>
@@ -259,14 +364,12 @@
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">;</span>
     <span class="nx">person</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Mary Poppins&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">});</span> 
     <span class="c1">// Will trigger an alert outputting the error</span>
-    <span class="k">delete</span> <span class="nx">person</span><span class="p">;</span>
     
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">;</span>
     <span class="nx">person</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Dr Manhatten&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">});</span>
     <span class="c1">// God have mercy on our souls</span>
     
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h3>Contributors</h3>
@@ -278,7 +381,11 @@
 
 </div>
 
-<p>Leave a comment or question and I will try my very hardest to get back to you!</p>
+<div style="border: 1px solid #ccc; box-shadow: 0 0 10px #ccc; margin-top: 15px; margin-bottom: 20px;padding: 15px;">
+<h3 style="margin-bottom:15 px;">Backbone.js Beginner Video Tutorial</h3><img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+<a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+<div style="clear: both;"></div>
+</div>
 
 
      <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
@@ -307,11 +414,7 @@
     })();
 </script>
 
-            </div>
-            </div>
-
-
-      
+  </div>
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>

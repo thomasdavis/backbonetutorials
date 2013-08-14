@@ -11,7 +11,7 @@
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-
+  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
@@ -33,48 +33,53 @@
     })();
 /* ]]> */
 </script>
+     <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 </head>
 <body>
-
-     
-
-
 <div class="container">
-          <hr />
 
-<div class="">
-
-   <div class="row">
-    <div class="span12" style="position: relative;">  <h1>
-   <a class="" href="/">Backbone Tutorials</a>
- </h1>
-      <h3>By <a href="http://thomasdavis.github.com">Thomas Davis</a></h3>
-             <span style="position: absolute; right: 0; top: 0;"><a href="http://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<br />
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
-
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
-
-             </span><a class="btn btn-warning btn-mini" href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
-            <a class="btn btn-success btn-mini" href="http://leanpub.com/backbonetutorials">download free - (.pdf, .MOBI, .ePUB)</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="navbar" style="margin-top:10px;">
+        <div class="container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="#">Subscribe</a></li>
+              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
       </div>
-     
+
+
+    </div>
   </div>
 </div>
-          <hr />
-                    
-         <div class="row">
-          <div class="span12">
-          
-          
 
-             <div id="post">
+
+<div style=""></div>
+<div class="container">
+
+  <div class="container">
+      <div id="post">
 <h1>Lightweight Infinite Scrolling using Twitter API</h1>
 
 <h2>Getting started</h2>
 
-<p>In this example we are going to build a widget that pulls in tweets and when the user scrolls to the bottom of the widget Backbone.js will resync with the server to bring down the next page of results.</p>
+<p>In this example we are going to build a widget that pulls in tweets and when the user scrolls to the bottom of the widget Backbone.js will re-sync with the server to bring down the next page of results.</p>
 
 <p><a href="http://backbonetutorials.com/examples/infinite-scroll/">Example Demo</a></p>
 
@@ -84,7 +89,7 @@
 
 <h2>The Twitter Collection</h2>
 
-<p>Twitter offers a jsonp API for browsing tweets.  The first thing to note is that we have to append '&amp;callback?' to allow cross domain ajax calls which is a feature of <a href="http://en.wikipedia.org/wiki/JSONP">jsonp</a>.</p>
+<p>Twitter offers a jsonp API for browsing tweets.  The first thing to note is that we have to append '&amp;callback?' to allow cross domain Ajax calls which is a feature of <a href="http://en.wikipedia.org/wiki/JSONP">jsonp</a>.</p>
 
 <p>Using the 'q' and 'page' query parameters we can find the results we are after.  In the collection definition below we have set some defaults which can be overridden at any point.</p>
 
@@ -111,8 +116,7 @@
 
   <span class="k">return</span> <span class="nx">Tweets</span><span class="p">;</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><em>Note: Feel free to attach the meta information returned by Twitter to the collection itself e.g.</em></p>
@@ -121,13 +125,12 @@
   <span class="k">this</span><span class="p">.</span><span class="nx">completed_in</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">completed_in</span>
   <span class="k">return</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
 <span class="p">},</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h2>Setting up the View</h2>
 
-<p>The first thing to do is load our Twitter collection and template into the widget module. We should attach our collection to our view in our <code>initialize</code> function. <code>loadResults</code> will be responsible for calling fetch on our Twitter collection. On success we will append the latest results to our widget using our template. Our Backbone.js <code>events</code> will listen for <code>scroll</code> on the current <code>el</code> of the view which is '.twitter-widget'. If the current <code>scrollTop</code> is at the bottom then we simply increment the Twitter collections current page property and call <code>loadResults</code> again.</p>
+<p>The first thing to do is to load our Twitter collection and template into the widget module. We should attach our collection to our view in our <code>initialize</code> function. <code>loadResults</code> will be responsible for calling fetch on our Twitter collection. On success we will append the latest results to our widget using our template. Our Backbone.js <code>events</code> will listen for <code>scroll</code> on the current <code>el</code> of the view which is '.twitter-widget'. If the current <code>scrollTop</code> is at the bottom then we simply increment the Twitter collections current page property and call <code>loadResults</code> again.</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="c1">// views/twitter/widget.js</span>
 <span class="nx">define</span><span class="p">([</span>
@@ -177,8 +180,7 @@
   <span class="p">});</span>
   <span class="k">return</span> <span class="nx">TwitterWidget</span><span class="p">;</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><em>Note: <code>triggerPoint</code> will allow you to set an offset where the user has to scroll to before loading the next page</em></p>
@@ -195,13 +197,12 @@
 
 <span class="o">&lt;%</span> <span class="p">});</span> <span class="o">%&gt;</span>
 <span class="o">&lt;</span><span class="err">/ul&gt;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h2>Conclusion</h2>
 
-<p>This is a very light weight but robust infinite scroll example. There are caveats to using infinite scroll in UI/UX so make sure to use it only when applicable.</p>
+<p>This is a very lightweight but robust infinite scroll example. There are caveats to using infinite scroll in UI/UX so make sure to only use it when applicable.</p>
 
 <p><a href="http://backbonetutorials.com/examples/infinite-scroll/">Example Demo</a></p>
 
@@ -209,7 +210,11 @@
 
 </div>
 
-<p>Leave a comment or question and I will try my very hardest to get back to you!</p>
+<div style="border: 1px solid #ccc; box-shadow: 0 0 10px #ccc; margin-top: 15px; margin-bottom: 20px;padding: 15px;">
+<h3 style="margin-bottom:15 px;">Backbone.js Beginner Video Tutorial</h3><img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+<a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+<div style="clear: both;"></div>
+</div>
 
 
      <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
@@ -238,11 +243,7 @@
     })();
 </script>
 
-            </div>
-            </div>
-
-
-      
+  </div>
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>

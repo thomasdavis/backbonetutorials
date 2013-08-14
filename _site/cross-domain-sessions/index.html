@@ -11,7 +11,7 @@
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-
+  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
@@ -33,68 +33,73 @@
     })();
 /* ]]> */
 </script>
+     <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 </head>
 <body>
-
-     
-
-
 <div class="container">
-          <hr />
 
-<div class="">
-
-   <div class="row">
-    <div class="span12" style="position: relative;">  <h1>
-   <a class="" href="/">Backbone Tutorials</a>
- </h1>
-      <h3>By <a href="http://thomasdavis.github.com">Thomas Davis</a></h3>
-             <span style="position: absolute; right: 0; top: 0;"><a href="http://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<br />
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
-
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
-
-             </span><a class="btn btn-warning btn-mini" href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
-            <a class="btn btn-success btn-mini" href="http://leanpub.com/backbonetutorials">download free - (.pdf, .MOBI, .ePUB)</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="navbar" style="margin-top:10px;">
+        <div class="container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="#">Subscribe</a></li>
+              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
       </div>
-     
+
+
+    </div>
   </div>
 </div>
-          <hr />
-                    
-         <div class="row">
-          <div class="span12">
-          
-          
 
-             <div id="post">
+
+<div style=""></div>
+<div class="container">
+
+  <div class="container">
+      <div id="post">
 <h1>Cross-domain Backbone.js with sessions using CORS</h1>
 
 <p><strong> This tutorial is a proof of concept and needs to be checked for security flaws </strong></p>
 
 <p>This tutorial will teach you how to completely separate the server and client allowing for developers to work with freedom in their respective areas.</p>
 
-<p>On a personal note, I consider this development practise highly desirable and encourage others to think of the possible benefits but the security still needs to be prooved.</p>
+<p>On a personal note, I consider this development practice highly desirable and encourage others to think of the possible benefits but the security still needs to be proved.</p>
 
 <blockquote><p>Cross-Origin Resource Sharing (CORS) is a specification that enables a truly open access across domain-boundaries. - <a href="http://enable-cors.org/">enable-cors.org</a></p></blockquote>
 
 <p><strong>Some benefits include</strong></p>
 
 <ul>
-<li>The client and back end exist independently regardless of where they are each hosted and built</li>
+<li>The client and back end exist independently regardless of where they are each hosted and built.</li>
 <li>Due to the separation of concerns, testing now becomes easier and more controlled.</li>
-<li>Develop only one API on the server, your front-end could be outsourced or built by a inhouse team.</li>
-<li>As a front-end developer you can host the client anywhere</li>
-<li>This separation enforces that the API be built robustly, documented, collaborativly and versioned.</li>
+<li>Develop only one API on the server, your front-end could be outsourced or built by a in-house team.</li>
+<li>As a front-end developer you can host the client anywhere.</li>
+<li>This separation enforces that the API be built robustly, documented, collaboratively and versioned.</li>
 </ul>
 
 
 <p><strong> Cons of this tutorial </strong></p>
 
 <ul>
-<li>This tutorial doesn't explain how to perform this with cross browser support. CORS headers aren't supported by Opera and Ie 6/7. Though it is do-able using <a href="http://easyxdm.net/wp/">easyXDM</a></li>
+<li>This tutorial doesn't explain how to perform this with cross browser support. CORS headers aren't supported by Opera and IE 6/7. Though it is do-able using <a href="http://easyxdm.net/wp/">easyXDM</a></li>
 <li>Security is somewhat addressed but maybe a more thorough security expert can chime in.</li>
 </ul>
 
@@ -102,8 +107,8 @@
 <h2>Security</h2>
 
 <ul>
-<li>Don't allow GET request to change data, only retrieve</li>
-<li>Whitelist your allowed domains (see <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/cross-domain/server.js">server.js</a></li>
+<li>Don't allow GET request to change data, only retrieve.</li>
+<li>Whitelist your allowed domains (see <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/cross-domain/server.js">server.js</a>)</li>
 <li>Protect again <a href="http://blog.opensecurityresearch.com/2012/02/json-csrf-with-parameter-padding.html">JSON padding</a></li>
 </ul>
 
@@ -112,7 +117,7 @@
 
 <p>To easily understand this tutorial you should jump straight into the example code base.</p>
 
-<p>Host the codebase on a simple http server such that the domain is <code>localhost</code> with port 80 hidden.</p>
+<p>Host the codebase on a simple HTTP server such that the domain is <code>localhost</code> with port 80 hidden.</p>
 
 <p><a href="https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/cross-domain">Example Codebase</a></p>
 
@@ -122,7 +127,7 @@
 
 <h2>Checking session state at first load</h2>
 
-<p>Before starting any routes, we should really know if the user is authed or not. This will allow us to load the appropiate views. We will simply wrap our <code>Backbone.history.start</code> in a callback that executes after <code>Session.getAuth</code> has checked the server. We will jump into our Session model next.</p>
+<p>Before starting any routes, we should really know whether the user is authenticated. This will allow us to load the appropriate views. We will simply wrap our <code>Backbone.history.start</code> in a callback that executes after <code>Session.getAuth</code> has checked the server. We will jump into our Session model next.</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;jquery&#39;</span><span class="p">,</span>
@@ -157,15 +162,14 @@
     <span class="p">});</span>
   <span class="k">return</span> <span class="nx">AppView</span><span class="p">;</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><em>Note: We have used jQuery <code>ajaxPrefilter</code> to hook into all AJAX requests before they are executed. This is where we specify what server we want the application to hit.</em></p>
 
 <h2>An example Session model</h2>
 
-<p>This is a very light weight Session model which handles most situations. Read through the code and comments below. The model simply has a login, logout and check function. Again we have hooked into jQuery <code>ajaxPrefilter</code> to allow for csrf tokens and also telling jQuery to send cookies with the <code>withCredentials</code> property. The model relies heavily on it's <code>auth</code> property. Throughout your application, each view can simply bind to <code>change:auth</code> on the Session model and react accordingly. Because we return this AMD module instantiated using the new keyword, then it will keep state throughout the page. (This may not be best practise but it's highly convenient)</p>
+<p>This is a very light weight Session model which handles most situations. Read through the code and comments below. The model simply has a login, logout and check function. Again we have hooked into jQuery <code>ajaxPrefilter</code> to allow for csrf tokens and also telling jQuery to send cookies with the <code>withCredentials</code> property. The model relies heavily on it's <code>auth</code> property. Throughout your application, each view can simply bind to <code>change:auth</code> on the Session model and react accordingly. Because we return this AMD module instantiated using the new keyword, then it will keep state throughout the page. (This may not be best practice but it's highly convenient)</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="c1">// views/app.js</span>
 <span class="nx">define</span><span class="p">([</span>
@@ -222,15 +226,14 @@
   <span class="k">return</span> <span class="k">new</span> <span class="nx">SessionModel</span><span class="p">();</span>
 
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><em>Note: This session model is missing one useful feature. If a user looses auth when navigating your application then the application should set {auth: false} on this model. To do this, in the <code>ajaxPrefilter</code> edit outgoing <code>success</code> functions to check if the server response was {auth: false} and then call the original <code>success()</code> function.</em></p>
 
 <h2>Hooking up views to listen to changes in <code>auth</code></h2>
 
-<p>Now that we have a Session model, let's hook up our <code>login/logout</code> view to listen to changes in <code>auth</code>. When creating the view we use <code>on</code> to bind a listener to the <code>auth</code> attribute of our model. Everytime is changes we will re-render the view which will conditionally load a template depending on the value of <code>Session.get('auth')</code>.</p>
+<p>Now that we have a Session model, let's hook up our <code>login/logout</code> view to listen to changes in <code>auth</code>. When creating the view we use <code>on</code> to bind a listener to the <code>auth</code> attribute of our model. Everytime it changes we will re-render the view which will conditionally load a template depending on the value of <code>Session.get('auth')</code>.</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="c1">// models/session.js</span>
 <span class="nx">define</span><span class="p">([</span>
@@ -280,11 +283,10 @@
   <span class="p">});</span>
   <span class="k">return</span> <span class="nx">ExamplePage</span><span class="p">;</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
-<p><em>Note: <code>.serializeObject</code> is not a native jQuery function and I have included it in <code>[app.js](https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/cross-domain/js/views/app.js)</code> in the demo folder. <code>creds</code> can be an object of any variation of inputs, regardless it will be converted to JSON and posted to the server like any normal Backbone model.</em></p>
+<p><em>Note: <code>.serializeObject</code> is not a native jQuery function and I have included it as <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/cross-domain/js/views/app.js">app.js</a> in the demo folder. <code>creds</code> can be an object of any variation of inputs, regardless it will be converted to JSON and posted to the server like any normal Backbone model.</em></p>
 
 <p>Here are the templates we are using for our login view</p>
 
@@ -298,8 +300,7 @@
 <span class="c">&lt;!--</span> <span class="nx">templates</span><span class="o">/</span><span class="nx">example</span><span class="o">/</span><span class="nx">logout</span><span class="p">.</span><span class="nx">html</span> <span class="o">--&gt;</span>
 <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="o">&lt;%=</span> <span class="nx">username</span> <span class="o">%&gt;</span><span class="p">.</span> <span class="nx">Time</span> <span class="nx">to</span> <span class="nx">logout</span><span class="o">?&lt;</span><span class="err">/p&gt;</span>
 <span class="o">&lt;</span><span class="nx">button</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;logout&quot;</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>This wraps up setting up the client, there are some notable points to make sure this technique works.</p>
@@ -336,13 +337,13 @@
 </ul>
 
 
-<p>Be sure to read this Mozilla <a href="http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/">documentation</a> on the above</p>
+<p>Be sure to read this Mozilla <a href="http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/">documentation</a> on the above.</p>
 
 <h2>Example node server</h2>
 
-<p>This server below implements everything we talked about above. It should be relativly easy to see how would translate into other frameworks and languages. <code>app.configure</code> runs the specified libraries against every request. We have told the server that on each request it should check the csrf token and check if the origin domain is white-listed. If so we edit each request to contain the appropiate headers.</p>
+<p>This server below implements everything we have talked about so far. It should be relatively easy to see how would translate into other frameworks and languages. <code>app.configure</code> runs the specified libraries against every request. We have told the server that on each request it should check the csrf token and check if the origin domain is white-listed. If so we edit each request to contain the appropriate headers.</p>
 
-<p>This server has 3 end points, that are pseduo-restful;</p>
+<p>This server has 3 endpoints, that are pseudo-restful;</p>
 
 <ul>
 <li>POST /session - Login - Sets the session username and returns a csrf token for the user to use</li>
@@ -418,11 +419,10 @@
 <span class="p">});</span>
 
 <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
-<p><em>Note: I wrote a custom csrf module for this which can be found in the example directory. It's based of connects and uses the <code>crypto</code> library.   I didn't spend much time on it but other traditional csrf modules won't work because they aren't exactly built for this implentation technique.</em></p>
+<p><em>Note: I wrote a custom csrf module for this which can be found in the example directory. It's based of connects and uses the <code>crypto</code> library.   I didn't spend much time on it but other traditional csrf modules won't work because they aren't exactly built for this implementation technique.</em></p>
 
 <h2>Conclusion</h2>
 
@@ -449,7 +449,11 @@
 
 </div>
 
-<p>Leave a comment or question and I will try my very hardest to get back to you!</p>
+<div style="border: 1px solid #ccc; box-shadow: 0 0 10px #ccc; margin-top: 15px; margin-bottom: 20px;padding: 15px;">
+<h3 style="margin-bottom:15 px;">Backbone.js Beginner Video Tutorial</h3><img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+<a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+<div style="clear: both;"></div>
+</div>
 
 
      <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
@@ -478,11 +482,7 @@
     })();
 </script>
 
-            </div>
-            </div>
-
-
-      
+  </div>
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>

@@ -11,7 +11,7 @@
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-
+  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
@@ -33,126 +33,219 @@
     })();
 /* ]]> */
 </script>
+     <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 </head>
 <body>
-
-     
-
-
 <div class="container">
-          <hr />
 
-<div class="">
-
-   <div class="row">
-    <div class="span12" style="position: relative;">  <h1>
-   <a class="" href="/">Backbone Tutorials</a>
- </h1>
-      <h3>By <a href="http://thomasdavis.github.com">Thomas Davis</a></h3>
-             <span style="position: absolute; right: 0; top: 0;"><a href="http://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<br />
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
-
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
-
-             </span><a class="btn btn-warning btn-mini" href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
-            <a class="btn btn-success btn-mini" href="http://leanpub.com/backbonetutorials">download free - (.pdf, .MOBI, .ePUB)</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="navbar" style="margin-top:10px;">
+        <div class="container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="#">Subscribe</a></li>
+              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
       </div>
-     
+
+
+    </div>
   </div>
 </div>
-          <hr />
-                    
-         <div class="row">
-          <div class="span12">
-          
-          
 
-             <h2>Beginner</h2>
-<ul class="tutorials">
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-      <li><a href="/why-would-you-use-backbone">Why would you use Backbone.js?</a></li>
-        
-    
-        
-      <li><a href="/what-is-a-model">What is a model?</a></li>
-        
-    
-        
-      <li><a href="/what-is-a-view">What is a view?</a></li>
-        
-    
-        
-      <li><a href="/what-is-a-router">What is a router?</a></li>
-        
-    
-        
-      <li><a href="/what-is-a-collection">What is a collection?</a></li>
-        
-    
-</ul>
-<h2>Intermediate</h2>
-<ul class="tutorials">
-    
-        
-      <li><a href="/organizing-backbone-using-modules">Organizing your application using Modules (require.js)</a></li>
-        
-    
-        
-      <li><a href="/cross-domain-sessions">Cross-domain Backbone.js with sessions using CORS</a></li>
-        
-    
-        
-      <li><a href="/infinite-scrolling">Lightweight Infinite Scrolling using Twitter API</a></li>
-        
-    
-        
-      <li><a href="/nodejs-restify-mongodb-mongoose">Simple example - Node.js, Restify, MongoDb and Mongoose</a></li>
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
 
+<div style=""></div>
+<div class="container">
+
+  <div class="container">
+      <div class="row">
+  <div class="col-lg-4">
+<div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">About</h3>
+      </div>
+    
+    <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="panel ">
+      <div class="panel-heading">
+        <h3 class="panel-title">Backbone.js Beginner Video Tutorial</h3>
+      </div>
+      <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+      <a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" >
+  <div class="col-lg-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Beginners</h3>
+      </div>
+      <div class="list-group">
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+            <a href="/why-would-you-use-backbone" class="list-group-item ">Why would you use Backbone.js?</a>
+            
+          
+            
+            <a href="/what-is-a-model" class="list-group-item ">What is a model?</a>
+            
+          
+            
+            <a href="/what-is-a-view" class="list-group-item ">What is a view?</a>
+            
+          
+            
+            <a href="/what-is-a-router" class="list-group-item ">What is a router?</a>
+            
+          
+            
+            <a href="/what-is-a-collection" class="list-group-item ">What is a collection?</a>
+            
+          
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Intermediate</h3>
+      </div>
+      <div class="list-group">
+          
+            
+            <a href="/seo-for-single-page-apps" class="list-group-item ">SEO for single page applications</a>
+            
+          
+            
+            <a href="/organizing-backbone-using-modules" class="list-group-item ">Organizing your application using Modules (require.js)</a>
+            
+          
+            
+            <a href="/cross-domain-sessions" class="list-group-item ">Cross-domain Backbone.js with sessions using CORS</a>
+            
+          
+            
+            <a href="/infinite-scrolling" class="list-group-item ">Lightweight Infinite Scrolling using Twitter API</a>
+            
+          
+            
+            <a href="/nodejs-restify-mongodb-mongoose" class="list-group-item ">Simple example - Node.js, Restify, MongoDb and Mongoose</a>
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">Advanced</h3>
+      </div>
+      <p>Coming soon...</p>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="row" >
+  <div class="col-lg-12">
+
+  </div>
+
+</div>
+
+
+<div class="row" >
+  <div class="col-lg-6">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">External Tutorials</h3>
+      </div>
+      <div class="list-group">
+
+          <a class="list-group-item" href="http://backboneboilerplate.com">Backbone Boilerplate - Using require.js with build system</a>
+          <a class="list-group-item" target="_blank" href="http://thomasdavis.github.com/2011/02/01/backbone-introduction.html">Backbone.js Tutorial – by noob for noobs</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">Example Apps</h3>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item" href="http://www.earbits.com">Earbits.com - Music streaming website built with Backbone.js - Great for programmers who listen to music when coding</a>
+  <a class="list-group-item" href="http://kaleistyleguide.com/">Kalei - A living CSS styleguide - Built with Backbone.js using these principles</a>
+  <a class="list-group-item" href="http://apiengine.io">ApiEngine.io (Beta) - Collaborativly build RESTful API's with automated testing and client mocking.</a>
+      <a class="list-group-item" href="https://github.com/alessioalex/ClientManager" alt="Sample application built with Backbone, RequireJS, Twitter Bootstrap on the client and Node.js (Express.js, Mongoose) on the server.">ClientManager - Sample application built with Backbone, RequireJS, Twitter Bootstrap on the client and Node.js (Express.js, Mongoose) on the server.</a>
+      <a class="list-group-item" href="http://antoviaque.org/docs/tutorials/backbone-relational-tutorial/">Backbone-relational Tutorial - Nested Models With Backbone.js</a>
+      <a class="list-group-item" href="http://www.clevertim.com">Clevertim CRM - A real life example of implementing a simple CRM with backbone.js (check the Quick Demo)</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--
+<h2>Backbone Boilerplate</h2>
+<ul class="tutorials">
+<li><a href="http://backboneboilerplate.com">Backbone Boilerplate - Using require.js with build system</a></li>
+    <li><a target="_blank" href="http://thomasdavis.github.com/2011/02/01/backbone-introduction.html">Backbone.js Tutorial – by noob for noobs</a></li>
 </ul>
 <h2>Demo apps!</h2>
 <ul class="tutorials">
-<li><a href="http://thomasdavis.github.com/kalei/">Kalei - A living CSS styleguide - Built with Backbone.js using these principles</a></li>
+
+<li><a href="http://www.earbits.com">Earbits.com - Music streaming website built with Backbone.js - Great for programmers who listen to music when coding</a></li>
+<li><a href="http://kaleistyleguide.com/">Kalei - A living CSS styleguide - Built with Backbone.js using these principles</a></li>
+<li><a href="http://apiengine.io">ApiEngine.io</a> (Beta) - Collaborativly build RESTful API's with automated testing and client mocking.</li>
     <li><a href="https://github.com/alessioalex/ClientManager" alt="Sample application built with Backbone, RequireJS, Twitter Bootstrap on the client and Node.js (Express.js, Mongoose) on the server.">ClientManager</a> - Sample application built with Backbone, RequireJS, Twitter Bootstrap on the client and Node.js (Express.js, Mongoose) on the server.</li>
     <li><a href="http://antoviaque.org/docs/tutorials/backbone-relational-tutorial/">Backbone-relational Tutorial</a> - Nested Models With Backbone.js</li>
-    <li><a href="https://github.com/sadasant/topics">A clean opensource web application to write and organize your ideas</a>, using Backbone, RequireJS, jQueryUI, Node.js, login with Twitter and more.</li>
+    <li><a href="http://www.clevertim.com">Clevertim CRM - A real life example of implementing a simple CRM with backbone.js (check the Quick Demo)</a></li>
 </ul>
-
-
-<h2>External Tutorials</h2>
-<ul class="tutorials">
-    <li><a target="_blank" href="http://thomasdavis.github.com/2011/02/01/backbone-introduction.html">Backbone.js Tutorial – by noob for noobs</a></li>
-    <li><a target="_blank" href="http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules">Organizing Your Backbone.js Application with Modules</a></li>
-    <li><a target="_blank" href="http://developer.teradata.com/blog/jasonstrimpel/2011/11/backbone-js-and-socket-io">Backbone.js and socket.io</a></li>
-</ul>
-
-            </div>
-            </div>
-
-
-      
+-->
+  </div>
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>

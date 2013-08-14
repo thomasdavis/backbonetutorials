@@ -11,7 +11,7 @@
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-
+  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
@@ -33,43 +33,48 @@
     })();
 /* ]]> */
 </script>
+     <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 </head>
 <body>
-
-     
-
-
 <div class="container">
-          <hr />
 
-<div class="">
-
-   <div class="row">
-    <div class="span12" style="position: relative;">  <h1>
-   <a class="" href="/">Backbone Tutorials</a>
- </h1>
-      <h3>By <a href="http://thomasdavis.github.com">Thomas Davis</a></h3>
-             <span style="position: absolute; right: 0; top: 0;"><a href="http://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<br />
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
-
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
-
-             </span><a class="btn btn-warning btn-mini" href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
-            <a class="btn btn-success btn-mini" href="http://leanpub.com/backbonetutorials">download free - (.pdf, .MOBI, .ePUB)</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="navbar" style="margin-top:10px;">
+        <div class="container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="#">Subscribe</a></li>
+              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
       </div>
-     
+
+
+    </div>
   </div>
 </div>
-          <hr />
-                    
-         <div class="row">
-          <div class="span12">
-          
-          
 
-             <div id="post">
+
+<div style=""></div>
+<div class="container">
+
+  <div class="container">
+      <div id="post">
 <h1>Simple example - Node.js, Restify, MongoDb and Mongoose</h1>
 
 <p>Before I start, the Backbone.js parts of this tutorial will be using techniques described in "Organizing your application using <a href="http://backbonetutorials.com/organizing-backbone-using-modules/">Modules</a> to construct a simple guestbook.</p>
@@ -86,7 +91,7 @@
 
 <h2>The technologies</h2>
 
-<p>This stack is great for rapid prototyping and highly intuitive. Personal note: I love using Javascript as my only language for the entire application(FrontEnd/BackEnd/API/Database). Restify is still in early development but is essentially just an extension of Express. So for anyone needing more stability you can easily just substitute Express in.</p>
+<p>This stack is great for rapid prototyping and highly intuitive. Personal note: I love using JavaScript as my only language for the entire application (FrontEnd/BackEnd/API/Database). Restify is still in early development but is essentially just an extension of Express. So for anyone needing more stability you can easily just substitute Express in.</p>
 
 <h3>Node.js</h3>
 
@@ -110,16 +115,15 @@
 
 <h2>Restify configuration</h2>
 
-<p>The first thing to do is require the Restify module. Restify will be in control of handling our restFul end points and returning the appropriate JSON.</p>
+<p>The first thing to do is require the Restify module. Restify will be in control of handling our restful endpoints and returning the appropriate JSON.</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">restify</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;restify&#39;</span><span class="p">);</span>  
 <span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">restify</span><span class="p">.</span><span class="nx">createServer</span><span class="p">();</span>
 <span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">restify</span><span class="p">.</span><span class="nx">bodyParser</span><span class="p">());</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
-<p>Note: bodyParser() takes care of turning your request data into a Javascript object on the server automatically.</p>
+<p>Note: bodyParser() takes care of turning your request data into a JavaScript object on the server automatically.</p>
 
 <h2>MongoDb/Mongoose configuration</h2>
 
@@ -131,8 +135,7 @@
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./config&#39;</span><span class="p">);</span>
 <span class="nx">db</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">creds</span><span class="p">.</span><span class="nx">mongoose_auth</span><span class="p">),</span>
 <span class="nx">Schema</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">;</span>  
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <h2>Mongoose Schema</h2>
@@ -147,15 +150,14 @@
 <span class="c1">// Use the schema to register a model with MongoDb</span>
 <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Message&#39;</span><span class="p">,</span> <span class="nx">MessageSchema</span><span class="p">);</span> 
 <span class="kd">var</span> <span class="nx">Message</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Message&#39;</span><span class="p">);</span> 
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p><em>Note: <code>Message</code> can now be used for all things CRUD related.</em></p>
 
 <h2>Setting up the routes</h2>
 
-<p>Just like in Backbone, Restify allows you to configure different routes and their associated callbacks. In the code below we want to define two routes.  One for saving new messages and one for retrieving all messages. After we have created our function definitions, we then attach them to either GET/POST/PUT/DELETE on a particular restful endpoint e.g. GET /messages</p>
+<p>Just like in Backbone, Restify allows you to configure different routes and their associated callbacks. In the code below we define two routes.  One for saving new messages and one for retrieving all messages. After we have created our function definitions, we attach them to either GET/POST/PUT/DELETE on a particular restful endpoint e.g. GET /messages</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="c1">// This function is responsible for returning all entries for the Message model</span>
 <span class="kd">function</span> <span class="nx">getMessages</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
@@ -176,9 +178,9 @@
   <span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="s2">&quot;Access-Control-Allow-Origin&quot;</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">);</span>
   <span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="s2">&quot;Access-Control-Allow-Headers&quot;</span><span class="p">,</span> <span class="s2">&quot;X-Requested-With&quot;</span><span class="p">);</span>
   <span class="c1">// Create a new message model, fill it up and save it to Mongodb</span>
-  <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Message</span><span class="p">();</span> 
+  <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Message</span><span class="p">();</span>
   <span class="nx">message</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
-  <span class="nx">message</span><span class="p">.</span><span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> 
+  <span class="nx">message</span><span class="p">.</span><span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
   <span class="nx">message</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
   <span class="p">});</span>
@@ -187,8 +189,7 @@
 <span class="c1">// Set up our routes and start the server</span>
 <span class="nx">server</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/messages&#39;</span><span class="p">,</span> <span class="nx">getMessages</span><span class="p">);</span>
 <span class="nx">server</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/messages&#39;</span><span class="p">,</span> <span class="nx">postMessage</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>This wraps up the server side of things, if you follow the <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/server.js">example</a> then you should see something like</p>
@@ -197,7 +198,7 @@
 
 <p><em>Note: Again you must remember to change the <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/models/message.js">Model</a> and <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/collections/messages.js">Collection</a> definitions to match your server address.</em></p>
 
-<h2>Setting up the client(Backbone.js)</h2>
+<h2>Setting up the client (Backbone.js)</h2>
 
 <p>I've actually used the latest copy of <a href="http://backboneboilerplate.com">http://backboneboilerplate.com</a> to set up the example page.</p>
 
@@ -219,13 +220,12 @@
 
 <div class="highlight"><pre><code class="javascript"><span class="o">&lt;</span><span class="nx">textarea</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;message&quot;</span><span class="o">&gt;&lt;</span><span class="err">/textarea&gt;</span>
 <span class="o">&lt;</span><span class="nx">button</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;post-message&quot;</span><span class="o">&gt;</span><span class="nx">Post</span> <span class="nx">Message</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>This template gets inserted into the DOM by <code>views/guestbook/form.js</code>, this Backbone view also handles the interaction of the form and the posting of the new data.</p>
 
-<p>Let us create a Backbone Model that has the correct url for our restFul interface.</p>
+<p>Let us create a Backbone Model that has the correct URL for our restful interface.</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;underscore&#39;</span><span class="p">,</span>
@@ -236,11 +236,10 @@
   <span class="p">});</span>
   <span class="k">return</span> <span class="nx">Message</span><span class="p">;</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
-<p>We can see how we require our pre-defined model for messages and also our form template.</p>
+<p>We can see how we require our predefined model for messages and also our form template.</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;jquery&#39;</span><span class="p">,</span>
@@ -271,11 +270,10 @@
   <span class="p">});</span>
   <span class="k">return</span> <span class="nx">GuestbookForm</span><span class="p">;</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
-<p><em>Note: <code>trigger</code> is from Backbone Events, I binded a listener to this view in <code>views/dashboard/page.js</code> so that when a new message is submitted, the list is re-rendered. We are setting the date of post on the server so there is no need to pass it up now.</em></p>
+<p><em>Note: <code>trigger</code> is from Backbone Events, I binded a listener to this view in <code>views/dashboard/page.js</code> so when a new message is submitted, the list is re-rendered. We are setting the date of the POST on the server so there is no need to pass it up.</em></p>
 
 <h2>Retrieving a list of messages</h2>
 
@@ -294,8 +292,7 @@
 
   <span class="k">return</span> <span class="nx">Messages</span><span class="p">;</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>Now that we have a collection to use we can setup our <code>views/list.js</code> to require the collection and trigger a fetch. Once the fetch is complete we want to render our returned data to a template and insert it into the DOM.</p>
@@ -321,8 +318,7 @@
   <span class="p">});</span>
   <span class="k">return</span> <span class="nx">GuestbookList</span><span class="p">;</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>The template file should iterate over <code>messages.models</code> which is an array and print out a HTML fragment for each model.</p>
@@ -333,8 +329,7 @@
 <span class="o">&lt;</span><span class="nx">em</span><span class="o">&gt;&lt;%=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span> <span class="o">%&gt;&lt;</span><span class="err">/em&gt;</span>
 
 <span class="o">&lt;%</span> <span class="p">});</span> <span class="o">%&gt;</span>
-</code></pre>
-</div>
+</code></pre></div>
 
 
 <p>This actually sums up everything you need to know to implement this simple example.</p>
@@ -345,15 +340,15 @@
 
 <p><a href="http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/">Example Demo</a></p>
 
-<p>In this example you should really be using relative url's in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.</p>
+<p>In this example you should really be using relative URL's in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.</p>
 
-<p>This example is hosted on github therefore we had to include the absolute url to the server which is hosted on nodejitsu.com</p>
+<p>This example is hosted on GitHub therefore we had to include the absolute URL to the server which is hosted on nodejitsu.com</p>
 
 <p>On a personal note, I have of recent used the Joyent, Nodejitsu, MongoDbHq stack after they have now partnered up and I have nothing but good things to say. Highly recommend you check it out!</p>
 
 <p>As always I hope I made this tutorial easy to follow!</p>
 
-<p>Get in touch with me on twitter, comments or github!</p>
+<p>Get in touch with me on twitter, comments or GitHub!</p>
 
 <h3>Relevant Links</h3>
 
@@ -361,7 +356,11 @@
 
 </div>
 
-<p>Leave a comment or question and I will try my very hardest to get back to you!</p>
+<div style="border: 1px solid #ccc; box-shadow: 0 0 10px #ccc; margin-top: 15px; margin-bottom: 20px;padding: 15px;">
+<h3 style="margin-bottom:15 px;">Backbone.js Beginner Video Tutorial</h3><img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+<a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+<div style="clear: both;"></div>
+</div>
 
 
      <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
@@ -390,11 +389,7 @@
     })();
 </script>
 
-            </div>
-            </div>
-
-
-      
+  </div>
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>

@@ -1,0 +1,17 @@
+{
+  "name": "nationalpark-mongodb",
+  "subdomain": "nationalpark-mongodb",
+  "scripts": {
+    "start": "server-mongo.js"
+  },
+  "version": "0.0.0-14",
+  "engines": {
+    "node": "0.6.x"
+  },
+  "dependencies": {
+    "restify": "1.4.x",
+    "mongoose": "2.6.x",
+    "connect": "2.7.4",
+    "dtrace-provider":"0.2.8"
+  }
+}

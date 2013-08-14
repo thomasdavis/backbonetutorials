@@ -32,8 +32,8 @@ define([
     
       $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
         // Your server goes below
-        //options.url = 'http://localhost:8000' + options.url;
-        options.url = 'http://cross-domain.nodejitsu.com' + options.url;
+         options.url = 'http://localhost:8000' + options.url;
+        // options.url = 'http://cross-domain.nodejitsu.com' + options.url;
       });
     
     },

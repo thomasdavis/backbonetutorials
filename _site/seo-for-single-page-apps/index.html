@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>SEO for single page applications - Backbone.js Tutorials</title>
+<link href="/atom.xml" rel="alternate" title="backbone tutorials" type="application/atom+xml">
+   <meta name="author" content="Backbone Tutorials" />
+
+   <!-- syntax highlighting CSS -->
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+   
+  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
+   
+
+
+   <!-- Typekit -->
+   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+ 
+  
+    <script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+     <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="navbar" style="margin-top:10px;">
+        <div class="container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="#">Subscribe</a></li>
+              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div style=""></div>
+<div class="container">
+
+  <div class="container">
+      <div id="post">
+<h1>SEO for single page apps</h1>
+
+<p>This tutorial will show you how to index your application on search engines.   As the author I believe that servers should be completely independent of the client in the age of API's.  Which speeds up development for the ever increasing array of clients.   It is on the shoulders of the search engines to conform and they should not dictate how the web is stored and accessed.</p>
+
+<p>In 2009 Google released the idea of <a href="http://googlewebmastercentral.blogspot.com.au/2009/10/proposal-for-making-ajax-crawlable.html">escaped fragments</a>.</p>
+
+<p>The idea simply stating that if a search engine should come across your JavaScript application then you have the permission to redirect the search engine to another URL that serves the fully rendered version of the page (The current search engines cannot execute much JavaScript (Some people speculate that Google Chrome was born of Google Search wishing to successfully render every web page to retrieve ajaxed content)).</p>
+
+<h2>How does redirecting bots work?</h2>
+
+<p>Using modern headless browsers, we can easily return the fully rendered content per request by redirecting bots using our web servers configuration.   Here is an image made by Google depicting the setup.</p>
+
+<p><img src="http://acris.googlecode.com/svn/wiki/images/seo_google_crawlability.png" alt="headless seo" /></p>
+
+<div style='clear: both;'></div>
+
+
+<h2>Implementation using Phantom.js</h2>
+
+<p><a href="http://phantomjs.org/">Phantom.js</a> is a headless webkit browser.  We are going to setup a node.js server that given a URL, it will fully render the page content. Then we will redirect bots to this server to retrieve the correct content.</p>
+
+<p>You will need to install node.js and phantom.js onto a box. Then start up this server below. There are two files, one which is the web server and the other is a phantomjs script that renders the page.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// web.js</span>
+
+<span class="c1">// Express is our web server that can handle request</span>
+<span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+
+
+<span class="kd">var</span> <span class="nx">getContent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="c1">// Here we spawn a phantom.js process, the first element of the </span>
+  <span class="c1">// array is our phantomjs script and the second element is our url </span>
+  <span class="kd">var</span> <span class="nx">phantom</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;phantomjs&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;phantom-server.js&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">]);</span>
+  <span class="nx">phantom</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">setEncoding</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+  <span class="c1">// Our phantom.js script is simply logging the output and</span>
+  <span class="c1">// we access it here through stdout</span>
+  <span class="nx">phantom</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">content</span> <span class="o">+=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">phantom</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;exit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">code</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;We have an error&#39;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// once our phantom.js script exits, let&#39;s call out call back</span>
+      <span class="c1">// which outputs the contents to the page</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">respond</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Because we use [P] in htaccess we have access to this header</span>
+  <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s1">&#39;x-forwarded-host&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="nx">getContent</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sr">/(.*)/</span><span class="p">,</span> <span class="nx">respond</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>The script below is <code>phantom-server.js</code> and will be in charge of fully rendering the content. We don't return the content  until the page is fully rendered. We hook into the resources listener to do this.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;webpage&#39;</span><span class="p">).</span><span class="nx">create</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">system</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">lastReceived</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">requestCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">responseCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">requestIds</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">var</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">();</span>
+
+<span class="nx">page</span><span class="p">.</span><span class="nx">onResourceReceived</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">requestIds</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">lastReceived</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">();</span>
+        <span class="nx">responseCount</span><span class="o">++</span><span class="p">;</span>
+        <span class="nx">requestIds</span><span class="p">[</span><span class="nx">requestIds</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">id</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">onResourceRequested</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">requestIds</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">requestIds</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+        <span class="nx">requestCount</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Open the page</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">system</span><span class="p">.</span><span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
+
+<span class="kd">var</span> <span class="nx">checkComplete</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// We don&#39;t allow it to take longer than 5 seconds but</span>
+  <span class="c1">// don&#39;t return until all requests are finished</span>
+  <span class="k">if</span><span class="p">((</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">lastReceived</span> <span class="o">&gt;</span> <span class="mi">300</span> <span class="o">&amp;&amp;</span> <span class="nx">requestCount</span> <span class="o">===</span> <span class="nx">responseCount</span><span class="p">)</span> <span class="o">||</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">startTime</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">checkCompleteInterval</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">page</span><span class="p">.</span><span class="nx">content</span><span class="p">);</span>
+    <span class="nx">phantom</span><span class="p">.</span><span class="nx">exit</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Let us check to see if the page is finished rendering</span>
+<span class="kd">var</span> <span class="nx">checkCompleteInterval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">checkComplete</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>Once we have this server up and running we just redirect bots to the server in our client's web server configuration.</p>
+
+<h2>Redirecting bots</h2>
+
+<p>If you are using apache we can edit out <code>.htaccess</code> such that Google requests are proxied to our middle man phantom.js server.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">RewriteEngine</span> <span class="nx">on</span>
+<span class="nx">RewriteCond</span> <span class="o">%</span><span class="p">{</span><span class="nx">QUERY_STRING</span><span class="p">}</span> <span class="o">^</span><span class="nx">_escaped_fragment_</span><span class="o">=</span><span class="p">(.</span><span class="o">*</span><span class="p">)</span><span class="nx">$</span>
+<span class="nx">RewriteRule</span> <span class="p">(.</span><span class="o">*</span><span class="p">)</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//webserver:3000/%1? [P]</span>
+</code></pre></div>
+
+
+<p>We could also include other <code>RewriteCond</code>, such as <code>user agent</code> to redirect other search engines we wish to be indexed on.</p>
+
+<p>Though Google won't use <code>_escaped_fragment_</code> unless we tell it to by either including a meta tag;
+<code>&lt;meta name="fragment" content="!"&gt;</code>
+or
+using <code>#!</code> URLs in our links.</p>
+
+<p>You will most likely have to use both.</p>
+
+<p>I have released an open source npm package called <a href="http://seo.apiengine.io">seo server</a> for anyone wanting to jump straight in.</p>
+
+<p>This has been tested with Google Webmasters fetch tool.  Make sure you include <code>#!</code> on your URLs when using the fetch tool.</p>
+
+<h3>Relevant Links</h3>
+
+<ul>
+<li><a href="http://seo.apiengine.io">Open source node.js Seo Server</a></li>
+</ul>
+
+
+</div>
+
+<div style="border: 1px solid #ccc; box-shadow: 0 0 10px #ccc; margin-top: 15px; margin-bottom: 20px;padding: 15px;">
+<h3 style="margin-bottom:15 px;">Backbone.js Beginner Video Tutorial</h3><img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+<a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+<div style="clear: both;"></div>
+</div>
+
+
+     <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
+<noscript><a href="http://flattr.com/thing/176986/Backbone-js-Tutorials" target="_blank">
+<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+
+
+<span class='st_facebook_vcount' displayText='Facebook'></span>
+<span class='st_twitter_vcount' displayText='Tweet'></span>
+<span class='st_email_vcount' displayText='Reddit'></span>
+<span class='st_email_vcount' displayText='Google +1'></span>
+<script type="text/javascript">var switchTo5x=false;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "bdee6d8c-ed9a-4867-90f6-011704c29ee3"}); </script>
+<hr />
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'bbtutes'; // required: replace example with your forum shortname
+    var disqus_url = 'http://backbonetutorials.com/seo-for-single-page-apps';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+  </div>
+</div>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66406579ns.gif" /></p></noscript>
+</body>
+</html>

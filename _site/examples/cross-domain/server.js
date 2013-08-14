@@ -11,25 +11,17 @@ var allowCrossDomain = function(req, res, next) {
   // WARNING - Be careful with what origins you give access to
   var allowedHost = [
     'http://backbonetutorials.com',
-    'http://localhost',
-    'http://fiddle.jshell.net'
+    'http://localhost'
   ];
 
   if(allowedHost.indexOf(req.headers.origin) !== -1) {
-    res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
     res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', req.headers.origin)
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    if(req.headers['user-agent'] === 'Amazon CloudFront') {
-      res.header('Expires', new Date(new Date().getTime() + 30000).toUTCString());
-      res.header('Access-Control-Allow-Origin', '*');
-
-    } else {
-     res.header('Access-Control-Allow-Origin', req.headers.origin)
-    }
+    res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
     next();
   } else {
-   res.header('Expires', '0');
-   res.send({auth: false});
+    res.send({auth: false});
   }
 }
 
@@ -41,19 +33,35 @@ app.configure(function() {
     app.use(csrf.check);
 });
 
-app.get('/test1', function(req, res){ 
-
-    res.send({test1: false});
-
+app.get('/session', function(req, res){
+  // This checks the current users auth
+  // It runs before Backbones router is started
+  // we should return a csrf token for Backbone to use
+  if(typeof req.session.username !== 'undefined'){
+    res.send({auth: true, id: req.session.id, username: req.session.username, _csrf: req.session._csrf});
+  } else {
+    res.send({auth: false, _csrf: req.session._csrf});
+  }
 });
-app.get('/test2', function(req, res){ 
 
-    res.send({test2: false});
-
+app.post('/session', function(req, res){
+  // Login
+  // Here you would pull down your user credentials and match them up
+  // to the request
+  req.session.username = req.body.username;
+  res.send({auth: true, id: req.session.id, username: req.session.username});
 });
-app.get('/test31', function(req, res){ 
 
-    res.send({test3: false});
-
+app.del('/session/:id', function(req, res, next){
+  // Logout by clearing the session
+  req.session.regenerate(function(err){
+    // Generate a new csrf token so the user can login again
+    // This is pretty hacky, connect.csrf isn't built for rest
+    // I will probably release a restful csrf module
+    csrf.generate(req, res, function () {
+      res.send({auth: false, _csrf: req.session._csrf});
+    });
+  });
 });
-app.listen(2000);
+
+app.listen(8000);

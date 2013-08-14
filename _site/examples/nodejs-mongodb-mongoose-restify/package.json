@@ -1,15 +1,16 @@
 {
-  "name": "backbonetutorials",
-  "subdomain": "backbonetutorials",
+  "name": "nationalpark",
+  "subdomain": "nationalpark",
   "scripts": {
-    "start": "server.js"
+    "start": "server-http.js"
   },
-  "version": "0.0.0-10",
+  "version": "0.0.0-13",
   "engines": {
-    "node": "0.6.x"
+    "node": "0.8.x"
   },
   "dependencies": {
     "restify": "1.4.x",
-    "mongoose": "2.6.x"
+    "mongoose": "2.6.x",
+    "connect": "2.7.4"
   }
 }

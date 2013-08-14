@@ -11,7 +11,7 @@
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-
+  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
@@ -33,58 +33,69 @@
     })();
 /* ]]> */
 </script>
+     <!-- (1) Moot depends on jQuery v1.7 or greater -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 </head>
 <body>
-
-     
-
-
 <div class="container">
-          <hr />
 
-<div class="">
-
-   <div class="row">
-    <div class="span12" style="position: relative;">  <h1>
-   <a class="" href="/">Backbone Tutorials</a>
- </h1>
-      <h3>By <a href="http://thomasdavis.github.com">Thomas Davis</a></h3>
-             <span style="position: absolute; right: 0; top: 0;"><a href="http://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
-<br />
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
-
-<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=backbonetutorials&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
-
-             </span><a class="btn btn-warning btn-mini" href="http://feeds.feedburner.com/BackboneTutorials">subscribe</a>
-            <a class="btn btn-success btn-mini" href="http://leanpub.com/backbonetutorials">download free - (.pdf, .MOBI, .ePUB)</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="navbar" style="margin-top:10px;">
+        <div class="container">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Backbone Tutorials</a>
+          <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Link</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="#">Subscribe</a></li>
+              <li><a href="#">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+            </ul>
+          </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
       </div>
-     
+
+
+    </div>
   </div>
 </div>
-          <hr />
-                    
-         <div class="row">
-          <div class="span12">
-          
-          
 
-             <div id="post">
+
+<div style=""></div>
+<div class="container">
+
+  <div class="container">
+      <div id="post">
 <h1>Why do you need Backbone.js?</h1>
 
-<p>Building single-page web apps or complicated user interfaces will get extremely difficult by simply using <a href="http://jquery.com">jQuery</a> or <a href="http://mootools.net">MooTools</a>.   The problem is standard JavaScript libraries are great at what they do - and without realizing it you can build an entire application without any formal structure.   You will with ease turn your application into a nested pile of jQuery callbacks, all tied to concrete DOM elements.</p>
+<p>Building single-page web apps or complicated user interfaces will get extremely difficult by simply using <a href="http://jquery.com">jQuery</a> or <a href="http://mootools.net">MooTools</a>. The problem is standard JavaScript libraries are great at what they do - and without realizing it you can build an entire application without any formal structure. You will with ease turn your application into a nested pile of jQuery callbacks, all tied to concrete DOM elements.</p>
 
-<p>I shouldn't need to explain why building something without any structure is a bad idea.   Of course you can always invent your own way of implement your own way of structuring your application but you miss out on the benefits of the open source community.</p>
+<p>I shouldn't need to explain why building something without any structure is a bad idea. Of course you can always invent your own way of structuring your application but you miss out on the benefits of the open source community.</p>
+
+<h2>Why single page applications are the future</h2>
+
+<p>Backbone.js enforces that communication to the server should be done entirely through a RESTful API. The web is currently trending such that all data/content will be exposed through an API. This is because the browser is no longer the only client, we now have mobile devices, tablet devices, Google Goggles and electronic fridges etc.</p>
 
 <h2>So how does Backbone.js help?</h2>
 
-<p>Backbone is an incredibly small library for the amount of functionality and structure it gives you.   It is essentially MVC for the client and allows you to make your code modular.   If you read through some of the beginner tutorials the benefits will soon become self evident and due to Backbone.js light nature you can incrementally include it in any current or future projects.</p>
+<p>Backbone is an incredibly small library for the amount of functionality and structure it gives you. It is essentially MVC for the client and allows you to make your code modular. If you read through some of the beginner tutorials the benefits will soon become self evident and due to Backbone.js light nature you can incrementally include it in any current or future projects.</p>
 
-<h3>Relevant Links</h3>
+<h2>Other frameworks</h2>
+
+<p>If you are looking for comparisons to build your single page application, try some of these resourceful links.</p>
 
 <ul>
-<li><a href="http://documentcloud.github.com/backbone/">Backbone.js official website"</a></li>
-<li><a href="http://news.ycombinator.com/item?id=2119704">great hackernews discussion /w post from author</a></li>
+<li><a href="http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/">A feature comparison of different frontend frameworks</a></li>
+<li><a href="http://addyosmani.github.com/todomvc/">Todo MVC - Todo list implemented in the many different types of frontend frameworks</a></li>
 </ul>
 
 
@@ -95,9 +106,15 @@
 </ul>
 
 
+<p><strong>If you questions regarding why you should choose Backbone.js as your framework, please leave a comment below</strong></p>
+
 </div>
 
-<p>Leave a comment or question and I will try my very hardest to get back to you!</p>
+<div style="border: 1px solid #ccc; box-shadow: 0 0 10px #ccc; margin-top: 15px; margin-bottom: 20px;padding: 15px;">
+<h3 style="margin-bottom:15 px;">Backbone.js Beginner Video Tutorial</h3><img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+<a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+<div style="clear: both;"></div>
+</div>
 
 
      <a class="FlattrButton" style="display:none;" href="http://backbonetutorials.com/"></a>
@@ -126,11 +143,7 @@
     })();
 </script>
 
-            </div>
-            </div>
-
-
-      
+  </div>
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>
