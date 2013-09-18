@@ -15,7 +15,7 @@ To easily understand this tutorial you should jump straight into the example cod
 
 [Example Codebase](https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/nodejs-mongodb-mongoose-restify)
 
-[Example Demo](http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/)
+[Example Demo](http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/app)
 
 This tutorial will assist you in saving data(Backbone.js Models) to MongoDb and retrieving a list(Backbone.js Collections) of them back.
 
@@ -272,7 +272,7 @@ This actually sums up everything you need to know to implement this simple examp
 
 [Example Codebase](https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/nodejs-mongodb-mongoose-restify)
 
-[Example Demo](http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/)
+[Example Demo](http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/app)
 
 In this example you should really be using relative URL's in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.
 
