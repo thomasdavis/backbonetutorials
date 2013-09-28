@@ -129,7 +129,8 @@
             console.log('destroyed');
             router.navigate('', {trigger:true});
           }
-        })
+        });
+        return false;
       },
       render: function (options) {
         var that = this;
