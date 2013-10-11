@@ -233,7 +233,7 @@ define([
   'backbone',
   'views/projects/list',
   'views/users/list'
-], function($, _, Backbone, Session, ProjectListView, UserListView){
+], function($, _, Backbone, ProjectListView, UserListView){
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
