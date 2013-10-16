@@ -98,17 +98,19 @@
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>
 <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66406579ns.gif" /></p></noscript>
-    <script> 
-      var tfrce_config = {
-        show_style: 'banner',
-        disableGeo: true
-      };
-      (function(){
-        var e = document.createElement('script'); e.type='text/javascript'; e.async = true;
-        e.src = document.location.protocol + '//widget.taskforce.is/widget/widget.min.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e, s);
-      })();
-    </script>
+<script> 
+  var tfrce_config = {
+    show_style: 'banner', // Other styles are banner,modal,strip and dev
 
+    disableGeo: true, // If true, will show to all visitors not just those around Washington DC
+    disableDate: true, // If true, will run the widget indefinitely and not just inside the configured time frame
+    cookieTimeout: 86400 // Currently set to two days
+  };
+  (function(){
+    var e = document.createElement('script'); e.type='text/javascript'; e.async = true;
+    e.src = document.location.protocol + '//widget.taskforce.is/widget/widget.min.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e, s);
+  })();
+</script>
 </body>
 </html>
