@@ -265,7 +265,7 @@
             <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
         <span class="p">}</span>
     <span class="p">});</span>
-    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserModel</span><span class="p">();</span>
     <span class="c1">// Notice that we haven&#39;t set an `id`</span>
     <span class="kd">var</span> <span class="nx">userDetails</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Thomas&#39;</span><span class="p">,</span>
@@ -293,7 +293,7 @@
 <p>If we instantiate a model with an <code>id</code>, Backbone.js will automatically perform a get request to the urlRoot + '/id' (conforming to RESTful conventions)</p>
 
 <div class="highlight"><pre><code class="javascript">    <span class="c1">// Here we have set the `id` of the model</span>
-    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">({</span><span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserModel</span><span class="p">({</span><span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">});</span>
 
     <span class="c1">// The fetch below will perform GET /user/1</span>
     <span class="c1">// The server should return the id, name and email from the database</span>
@@ -311,7 +311,7 @@
 We will use the <code>save</code> api call which is intelligent and will send a PUT request instead of a POST request if an <code>id</code> is present(conforming to RESTful conventions)</p>
 
 <div class="highlight"><pre><code class="javascript">    <span class="c1">// Here we have set the `id` of the model</span>
-    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">({</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserModel</span><span class="p">({</span>
         <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Thomas&#39;</span><span class="p">,</span>
         <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;thomasalwyndavis@gmail.com&#39;</span>
@@ -333,7 +333,7 @@ We will use the <code>save</code> api call which is intelligent and will send a 
 <p>When a model has an <code>id</code> we know that it exist on the server, so if we wish to remove it from the server we can call <code>destroy</code>.  <code>destroy</code> will fire off a DELETE /user/id (conforming to RESTful conventions).</p>
 
 <div class="highlight"><pre><code class="javascript">    <span class="c1">// Here we have set the `id` of the model</span>
-    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">({</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserModel</span><span class="p">({</span>
         <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Thomas&#39;</span><span class="p">,</span>
         <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;thomasalwyndavis@gmail.com&#39;</span>
