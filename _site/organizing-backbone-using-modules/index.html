@@ -5,71 +5,54 @@
    <title>Organizing your application using Modules (require.js) - Backbone.js Tutorials</title>
 <link href="/atom.xml" rel="alternate" title="backbone tutorials" type="application/atom+xml">
    <meta name="author" content="Backbone Tutorials" />
-
    <!-- syntax highlighting CSS -->
 
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
    
-  <link rel="stylesheet" href="http://cdn.moot.it/1.1/moot.css"/>
    <!-- Homepage CSS -->
-   <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="//bootswatch.com/sandstone/bootstrap.min.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
-   
+   <link href="https://fonts.googleapis.com/css?family=Arvo:400,700&subset=latin" rel="stylesheet" type="text/css">
 
 
    <!-- Typekit -->
    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
  
   
-    <script type="text/javascript">
-/* <![CDATA[ */
-    (function() {
-        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-        t.parentNode.insertBefore(s, t);
-    })();
-/* ]]> */
-</script>
-     <!-- (1) Moot depends on jQuery v1.7 or greater -->
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+   
 
 </head>
 <body>
-<div class="container">
 
   <div class="row">
-    <div class="col-lg-12">
-      <div class="navbar" style="margin-top:10px;">
-        <div class="container">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Backbone Tutorials</a>
-          <div class="nav-collapse collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav">
+
+      <div class="navbar navbar-default">
+      <div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Backbone Tutorials</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav">
               <li class=""><a href="/">Home</a></li>
-             
-            </ul>
-            <ul class="nav navbar-nav pull-right">
-              <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
-              <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
-            </ul>
-          </div><!-- /.nav-collapse -->
-        </div><!-- /.container -->
-      </div>
 
-
-    </div>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       <li><a href="http://prerender.io"><strong>Need SEO?</strong></a></li>
+      <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
+      <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+    </ul>
   </div>
 </div>
 
+</div>
 
-<div style=""></div>
+
 <div class="container">
 <div class="row">
   <div class="col-lg-4">
@@ -79,12 +62,14 @@
       </div>
     
     <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
-    </div>
+<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>   
+ </div>
   </div>
   <div class="col-lg-8">
         <h3 >Backbone.js Beginner Video Tutorial</h3>
       <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
-      <a href="http://gum.co/backbone-beginner-screencast" class="btn btn-primary">Watch Video</a>
+      <a href="https://www.youtube.com/watch?v=FZSjvWtUxYk" class="btn btn-primary">Watch Video</a>
   </div>
 </div>
   <div class="container">
@@ -96,7 +81,7 @@
 
 
 <div id="post">
-<h1>Organizing your application using Modules (require.js)</h1>
+<h1 id="organizing-your-application-using-modules-requirejs">Organizing your application using Modules (require.js)</h1>
 
 <p>Unfortunately Backbone.js does not tell you how to organize your code, leaving many developers in the dark regarding how to load scripts and lay out their development environments.</p>
 
@@ -106,7 +91,7 @@
 
 <p>This tutorial will get you started on combining Backbone.js with <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a> (Asynchronous Module Definitions).</p>
 
-<h2>What is AMD?</h2>
+<h2 id="what-is-amd">What is AMD?</h2>
 
 <p><a href="https://github.com/amdjs/amdjs-api/wiki/AMD">Asynchronous Module Definitions</a> designed to load modular code asynchronously in the browser and server.   It is actually a fork of the Common.js specification.   Many script loaders have built their implementations around AMD, seeing it as the future of modular JavaScript development.</p>
 
@@ -117,26 +102,20 @@
 <p>Quick Overview</p>
 
 <ul>
-<li>Modular</li>
-<li>Scalable</li>
-<li>Compiles well(see <a href="http://requirejs.org/docs/optimization.html">r.js</a> )</li>
-<li>Market Adoption( <a href="http://dojotoolkit.org/reference-guide/releasenotes/1.6.html">Dojo 1.6 converted fully to AMD</a> )</li>
+  <li>Modular</li>
+  <li>Scalable</li>
+  <li>Compiles well(see <a href="http://requirejs.org/docs/optimization.html">r.js</a> )</li>
+  <li>Market Adoption( <a href="http://dojotoolkit.org/reference-guide/releasenotes/1.6.html">Dojo 1.6 converted fully to AMD</a> )</li>
 </ul>
 
+<h2 id="why-requirejs">Why Require.js?</h2>
 
-<h2>Why Require.js?</h2>
+<p>p. Require.js has a great community and it is growing rapidly.  <a href="http://tagneto.blogspot.com/">James Burke</a> the author is married to Require.js and always responds to user feedback.   He is a leading expert in script loading and a contributer to the AMD specification.</p>
 
-<ol type="a">
-<li>Require.js has a great community and it is growing rapidly.  <a href="http://tagneto.blogspot.com/">James Burke</a> the author is married to Require.js and always responds to user feedback.   He is a leading expert in script loading and a contributer to the AMD specification.</li>
-</ol>
+<p><a href="https://twitter.com/jrburke" class="twitter-follow-button">Follow @jrburke</a>
+<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script></p>
 
-
-<p><a href="https://twitter.com/jrburke" class="twitter-follow-button">Follow @jrburke</a></p>
-
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
-
-
-<h2>Getting started</h2>
+<h2 id="getting-started">Getting started</h2>
 
 <p>To easily understand this tutorial you should jump straight into the example code base.</p>
 
@@ -148,13 +127,13 @@
 
 <p>If you would like to see how a particular use case would be implemented please visit the GitHub page and create an issue.(Example Request: How to do nested views).</p>
 
-<p>The example isn't super fleshed out but should give you a vague idea.</p>
+<p>The example isn’t super fleshed out but should give you a vague idea.</p>
 
-<h2>Example File Structure</h2>
+<h2 id="example-file-structure">Example File Structure</h2>
 
 <p>There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirrored in file structure.  Collections and Models are categorized into folders kind of like an ORM.</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="cm">/* File Structure</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/* File Structure</span>
 <span class="cm">├── imgs</span>
 <span class="cm">├── css</span>
 <span class="cm">│   └── style.css</span>
@@ -193,25 +172,23 @@
 <span class="cm">│   └── text.js  //Require.js plugin</span>
 <span class="cm">└── index.html</span>
 
-<span class="cm">*/</span>
-</code></pre></div>
-
+<span class="cm">*/</span></code></pre></div>
 
 <p>To continue you must really understand what we are aiming towards as described in the introduction.</p>
 
-<h2>Bootstrapping your application</h2>
+<h2 id="bootstrapping-your-application">Bootstrapping your application</h2>
 
 <p>Using Require.js we define a single entry point on our index page.
 We should setup any useful containers that might be used by our Backbone views.</p>
 
-<p><em>Note: The data-main attribute on our single script tag tells Require.js to load the script located at "js/main.js".  It automatically appends the ".js"</em></p>
+<p><em>Note: The data-main attribute on our single script tag tells Require.js to load the script located at “js/main.js”.  It automatically appends the “.js”</em></p>
 
-<div class="highlight"><pre><code class="html"><span class="cp">&lt;!doctype html&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Jackie Chan<span class="nt">&lt;/title&gt;</span>
-    <span class="c">&lt;!-- Load the script &quot;js/main.js&quot; as our entry point --&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">data-main=</span><span class="s">&quot;js/main&quot;</span> <span class="na">src=</span><span class="s">&quot;js/libs/require/require.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;title&gt;</span>Jackie Chan<span class="nt">&lt;/title&gt;</span>
+	<span class="c">&lt;!-- Load the script &quot;js/main.js&quot; as our entry point --&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">data-main=</span><span class="s">&quot;js/main&quot;</span> <span class="na">src=</span><span class="s">&quot;js/libs/require/require.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
@@ -221,27 +198,25 @@ We should setup any useful containers that might be used by our Backbone views.<
 <span class="nt">&lt;/div&gt;</span>
 
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/html&gt;</span></code></pre></div>
 
 <p>You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be. (You can also now serve the index file off the CDN using Cloudfront)</p>
 
-<h3>What does the bootstrap look like?</h3>
+<h3 id="what-does-the-bootstrap-look-like">What does the bootstrap look like?</h3>
 
 <p>Our bootstrap file will be responsible for configuring Require.js and loading initially important dependencies.</p>
 
 <p>In the example below we configure Require.js to create a shortcut alias to commonly used scripts such as jQuery, Underscore and Backbone.</p>
 
-<p>Unfortunately Backbone.js isn't AMD enabled so I downloaded the community managed repository and patched it on <a href="https://github.com/amdjs">amdjs</a>.</p>
+<p>Unfortunately Backbone.js isn’t AMD enabled so I downloaded the community managed repository and patched it on <a href="https://github.com/amdjs">amdjs</a>.</p>
 
 <p>Hopefully if the AMD specification takes off these libraries will add code to allow themselves to be loaded asynchronously.   Due to this inconvenience the bootstrap is not as intuitive as it could be.</p>
 
-<p>We also request a module called "app", this will contain the entirety of our application logic.</p>
+<p>We also request a module called “app”, this will contain the entirety of our application logic.</p>
 
-<p><em>Note: Modules are loaded relatively to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap.</em></p>
+<p><em>Note: Modules are loaded relatively to the boot strap and always append with “.js”.   So the module “app” will load “app.js” which is in the same directory as the bootstrap.</em></p>
 
-<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: main.js</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Filename: main.js</span>
 
 <span class="c1">// Require.js allows us to configure shortcut alias</span>
 <span class="c1">// There usage will become more apparent further along in the tutorial.</span>
@@ -261,23 +236,21 @@ We should setup any useful containers that might be used by our Backbone views.<
 <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">App</span><span class="p">){</span>
   <span class="c1">// The &quot;app&quot; dependency is passed in as &quot;App&quot;</span>
   <span class="nx">App</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-
-<h2>How should we lay out external scripts?</h2>
+<h2 id="how-should-we-lay-out-external-scripts">How should we lay out external scripts?</h2>
 
 <p>Any modules we develop for our application using AMD/Require.js will be asynchronously loaded.</p>
 
-<p>We have a heavy dependency on jQuery, Underscore and Backbone. Unfortunately, these libraries are loaded synchronously and also depend on each other existing in the global namespace.</p>
+<p>We have a heavy dependency on jQuery, Underscore and Backbone, unfortunately this libraries are loaded synchronously and also depend on each other existing in the global namespace.</p>
 
-<h2>A boiler plate module</h2>
+<h2 id="a-boiler-plate-module">A boiler plate module</h2>
 
-<p>So before we start developing our application, let's quickly look over boiler plate code that will be reused quite often.</p>
+<p>So before we start developing our application, let’s quickly look over boiler plate code that will be reused quite often.</p>
 
-<p>For convenience sake I generally keep a "boilerplate.js" in my application root so I can copy it when I need to.</p>
+<p>For convenience sake I generally keep a “boilerplate.js” in my application root so I can copy it when I need to.</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="c1">//Filename: boilerplate.js</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">//Filename: boilerplate.js</span>
 
 <span class="nx">define</span><span class="p">([</span>
   <span class="c1">// These are path alias that we configured in our bootstrap</span>
@@ -289,19 +262,17 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="c1">// They will not be accessible in the global scope</span>
   <span class="k">return</span> <span class="p">{};</span>
   <span class="c1">// What we return here will be used by other modules</span>
-<span class="p">});</span>
-</code></pre></div>
-
+<span class="p">});</span></code></pre></div>
 
 <p>The first argument of the define function is our dependency array, in the future we can pass in any modules we like.</p>
 
-<h2>App.js Building our applications main module</h2>
+<h2 id="appjs-building-our-applications-main-module">App.js Building our applications main module</h2>
 
 <p>Our applications main module should always remain light weight.   This tutorial only covers setting up a Backbone Router and initializing it in our main module.</p>
 
 <p>The router will then load the correct dependencies depending on the current URL.</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: app.js</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Filename: app.js</span>
 <span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;jquery&#39;</span><span class="p">,</span>
   <span class="s1">&#39;underscore&#39;</span><span class="p">,</span>
@@ -316,20 +287,16 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="k">return</span> <span class="p">{</span>
     <span class="nx">initialize</span><span class="o">:</span> <span class="nx">initialize</span>
   <span class="p">};</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-
-
-
-<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: router.js</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Filename: router.js</span>
 <span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;jquery&#39;</span><span class="p">,</span>
   <span class="s1">&#39;underscore&#39;</span><span class="p">,</span>
   <span class="s1">&#39;backbone&#39;</span><span class="p">,</span>
   <span class="s1">&#39;views/projects/list&#39;</span><span class="p">,</span>
   <span class="s1">&#39;views/users/list&#39;</span>
-<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">Session</span><span class="p">,</span> <span class="nx">ProjectListView</span><span class="p">,</span> <span class="nx">UserListView</span><span class="p">){</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">Backbone</span><span class="p">,</span> <span class="nx">ProjectListView</span><span class="p">,</span> <span class="nx">UserListView</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">AppRouter</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
     <span class="nx">routes</span><span class="o">:</span> <span class="p">{</span>
       <span class="c1">// Define some URL routes</span>
@@ -364,15 +331,13 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="k">return</span> <span class="p">{</span>
     <span class="nx">initialize</span><span class="o">:</span> <span class="nx">initialize</span>
   <span class="p">};</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-
-<h2>Modularizing a Backbone View</h2>
+<h2 id="modularizing-a-backbone-view">Modularizing a Backbone View</h2>
 
 <p>Backbone views usually interact with the DOM. Using our new modular system we can load in JavaScript templates using the Require.js text! plug-in.</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: views/project/list</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Filename: views/project/list</span>
 <span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;jquery&#39;</span><span class="p">,</span>
   <span class="s1">&#39;underscore&#39;</span><span class="p">,</span>
@@ -393,19 +358,17 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="p">});</span>
   <span class="c1">// Our module now returns our view</span>
   <span class="k">return</span> <span class="nx">ProjectListView</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre></div>
-
+<span class="p">});</span></code></pre></div>
 
 <p>JavaScript templating allows us to separate the design from the application logic by placing all our HTML in the templates folder.</p>
 
-<h2>Modularizing a Collection, Model and View</h2>
+<h2 id="modularizing-a-collection-model-and-view">Modularizing a Collection, Model and View</h2>
 
 <p>Now we put it altogether by chaining up a Model, Collection and View which is a typical scenario when building a Backbone.js application.</p>
 
 <p>First we will define our model</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: models/project</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Filename: models/project</span>
 <span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;underscore&#39;</span><span class="p">,</span>
   <span class="s1">&#39;backbone&#39;</span>
@@ -417,15 +380,15 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="p">});</span>
   <span class="c1">// Return the model for the module</span>
   <span class="k">return</span> <span class="nx">ProjectModel</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
+<p>Now that we have a model, our collection module can depend on it.  We will set the “model” attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.</p>
 
-<p>Now that we have a model, our collection module can depend on it.  We will set the "model" attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.</p>
+<blockquote>
+  <p>Collection.model: Override this property to specify the model class that the collection contains. If defined, you can pass raw attributes objects (and arrays) to add, create, and reset, and the attributes will be converted into a model of the proper type.</p>
+</blockquote>
 
-<blockquote><p>Collection.model: Override this property to specify the model class that the collection contains. If defined, you can pass raw attributes objects (and arrays) to add, create, and reset, and the attributes will be converted into a model of the proper type.</p></blockquote>
-
-<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: collections/projects</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Filename: collections/projects</span>
 <span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;underscore&#39;</span><span class="p">,</span>
   <span class="s1">&#39;backbone&#39;</span><span class="p">,</span>
@@ -437,13 +400,11 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="p">});</span>
   <span class="c1">// You don&#39;t usually return a collection instantiated</span>
   <span class="k">return</span> <span class="nx">ProjectCollection</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre></div>
-
+<span class="p">});</span></code></pre></div>
 
 <p>Now we can simply depend on our collection in our view and pass it to our JavaScript template.</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="c1">// Filename: views/projects/list</span>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Filename: views/projects/list</span>
 <span class="nx">define</span><span class="p">([</span>
   <span class="s1">&#39;jquery&#39;</span><span class="p">,</span>
   <span class="s1">&#39;underscore&#39;</span><span class="p">,</span>
@@ -464,29 +425,25 @@ We should setup any useful containers that might be used by our Backbone views.<
   <span class="p">});</span>
   <span class="c1">// Returning instantiated views can be quite useful for having &quot;state&quot;</span>
   <span class="k">return</span> <span class="nx">ProjectListView</span><span class="p">;</span>
-<span class="p">});</span>
-</code></pre></div>
+<span class="p">});</span></code></pre></div>
 
-
-<h2>Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Looking forward to feedback so I can turn this post and example into quality references on building modular JavaScript applications.</p>
 
 <p>Get in touch with me on twitter, comments or GitHub!</p>
 
-<h3>Relevant Links</h3>
+<h3 id="relevant-links">Relevant Links</h3>
 
 <ul>
-<li><a href="http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules">Organizing Your Backbone.js Application With Modules</a></li>
+  <li><a href="http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules">Organizing Your Backbone.js Application With Modules</a></li>
 </ul>
 
-
-<h3>Contributors</h3>
+<h3 id="contributors">Contributors</h3>
 
 <ul>
-<li><a href="https://github.com/dzejkej">Jakub Kozisek</a> (created modular-backbone-updated containing updated libs with AMD support)</li>
+  <li><a href="https://github.com/dzejkej">Jakub Kozisek</a> (created modular-backbone-updated containing updated libs with AMD support)</li>
 </ul>
-
 
 </div>
   </div>
@@ -500,7 +457,8 @@ We should setup any useful containers that might be used by our Backbone views.<
         <a href="https://plus.google.com/101608559187380638042?rel=author">Google Profile</a>
         <a href="https://twitter.com/neutralthoughts">Twitter</a>
         <a href="https://github.com/thomasdavis">Github</a>
-
+<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </div>
 <div class="panel panel-info">
       <div class="panel-heading">
@@ -523,17 +481,9 @@ We should setup any useful containers that might be used by our Backbone views.<
   </div>
 
 </div>
-<!-- AddThis Button BEGIN -->
-<div class="addthis_toolbox addthis_floating_style addthis_counter_style" style="left:50px;top:50px;">
-<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
-<a class="addthis_button_tweet" tw:count="vertical"></a>
-<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
-<a class="addthis_counter"></a>
-</div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-520b31815dc3cdc8"></script>
-<!-- AddThis Button END -->
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>
 <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66406579ns.gif" /></p></noscript>
+
 </body>
 </html>

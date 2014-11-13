@@ -7,3 +7,15 @@
 #post h3 {
 	font-size: 20px !important;
 }
+
+.container {
+  max-width: 840px !important ;
+}
+/*
+body {
+  font: 1em "Arvo","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  text-shadow: 0 0 4px #CCC !important;
+  color: #333;
+  font-size: 14px !important;
+}
+*/

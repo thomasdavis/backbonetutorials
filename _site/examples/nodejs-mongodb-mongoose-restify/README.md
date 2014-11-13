@@ -1,13 +1,23 @@
-# Simple example - Node.js, Restify, MongoDb and Mongoose
+## A Relatively Simple Example 
 
-authors: Thomas Davis | https://github.com/thomasdavis
- 		 Brandon Flowers | https://github.com/headwinds 
+### Node.js, Restify, MongoDb and Mongoose
 
-If you would like to discuss any of this code, please your leave comments using disqus at the bottom of this article:
+authors: 
 
-http://backbonetutorials.com/nodejs-restify-mongodb-mongoose/ 
+Thomas Davis | https://github.com/thomasdavis
 
-## STRUCTURE
+Brandon Flowers | https://github.com/headwinds 
+
+If you would like to discuss any of this code, please your leave comments using disqus at the bottom of [the main article](http://backbonetutorials.com/nodejs-restify-mongodb-mongoose/).
+
+This README.md has four main sections:
+
+1. STRUCTURE - why are there 2 servers?!
+2. HTTP SERVER - serves static html, css, js; the front-end
+3. MONGODB - pure data services; the back-end 
+4. THE MISSING CONFIG.JS FILE - the long and short:  see configSample.js and then create your own config.js 
+
+### STRUCTURE
 
 There are basically two parts to this demo - two servers - within one file, server.js, which may sound a little confusing but the two servers do different things. 
 
@@ -19,9 +29,11 @@ In addition to server.js, I've also refactored it into two separate files: serve
 
 If you only need the mongobd server, you might start with the server-mongo folder.  
 
-## HTTP SERVER
+### HTTP SERVER
 
-Originally, this tutorial started out as purely a mongodb one but I wanted to see the data in a browser and since this is a collection of Backbone tutorials, I might as well include some client-side backbone views. I aslo started working on it before discovering Google's Yeoman which includes its own web server that serves static files thus making the HTTP portion not necessary when testing locally, however, when you move to host these files somewhere else like nodejitsu, you may need to use your own static web server if it doesn't support nginx or apache. 
+Originally, this tutorial started out as purely a mongodb one but I wanted to see the data in a browser and since this is a collection of Backbone tutorials, I might as well include some client-side backbone views. 
+
+I also started working on it before discovering Google's Yeoman which includes its own web server that serves static files thus making the HTTP portion not necessary when testing locally, however, when you move to host these files somewhere else like nodejitsu, you may need to use your own static web server if it doesn't support nginx or apache. 
 
 But before using Yeoman, you might want to try open a terminal to the directory of this app and typing:
 
@@ -31,7 +43,7 @@ Next, you will need to open browser and point it to:
 
 http://localhost:8080/
 
-Alternatively, you can use Yeoman which would automatically launch a browswer window and also you more features like live reload. 
+Alternatively, you can use Yeoman which would automatically launch a browser window and also you more features like live reload. 
 
 $ yeoman server
 
@@ -43,15 +55,14 @@ http://localhost:3501/
 
 http server: 
 
-
 If you'd like to see the raw messages as a json dump, you can point your browser to: 
 
 http://localhost:8888/messages 
 
-This static server is taken very largely (line for line) from this example: 
-http://thecodinghumanist.com/blog/archives/2011/5/6/serving-static-files-from-node-js
+This static server is taken very largely (line for line) from [this example on thecodinghumanist.com](http://thecodinghumanist.com/blog/archives/2011/5/6/serving-static-files-from-node-js) and thus a very large credit should go to Eric Sowell. 
 
-## MONGODB
+
+### MONGODB
 
 In order to setup my mongodb database, I've taken the following steps:
 
@@ -83,16 +94,15 @@ Just to prove you've added a message, you can display all the messages
 
 Now, I have a database with a collection of messages containing at least one message. You view this message in the browser, visit:
 
-http://localhost:8888/messages
+> http://localhost:8888/messages
 
-## CONFIG
+## THE MISSING CONFIG.JS FILE 
 
-If you plan to work with a public github, it is a good idea to protect your production mongodb connection uri 
-and put it in a config file which you include in .gitignore so that it doesn't get committed  
+If you plan to work with a public github, it is a good idea to protect your production mongodb connection uri and put it in a config file which you include in .gitignore so that it doesn't get committed  
 
-var config = require('./config'); // Local congig file to hide creds
-db = mongoose.connect(config.mongoose_auth),
-Schema = mongoose.Schema;  
+> var config = require('./config'); // Local congig file to hide creds
+> db = mongoose.connect(config.mongoose_auth),
+> Schema = mongoose.Schema;  
 
 When you go to host it on a platform like nodejitsu, you will need to deploy that config file so ensure it is included by using a .npmignore file
 
@@ -105,6 +115,3 @@ backbone.sublime-workspace
 Within my .npmignore file, I have one to include the config:
 
 !./config.js
-
-
-

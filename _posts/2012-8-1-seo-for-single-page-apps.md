@@ -27,7 +27,7 @@ Using modern headless browsers, we can easily return the fully rendered content 
 
 You will need to install node.js and phantom.js onto a box. Then start up this server below. There are two files, one which is the web server and the other is a phantomjs script that renders the page.
 
-{% highlight javascript %}
+```javascript
 // web.js
 
 // Express is our web server that can handle request
@@ -67,7 +67,7 @@ var respond = function (req, res) {
 
 app.get(/(.*)/, respond);
 app.listen(3000);
-{% endhighlight %}
+```
 
 The script below is `phantom-server.js` and will be in charge of fully rendering the content. We don't return the content  until the page is fully rendered. We hook into the resources listener to do this.
 
