@@ -39,12 +39,11 @@
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
-              <li class=""><a href="/">Home</a></li>
+              <li class=""><a href="/">Tutorials</a></li>
 
     </ul>
     <ul class="nav navbar-nav navbar-right">
        <li><a href="http://prerender.io"><strong>Need SEO?</strong></a></li>
-      <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
       <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
     </ul>
   </div>
@@ -55,35 +54,30 @@
 
 <div class="container">
 <div class="row">
-  <div class="col-lg-4">
 <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">About</h3>
       </div>
+      <div class="panel-body">
+  <div class="col-lg-4">
     
     <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
 <a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>   
  </div>
-  </div>
   <div class="col-lg-8">
         <h3 >Backbone.js Beginner Video Tutorial</h3>
       <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
       <a href="https://www.youtube.com/watch?v=FZSjvWtUxYk" class="btn btn-primary">Watch Video</a>
   </div>
+  
+ </div>
+  </div>
 </div>
-  <div class="container">
-      <div class="panel">
-      <div class="panel-heading">
-        <h3 class="panel-title">Tutorial</h3>
-      </div>
-    
+      <div id="post">
+<h1>Lightweight Infinite Scrolling using Twitter API</h1>
 
-
-<div id="post">
-<h1 id="lightweight-infinite-scrolling-using-twitter-api">Lightweight Infinite Scrolling using Twitter API</h1>
-
-<h2 id="getting-started">Getting started</h2>
+<h2>Getting started</h2>
 
 <p>In this example we are going to build a widget that pulls in tweets and when the user scrolls to the bottom of the widget Backbone.js will re-sync with the server to bring down the next page of results.</p>
 
@@ -93,13 +87,13 @@
 
 <p><em>Note: This tutorial will use <a href="http://backbonetutorials.com/organizing-backbone-using-modules">AMD</a> for modularity.</em></p>
 
-<h2 id="the-twitter-collection">The Twitter Collection</h2>
+<h2>The Twitter Collection</h2>
 
-<p>Twitter offers a jsonp API for browsing tweets.  The first thing to note is that we have to append ‘&amp;callback?’ to allow cross domain Ajax calls which is a feature of <a href="http://en.wikipedia.org/wiki/JSONP">jsonp</a>.</p>
+<p>Twitter offers a jsonp API for browsing tweets.  The first thing to note is that we have to append &#39;&amp;callback?&#39; to allow cross domain Ajax calls which is a feature of <a href="http://en.wikipedia.org/wiki/JSONP">jsonp</a>.</p>
 
-<p>Using the ‘q’ and ‘page’ query parameters we can find the results we are after.  In the collection definition below we have set some defaults which can be overridden at any point.</p>
+<p>Using the &#39;q&#39; and &#39;page&#39; query parameters we can find the results we are after.  In the collection definition below we have set some defaults which can be overridden at any point.</p>
 
-<p>Twitter’s search API actually returns a whole bunch of meta information alongside the results.  Though this is a problem for Backbone.js because a Collection expects to be populated with an array of objects. So in our collection definition we can override the Backbone.js default parse function to instead choose the correct property to populate the collection.  </p>
+<p>Twitter&#39;s search API actually returns a whole bunch of meta information alongside the results.  Though this is a problem for Backbone.js because a Collection expects to be populated with an array of objects. So in our collection definition we can override the Backbone.js default parse function to instead choose the correct property to populate the collection.  </p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// collections/twitter.js</span>
 <span class="nx">define</span><span class="p">([</span>
@@ -130,9 +124,9 @@
   <span class="k">return</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
 <span class="p">},</span></code></pre></div>
 
-<h2 id="setting-up-the-view">Setting up the View</h2>
+<h2>Setting up the View</h2>
 
-<p>The first thing to do is to load our Twitter collection and template into the widget module. We should attach our collection to our view in our <code>initialize</code> function. <code>loadResults</code> will be responsible for calling fetch on our Twitter collection. On success we will append the latest results to our widget using our template. Our Backbone.js <code>events</code> will listen for <code>scroll</code> on the current <code>el</code> of the view which is ‘.twitter-widget’. If the current <code>scrollTop</code> is at the bottom then we simply increment the Twitter collections current page property and call <code>loadResults</code> again.</p>
+<p>The first thing to do is to load our Twitter collection and template into the widget module. We should attach our collection to our view in our <code>initialize</code> function. <code>loadResults</code> will be responsible for calling fetch on our Twitter collection. On success we will append the latest results to our widget using our template. Our Backbone.js <code>events</code> will listen for <code>scroll</code> on the current <code>el</code> of the view which is &#39;.twitter-widget&#39;. If the current <code>scrollTop</code> is at the bottom then we simply increment the Twitter collections current page property and call <code>loadResults</code> again.</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// views/twitter/widget.js</span>
 <span class="nx">define</span><span class="p">([</span>
@@ -185,9 +179,9 @@
 
 <p><em>Note: <code>triggerPoint</code> will allow you to set an offset where the user has to scroll to before loading the next page</em></p>
 
-<h2 id="the-widget-template">The widget template</h2>
+<h2>The widget template</h2>
 
-<p>Our view above passes into our underscore template the variable tweets which we can simply iterate over with using underscore’s <code>each</code> method.</p>
+<p>Our view above passes into our underscore template the variable tweets which we can simply iterate over with using underscore&#39;s <code>each</code> method.</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c">&lt;!--</span> <span class="nx">templates</span><span class="o">/</span><span class="nx">twitter</span><span class="o">/</span><span class="nx">list</span><span class="p">.</span><span class="nx">html</span> <span class="o">--&gt;</span>
 <span class="o">&lt;</span><span class="nx">ul</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;tweets&quot;</span><span class="o">&gt;</span>
@@ -198,7 +192,7 @@
 <span class="o">&lt;%</span> <span class="p">});</span> <span class="o">%&gt;</span>
 <span class="o">&lt;</span><span class="err">/ul&gt;</span></code></pre></div>
 
-<h2 id="conclusion">Conclusion</h2>
+<h2>Conclusion</h2>
 
 <p>This is a very lightweight but robust infinite scroll example. There are caveats to using infinite scroll in UI/UX so make sure to only use it when applicable.</p>
 
@@ -207,24 +201,25 @@
 <p><a href="https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/infinite-scroll">Example Source</a></p>
 
 </div>
-  </div>
+<hr />
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+            <div style="text-align: center;">
+            <img src="https://secure.gravatar.com/avatar/cff733cf90823edd218a834980379c61?s=170" class="img-circle" style=" padding:2px; border: 1px solid #ddd; width: 100px;">
+              <h2>Thomas Davis</h2>
+              <p>Founder of <a href="http://cdnjs.com">cdnjs.com</a>, <a href="http://jsonresume.org">jsonresume.org</a></p>
+              <p>Work with Drones, Open Source, Tech Policy, Javascript and Music. </p>
+<div class="addthis_horizontal_follow_toolbox" style="padding-left: 33px;"></div>
+<br />
+              <a href="https://github.com/thomasdavis">github.com/thomasdavis</a>
+            </div>
+        </div>
+        </div>
+<hr />
 
 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=thomasdavis" async="async"></script>
 
-<div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Authored by Thomas Davis</h3>
-      </div>
-        <a href="https://plus.google.com/101608559187380638042?rel=author">Google Profile</a>
-        <a href="https://twitter.com/neutralthoughts">Twitter</a>
-        <a href="https://github.com/thomasdavis">Github</a>
-<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</div>
-<div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Comments</h3>
-      </div>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -237,9 +232,7 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-</div>
 
-  </div>
 
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>

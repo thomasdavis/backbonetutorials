@@ -39,12 +39,11 @@
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
-              <li class=""><a href="/">Home</a></li>
+              <li class=""><a href="/">Tutorials</a></li>
 
     </ul>
     <ul class="nav navbar-nav navbar-right">
        <li><a href="http://prerender.io"><strong>Need SEO?</strong></a></li>
-      <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
       <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
     </ul>
   </div>
@@ -55,41 +54,36 @@
 
 <div class="container">
 <div class="row">
-  <div class="col-lg-4">
 <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">About</h3>
       </div>
+      <div class="panel-body">
+  <div class="col-lg-4">
     
     <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
 <a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>   
  </div>
-  </div>
   <div class="col-lg-8">
         <h3 >Backbone.js Beginner Video Tutorial</h3>
       <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
       <a href="https://www.youtube.com/watch?v=FZSjvWtUxYk" class="btn btn-primary">Watch Video</a>
   </div>
+  
+ </div>
+  </div>
 </div>
-  <div class="container">
-      <div class="panel">
-      <div class="panel-heading">
-        <h3 class="panel-title">Tutorial</h3>
-      </div>
-    
+      <div id="post">
+<h1>What is a model?</h1>
 
-
-<div id="post">
-<h1 id="what-is-a-model">What is a model?</h1>
-
-<p>Across the internet the definition of <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> is so diluted that it’s hard to tell what exactly your model should be doing.   The authors of backbone.js have quite a clear definition of what they believe the model represents in backbone.js.</p>
+<p>Across the internet the definition of <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> is so diluted that it&#39;s hard to tell what exactly your model should be doing.   The authors of backbone.js have quite a clear definition of what they believe the model represents in backbone.js.</p>
 
 <blockquote>
-  <p>Models are the heart of any JavaScript application, containing the interactive data as well as a large part of the logic surrounding it: conversions, validations, computed properties, and access control.</p>
+<p>Models are the heart of any JavaScript application, containing the interactive data as well as a large part of the logic surrounding it: conversions, validations, computed properties, and access control.</p>
 </blockquote>
 
-<p>So for the purpose of the tutorial let’s create a model.</p>
+<p>So for the purpose of the tutorial let&#39;s create a model.</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
@@ -99,9 +93,9 @@
     
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">;</span></code></pre></div>
 
-<p>So <em>initialize()</em> is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don’t have to include it in your model declaration but you will find yourself using it more often than not.</p>
+<p>So <em>initialize()</em> is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don&#39;t have to include it in your model declaration but you will find yourself using it more often than not.</p>
 
-<h2 id="setting-attributes">Setting attributes</h2>
+<h2>Setting attributes</h2>
 
 <p>Now we want to pass some parameters when we create an instance of our model.</p>
 
@@ -118,7 +112,7 @@
 
 <p>So passing a JavaScript object to our constructor is the same as calling <em>model.set()</em>.   Now that these models have attributes set we need to be able to retrieve them.  </p>
 
-<h2 id="getting-attributes">Getting attributes</h2>
+<h2>Getting attributes</h2>
 
 <p>Using the <em>model.get()</em> method we can access model properties at anytime.</p>
 
@@ -134,9 +128,9 @@
     <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span> <span class="c1">// &quot;Thomas&quot;</span>
     <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">);</span> <span class="c1">// &#39;Ryan&#39;</span></code></pre></div>
 
-<h2 id="setting-model-defaults">Setting model defaults</h2>
+<h2>Setting model defaults</h2>
 
-<p>Sometimes you will want your model to contain default values.   This can easily be accomplished by setting a property name ‘defaults’ in your model declaration.</p>
+<p>Sometimes you will want your model to contain default values.   This can easily be accomplished by setting a property name &#39;defaults&#39; in your model declaration.</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
@@ -155,7 +149,7 @@
     <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span> <span class="c1">// &quot;Thomas&quot;</span>
     <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">);</span> <span class="c1">// &#39;Ryan&#39;</span></code></pre></div>
 
-<h2 id="manipulating-model-attributes">Manipulating model attributes</h2>
+<h2>Manipulating model attributes</h2>
 
 <p>Models can contain as many custom methods as you like to manipulate attributes.   By default all methods are public.</p>
 
@@ -179,9 +173,9 @@
 
 <p>So we can implement methods to get/set and perform other calculations using attributes from our model at any time.   </p>
 
-<h2 id="listening-for-changes-to-the-model">Listening for changes to the model</h2>
+<h2>Listening for changes to the model</h2>
 
-<p>Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case if the name of our “person” changes we will alert their new name.</p>
+<p>Now onto one of the more useful parts of using a library such as backbone.   All attributes of a model can have listeners bound to them to detect changes to their values.   In our initialize function we are going to bind a function call everytime we change the value of our attribute.   In this case if the name of our &quot;person&quot; changes we will alert their new name.</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Person</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
@@ -200,9 +194,9 @@
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Thomas&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">67</span><span class="p">});</span>
     <span class="nx">person</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Stewie Griffin&#39;</span><span class="p">});</span> <span class="c1">// This triggers a change and will alert()</span></code></pre></div>
 
-<p>So we can bind the change listener to individual attributes or if we like simply ‘<em>this.on(“change”, function(model){});</em>’ to listen for changes to all attributes of the model.</p>
+<p>So we can bind the change listener to individual attributes or if we like simply &#39;<em>this.on(&quot;change&quot;, function(model){});</em>&#39; to listen for changes to all attributes of the model.</p>
 
-<h2 id="interacting-with-the-server">Interacting with the server</h2>
+<h2>Interacting with the server</h2>
 
 <p>Models are used to represent data from your server and actions you perform on them will be translated to RESTful operations.</p>
 
@@ -223,7 +217,7 @@
 
     <span class="p">});</span></code></pre></div>
 
-<h3 id="creating-a-new-model">Creating a new model</h3>
+<h3>Creating a new model</h3>
 
 <p>If we wish to create a new user on the server then we will instantiate a new UserModel and call <code>save</code>.  If the <code>id</code> attribute of the model is <code>null</code>, Backbone.js will send a POST request to the urlRoot of the server. </p>
 
@@ -251,13 +245,13 @@
 
 <p>Our table should now have the values</p>
 
-<p>1, ‘Thomas’, ‘thomasalwyndavis@gmail.com’</p>
+<p>1, &#39;Thomas&#39;, &#39;thomasalwyndavis@gmail.com&#39;</p>
 
-<h3 id="getting-a-model">Getting a model</h3>
+<h3>Getting a model</h3>
 
 <p>Now that we have saved a new user model, we can retrieve it from the server.   We know that the <code>id</code> is 1 from the above example.</p>
 
-<p>If we instantiate a model with an <code>id</code>, Backbone.js will automatically perform a get request to the urlRoot + ‘/id’ (conforming to RESTful conventions)</p>
+<p>If we instantiate a model with an <code>id</code>, Backbone.js will automatically perform a get request to the urlRoot + &#39;/id&#39; (conforming to RESTful conventions)</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Here we have set the `id` of the model</span>
     <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Usermodel</span><span class="p">({</span><span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">});</span>
@@ -270,7 +264,7 @@
         <span class="p">}</span>
     <span class="p">})</span></code></pre></div>
 
-<h3 id="updating-a-model">Updating a model</h3>
+<h3>Updating a model</h3>
 
 <p>Now that we have a model that exist on the server we can perform an update using a PUT request.
 We will use the <code>save</code> api call which is intelligent and will send a PUT request instead of a POST request if an <code>id</code> is present(conforming to RESTful conventions)</p>
@@ -291,7 +285,7 @@ We will use the <code>save</code> api call which is intelligent and will send a 
         <span class="p">}</span>
     <span class="p">});</span></code></pre></div>
 
-<h3 id="deleting-a-model">Deleting a model</h3>
+<h3>Deleting a model</h3>
 
 <p>When a model has an <code>id</code> we know that it exist on the server, so if we wish to remove it from the server we can call <code>destroy</code>.  <code>destroy</code> will fire off a DELETE /user/id (conforming to RESTful conventions).</p>
 
@@ -310,7 +304,7 @@ We will use the <code>save</code> api call which is intelligent and will send a 
         <span class="p">}</span>
     <span class="p">});</span></code></pre></div>
 
-<h3 id="tips-and-tricks">Tips and Tricks</h3>
+<h3>Tips and Tricks</h3>
 
 <p><em>Get all the current attributes</em></p>
 
@@ -348,31 +342,32 @@ We will use the <code>save</code> api call which is intelligent and will send a 
     <span class="nx">person</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Dr Manhatten&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">});</span>
     <span class="c1">// God have mercy on our souls</span></code></pre></div>
 
-<h3 id="contributors">Contributors</h3>
+<h3>Contributors</h3>
 
 <ul>
-  <li><a href="https://github.com/utkarshkukreti">Utkarsh Kukreti</a></li>
+<li><a href="https://github.com/utkarshkukreti">Utkarsh Kukreti</a></li>
 </ul>
 
 </div>
-  </div>
+<hr />
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+            <div style="text-align: center;">
+            <img src="https://secure.gravatar.com/avatar/cff733cf90823edd218a834980379c61?s=170" class="img-circle" style=" padding:2px; border: 1px solid #ddd; width: 100px;">
+              <h2>Thomas Davis</h2>
+              <p>Founder of <a href="http://cdnjs.com">cdnjs.com</a>, <a href="http://jsonresume.org">jsonresume.org</a></p>
+              <p>Work with Drones, Open Source, Tech Policy, Javascript and Music. </p>
+<div class="addthis_horizontal_follow_toolbox" style="padding-left: 33px;"></div>
+<br />
+              <a href="https://github.com/thomasdavis">github.com/thomasdavis</a>
+            </div>
+        </div>
+        </div>
+<hr />
 
 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=thomasdavis" async="async"></script>
 
-<div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Authored by Thomas Davis</h3>
-      </div>
-        <a href="https://plus.google.com/101608559187380638042?rel=author">Google Profile</a>
-        <a href="https://twitter.com/neutralthoughts">Twitter</a>
-        <a href="https://github.com/thomasdavis">Github</a>
-<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</div>
-<div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Comments</h3>
-      </div>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -385,9 +380,7 @@ We will use the <code>save</code> api call which is intelligent and will send a 
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-</div>
 
-  </div>
 
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>

@@ -39,12 +39,11 @@
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
-              <li class=""><a href="/">Home</a></li>
+              <li class=""><a href="/">Tutorials</a></li>
 
     </ul>
     <ul class="nav navbar-nav navbar-right">
        <li><a href="http://prerender.io"><strong>Need SEO?</strong></a></li>
-      <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
       <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
     </ul>
   </div>
@@ -55,37 +54,32 @@
 
 <div class="container">
 <div class="row">
-  <div class="col-lg-4">
 <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">About</h3>
       </div>
+      <div class="panel-body">
+  <div class="col-lg-4">
     
     <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
 <a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>   
  </div>
-  </div>
   <div class="col-lg-8">
         <h3 >Backbone.js Beginner Video Tutorial</h3>
       <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
       <a href="https://www.youtube.com/watch?v=FZSjvWtUxYk" class="btn btn-primary">Watch Video</a>
   </div>
+  
+ </div>
+  </div>
 </div>
-  <div class="container">
-      <div class="panel">
-      <div class="panel-heading">
-        <h3 class="panel-title">Tutorial</h3>
-      </div>
-    
+      <div id="post">
+<h1>Simple example - Node.js, Restify, MongoDb and Mongoose</h1>
 
+<p>Before I start, the Backbone.js parts of this tutorial will be using techniques described in &quot;Organizing your application using <a href="http://backbonetutorials.com/organizing-backbone-using-modules/">Modules</a> to construct a simple guestbook.</p>
 
-<div id="post">
-<h1 id="simple-example---nodejs-restify-mongodb-and-mongoose">Simple example - Node.js, Restify, MongoDb and Mongoose</h1>
-
-<p>Before I start, the Backbone.js parts of this tutorial will be using techniques described in “Organizing your application using <a href="http://backbonetutorials.com/organizing-backbone-using-modules/">Modules</a> to construct a simple guestbook.</p>
-
-<h2 id="getting-started">Getting started</h2>
+<h2>Getting started</h2>
 
 <p>To easily understand this tutorial you should jump straight into the example code base.</p>
 
@@ -95,31 +89,31 @@
 
 <p>This tutorial will assist you in saving data(Backbone.js Models) to MongoDb and retrieving a list(Backbone.js Collections) of them back.</p>
 
-<h2 id="the-technologies">The technologies</h2>
+<h2>The technologies</h2>
 
 <p>This stack is great for rapid prototyping and highly intuitive. Personal note: I love using JavaScript as my only language for the entire application (FrontEnd/BackEnd/API/Database). Restify is still in early development but is essentially just an extension of Express. So for anyone needing more stability you can easily just substitute Express in.</p>
 
-<h3 id="nodejs">Node.js</h3>
+<h3>Node.js</h3>
 
-<p>“Node.js is a platform built on Chrome’s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.”</p>
+<p>&quot;Node.js is a platform built on Chrome&#39;s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.&quot;</p>
 
-<h3 id="restify">Restify</h3>
+<h3>Restify</h3>
 
-<p>“Restify is a node.js module built specifically to enable you to build correct REST web services. It borrows heavily from express (intentionally) as that is more or less the de facto API for writing web applications on top of node.js.”</p>
+<p>&quot;Restify is a node.js module built specifically to enable you to build correct REST web services. It borrows heavily from express (intentionally) as that is more or less the de facto API for writing web applications on top of node.js.&quot;</p>
 
-<h3 id="mongodb">MongoDb</h3>
+<h3>MongoDb</h3>
 
-<p>“MongoDB (from “humongous”) is a scalable, high-performance, open source NoSQL database.”</p>
+<p>&quot;MongoDB (from &quot;humongous&quot;) is a scalable, high-performance, open source NoSQL database.&quot;</p>
 
-<h3 id="mongoose">Mongoose</h3>
+<h3>Mongoose</h3>
 
-<p>“Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.”</p>
+<p>&quot;Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.&quot;</p>
 
-<h2 id="building-the-server">Building the server</h2>
+<h2>Building the server</h2>
 
 <p>In the example repository there is a server.js example which can be executed by running <code>node server.js</code>. If you use this example in your own applications make sure to update the Backbone.js <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/models/message.js">Model</a> and <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/collections/messages.js">Collection</a> definitions to match your server address.</p>
 
-<h2 id="restify-configuration">Restify configuration</h2>
+<h2>Restify configuration</h2>
 
 <p>The first thing to do is require the Restify module. Restify will be in control of handling our restful endpoints and returning the appropriate JSON.</p>
 
@@ -129,7 +123,7 @@
 
 <p>Note: bodyParser() takes care of turning your request data into a JavaScript object on the server automatically.</p>
 
-<h2 id="mongodbmongoose-configuration">MongoDb/Mongoose configuration</h2>
+<h2>MongoDb/Mongoose configuration</h2>
 
 <p>We simply want to require the MongoDb module and pass it a MongoDb authentication URI  e.g. mongodb://username:server@mongoserver:10059/somecollection</p>
 
@@ -140,7 +134,7 @@
 <span class="nx">db</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">creds</span><span class="p">.</span><span class="nx">mongoose_auth</span><span class="p">),</span>
 <span class="nx">Schema</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">;</span></code></pre></div>
 
-<h2 id="mongoose-schema">Mongoose Schema</h2>
+<h2>Mongoose Schema</h2>
 
 <p>Mongoose introduces a concept of <a href="http://mongoosejs.com/docs/model-definition.html">model/schema</a> enforcing types which allow for easier input validation etc</p>
 
@@ -155,7 +149,7 @@
 
 <p><em>Note: <code>Message</code> can now be used for all things CRUD related.</em></p>
 
-<h2 id="setting-up-the-routes">Setting up the routes</h2>
+<h2>Setting up the routes</h2>
 
 <p>Just like in Backbone, Restify allows you to configure different routes and their associated callbacks. In the code below we define two routes.  One for saving new messages and one for retrieving all messages. After we have created our function definitions, we attach them to either GET/POST/PUT/DELETE on a particular restful endpoint e.g. GET /messages</p>
 
@@ -196,22 +190,22 @@
 
 <p><em>Note: Again you must remember to change the <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/models/message.js">Model</a> and <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/js/collections/messages.js">Collection</a> definitions to match your server address.</em></p>
 
-<h2 id="setting-up-the-client-backbonejs">Setting up the client (Backbone.js)</h2>
+<h2>Setting up the client (Backbone.js)</h2>
 
-<p>I’ve actually used the latest copy of <a href="http://backboneboilerplate.com">http://backboneboilerplate.com</a> to set up the example page.</p>
+<p>I&#39;ve actually used the latest copy of <a href="http://backboneboilerplate.com">http://backboneboilerplate.com</a> to set up the example page.</p>
 
 <p>The important files you will want to check out are;</p>
 
 <ul>
-  <li>views/dashboard/page.js</li>
-  <li>views/guestbook/form.js</li>
-  <li>views/guestbook/list.js</li>
-  <li>models/message.js</li>
-  <li>collections/messages.js</li>
-  <li>templates/guestbook/</li>
+<li>views/dashboard/page.js</li>
+<li>views/guestbook/form.js</li>
+<li>views/guestbook/list.js</li>
+<li>models/message.js</li>
+<li>collections/messages.js</li>
+<li>templates/guestbook/</li>
 </ul>
 
-<h2 id="saving-a-message">Saving a message</h2>
+<h2>Saving a message</h2>
 
 <p>First of all we want to setup a <a href="https://github.com/thomasdavis/backbonetutorials/blob/gh-pages/examples/nodejs-mongodb-mongoose-restify/templates/guestbook/form.html">template</a> for showing our form that creates new messages.</p>
 
@@ -266,7 +260,7 @@
 
 <p><em>Note: <code>trigger</code> is from Backbone Events, I binded a listener to this view in <code>views/dashboard/page.js</code> so when a new message is submitted, the list is re-rendered. We are setting the date of the POST on the server so there is no need to pass it up.</em></p>
 
-<h2 id="retrieving-a-list-of-messages">Retrieving a list of messages</h2>
+<h2>Retrieving a list of messages</h2>
 
 <p>We setup a route on our server to generate a list of all available messages at <code>GET /messages</code>. So we need to define a collection with the appropriate <code>url</code> to fetch this data down.</p>
 
@@ -319,13 +313,13 @@
 
 <p>This actually sums up everything you need to know to implement this simple example.</p>
 
-<h2 id="conclusion">Conclusion</h2>
+<h2>Conclusion</h2>
 
 <p><a href="https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/nodejs-mongodb-mongoose-restify">Example Codebase</a></p>
 
 <p><a href="http://backbonetutorials.com/examples/nodejs-mongodb-mongoose-restify/app">Example Demo</a></p>
 
-<p>In this example you should really be using relative URL’s in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.</p>
+<p>In this example you should really be using relative URL&#39;s in your collections/models and instead setting a baseUrl in a config file or by placing your index.html file on the restful server.</p>
 
 <p>This example is hosted on GitHub therefore we had to include the absolute URL to the server which is hosted on nodejitsu.com</p>
 
@@ -335,29 +329,30 @@
 
 <p>Get in touch with me on twitter, comments or GitHub!</p>
 
-<h3 id="relevant-links">Relevant Links</h3>
+<h3>Relevant Links</h3>
 
 <p><a href="http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules">Organizing Your Backbone.js Application With Modules</a></p>
 
 </div>
-  </div>
+<hr />
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+            <div style="text-align: center;">
+            <img src="https://secure.gravatar.com/avatar/cff733cf90823edd218a834980379c61?s=170" class="img-circle" style=" padding:2px; border: 1px solid #ddd; width: 100px;">
+              <h2>Thomas Davis</h2>
+              <p>Founder of <a href="http://cdnjs.com">cdnjs.com</a>, <a href="http://jsonresume.org">jsonresume.org</a></p>
+              <p>Work with Drones, Open Source, Tech Policy, Javascript and Music. </p>
+<div class="addthis_horizontal_follow_toolbox" style="padding-left: 33px;"></div>
+<br />
+              <a href="https://github.com/thomasdavis">github.com/thomasdavis</a>
+            </div>
+        </div>
+        </div>
+<hr />
 
 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=thomasdavis" async="async"></script>
 
-<div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Authored by Thomas Davis</h3>
-      </div>
-        <a href="https://plus.google.com/101608559187380638042?rel=author">Google Profile</a>
-        <a href="https://twitter.com/neutralthoughts">Twitter</a>
-        <a href="https://github.com/thomasdavis">Github</a>
-<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</div>
-<div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Comments</h3>
-      </div>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -370,9 +365,7 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-</div>
 
-  </div>
 
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>

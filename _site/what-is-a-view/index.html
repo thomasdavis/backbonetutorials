@@ -39,12 +39,11 @@
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
-              <li class=""><a href="/">Home</a></li>
+              <li class=""><a href="/">Tutorials</a></li>
 
     </ul>
     <ul class="nav navbar-nav navbar-right">
        <li><a href="http://prerender.io"><strong>Need SEO?</strong></a></li>
-      <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
       <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
     </ul>
   </div>
@@ -55,37 +54,32 @@
 
 <div class="container">
 <div class="row">
-  <div class="col-lg-4">
 <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">About</h3>
       </div>
+      <div class="panel-body">
+  <div class="col-lg-4">
     
     <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
 <a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>   
  </div>
-  </div>
   <div class="col-lg-8">
         <h3 >Backbone.js Beginner Video Tutorial</h3>
       <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
       <a href="https://www.youtube.com/watch?v=FZSjvWtUxYk" class="btn btn-primary">Watch Video</a>
   </div>
+  
+ </div>
+  </div>
 </div>
-  <div class="container">
-      <div class="panel">
-      <div class="panel-heading">
-        <h3 class="panel-title">Tutorial</h3>
-      </div>
-    
+      <div id="post">
+<h1>What is a view?</h1>
 
+<p>Backbone views are used to reflect what your applications&#39; data models look like. They are also used to listen to events and react accordingly. This tutorial will not be addressing how to bind models and collections to views but will focus on view functionality and how to use views with a JavaScript templating library, specifically <a href="http://documentcloud.github.com/underscore/#template">Underscore.js&#39;s _.template</a>.</p>
 
-<div id="post">
-<h1 id="what-is-a-view">What is a view?</h1>
-
-<p>Backbone views are used to reflect what your applications’ data models look like. They are also used to listen to events and react accordingly. This tutorial will not be addressing how to bind models and collections to views but will focus on view functionality and how to use views with a JavaScript templating library, specifically <a href="http://documentcloud.github.com/underscore/#template">Underscore.js’s _.template</a>.</p>
-
-<p>We will be using <a href="http://jquery.com/">jQuery 1.8.2</a> as our DOM manipulator. It’s possible to use other libraries such as <a href="http://mootools.net/">MooTools</a> or <a href="http://sizzlejs.com/">Sizzle</a>, but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with other libraries other than jQuery.</p>
+<p>We will be using <a href="http://jquery.com/">jQuery 1.8.2</a> as our DOM manipulator. It&#39;s possible to use other libraries such as <a href="http://mootools.net/">MooTools</a> or <a href="http://sizzlejs.com/">Sizzle</a>, but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with other libraries other than jQuery.</p>
 
 <p>For the purposes of this demonstration, we will be implementing a search box. <a href="http://jsfiddle.net/tBS4X/1/">A live example</a> can be found on jsFiddle.</p>
 
@@ -99,31 +93,31 @@
     <span class="c1">// Consider it the constructor of the class.</span>
     <span class="kd">var</span> <span class="nx">search_view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchView</span><span class="p">();</span></code></pre></div>
 
-<h2 id="the-el-property">The “el” property</h2>
+<h2>The &quot;el&quot; property</h2>
 
-<p>The “el” property references the DOM object created in the browser. Every Backbone.js view has an “el” property, and if it not defined, Backbone.js will construct its own, which is an empty div element.</p>
+<p>The &quot;el&quot; property references the DOM object created in the browser. Every Backbone.js view has an &quot;el&quot; property, and if it not defined, Backbone.js will construct its own, which is an empty div element.</p>
 
-<p>Let us set our view’s “el” property to div#search_container, effectively making Backbone.View the owner of the DOM element.</p>
+<p>Let us set our view&#39;s &quot;el&quot; property to div#search_container, effectively making Backbone.View the owner of the DOM element.</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;search_container&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
 
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-	<span class="nx">SearchView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-		<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-			<span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Alerts suck.&quot;</span><span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">});</span>
-	
-	<span class="kd">var</span> <span class="nx">search_view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchView</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_container&quot;</span><span class="p">)</span> <span class="p">});</span>
+    <span class="nx">SearchView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+        <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Alerts suck.&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    
+    <span class="kd">var</span> <span class="nx">search_view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchView</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_container&quot;</span><span class="p">)</span> <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span></code></pre></div>
 
 <p><em>Note: Keep in mind that this binds the container element. Any events we trigger must be in this element.</em></p>
 
-<h2 id="loading-a-template">Loading a template</h2>
+<h2>Loading a template</h2>
 
-<p>Backbone.js is dependent on Underscore.js, which includes its own micro-templating solution. Refer to <a href="http://documentcloud.github.com/underscore/">Underscore.js’s documentation</a> for more information.</p>
+<p>Backbone.js is dependent on Underscore.js, which includes its own micro-templating solution. Refer to <a href="http://documentcloud.github.com/underscore/">Underscore.js&#39;s documentation</a> for more information.</p>
 
-<p>Let us implement a “render()” function and call it when the view is initialized. The “render()” function will load our template into the view’s “el” property using jQuery.</p>
+<p>Let us implement a &quot;render()&quot; function and call it when the view is initialized. The &quot;render()&quot; function will load our template into the view&#39;s &quot;el&quot; property using jQuery.</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/template&quot;</span> <span class="na">id=</span><span class="s">&quot;search_template&quot;</span><span class="nt">&gt;</span>
   <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Search</span><span class="o">&lt;</span><span class="err">/label&gt;</span>
@@ -134,26 +128,26 @@
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;search_container&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
 
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-	<span class="nx">SearchView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-		<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
-		<span class="p">},</span>
-		<span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-			<span class="c1">// Compile the template using underscore</span>
-			<span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_template&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="p">{}</span> <span class="p">);</span>
-			<span class="c1">// Load the compiled HTML into the Backbone &quot;el&quot;</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span> <span class="nx">template</span> <span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">});</span>
-	
-	<span class="kd">var</span> <span class="nx">search_view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchView</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_container&quot;</span><span class="p">)</span> <span class="p">});</span>
+    <span class="nx">SearchView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+        <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+        <span class="p">},</span>
+        <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="c1">// Compile the template using underscore</span>
+            <span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_template&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="p">{}</span> <span class="p">);</span>
+            <span class="c1">// Load the compiled HTML into the Backbone &quot;el&quot;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span> <span class="nx">template</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    
+    <span class="kd">var</span> <span class="nx">search_view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchView</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_container&quot;</span><span class="p">)</span> <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span></code></pre></div>
 
 <p><em>Tip: Place all your templates in a file and serve them from a CDN. This ensures your users will always have your application cached.</em></p>
 
-<h2 id="listening-for-events">Listening for events</h2>
+<h2>Listening for events</h2>
 
-<p>To attach a listener to our view, we use the “events” attribute of Backbone.View. Remember that event listeners can only be attached to child elements of the “el” property. Let us attach a “click” listener to our button.</p>
+<p>To attach a listener to our view, we use the &quot;events&quot; attribute of Backbone.View. Remember that event listeners can only be attached to child elements of the &quot;el&quot; property. Let us attach a &quot;click&quot; listener to our button.</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/template&quot;</span> <span class="na">id=</span><span class="s">&quot;search_template&quot;</span><span class="nt">&gt;</span>
   <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Search</span><span class="o">&lt;</span><span class="err">/label&gt;</span>
@@ -184,7 +178,7 @@
     <span class="kd">var</span> <span class="nx">search_view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchView</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_container&quot;</span><span class="p">)</span> <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span></code></pre></div>
 
-<h2 id="tips-and-tricks">Tips and Tricks</h2>
+<h2>Tips and Tricks</h2>
 
 <p><em>Using template variables</em></p>
 
@@ -198,64 +192,65 @@
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;search_container&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
 
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-	 <span class="nx">SearchView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-		<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
-		<span class="p">},</span>
-		<span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-			<span class="c1">//Pass variables in using Underscore.js Template</span>
-			<span class="kd">var</span> <span class="nx">variables</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">search_label</span><span class="o">:</span> <span class="s2">&quot;My Search&quot;</span> <span class="p">};</span>
-			<span class="c1">// Compile the template using underscore</span>
-			<span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_template&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="nx">variables</span> <span class="p">);</span>
-			<span class="c1">// Load the compiled HTML into the Backbone &quot;el&quot;</span>
-			<span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span> <span class="nx">template</span> <span class="p">);</span>
-		<span class="p">},</span>
-		<span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
-			<span class="s2">&quot;click input[type=button]&quot;</span><span class="o">:</span> <span class="s2">&quot;doSearch&quot;</span>  
-		<span class="p">},</span>
-		<span class="nx">doSearch</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">){</span>
-			<span class="c1">// Button clicked, you can access the element that was clicked with event.currentTarget</span>
-			<span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;Search for &quot;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_input&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span> <span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">});</span>
-		
-	<span class="kd">var</span> <span class="nx">search_view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchView</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_container&quot;</span><span class="p">)</span> <span class="p">});</span>
+     <span class="nx">SearchView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+        <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+        <span class="p">},</span>
+        <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="c1">//Pass variables in using Underscore.js Template</span>
+            <span class="kd">var</span> <span class="nx">variables</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">search_label</span><span class="o">:</span> <span class="s2">&quot;My Search&quot;</span> <span class="p">};</span>
+            <span class="c1">// Compile the template using underscore</span>
+            <span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_template&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="nx">variables</span> <span class="p">);</span>
+            <span class="c1">// Load the compiled HTML into the Backbone &quot;el&quot;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span> <span class="nx">template</span> <span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;click input[type=button]&quot;</span><span class="o">:</span> <span class="s2">&quot;doSearch&quot;</span>  
+        <span class="p">},</span>
+        <span class="nx">doSearch</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">){</span>
+            <span class="c1">// Button clicked, you can access the element that was clicked with event.currentTarget</span>
+            <span class="nx">alert</span><span class="p">(</span> <span class="s2">&quot;Search for &quot;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_input&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+        
+    <span class="kd">var</span> <span class="nx">search_view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchView</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search_container&quot;</span><span class="p">)</span> <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span></code></pre></div>
 
-<h3 id="relevant-links">Relevant Links</h3>
+<h3>Relevant Links</h3>
 
 <ul>
-  <li><a href="http://thomasdavis.github.com/2011/02/05/backbone-views-and-templates.html">This example implemented with google API</a></li>
-  <li><a href="http://jsfiddle.net/thomas/C9wew/4/">This examples exact code on jsfiddle.net</a></li>
-  <li><a href="http://jsfiddle.net/thomas/dKK9Y/6/">Another semi-complete example on jsFiddle</a></li>
+<li><a href="http://thomasdavis.github.com/2011/02/05/backbone-views-and-templates.html">This example implemented with google API</a></li>
+<li><a href="http://jsfiddle.net/thomas/C9wew/4/">This examples exact code on jsfiddle.net</a></li>
+<li><a href="http://jsfiddle.net/thomas/dKK9Y/6/">Another semi-complete example on jsFiddle</a></li>
 </ul>
 
-<h3 id="contributors">Contributors</h3>
+<h3>Contributors</h3>
 
 <ul>
-  <li><a href="https://github.com/zaeleus">Michael Macias</a></li>
-  <li><a href="https://github.com/lawnday">Alex Lande</a></li>
+<li><a href="https://github.com/zaeleus">Michael Macias</a></li>
+<li><a href="https://github.com/lawnday">Alex Lande</a></li>
 </ul>
 
 </div>
-  </div>
+<hr />
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+            <div style="text-align: center;">
+            <img src="https://secure.gravatar.com/avatar/cff733cf90823edd218a834980379c61?s=170" class="img-circle" style=" padding:2px; border: 1px solid #ddd; width: 100px;">
+              <h2>Thomas Davis</h2>
+              <p>Founder of <a href="http://cdnjs.com">cdnjs.com</a>, <a href="http://jsonresume.org">jsonresume.org</a></p>
+              <p>Work with Drones, Open Source, Tech Policy, Javascript and Music. </p>
+<div class="addthis_horizontal_follow_toolbox" style="padding-left: 33px;"></div>
+<br />
+              <a href="https://github.com/thomasdavis">github.com/thomasdavis</a>
+            </div>
+        </div>
+        </div>
+<hr />
 
 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=thomasdavis" async="async"></script>
 
-<div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Authored by Thomas Davis</h3>
-      </div>
-        <a href="https://plus.google.com/101608559187380638042?rel=author">Google Profile</a>
-        <a href="https://twitter.com/neutralthoughts">Twitter</a>
-        <a href="https://github.com/thomasdavis">Github</a>
-<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</div>
-<div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Comments</h3>
-      </div>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -268,9 +263,7 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-</div>
 
-  </div>
 
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>

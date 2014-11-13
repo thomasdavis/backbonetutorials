@@ -27,7 +27,7 @@ Using modern headless browsers, we can easily return the fully rendered content 
 
 You will need to install node.js and phantom.js onto a box. Then start up this server below. There are two files, one which is the web server and the other is a phantomjs script that renders the page.
 
-```javascript
+```js
 // web.js
 
 // Express is our web server that can handle request

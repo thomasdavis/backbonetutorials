@@ -39,12 +39,11 @@
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
-              <li class=""><a href="/">Home</a></li>
+              <li class=""><a href="/">Tutorials</a></li>
 
     </ul>
     <ul class="nav navbar-nav navbar-right">
        <li><a href="http://prerender.io"><strong>Need SEO?</strong></a></li>
-      <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
       <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
     </ul>
   </div>
@@ -55,39 +54,34 @@
 
 <div class="container">
 <div class="row">
-  <div class="col-lg-4">
 <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">About</h3>
       </div>
+      <div class="panel-body">
+  <div class="col-lg-4">
     
     <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
 <a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>   
  </div>
-  </div>
   <div class="col-lg-8">
         <h3 >Backbone.js Beginner Video Tutorial</h3>
       <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
       <a href="https://www.youtube.com/watch?v=FZSjvWtUxYk" class="btn btn-primary">Watch Video</a>
   </div>
+  
+ </div>
+  </div>
 </div>
-  <div class="container">
-      <div class="panel">
-      <div class="panel-heading">
-        <h3 class="panel-title">Tutorial</h3>
-      </div>
-    
+      <div id="post">
+<h1>What is a router?</h1>
 
-
-<div id="post">
-<h1 id="what-is-a-router">What is a router?</h1>
-
-<p>Backbone routers are used for routing your applications URL’s when using hash tags(#).   In the traditional MVC sense they don’t necessarily fit the semantics and if you have read “<a href="http://backbonetutorials.com/what-is-a-view">What is a view?</a>” it will elaborate on this point.   Though a Backbone “router” is still very useful for any application/feature that needs URL routing/history capabilities.   </p>
+<p>Backbone routers are used for routing your applications URL&#39;s when using hash tags(#).   In the traditional MVC sense they don&#39;t necessarily fit the semantics and if you have read &quot;<a href="http://backbonetutorials.com/what-is-a-view">What is a view?</a>&quot; it will elaborate on this point.   Though a Backbone &quot;router&quot; is still very useful for any application/feature that needs URL routing/history capabilities.   </p>
 
 <p>Defined routers should always contain at least one route and a function to map the particular route to.   In the example below we are going to define a route that is always called.</p>
 
-<p>Also note that routes interpret anything after “#” tag in the URL.   All links in your application should target “#/action” or “#action”.   (Appending a forward slash after the hashtag looks a bit nicer e.g. http://example.com/#/user/help)</p>
+<p>Also note that routes interpret anything after &quot;#&quot; tag in the URL.   All links in your application should target &quot;#/action&quot; or &quot;#action&quot;.   (Appending a forward slash after the hashtag looks a bit nicer e.g. http://example.com/#/user/help)</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
     <span class="kd">var</span> <span class="nx">AppRouter</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
@@ -113,9 +107,9 @@
 
 <p><em>Notice the change in the url</em></p>
 
-<h2 id="dynamic-routing">Dynamic Routing</h2>
+<h2>Dynamic Routing</h2>
 
-<p>Most conventional frameworks allow you to define routes that contain a mix of static and dynamic route parameters. For example you might want to retrieve a post with a variable id with a friendly URL string. Such that your URL would look like “http://example.com/#/posts/12”.   Once this route was activated you would want to access the id given in the URL string.   This example is implemented below.</p>
+<p>Most conventional frameworks allow you to define routes that contain a mix of static and dynamic route parameters. For example you might want to retrieve a post with a variable id with a friendly URL string. Such that your URL would look like &quot;http://example.com/#/posts/12&quot;.   Once this route was activated you would want to access the id given in the URL string.   This example is implemented below.</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
     <span class="kd">var</span> <span class="nx">AppRouter</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
@@ -144,13 +138,13 @@
 
 <p><em>Notice the change in the url</em></p>
 
-<h2 id="dynamic-routing-cont-params-and-splats">Dynamic Routing Cont. “:params” and “*splats”</h2>
+<h2>Dynamic Routing Cont. &quot;:params&quot; and &quot;*splats&quot;</h2>
 
-<p>Backbone uses two styles of variables when implementing routes.   First there are “:params” which match any URL components between slashes.  Then there are “<em>splats” which match any number of URL components.   Note that due to the nature of a “</em>splat” it will always be the last variable in your URL as it will match any and all components.</p>
+<p>Backbone uses two styles of variables when implementing routes.   First there are &quot;:params&quot; which match any URL components between slashes.  Then there are &quot;<em>splats&quot; which match any number of URL components.   Note that due to the nature of a &quot;</em>splat&quot; it will always be the last variable in your URL as it will match any and all components.</p>
 
-<p>Any “*splats” or “:params” in route definitions are passed as arguments (in respective order) to the associated function.  A route defined as “/:route/:action” will pass 2 variables (“route” and “action”) to the callback function.     (If this is confusing please post a comment and I will try articulate it better)</p>
+<p>Any &quot;*splats&quot; or &quot;:params&quot; in route definitions are passed as arguments (in respective order) to the associated function.  A route defined as &quot;/:route/:action&quot; will pass 2 variables (“route” and “action”) to the callback function.     (If this is confusing please post a comment and I will try articulate it better)</p>
 
-<p>Here are some examples of using “:params” and “*splats”</p>
+<p>Here are some examples of using &quot;:params&quot; and &quot;*splats&quot;</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">routes</span><span class="o">:</span> <span class="p">{</span>
         
@@ -175,42 +169,44 @@
             <span class="nx">alert</span><span class="p">(</span><span class="nx">route</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nx">action</span><span class="p">);</span> <span class="c1">// dashboard_graph </span>
         <span class="p">});</span></code></pre></div>
 
-<p>Routes are quite powerful and in an ideal world your application should never contain too many.   If you need to implement hash tags with SEO in mind, do a google search for “google seo hashbangs”. Also check out <a href="http://seo.apiengine.io">Seo Server</a></p>
+<p>Routes are quite powerful and in an ideal world your application should never contain too many.   If you need to implement hash tags with SEO in mind, do a google search for &quot;google seo hashbangs&quot;. Also check out <a href="http://seo.apiengine.io">Seo Server</a></p>
 
 <p>Remember to do a pull request for any errors you come across.</p>
 
-<h3 id="relevant-links">Relevant Links</h3>
+<h3>Relevant Links</h3>
+
 <ul>
-  <li><a href="http://documentcloud.github.com/backbone/#Router">Backbone.js official router documentation</a></li>
-  <li><a href="http://thomasdavis.github.com/2011/02/07/making-a-restful-ajax-app.html">Using routes and understanding the hash tag</a></li>
+<li><a href="http://documentcloud.github.com/backbone/#Router">Backbone.js official router documentation</a></li>
+<li><a href="http://thomasdavis.github.com/2011/02/07/making-a-restful-ajax-app.html">Using routes and understanding the hash tag</a></li>
 </ul>
 
-<h3 id="contributors">Contributors</h3>
+<h3>Contributors</h3>
 
 <ul>
-  <li><a href="http://schistad.info">Herman Schistad</a> - (Backbone 0.5 rename from Controller to Router)</li>
-  <li><a href="http://paulirish.com">Paul Irish</a></li>
+<li><a href="http://schistad.info">Herman Schistad</a> - (Backbone 0.5 rename from Controller to Router)</li>
+<li><a href="http://paulirish.com">Paul Irish</a></li>
 </ul>
 
 </div>
-  </div>
+<hr />
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+            <div style="text-align: center;">
+            <img src="https://secure.gravatar.com/avatar/cff733cf90823edd218a834980379c61?s=170" class="img-circle" style=" padding:2px; border: 1px solid #ddd; width: 100px;">
+              <h2>Thomas Davis</h2>
+              <p>Founder of <a href="http://cdnjs.com">cdnjs.com</a>, <a href="http://jsonresume.org">jsonresume.org</a></p>
+              <p>Work with Drones, Open Source, Tech Policy, Javascript and Music. </p>
+<div class="addthis_horizontal_follow_toolbox" style="padding-left: 33px;"></div>
+<br />
+              <a href="https://github.com/thomasdavis">github.com/thomasdavis</a>
+            </div>
+        </div>
+        </div>
+<hr />
 
 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=thomasdavis" async="async"></script>
 
-<div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Authored by Thomas Davis</h3>
-      </div>
-        <a href="https://plus.google.com/101608559187380638042?rel=author">Google Profile</a>
-        <a href="https://twitter.com/neutralthoughts">Twitter</a>
-        <a href="https://github.com/thomasdavis">Github</a>
-<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</div>
-<div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Comments</h3>
-      </div>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -223,9 +219,7 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-</div>
 
-  </div>
 
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>

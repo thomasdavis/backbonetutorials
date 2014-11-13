@@ -39,12 +39,11 @@
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
-              <li class=""><a href="/">Home</a></li>
+              <li class=""><a href="/">Tutorials</a></li>
 
     </ul>
     <ul class="nav navbar-nav navbar-right">
        <li><a href="http://prerender.io"><strong>Need SEO?</strong></a></li>
-      <li><a href="http://feeds.feedburner.com/BackboneTutorials">Subscribe</a></li>
       <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
     </ul>
   </div>
@@ -55,96 +54,89 @@
 
 <div class="container">
 <div class="row">
-  <div class="col-lg-4">
 <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">About</h3>
       </div>
+      <div class="panel-body">
+  <div class="col-lg-4">
     
     <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
 <a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>   
  </div>
-  </div>
   <div class="col-lg-8">
         <h3 >Backbone.js Beginner Video Tutorial</h3>
       <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
       <a href="https://www.youtube.com/watch?v=FZSjvWtUxYk" class="btn btn-primary">Watch Video</a>
   </div>
+  
+ </div>
+  </div>
 </div>
-  <div class="container">
-      <div class="panel">
-      <div class="panel-heading">
-        <h3 class="panel-title">Tutorial</h3>
-      </div>
-    
+      <div id="post">
+<h1>SEO for single page apps</h1>
 
-
-<div id="post">
-<h1 id="seo-for-single-page-apps">SEO for single page apps</h1>
-
-<p>This tutorial will show you how to index your application on search engines.   As the author I believe that servers should be completely independent of the client in the age of API’s.  Which speeds up development for the ever increasing array of clients.   It is on the shoulders of the search engines to conform and they should not dictate how the web is stored and accessed.</p>
+<p>This tutorial will show you how to index your application on search engines.   As the author I believe that servers should be completely independent of the client in the age of API&#39;s.  Which speeds up development for the ever increasing array of clients.   It is on the shoulders of the search engines to conform and they should not dictate how the web is stored and accessed.</p>
 
 <p>In 2009 Google released the idea of <a href="http://googlewebmastercentral.blogspot.com.au/2009/10/proposal-for-making-ajax-crawlable.html">escaped fragments</a>.   </p>
 
 <p>The idea simply stating that if a search engine should come across your JavaScript application then you have the permission to redirect the search engine to another URL that serves the fully rendered version of the page (The current search engines cannot execute much JavaScript (Some people speculate that Google Chrome was born of Google Search wishing to successfully render every web page to retrieve ajaxed content)).</p>
 
-<h2 id="how-does-redirecting-bots-work">How does redirecting bots work?</h2>
+<h2>How does redirecting bots work?</h2>
 
 <p>Using modern headless browsers, we can easily return the fully rendered content per request by redirecting bots using our web servers configuration.   Here is an image made by Google depicting the setup.</p>
 
-<p><img src="http://acris.googlecode.com/svn/wiki/images/seo_google_crawlability.png" alt="headless seo" /></p>
+<p><img src="http://acris.googlecode.com/svn/wiki/images/seo_google_crawlability.png" alt="headless seo"></p>
 
-<div style="clear: both;"></div>
+<div style='clear: both;'></div>
 
-<h2 id="implementation-using-phantomjs">Implementation using Phantom.js</h2>
+<h2>Implementation using Phantom.js</h2>
 
 <p><a href="http://phantomjs.org/">Phantom.js</a> is a headless webkit browser.  We are going to setup a node.js server that given a URL, it will fully render the page content. Then we will redirect bots to this server to retrieve the correct content.</p>
 
 <p>You will need to install node.js and phantom.js onto a box. Then start up this server below. There are two files, one which is the web server and the other is a phantomjs script that renders the page.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// web.js</span>
 
-<p>```javascript
-// web.js</p>
+<span class="c1">// Express is our web server that can handle request</span>
+<span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
 
-<p>// Express is our web server that can handle request
-var express = require(‘express’);
-var app = express();</p>
 
-<p>var getContent = function(url, callback) {
-  var content = ‘’;
-  // Here we spawn a phantom.js process, the first element of the 
-  // array is our phantomjs script and the second element is our url 
-  var phantom = require(‘child_process’).spawn(‘phantomjs’, [‘phantom-server.js’, url]);
-  phantom.stdout.setEncoding(‘utf8’);
-  // Our phantom.js script is simply logging the output and
-  // we access it here through stdout
-  phantom.stdout.on(‘data’, function(data) {
-    content += data.toString();
-  });
-  phantom.on(‘exit’, function(code) {
-    if (code !== 0) {
-      console.log(‘We have an error’);
-    } else {
-      // once our phantom.js script exits, let’s call out call back
-      // which outputs the contents to the page
-      callback(content);
-    }
-  });
-};</p>
+<span class="kd">var</span> <span class="nx">getContent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="c1">// Here we spawn a phantom.js process, the first element of the </span>
+  <span class="c1">// array is our phantomjs script and the second element is our url </span>
+  <span class="kd">var</span> <span class="nx">phantom</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">).</span><span class="nx">spawn</span><span class="p">(</span><span class="s1">&#39;phantomjs&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;phantom-server.js&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">]);</span>
+  <span class="nx">phantom</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">setEncoding</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+  <span class="c1">// Our phantom.js script is simply logging the output and</span>
+  <span class="c1">// we access it here through stdout</span>
+  <span class="nx">phantom</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">content</span> <span class="o">+=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">phantom</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;exit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">code</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;We have an error&#39;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// once our phantom.js script exits, let&#39;s call out call back</span>
+      <span class="c1">// which outputs the contents to the page</span>
+      <span class="nx">callback</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">};</span>
 
-<p>var respond = function (req, res) {
-  // Because we use [P] in htaccess we have access to this header
-  url = ‘http://’ + req.headers[‘x-forwarded-host’] + req.params[0];
-  getContent(url, function (content) {
-    res.send(content);
-  });
-}</p>
+<span class="kd">var</span> <span class="nx">respond</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Because we use [P] in htaccess we have access to this header</span>
+  <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s1">&#39;x-forwarded-host&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="nx">getContent</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
 
-<p>app.get(/(.*)/, respond);
-app.listen(3000);
-```</p>
-
-<p>The script below is <code>phantom-server.js</code> and will be in charge of fully rendering the content. We don’t return the content  until the page is fully rendered. We hook into the resources listener to do this.</p>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sr">/(.*)/</span><span class="p">,</span> <span class="nx">respond</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+</code></pre></div>
+<p>The script below is <code>phantom-server.js</code> and will be in charge of fully rendering the content. We don&#39;t return the content  until the page is fully rendered. We hook into the resources listener to do this.</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;webpage&#39;</span><span class="p">).</span><span class="nx">create</span><span class="p">();</span>
 <span class="kd">var</span> <span class="nx">system</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">);</span>
@@ -184,9 +176,9 @@ app.listen(3000);
 <span class="c1">// Let us check to see if the page is finished rendering</span>
 <span class="kd">var</span> <span class="nx">checkCompleteInterval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">checkComplete</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span></code></pre></div>
 
-<p>Once we have this server up and running we just redirect bots to the server in our client’s web server configuration.</p>
+<p>Once we have this server up and running we just redirect bots to the server in our client&#39;s web server configuration.</p>
 
-<h2 id="redirecting-bots">Redirecting bots</h2>
+<h2>Redirecting bots</h2>
 
 <p>If you are using apache we can edit out <code>.htaccess</code> such that Google requests are proxied to our middle man phantom.js server.</p>
 
@@ -196,8 +188,8 @@ app.listen(3000);
 
 <p>We could also include other <code>RewriteCond</code>, such as <code>user agent</code> to redirect other search engines we wish to be indexed on.</p>
 
-<p>Though Google won’t use <code>_escaped_fragment_</code> unless we tell it to by either including a meta tag;
-<code>&lt;meta name="fragment" content="!"&gt;</code>
+<p>Though Google won&#39;t use <code>_escaped_fragment_</code> unless we tell it to by either including a meta tag;
+<code>&lt;meta name=&quot;fragment&quot; content=&quot;!&quot;&gt;</code>
 or
 using <code>#!</code> URLs in our links.</p>
 
@@ -207,31 +199,32 @@ using <code>#!</code> URLs in our links.</p>
 
 <p>This has been tested with Google Webmasters fetch tool.  Make sure you include <code>#!</code> on your URLs when using the fetch tool.</p>
 
-<h3 id="relevant-links">Relevant Links</h3>
+<h3>Relevant Links</h3>
 
 <ul>
-  <li><a href="http://seo.apiengine.io">Open source node.js Seo Server</a></li>
+<li><a href="http://seo.apiengine.io">Open source node.js Seo Server</a></li>
 </ul>
 
 </div>
-  </div>
+<hr />
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+            <div style="text-align: center;">
+            <img src="https://secure.gravatar.com/avatar/cff733cf90823edd218a834980379c61?s=170" class="img-circle" style=" padding:2px; border: 1px solid #ddd; width: 100px;">
+              <h2>Thomas Davis</h2>
+              <p>Founder of <a href="http://cdnjs.com">cdnjs.com</a>, <a href="http://jsonresume.org">jsonresume.org</a></p>
+              <p>Work with Drones, Open Source, Tech Policy, Javascript and Music. </p>
+<div class="addthis_horizontal_follow_toolbox" style="padding-left: 33px;"></div>
+<br />
+              <a href="https://github.com/thomasdavis">github.com/thomasdavis</a>
+            </div>
+        </div>
+        </div>
+<hr />
 
 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=thomasdavis" async="async"></script>
 
-<div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Authored by Thomas Davis</h3>
-      </div>
-        <a href="https://plus.google.com/101608559187380638042?rel=author">Google Profile</a>
-        <a href="https://twitter.com/neutralthoughts">Twitter</a>
-        <a href="https://github.com/thomasdavis">Github</a>
-<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</div>
-<div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Comments</h3>
-      </div>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -244,9 +237,7 @@ using <code>#!</code> URLs in our links.</p>
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-</div>
 
-  </div>
 
 </div>
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
