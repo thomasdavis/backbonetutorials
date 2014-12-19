@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Real-Time Backbone With PubNub - Backbone.js Tutorials</title>
+<link href="/atom.xml" rel="alternate" title="backbone tutorials" type="application/atom+xml">
+   <meta name="author" content="Backbone Tutorials" />
+   <!-- syntax highlighting CSS -->
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+   
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="//bootswatch.com/sandstone/bootstrap.min.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
+   <link href="https://fonts.googleapis.com/css?family=Arvo:400,700&subset=latin" rel="stylesheet" type="text/css">
+
+
+   <!-- Typekit -->
+   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+ 
+  
+   
+
+</head>
+<body>
+
+  <div class="row">
+
+      <div class="navbar navbar-default">
+      <div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Backbone Tutorials</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav">
+              <li class=""><a href="/">Tutorials</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       <li><a href="http://prerender.io"><strong>Need SEO?</strong></a></li>
+      <li><a href="https://leanpub.com/backbonetutorials">Download eBook (.pdf, .MOBI, .ePub)</a></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+
+<div class="container">
+<div class="row">
+<div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">About</h3>
+      </div>
+      <div class="panel-body">
+  <div class="col-lg-4">
+    
+    <p>Backbone Tutorials is a collection of tutorials written by <a href="http://thomasdav.is">Thomas Davis</a>. Everything is open source and I try my best to keep the tutorials updated. Though I am busy and only work on this is my spare time so many <a href="https://github.com/thomasdavis/backbonetutorials/graphs/contributors">contributors</a> have also help me put this resource together.</p>
+<a href="https://twitter.com/neutralthoughts" class="twitter-follow-button" data-show-count="true">Follow @neutralthoughts</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>   
+ </div>
+  <div class="col-lg-8">
+        <h3 >Backbone.js Beginner Video Tutorial</h3>
+      <img src="/backbone.png" style="float: left;" /><p>I have put extra effort into making a very easy to understand Backbone.js video which is also free.   It is 70mins long and covers everything you need to know when getting started.</p>
+      <a href="https://www.youtube.com/watch?v=FZSjvWtUxYk" class="btn btn-primary">Watch Video</a>
+  </div>
+  
+ </div>
+  </div>
+</div>
+      <div id="post">
+<h1>Real-Time Backbone With PubNub</h1>
+
+<p>Backbone is one of the most popular JavaScript based frameworks to date. It is a simple yet powerful way to create interactive JavaScript applications with data bindings to a back-end server. Instead of having to constantly synchronize data between your client and server though, why not have all the data there when it happens? Users should not have to wait to see updates to their model’s data so we decided to tackle this problem by integrating Backbone.js with PubNub.</p>
+
+<p><img src="http://blogly.pubnub.com/wp-content/uploads/2013/08/PubNubBackboneJS.png" alt="PubnNub and Backbone"></p>
+
+<p>Our integration allows developers to create a Backbone model or collection and have them synchronize with every other client instance of those models or collections in real-time. This will give any Backbone application a better user experience when working with collaborative, social, or any type of multi-user interface. It works by taking all of the create, update, and delete methods that are spawned by Backbone and propagating them across the PubNub real-time network.</p>
+
+<p>Want to see it in action? A full working tutorial and all the code you need is available at our <a href="http://pubnub.github.io/backbone/">GitHub page</a></p>
+
+<h2>Getting Started</h2>
+
+<p>The easiest way to get started is by using bower via <code>bower install pubnub-backbone</code>. You can also clone the repository and copy the built javascript files. Now you can include this and the base PubNub library found at <a href="https://github.com/pubnub/javascript#pubnub-cdn-javascript-sdk">https://github.com/pubnub/javascript#pubnub-cdn-javascript-sdk</a> like so:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.pubnub.com/pubnub.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/path/to/backbone-pubnub.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></div>
+
+<p>The easiest way to get started using the library is by creating a PubNub based collection. This will automatically propagate all create, update, and delete methods across all other clients in real-time. This requires creating a free account to get your API keys at <a href="http://pubnub.com/free-trial">http://pubnub.com/free-trial</a> and then initializing a global PubNub instance:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">pubnub</span> <span class="o">=</span> <span class="nx">PUBNUB</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+  <span class="nx">publish_key</span><span class="o">:</span> <span class="s1">&#39;demo&#39;</span><span class="p">,</span>
+  <span class="nx">subscribe_key</span><span class="o">:</span> <span class="s1">&#39;demo&#39;</span>
+<span class="p">});</span></code></pre></div>
+
+<h2>Creating a Real-Time Collection</h2>
+
+<p>Now that we have a connection to PubNub, we can feed that connection into our custom Backbone collection:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">MyCollection</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">PubNub</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;MyCollection&#39;</span><span class="p">,</span>
+  <span class="nx">pubnub</span><span class="o">:</span> <span class="nx">pubnub</span>
+<span class="p">});</span></code></pre></div>
+
+<p>This will look and act just like a normal Backbone collection with two extra keys. The “name” key allows PubNub to distinguish this collection, so it connects this collections to only collections of the same type. Think of this as a namespace so you can have multiple types of collections all updating in real-time. It uses this to generate a PubNub channel that is unique to the collection in the form of &quot;backbone-collection-{name}&quot;. The &quot;pubnub&quot; property is the globally referenced connection to the PubNub network. This is the object that comes back after calling PUBNUB.init.</p>
+
+<p>Now your Backbone collection will update in real-time. You can listen for add and remove events just like usual when something gets added or removed in real-time. The next step is to implement a way to get the current set of data when the collection first loads so every client is using the same data set. A great way of accomplishing this is by listening to the PubNub based events with a server and replicating the data store. Then the client can ask for the current set of data every time the application loads. This is made even simpler when using the backbone npm module for nodejs:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;underscore&#39;</span><span class="p">).</span><span class="nx">_</span><span class="p">,</span>
+    <span class="nx">Backbone</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;backbone&#39;</span><span class="p">),</span>
+    <span class="nx">pubnub</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pubnub&#39;</span><span class="p">).</span><span class="nx">init</span><span class="p">({</span>
+      <span class="nx">publish_key</span><span class="o">:</span> <span class="s1">&#39;demo&#39;</span><span class="p">,</span>
+      <span class="nx">subscribe_key</span><span class="o">:</span> <span class="s1">&#39;demo&#39;</span>
+    <span class="p">});</span>
+    
+<span class="kd">var</span> <span class="nx">MyCollection</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="c1">// Add business logic here</span>
+<span class="p">});</span>
+ 
+<span class="kd">var</span> <span class="nx">myCollection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyCollection</span><span class="p">();</span>
+ 
+<span class="nx">pubnub</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">({</span>
+  <span class="nx">channel</span><span class="o">:</span> <span class="s1">&#39;backbone-collection-MyCollection&#39;</span><span class="p">,</span> <span class="c1">// This is what is created internally by the framework</span>
+  <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// All data is transferred as JSON</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">method</span> <span class="o">===</span> <span class="s1">&#39;create&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">myCollection</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">model</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">method</span> <span class="o">===</span> <span class="s1">&#39;update&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">myCollection</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">model</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">method</span> <span class="o">===</span> <span class="s1">&#39;delete&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">record</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">myCollection</span><span class="p">.</span><span class="nx">models</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">record</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">data</span><span class="p">.</span><span class="nx">model</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+      <span class="p">});</span>
+      
+      <span class="k">if</span> <span class="p">(</span><span class="nx">record</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Could not record: &quot;</span> <span class="o">+</span> <span class="nx">model</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+      <span class="p">}</span>
+      
+      <span class="kd">var</span> <span class="nx">diff</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">difference</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">attributes</span><span class="p">),</span> <span class="nx">_</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">model</span><span class="p">));</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">diff</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">record</span><span class="p">.</span><span class="nx">unset</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+      <span class="p">});</span>
+      
+      <span class="k">return</span> <span class="nx">record</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">model</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">options</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+ 
+<span class="c1">// Now myCollection will always be up to date.</span>
+<span class="c1">// Here you can provide some way (i.e. http.createServer) to get the data from the server.</span></code></pre></div>
+
+<p>Now you can listen for all the changes to the collection and either store them in memory or even a database such as MongoDB. You can even add other business logic for validations and more. Although nodejs was an obvious choice for the demo, this code will work with any type of back end too. This is just one easy way to use the framework but be sure to check out the repository for more examples!</p>
+
+<p>We here at PubNub truly believe that real-time is the way of the future. Your users will not have to click a refresh button to constantly synchronize their Backbone client data with a server. Instead, with PubNub integration, your users will get data right when it happens. This is also much more extensible since any client or server can listen to the events and manipulate them as they need to. This allows business logic to lay in more places than one. We really hope this changes the way developers look at building not just Backbone applications but web applications overall.</p>
+
+<p>You can read more about PubNub at <a href="http://pubnub.com">our website</a> and more about Backbone integration at <a href="http://pubnub.github.io/backbone/">our GitHub page</a></p>
+
+</div>
+<hr />
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4">
+            <div style="text-align: center;">
+            <img src="https://secure.gravatar.com/avatar/cff733cf90823edd218a834980379c61?s=170" class="img-circle" style=" padding:2px; border: 1px solid #ddd; width: 100px;">
+              <h2>Thomas Davis</h2>
+              <p>Founder of <a href="http://cdnjs.com">cdnjs.com</a>, <a href="http://jsonresume.org">jsonresume.org</a></p>
+              <p>Work with Drones, Open Source, Tech Policy, Javascript and Music. </p>
+<div class="addthis_horizontal_follow_toolbox" style="padding-left: 33px;"></div>
+<br />
+              <a href="https://github.com/thomasdavis">github.com/thomasdavis</a>
+            </div>
+        </div>
+        </div>
+<hr />
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=thomasdavis" async="async"></script>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'bbtutes'; // required: replace example with your forum shortname
+    var disqus_url = 'http://backbonetutorials.com/real-time-backbone-with-pubnub';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+</div>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(66406579); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66406579ns.gif" /></p></noscript>
+
+</body>
+</html>
