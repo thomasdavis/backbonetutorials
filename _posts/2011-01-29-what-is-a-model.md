@@ -175,7 +175,7 @@ If we wish to create a new user on the server then we will instantiate a new Use
             email: ''
         }
     });
-    var user = new Usermodel();
+    var user = new UserModel();
     // Notice that we haven't set an `id`
     var userDetails = {
         name: 'Thomas',
