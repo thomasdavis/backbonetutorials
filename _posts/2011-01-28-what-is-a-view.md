@@ -7,7 +7,7 @@ posturl: http://backbonetutorials.com/what-is-a-view
 
 # What is a view?
 
-Backbone views are used to reflect what your applications' data models look like. They are also used to listen to events and react accordingly. This tutorial will not be addressing how to bind models and collections to views but will focus on view functionality and how to use views with a JavaScript templating library, specifically [Underscore.js's _.template](http://documentcloud.github.com/underscore/#template).
+Backbone views are used to reflect what your applications' data models look like. They are also used to listen to events and react accordingly. This tutorial will not be addressing how to bind models and collections to views but will focus on view functionality and how to use views with a JavaScript templating library, specifically [Underscore.js's _.template](http://underscorejs.org/#template).
 
 We will be using [jQuery 1.8.2](http://jquery.com/) as our DOM manipulator. It's possible to use other libraries such as [MooTools](http://mootools.net/) or [Sizzle](http://sizzlejs.com/), but official Backbone.js documentation endorses jQuery. Backbone.View events may not work with libraries other than jQuery.
 
@@ -49,7 +49,7 @@ _Note: Keep in mind that this binds the container element. Any events we trigger
 
 ## Loading a template
 
-Backbone.js is dependent on Underscore.js, which includes its own micro-templating solution. Refer to [Underscore.js's documentation](http://documentcloud.github.com/underscore/) for more information.
+Backbone.js is dependent on Underscore.js, which includes its own micro-templating solution. Refer to [Underscore.js's documentation](http://underscorejs.org/) for more information.
 
 Let us implement a "render()" function and call it when the view is initialized. The "render()" function will load our template into the view's "el" property using jQuery.
 
