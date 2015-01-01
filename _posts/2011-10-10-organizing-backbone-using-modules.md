@@ -379,7 +379,7 @@ Get in touch with me on twitter, comments or GitHub!
 
 ### Relevant Links
 
-* [Organizing Your Backbone.js Application With Modules](http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules)
+* [Organizing Your Backbone.js Application With Modules](http://bocoup.com/weblog/organizing-your-backbone-js-application-with-modules/)
 
 ### Contributors
 
