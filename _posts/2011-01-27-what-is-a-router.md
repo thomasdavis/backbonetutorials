@@ -116,7 +116,7 @@ Routes are quite powerful and in an ideal world your application should never co
 Remember to do a pull request for any errors you come across.
 
 ### Relevant Links
-* [Backbone.js official router documentation](http://documentcloud.github.com/backbone/#Router)
+* [Backbone.js official router documentation](http://backbonejs.org/#Router)
 * [Using routes and understanding the hash tag](http://thomasdavis.github.com/2011/02/07/making-a-restful-ajax-app.html)
 
 ### Contributors
