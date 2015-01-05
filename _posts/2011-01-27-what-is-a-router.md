@@ -76,11 +76,11 @@ Most conventional frameworks allow you to define routes that contain a mix of st
 _Notice the change in the url_
 
 
-## Dynamic Routing Cont. ":params" and "*splats"
+## Dynamic Routing Cont. ":params" and "\*splats"
 
-Backbone uses two styles of variables when implementing routes.   First there are ":params" which match any URL components between slashes.  Then there are "\*splats" which match any number of URL components.   Note that due to the nature of a "*splat" it will always be the last variable in your URL as it will match any and all components.
+Backbone uses two styles of variables when implementing routes.   First there are ":params" which match any URL components between slashes.  Then there are "\*splats" which match any number of URL components.   Note that due to the nature of a "\*splat" it will always be the last variable in your URL as it will match any and all components.
 
-Any "*splats" or ":params" in route definitions are passed as arguments (in respective order) to the associated function.  A route defined as "/:route/:action" will pass 2 variables (“route” and “action”) to the callback function.     (If this is confusing please post a comment and I will try articulate it better)
+Any "\*splats" or ":params" in route definitions are passed as arguments (in respective order) to the associated function.  A route defined as "/:route/:action" will pass 2 variables (“route” and “action”) to the callback function.     (If this is confusing please post a comment and I will try articulate it better)
 
 Here are some examples of using ":params" and "*splats"
 
