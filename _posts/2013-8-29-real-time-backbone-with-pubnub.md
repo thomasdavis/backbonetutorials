@@ -24,7 +24,7 @@ The easiest way to get started is by using bower via `bower install pubnub-backb
 <script src="/path/to/backbone-pubnub.min.js"></script>
 {% endhighlight %}
 
-The easiest way to get started using the library is by creating a PubNub based collection. This will automatically propagate all create, update, and delete methods across all other clients in real-time. This requires creating a free account to get your API keys at [http://pubnub.com/free-trial](http://pubnub.com/free-trial) and then initializing a global PubNub instance:
+The easiest way to get started using the library is by creating a PubNub based collection. This will automatically propagate all create, update, and delete methods across all other clients in real-time. This requires creating a free account to get your API keys at [http://www.pubnub.com/get-started](http://www.pubnub.com/get-started) and then initializing a global PubNub instance:
 
 {% highlight javascript %}
 var pubnub = PUBNUB.init({
