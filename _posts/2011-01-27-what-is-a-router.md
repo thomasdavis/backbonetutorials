@@ -51,7 +51,7 @@ Most conventional frameworks allow you to define routes that contain a mix of st
     var AppRouter = Backbone.Router.extend({
         routes: {
             "posts/:id": "getPost",
-            "*actions": "defaultRoute" // Backbone will try match the route above first
+            "*actions": "defaultRoute" // Backbone will try to match the route above first
         }
     });
     // Instantiate the router
