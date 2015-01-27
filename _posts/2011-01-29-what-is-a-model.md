@@ -37,7 +37,7 @@ Now we want to pass some parameters when we create an instance of our model.
     });
     
     var person = new Person({ name: "Thomas", age: 67});
-    // or we can set afterwards, these operations are equivelent
+    // or we can set afterwards, these operations are equivalent
     var person = new Person();
     person.set({ name: "Thomas", age: 67});
     
