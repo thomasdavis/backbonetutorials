@@ -11,7 +11,7 @@
 
 A deployed CORS enabled version of this server is available at
 
-`http://backbonejs-beginner.herokuapp.com`
+`http://backbone-beginner.herokuapp.com`
 
 The server code base can be found [here](https://github.com/thomasdavis/video-backbone-beginner-server).
 
@@ -39,7 +39,7 @@ Ajax prefilters are useful for hooking into all AJAX request. In this case, we w
 
 ```js
 $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-  options.url = 'http://backbonejs-beginner.herokuapp.com' + options.url;
+  options.url = 'http://backbone-beginner.herokuapp.com' + options.url;
 });
 ```
 
