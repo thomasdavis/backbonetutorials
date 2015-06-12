@@ -13,15 +13,15 @@ Across the internet the definition of [MVC](http://en.wikipedia.org/wiki/Model%E
 
 So for the purpose of the tutorial let's create a model.
 
-{% highlight javascript %}
-    Person = Backbone.Model.extend({
+```js
+    var Person = Backbone.Model.extend({
         initialize: function(){
             alert("Welcome to this world");
         }
     });
     
     var person = new Person;
-{% endhighlight %}
+```
 
 So _initialize()_ is triggered whenever you create a new instance of a model( models, collections and views work the same way ).   You don't have to include it in your model declaration but you will find yourself using it more often than not.
 
