@@ -216,9 +216,8 @@ define([
     initialize: initialize
   };
 });
-{% endhighlight %}
-
-{% highlight javascript %}
+```
+```
 // Filename: router.js
 define([
   'jquery',
