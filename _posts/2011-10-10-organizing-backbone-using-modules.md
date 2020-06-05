@@ -101,7 +101,7 @@ We should setup any useful containers that might be used by our Backbone views.
 
 _Note: The data-main attribute on our single script tag tells Require.js to load the script located at "js/main.js".  It automatically appends the ".js"_
 
-{% highlight html %}
+```
 <!doctype html>
 <html lang="en">
 <head>
@@ -118,7 +118,7 @@ _Note: The data-main attribute on our single script tag tells Require.js to load
 
 </body>
 </html>
-{% endhighlight %}
+```
 
 You should most always end up with quite a light weight index file.   You can serve this off your server and then the rest of your site off a CDN ensuring that everything that can be cached, will be. (You can also now serve the index file off the CDN using Cloudfront)
 
@@ -136,7 +136,7 @@ We also request a module called "app", this will contain the entirety of our app
 
 _Note: Modules are loaded relatively to the boot strap and always append with ".js".   So the module "app" will load "app.js" which is in the same directory as the bootstrap._
 
-{% highlight javascript %}
+```
 // Filename: main.js
 
 // Require.js allows us to configure shortcut alias
@@ -189,7 +189,7 @@ define([
   return {};
   // What we return here will be used by other modules
 });
-{% endhighlight %}
+```
 
 The first argument of the define function is our dependency array, in the future we can pass in any modules we like.
 
@@ -199,7 +199,7 @@ Our applications main module should always remain light weight.   This tutorial 
 
 The router will then load the correct dependencies depending on the current URL.
 
-{% highlight javascript %}
+```
 // Filename: app.js
 define([
   'jquery',
@@ -262,13 +262,13 @@ define([
     initialize: initialize
   };
 });
-{% endhighlight %}
+```
 
 ## Modularizing a Backbone View
 
 Backbone views usually interact with the DOM. Using our new modular system we can load in JavaScript templates using the Require.js text! plug-in.
 
-{% highlight javascript %}
+```
 // Filename: views/project/list
 define([
   'jquery',
@@ -291,7 +291,7 @@ define([
   // Our module now returns our view
   return ProjectListView;
 });
-{% endhighlight %}
+```
 
 JavaScript templating allows us to separate the design from the application logic by placing all our HTML in the templates folder.
 
@@ -301,7 +301,7 @@ Now we put it altogether by chaining up a Model, Collection and View which is a 
 
 First we will define our model
 
-{% highlight javascript %}
+```
 // Filename: models/project
 define([
   'underscore',
@@ -315,13 +315,13 @@ define([
   // Return the model for the module
   return ProjectModel;
 });
-{% endhighlight %}
+```
 
 Now that we have a model, our collection module can depend on it.  We will set the "model" attribute of our collection to the loaded module.  Backbone.js offers great benefits when doing this.
 
 > Collection.model: Override this property to specify the model class that the collection contains. If defined, you can pass raw attributes objects (and arrays) to add, create, and reset, and the attributes will be converted into a model of the proper type.
 
-{% highlight javascript %}
+```
 // Filename: collections/projects
 define([
   'underscore',
@@ -335,11 +335,11 @@ define([
   // You don't usually return a collection instantiated
   return ProjectCollection;
 });
-{% endhighlight %}
+```
 
 Now we can simply depend on our collection in our view and pass it to our JavaScript template.
 
-{% highlight javascript %}
+```
 // Filename: views/projects/list
 define([
   'jquery',
@@ -362,7 +362,7 @@ define([
   // Returning instantiated views can be quite useful for having "state"
   return ProjectListView;
 });
-{% endhighlight %}
+```
 
 ## Conclusion
 
