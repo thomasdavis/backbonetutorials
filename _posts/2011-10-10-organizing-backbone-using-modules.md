@@ -1,10 +1,3 @@
----
-layout: post
-title: Organizing your application using Modules (require.js)
-type: intermediate
-posturl: http://backbonetutorials.com/organizing-backbone-using-modules
----
-
 # Organizing your application using Modules (require.js)
 
 Unfortunately Backbone.js does not tell you how to organize your code, leaving many developers in the dark regarding how to load scripts and lay out their development environments.
@@ -56,7 +49,7 @@ The example isn't super fleshed out but should give you a vague idea.
 
 There are many different ways to lay out your files and I believe it is actually dependent on the size and type of the project.   In the example below views and templates are mirrored in file structure.  Collections and Models are categorized into folders kind of like an ORM.
 
-{% highlight javascript %}
+```js
 /* File Structure
 ├── imgs
 ├── css
@@ -97,7 +90,7 @@ There are many different ways to lay out your files and I believe it is actually
 └── index.html
 
 */
-{% endhighlight %}
+```
 
 To continue you must really understand what we are aiming towards as described in the introduction.
 
